@@ -2,19 +2,20 @@
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Wrist Examination:</b> </span><label style="visibility:hidden">#leftwristtitle</label>
         <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the
-        <input type="checkbox" ID="chkPalpationUlnarLeft" onclick="checkMe(this)" value="ulnar" />ulnar
-        <input type="checkbox" ID="chkPalpationRadialLeft" onclick="checkMe(this)" value="radius" />radius
-        <input type="checkbox" ID="chkPalpationDorsalLeft" onclick="checkMe(this)" value="dorsal" />dorsal
-        <input type="checkbox" ID="chkPalpationPalmarLeft" onclick="checkMe(this)" value="palmar" />palmar
+        <input type="checkbox" ID="chkPalpationUlnarLeft" onclick="checkMe(this)" value="ulnar" /> ulnar
+        <input type="checkbox" ID="chkPalpationRadialLeft" onclick="checkMe(this)" value="radius" /> radius
+        <input type="checkbox" ID="chkPalpationDorsalLeft" onclick="checkMe(this)" value="dorsal" /> dorsal
+        <input type="checkbox" ID="chkPalpationPalmarLeft" onclick="checkMe(this)" value="palmar" /> palmar
         <label> aspect of the wrist.</label>
 
-        <div style="display:none">
-            <label class="control-label">ROM is </label>
-            <section class="dropdown">
-                <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this)" value="mildly decreased. " />
-                <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionLeft', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
-            </section>
-            <!--<input type="text" id="txtNoteLeft" style="Width:300px" onchange="txtMe(this)" />-->
+
+        <input type="checkbox" id="chkwirstROML" value="ROM is " class="nocomma" checked="checked"/> ROM is 
+        <section class="dropdown">
+            <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this)" value="mildly decreased. " />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionLeft', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
+        </section>
+      
+        <section style="display:none">
             <br />
             <span class="control-label"><b>Tests: </b></span>
             <input type="checkbox" ID="chkTinelLeft" onclick="checkMe(this)" value="Tinnel" />Tinnel
@@ -24,7 +25,7 @@
             <input type="checkbox" ID="chkPainUponRadialLeft" onclick="checkMe(this)" value="Pain upon radial deviation" />Pain upon radial deviation
             <input type="checkbox" ID="chkPainUponDorsiFlexionLeft" onclick="checkMe(this)" value="Pain upon dorsi flexion" />Pain upon dorsi flexion
             <span> test - positive.</span>
-        </div>
+        </section>
 
         <br />
 
@@ -46,20 +47,21 @@
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Wrist Examination:</b> </span><label style="visibility:hidden">#rightwristtitle</label>
         <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the        <input type="checkbox" ID="chkPalpationUlnarRight" onclick="checkMe(this)" value="ulnar" />ulnar
-        <input type="checkbox" ID="chkPalpationRadialRight" onclick="checkMe(this)" value="radius" />radius
-        <input type="checkbox" ID="chkPalpationDorsalRight" onclick="checkMe(this)" value="dorsal" />dorsal
-        <input type="checkbox" ID="chkPalpationPalmarRight" onclick="checkMe(this)" value="palmar" />palmar
-        of the wrist.
+        <input type="checkbox" ID="chkPalpationRadialRight" onclick="checkMe(this)" value="radius" /> radius
+        <input type="checkbox" ID="chkPalpationDorsalRight" onclick="checkMe(this)" value="dorsal" /> dorsal
+        <input type="checkbox" ID="chkPalpationPalmarRight" onclick="checkMe(this)" value="palmar" /> palmar
+        <label> aspect of the wrist.</label>
 
 
-        <div style="display:none">
-            <label class="control-label">ROM is </label>
-            <section class="dropdown">
-                <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this)" value="mildly decreased. " />
-                <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionRight', this.value)" id="ddlRangeOfMotionRight"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
-            </section>
-            <!--<input type="text" id="txtNoteRight" style="Width:300px" onchange="txtMe(this)" />-->
-            <br />
+
+        <input type="checkbox" id="chkwirstROMR" value="ROM is " class="nocomma" checked="checked" /> ROM is
+        <section class="dropdown">
+            <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this)" value="mildly decreased. " />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionRight', this.value)" id="ddlRangeOfMotionRight"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
+        </section>
+        <!--<input type="text" id="txtNoteRight" style="Width:300px" onchange="txtMe(this)" />-->
+        <br />
+        <section style="display:none">
             <span class="control-label"><b>Tests: </b></span>
             <input type="checkbox" ID="chkTinelRight" onclick="checkMe(this)" value="Tinnel" />Tinnel
             <input type="checkbox" ID="chkPhalenRight" onclick="checkMe(this)" value="Phalen" />Phalen
@@ -68,7 +70,7 @@
             <input type="checkbox" ID="chkPainUponRadialRight" onclick="checkMe(this)" value="Pain upon radial deviation" />Pain upon radial deviation
             <input type="checkbox" ID="chkPainUponDorsiFlexionRight" onclick="checkMe(this)" value="Pain upon dorsi flexion" />Pain upon dorsi flexion
             <span> test - positive.</span>
-        </div>
+        </section>
         <br />
 
         <section class="col-md-3">

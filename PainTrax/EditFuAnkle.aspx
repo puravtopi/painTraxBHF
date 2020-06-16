@@ -115,24 +115,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10" id="content">
-                <%--    <ul class="breadcrumb">
-                                <li>
-                                    <i class="icon-home"></i>
-                                    <a href="Page1.aspx"><span class="label">Page1</span></a>
-                                </li>
-                                <li id="lipage2">
-                                    <i class="icon-edit"></i>
-                                    <a href="Page2.aspx"><span class="label label-success">Page2</span></a>
-                                </li>
-                                <li id="li1" runat="server" enable="false">
-                                    <i class="icon-edit"></i>
-                                    <a href="Page3.aspx"><span class="label">Page3</span></a>
-                                </li>
-                                <li id="li2" runat="server" enable="false">
-                                    <i class="icon-edit"></i>
-                                    <a href="Page4.aspx"><span class="label">Page4</span></a>
-                                </li>
-                            </ul>--%>
+              
                 <div runat="server" id="CF">
                 </div>
 
@@ -155,7 +138,7 @@
                         <label class="control-label"><b><u>PHYSICAL EXAM:</u></b></label>
                     </div>
 
-                    <div class="col-md-9" style="margin-top: 5px; display: none">
+                    <div class="col-md-9" style="margin-top: 5px;">
 
                         <asp:Repeater runat="server" ID="repROM" OnItemDataBound="repROM_ItemDataBound">
                             <HeaderTemplate>

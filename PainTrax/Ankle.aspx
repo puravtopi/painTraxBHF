@@ -165,7 +165,7 @@
                     <div class="col-md-3">
                         <label class="control-label"><b><u>PHYSICAL EXAM:</u></b></label>
                     </div>
-                    <div class="col-md-9" style="margin-top: 5px; display: none">
+                    <div class="col-md-9" style="margin-top: 5px;">
 
                         <asp:Repeater runat="server" ID="repROM" OnItemDataBound="repROM_ItemDataBound">
                             <HeaderTemplate>
@@ -186,12 +186,10 @@
                                         <td></td>
                                         <td style="">Left
                                         </td>
-                                        <%--<td style="">IS
-                                            </td>--%>
+
                                         <td style="">Right
                                         </td>
-                                        <%--<td style="">IS
-                                            </td>--%>
+
                                         <td style="">Normal
                                         </td>
                                     </tr>
@@ -200,12 +198,10 @@
                                 <tr>
                                     <td style="text-align: left;">
                                         <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
-                                    <%--<td>
-                                                <asp:TextBox ID="txtLEFlexionLeftWas" Text="30" Width="50px" runat="server"></asp:TextBox></td>--%>
+
                                     <td>
                                         <asp:TextBox ID="txtleft" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
-                                    <%-- <td>
-                                                <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
+
                                     <td>
                                         <asp:TextBox ID="txtright" Width="50px" Text='<%# Eval("right") %>' onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
                                     <td>

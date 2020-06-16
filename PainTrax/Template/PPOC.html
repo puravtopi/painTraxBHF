@@ -1,0 +1,525 @@
+﻿
+<script src="https://cdn.rawgit.com/igorescobar/jQuery-Mask-Plugin/master/src/jquery.mask.js"></script>
+<script src="js/jquery-mask-1.14.8.min.js"></script>
+<script src="js/jquery.maskedinput.js"></script>
+<style>
+    .well {
+        background-color: #3de33ddb;
+        position: fixed;
+        width: 96.5%;
+        margin-top: -55px;
+    }
+
+    .navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
+        color: #fff;
+        background-color: #3de33ddb;
+    }
+
+    .panel-default > .panel-heading {
+        color: #333;
+        background-color: #f5f5f5;
+        border-color: #ddd;
+    }
+
+    .panel-body {
+        padding: 15px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .panel-default > .panel-heading + .panel-collapse > .panel-body {
+        border-top-color: #ddd;
+    }
+
+    .panel-group .panel-heading + .panel-collapse > .list-group, .panel-group .panel-heading + .panel-collapse > .panel-body {
+        border-top: 1px solid #ddd;
+    }
+
+    .panel-title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > small, .panel-title > small > a {
+        color: inherit;
+    }
+
+
+    a {
+        color: #337ab7;
+        text-decoration: none;
+    }
+
+    a {
+        background-color: transparent;
+    }
+
+    .radio input[type="radio"], .checkbox input[type="checkbox"] {
+        float: left;
+        margin-left: 13px;
+    }
+
+    .ProcText {
+        width: 120px;
+    }
+
+    input[type=checkbox] {
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        margin-left: 13px;
+        /*padding: 10px;*/
+    }
+
+    input[type=text] {
+        width: 110px
+    }
+
+    .Proctable {
+        table-layout: fixed;
+        min-width: 1300px;
+        word-wrap: break-word;
+    }
+
+        .Proctable th {
+            text-align: center;
+            background-color: #3de33d;
+            padding: 5px;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            color: #333;
+        }
+
+        .Proctable td {
+            padding: 4px
+        }
+</style>
+
+<div class="panel-body">
+    <table id="tblNeck" style="text-align:center;margin-bottom:5px;display:none" class="Proctable" border="1">
+        <tr>
+            <td rowspan="3" style="width:120px"><b>Cervical</b></td>
+            <th>MRI/CT</th>
+            <th>UE-EMG</th>
+            <th>CTPI</th>
+            <th>CESI</th>
+            <th>CMBB</th>
+            <th>CRFA</th>
+            <th>CPD</th>
+            <th>ONB</th>
+            <th>ONRFA</th>
+            <th>CFB</th>
+            <th>SGB</th>
+
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+
+        </tr>
+        <tr>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+
+        </tr>
+    </table>
+   
+    <table id="tblMidback" style="text-align:center;margin-bottom:5px;display:none" class="Proctable" border="1">
+        <tr>
+            <td rowspan="3" style="width:120px;"><b>Thoracic</b></td>
+            <th>MRI/CT</th>
+            <th>TTPI</th>
+            <th>TESI</th>
+            <th>TMBB</th>
+            <th>TRFA</th>
+            <th>TPD</th>
+            <th>TDG</th>
+            <th>T-END-RHI</th>
+            <th>TINB</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+
+
+        </tr>
+        <tr>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+
+        </tr>
+    </table>
+   
+    <table id="tblLowback" style="display:none;text-align:center;margin-bottom:5px" class="Proctable" border="1">
+        <tr>
+            <td rowspan="3" style="width:120px;"><b>Lumber</b></td>
+            <th>MRI/CT</th>
+            <th>LE-EMG</th>
+            <th>LTPI</th>
+            <th>LESI</th>
+            <th>LMBB</th>
+            <th>LRFA</th>
+            <th>LD</th>
+            <th>LPD</th>
+            <th>LTFE</th>
+            <th>L-END-RHI</th>
+            <th>SIJLBB</th>
+
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" />&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+
+        </tr>
+        <tr>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+
+
+        </tr>
+    </table>
+
+    <table id="tblLShoulder" style="display:none;text-align:center;margin-bottom:5px" class="Proctable" border="1">
+        <tr>
+            <td rowspan="3" style="width:120px;">
+                <b>Left Shoulder</b>
+            </td>
+            <th>MRI/CT</th>
+            <th>SIAI</th>
+            <th>STPI</th>
+            <th>SSNB</th>
+            <th>SACJIL</th>
+            <th>SRFA</th>
+            <!--<th>RSIAI</th>
+            <th>RSTPI</th>
+            <th>RSSNB</th>
+            <th>RSACJIL</th>
+            <th>RSRFA</th>-->
+
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <!--<td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>-->
+
+        </tr>
+        <tr>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <!--<td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>-->
+
+
+        </tr>
+    </table>
+   
+    <table id="tblRShoulder" style="display:none;text-align:center;margin-bottom:5px" class="Proctable" border="1">
+        <tr>
+            <td rowspan="3" style="width:120px;">
+                <b>Right Shoulder</b>
+            </td>
+            <th>MRI/CT</th>
+            <!--<th>LSIAI</th>
+            <th>LSTPI</th>
+            <th>LSSNB</th>
+            <th>LSACJIL</th>
+            <th>LSRFA</th>-->
+            <th>SIAI</th>
+            <th>STPI</th>
+            <th>SSNB</th>
+            <th>SACJIL</th>
+            <th>SRFA</th>
+
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <!--<td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>-->
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+
+        </tr>
+        <tr>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <!--<td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>-->
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+
+
+        </tr>
+    </table>
+   
+    <table id="tblLKnee" style="display:none;text-align:center;margin-bottom:5px" class="Proctable" border="1">
+        <tr>
+            <td rowspan="3" style="width:120px;"><b>Left Knee</b></td>
+            <th>MRI/CT</th>
+            <th>KIAI</th>
+            <th>KHI</th>
+            <th>KTPI</th>
+            <th>KGNB</th>
+            <th>KGRFA</th>
+            <!--<th>RKIAI</th>
+            <th>RKHI</th>
+            <th>RKTPI</th>
+            <th>RKGNB</th>
+            <th>RKGRFA</th>-->
+
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;</td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <!--<td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>-->
+
+        </tr>
+        <tr>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <!--<td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>-->
+
+
+        </tr>
+    </table>
+
+    <table id="tblRKnee" style="display:none;text-align:center;margin-bottom:5px" class="Proctable" border="1">
+        <tr>
+            <td rowspan="3" style="width:120px;"><b>Right Knee</b></td>
+            <th>MRI/CT</th>
+            <!--<th>LKIAI</th>
+            <th>LKHI</th>
+            <th>LKTPI</th>
+            <th>LKGNB</th>
+            <th>LKGRFA</th>-->
+            <th>KIAI</th>
+            <th>KHI</th>
+            <th>KTPI</th>
+            <th>KGNB</th>
+            <th>KGRFA</th>
+
+        </tr>
+        <tr>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;</td>
+            <!--<td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>-->
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td>
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />&nbsp;
+                <input type="checkbox" onclick="checkMe(this)" />
+            </td>
+            <td><input type="checkbox" onclick="checkMe(this)" /></td>
+            <td><input type="checkbox" onclick="checkMe(this)" />&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick="checkMe(this)" /></td>
+
+        </tr>
+        <tr>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <!--<td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>-->
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+            <td><input type="text" class="datePicker" onchange="txtMe(this)" /></td>
+
+
+        </tr>
+    </table>
+
+</div>

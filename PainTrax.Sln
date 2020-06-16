@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PainTrax", "http://localhost:56788", "{B7F03B5E-CB0F-40F7-9502-7F69632AB669}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{c421e194-5500-4595-8ded-9c4cb4f6eb07}|IntakeSheet.BLL.dll;{a962d459-5144-4e72-bc24-3372d2b01626}|IntakeSheet.DAL.dll;{4fa4dcce-0517-4de2-9197-c9d682bca866}|IntakeSheet.Entity.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_56788"
+		Debug.AspNetCompiler.PhysicalPath = "PainTrax\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56788\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_56788"
+		Release.AspNetCompiler.PhysicalPath = "PainTrax\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56788\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "PainTrax\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntakeSheet.BLL", "PainTrax.BLL\IntakeSheet.BLL.csproj", "{C421E194-5500-4595-8DED-9C4CB4F6EB07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntakeSheet.DAL", "PainTrax.DAL\IntakeSheet.DAL.csproj", "{A962D459-5144-4E72-BC24-3372D2B01626}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntakeSheet.Entity", "PainTrax.Entity\IntakeSheet.Entity.csproj", "{4FA4DCCE-0517-4DE2-9197-C9D682BCA866}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://unaht.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PainTrax.BLL\\IntakeSheet.BLL.csproj
+		SccProjectName1 = PainTrax.BLL
+		SccLocalPath1 = PainTrax.BLL
+		SccProjectUniqueName2 = PainTrax.DAL\\IntakeSheet.DAL.csproj
+		SccProjectName2 = PainTrax.DAL
+		SccLocalPath2 = PainTrax.DAL
+		SccProjectUniqueName3 = PainTrax.Entity\\IntakeSheet.Entity.csproj
+		SccProjectName3 = PainTrax.Entity
+		SccLocalPath3 = PainTrax.Entity
+		SccWebProject4 = true
+		SccProjectUniqueName4 = http://localhost:56788
+		SccProjectName4 = PainTrax
+		SccLocalPath4 = PainTrax
+		SccProjectEnlistmentChoice4 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7F03B5E-CB0F-40F7-9502-7F69632AB669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F03B5E-CB0F-40F7-9502-7F69632AB669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7F03B5E-CB0F-40F7-9502-7F69632AB669}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F03B5E-CB0F-40F7-9502-7F69632AB669}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{C421E194-5500-4595-8DED-9C4CB4F6EB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C421E194-5500-4595-8DED-9C4CB4F6EB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C421E194-5500-4595-8DED-9C4CB4F6EB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C421E194-5500-4595-8DED-9C4CB4F6EB07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A962D459-5144-4E72-BC24-3372D2B01626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A962D459-5144-4E72-BC24-3372D2B01626}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A962D459-5144-4E72-BC24-3372D2B01626}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A962D459-5144-4E72-BC24-3372D2B01626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA4DCCE-0517-4DE2-9197-C9D682BCA866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA4DCCE-0517-4DE2-9197-C9D682BCA866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA4DCCE-0517-4DE2-9197-C9D682BCA866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA4DCCE-0517-4DE2-9197-C9D682BCA866}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

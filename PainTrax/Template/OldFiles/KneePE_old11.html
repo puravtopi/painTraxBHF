@@ -1,0 +1,121 @@
+﻿<div class="col-md-9 row" style="margin-top: 5px">
+    <div id="WrapLeftPE" #leftdiv>
+        <label class="control-label"><b>LEFT KNEE:</b> reveals tenderness upon palpation of the </label>
+        <input type="text" ID="txtPalpationText1Left" onchange="txtMe(this)" Style="margin-left: 0px;" />
+        <input type="checkbox" ID="chkSuperiorLeft" onclick="checkMe(this)" value="suprapatellar" />suprapatellar
+        <input type="checkbox" ID="chkInferiorLeft" onclick="checkMe(this)" value="infrapatellar" />infrapatellar
+        <input type="checkbox" ID="chkMedialLeft" onclick="checkMe(this)" value="medial joint line" />medial joint line
+        <input type="checkbox" ID="chkLateralLeft" onclick="checkMe(this)" value="lateral joint line" />lateral joint line
+        <label>.</label>
+        <input type="checkbox" ID="chkSupermedialLeft" onclick="checkMe(this)" value="There is effusion noted. " />There is effusion noted.
+
+        <br />
+        <span class="control-label"><b>Tests:</b></span>
+        <input type="checkbox" ID="chkPositiveLeft" onclick="checkMe(this)" value="Tests positive for" />Positive for
+        <input type="checkbox" ID="chkMcMurrayLeft" onclick="checkMe(this)" value="McMurray's" />McMurray
+        <input type="checkbox" ID="chkLachmanLeft" onclick="checkMe(this)" value="patellofemoral grind" />Patellofemoral Grind
+        <input type="checkbox" ID="chkAnteriorLeft" onclick="checkMe(this)" value="anterior drawer" />Anterior drawer
+        <input type="checkbox" ID="chkPosteriorLeft" onclick="checkMe(this)" value="posterior drawer" />Posterior drawer
+        <input type="checkbox" ID="chkVarusLeft" onclick="checkMe(this)" value="varus stress" />Varus stress
+        <input type="checkbox" ID="chkValgusLeft" onclick="checkMe(this)" value="valgus stress" />Valgus stress
+        <label>.</label>
+        <!--<span> tests - positive.</span>-->
+        <br />
+
+        <section class="col-md-3">
+            <span class="control-label">Notes</span>
+        </section>
+        <section class="col-md-9" style="margin-top: 5px">
+            <textarea id="txtFreeFormL" Style="width:700px;height:100px" onchange="txtAreaMe(this)"></textarea>
+
+            <button type="button" id="start_button" onclick="startButton(event)">
+                <img src="images/mic.gif" alt="start" />
+            </button>
+            <br />
+            <label style="visibility:hidden">#kneeleftrom</label>
+            <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
+        </section>
+    </div>
+
+    <br />
+    <div id="WrapRightPE" #rigthtdiv>
+        <label class="control-label"><b>RIGHT KNEE:</b> reveals tenderness upon palpation of the&nbsp;</label>
+        <input type="text" ID="txtPalpationText1Right" onchange="txtMe(this)" Style="margin-Right: 0px;" />
+        <input type="checkbox" ID="chkSuperiorRight" onclick="checkMe(this)" value="suprapatellar" />suprapatellar
+        <input type="checkbox" ID="chkInferiorRight" onclick="checkMe(this)" value="infrapatellar" />infrapatellar
+        <input type="checkbox" ID="chkMedialRight" onclick="checkMe(this)" value="medial joint line" />medial joint line
+        <input type="checkbox" ID="chkLateralRight" onclick="checkMe(this)" value="lateral joint line" />lateral joint line
+        <label>.</label>
+        <input type="checkbox" ID="chkSupermedialLeft" onclick="checkMe(this)" value="There is effusion noted." />There is effusion noted.
+
+        <br />
+        <span class="control-label"><b>Tests: </b></span>
+        <input type="checkbox" ID="chkPositiveRight" onclick="checkMe(this)" value="Tests positive for " />Positive for
+        <input type="checkbox" ID="chkMcMurrayRight" onclick="checkMe(this)" value="McMurray's" />McMurray
+        <input type="checkbox" ID="chkLachmanRight" onclick="checkMe(this)" value="patellofemoral grind" />Patellofemoral Grind
+        <input type="checkbox" ID="chkAnteriorRight" onclick="checkMe(this)" value="anterior drawer" />Anterior drawer
+        <input type="checkbox" ID="chkPosteriorRight" onclick="checkMe(this)" value="posterior drawer" />Posterior drawer
+        <input type="checkbox" ID="chkVarusRight" onclick="checkMe(this)" value="varus stress" />Varus stress
+        <input type="checkbox" ID="chkValgusRight" onclick="checkMe(this)" value="valgus stress" />Valgus stress
+        <label>.</label>
+        <br />
+
+        <section class="col-md-3">
+            <span class="control-label">Notes</span>
+        </section>
+        <section class="col-md-9" style="margin-top: 5px">
+            <textarea id="txtFreeFormR" Style="width:700px;height:100px" onchange="txtAreaMe(this)"></textarea>
+
+            <button type="button" id="start_button" onclick="startButton(event)">
+                <img src="images/mic.gif" alt="start" />
+            </button>
+            <br />
+            <label style="visibility:hidden">#kneerightrom</label>
+            <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
+        </section>
+
+    </div>
+
+</div>
+
+<script>
+    function checkMe(chk) {
+
+        if ($(chk).prop("checked")) {
+            if ($(chk).attr("type") === "radio")
+                $("[name=" + $(chk).attr("name") + "]").removeAttr('checked');
+            $(chk).attr('checked', 'checked');
+        }
+        else {
+            $(chk).removeAttr('checked');
+        }
+
+    }
+
+    function txtMe(txt) {
+        var val = $(txt).val();
+        $(txt).attr('value', val);
+    }
+    function startButton(event) {
+        controlname = "#txtFreeForm";
+        if (recognizing) {
+            recognition.stop();
+            return;
+        }
+        final_transcript = '';
+        recognition.lang = 'en';
+        recognition.start();
+        ignore_onend = false;
+        final_span1.innerHTML = '';
+        interim_span1.innerHTML = '';
+
+        start_timestamp = event.timeStamp;
+    }
+
+    function txtAreaMe(txt) {
+        debugger
+        var val = $(txt).val();
+        $(txt).text(val);
+    }
+
+</script>

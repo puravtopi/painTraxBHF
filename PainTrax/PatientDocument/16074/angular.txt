@@ -1,0 +1,2 @@
+Components ==>  ng generate component user-details/UsersType -m modules/user-details/user-details.module.ts
+Module ==> ng generate module UserDetails --routing

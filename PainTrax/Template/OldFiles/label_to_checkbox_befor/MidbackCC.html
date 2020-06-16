@@ -1,0 +1,175 @@
+<div class="row">
+    <div class="col-md-3">
+        <span class="control-label"><b><u>CHIEF COMPLAINT</u></b></span>
+    </div>
+    <div class="col-md-9" style="margin-top: 5px">
+        <label class="control-label">The patient complains of mid-back pain that is </label>
+        <input type="text" id="txtPainScale" style="Width:40px" value="7" onchange="txtMe(this)" />
+        <label class="control-label">/10, with 10 being the worst, which is </label>
+        <input type="checkbox" id="chkcontent" onclick="checkMe(this)" value="constant" />constant &nbsp;
+        <input type="checkbox" id="chkintermittent" onclick="checkMe(this)" value="intermittent" />intermittent &nbsp;
+        <input type="checkbox" id="chksharp" onclick="checkMe(this)" value="sharp" checked />sharp &nbsp;
+
+        <input type="checkbox" id="chkelectric" onclick="checkMe(this)" value="electric" />electric &nbsp;
+        <input type="checkbox" id="chkshooting" onclick="checkMe(this)" value="shooting" />shooting &nbsp;
+        <input type="checkbox" id="chkthrobbing" onclick="checkMe(this)" value="throbbing" />throbbing &nbsp;
+        <input type="checkbox" id="chkpulsating" onclick="checkMe(this)" value="pulsating" />pulsating&nbsp;
+        <input type="checkbox" id="chkdull" onclick="checkMe(this)" value="dull" checked />dull &nbsp;
+        <input type="checkbox" id="chkachy" onclick="checkMe(this)" value="achy" checked />achy &nbsp;
+        <label> in nature.</label>
+        <label class="control-label">The mid-back pain </label>
+        <section class="dropdown">
+            <input type="text" id="txtmindpain" onchange="txtMe(this)" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtmindpain', this.value)" id="ddlmindpain">
+                <option></option>
+                <option>does not radiate</option>
+                <option>radiates to the left side</option>
+                <option>radiates to the right side</option>
+                <option>radiates bilaterally</option>
+            </select>
+        </section>
+
+
+        <label class="control-label">The mid-back pain worse with </label>
+        <input type="checkbox" id="chkworsesitting" onclick="checkMe(this)" checked value="sitting" />sitting &nbsp;
+        <input type="checkbox" id="chkworsestanding" onclick="checkMe(this)" checked value="standing" />standing &nbsp;
+        <input type="checkbox" id="chkworsebendingforward" onclick="checkMe(this)" checked value="lying down" />lying down &nbsp;
+        <input type="checkbox" id="chkworsebendingbackward" onclick="checkMe(this)" checked value="movement" />movement &nbsp;
+        <input type="checkbox" id="chkworsecarryingheavyitems" onclick="checkMe(this)" value="bending" />bending &nbsp;
+        <input type="checkbox" id="chkworsetwistingleft" onclick="checkMe(this)" value="lifting" />lifting &nbsp;
+        <input type="checkbox" id="chkworsetwistingright" onclick="checkMe(this)" value="going from seating to standing up" />going from seating to standing up &nbsp;
+        <input type="checkbox" id="chkworsewalking" onclick="checkMe(this)" value="walking" />walking&nbsp;
+        <input type="checkbox" id="chkworseclimbing" onclick="checkMe(this)" value="climbing stairs" />climbing stairs &nbsp;
+        <input type="checkbox" id="chkworsedescending" onclick="checkMe(this)" value="descending stairs" />descending stairs &nbsp;
+        <input type="checkbox" id="chkworseworking" onclick="checkMe(this)" value="working" />working 
+        <input type="text" id="txtPainScale2" style="Width:140px" onchange="txtMe(this)" />
+        <label>.</label>
+
+        <label class="control-label"> The mid-back back pain is improved with </label>
+        <input type="checkbox" id="chkimprovedresting" onclick="checkMe(this)" checked value="resting" />resting &nbsp;
+        <input type="checkbox" id="chkimprovedmedication" onclick="checkMe(this)" value="medication" />medication &nbsp;
+        <input type="checkbox" id="chkimprovedtherapy" onclick="checkMe(this)" value="therapy" />therapy &nbsp;
+        <input type="checkbox" id="chkimprovedsleeping" onclick="checkMe(this)" value="sleeping" />sleeping
+        <input type="checkbox" id="chkimprovedmovment" onclick="checkMe(this)" value="movement" />movement
+        <label>.</label>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <span class="control-label">Notes</span>
+    </div>
+    <div class="col-md-9" style="margin-top: 5px">
+        <textarea id="txtFreeFormCC" Style="width:700px;height:100px" onchange="txtAreaMe(this)"></textarea>
+        <button type="button" id="start_button1" onclick="startButton1(event)">
+            <img src="images/mic.gif" alt="start" />
+        </button>
+        <section style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></section>
+    </div>
+</div>
+
+<style>
+    .dropdown {
+        position: relative;
+        width: 200px;
+        display: inline-block;
+    }
+
+        .dropdown select {
+            width: 100%;
+        }
+
+        .dropdown > * {
+            box-sizing: border-box;
+            height: 2em;
+        }
+
+        .dropdown select {
+        }
+
+        .dropdown input {
+            position: absolute;
+            width: calc(100% - 20px);
+        }
+</style>
+
+<script type="text/javascript">
+
+    //window.load = PopulateDropDownList();
+
+    //function PopulateDropDownList() {
+
+
+    //    var ddl = document.getElementById("ddlradiate");
+
+    //    ddl.options.length = 0;
+
+    //    $.get('/xml/HSMData.xml', function (res) {
+
+    //        //var $xml = $(xmlDoc);
+
+    //        // Find Person Tag
+    //        var Radiate = $(res).find("Radiate");
+
+
+
+    //        for (var i = 0; i < Radiate.length; i++) {
+    //            var option = document.createElement("option");
+
+    //            //Set Customer Name in Text part.
+    //            option.text = Radiate[i].getAttribute('name');
+
+
+    //            //Add the Option element to DropDownList.
+    //            ddl.options.add(option);
+    //        }
+    //    });
+
+    //}
+    function checkMe(chk) {
+
+        if ($(chk).prop("checked")) {
+            if ($(chk).attr("type") === "radio")
+                $("[name=" + $(chk).attr("name") + "]").removeAttr('checked');
+            $(chk).attr('checked', 'checked');
+        }
+        else {
+            $(chk).removeAttr('checked');
+        }
+
+    }
+
+    function txtMe(txt) {
+        var val = $(txt).val();
+        $(txt).attr('value', val);
+    }
+
+    function selectRadiant(val) {
+
+        $("#txtradiate").attr('value', val);
+    }
+
+
+    function txtAreaMe(txt) {
+        debugger
+        var val = $(txt).val();
+        $(txt).text(val);
+    }
+
+    function startButton1(event) {
+        controlname = "#txtFreeFormCC";
+        if (recognizing) {
+            recognition.stop();
+            return;
+        }
+        final_transcript = '';
+        recognition.lang = 'en';
+        recognition.start();
+        ignore_onend = false;
+        final_span1.innerHTML = '';
+        interim_span1.innerHTML = '';
+
+        start_timestamp = event.timeStamp;
+    }
+</script>

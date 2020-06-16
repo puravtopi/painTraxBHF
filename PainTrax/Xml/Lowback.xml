@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ROMS>
+  <ROM>
+    <name>Rotation</name>
+    <left></left>
+    <right></right>
+    <normal>120</normal>
+  </ROM>
+  <ROM>
+    <name>Lateral flexion</name>
+    <left></left>
+    <right></right>
+    <normal>30</normal>
+  </ROM>
+  <Cervical>
+    <name>Forward flexion</name>
+    <rom></rom>
+    <normal>50</normal>
+  </Cervical>
+  <Cervical>
+    <name>Extension</name>
+    <rom></rom>
+    <normal>60</normal>
+  </Cervical>
+</ROMS>
+
+ 
+

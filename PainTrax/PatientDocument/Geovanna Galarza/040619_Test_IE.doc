@@ -1,0 +1,714 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 12">
+<meta name=Originator content="Microsoft Word 12">
+<link rel=File-List href="040619_Test_IE_files/filelist.xml">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>HP</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>HP</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>97</o:TotalTime>
+  <o:Created>2019-04-06T23:33:00Z</o:Created>
+  <o:LastSaved>2019-04-07T16:18:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>929</o:Words>
+  <o:Characters>5299</o:Characters>
+  <o:Company>HP</o:Company>
+  <o:Lines>44</o:Lines>
+  <o:Paragraphs>12</o:Paragraphs>
+  <o:CharactersWithSpaces>6216</o:CharactersWithSpaces>
+  <o:Version>12.00</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<link rel=themeData href="040619_Test_IE_files/themedata.thmx">
+<link rel=colorSchemeMapping href="040619_Test_IE_files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-US</w:LidThemeOther>
+  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:DontVertAlignCellWithSp/>
+   <w:DontBreakConstrainedForcedTables/>
+   <w:DontVertAlignInTxbx/>
+   <w:Word11KerningPairs/>
+   <w:CachedColBalance/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="--"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="true"
+  DefSemiHidden="true" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="267">
+  <w:LsdException Locked="false" Priority="0" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 9"/>
+  <w:LsdException Locked="false" Priority="35" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" Priority="10" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" Priority="1" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" Priority="11" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" Priority="22" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" Priority="59" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Table Grid"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" QFormat="true" Name="TOC Heading"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:1;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:0 0 0 0 0 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+h3
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 3 Char";
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:13.5pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	font-weight:bold;}
+p
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 3";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Cambria","serif";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#4F81BD;
+	mso-themecolor:accent1;
+	font-weight:bold;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-size:10.0pt;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<h3 align=center style='text-align:center'><span style='mso-fareast-font-family:
+"Times New Roman"'>Initial Comprehensive Medical Evaluation<o:p></o:p></span></h3>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-yfti-tbllook:1184;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width="10%" style='width:10.0%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><span style='mso-fareast-font-family:"Times New Roman"'>Patient
+  Name:<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman"'>040619
+  Test<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width="10%" style='width:10.0%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><span style='mso-fareast-font-family:"Times New Roman"'>Date
+  of Birth:<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman"'>10/10/1990<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width="10%" style='width:10.0%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><span style='mso-fareast-font-family:"Times New Roman"'>Date
+  of Incident:<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman"'>04/01/2019<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+  <td width="10%" style='width:10.0%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><span style='mso-fareast-font-family:"Times New Roman"'>Date
+  of Service:<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman"'>04/06/2019<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-bottom:12.0pt'><span style='mso-fareast-font-family:
+"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p><b>Degree of Disability:</b> 100% </p>
+
+<p><b><span style='background:red;mso-highlight:red'>Restrictions:</span></b> <span
+style='background:yellow;mso-highlight:yellow'>(should not print if nothing is
+selected in text box.)</span></p>
+
+<p><b>Work Status:</b> Not <span class=GramE>Working</span> - <span
+style='background:yellow;mso-highlight:yellow'>(not printing data in text box.)</span></p>
+
+<p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman"'><br>
+<b><span style='background:yellow;mso-highlight:yellow'>History</span></b><span
+style='background:yellow;mso-highlight:yellow'> <o:p></o:p></span></span></p>
+
+<p><span style='background:yellow;mso-highlight:yellow'>On</span> 04/06/2019,
+Mr. 040619 Test, a right-handed 29 -year-old male presents for the evaluation
+of the injuries sustained in a motor vehicle accident which occurred on the date
+of 04/01/2019. The patient was seen at the Staten Island <span class=SpellE><span
+style='background:yellow;mso-highlight:yellow'>office.The</span></span> patient
+states <span style='background:yellow;mso-highlight:yellow'>He</span> was the
+restrained driver of a vehicle which was involved in T-boned collision. The
+patient states that an EMS team arrived. He went to BV hospital on same day the
+accident occurred via .at the hospital, the patient <span class=SpellE>had,MRI</span>
+of ,CT of ,X-ray of <span class=SpellE>wrist.The</span> patient visited Dr.
+Ford since the <span class=SpellE>incident.The</span> patient reports injury to
+the head and loss of consciousness for undetermined time. The headaches are
+associated with nausea and <span class=SpellE>dizziness.The</span> headaches
+are <span class=SpellE>Occipital.During</span> the accident the patient reports
+injuries to neck. </p>
+
+<p><span style='mso-fareast-font-family:"Times New Roman"'><br>
+<b><span style='background:yellow;mso-highlight:yellow'>CHIEF COMPLAINT</span></b><span
+style='background:yellow;mso-highlight:yellow'> <br>
+<br>
+The</span> patient complains of neck pain that is 8 /10, with 10 being the
+worst; which is sharp, dull and achy in nature. <span style='background:yellow;
+mso-highlight:yellow'>The</span> <span style='background:red;mso-highlight:
+red'>neck pain radiates to</span> </span><span style='background:yellow;
+mso-highlight:yellow'>(should not print if nothing is selected in the grid)</span>
+<span style='mso-fareast-font-family:"Times New Roman"'>The neck pain is
+associated with numbness and tingling to bilateral shoulder and bilateral <span
+style='background:yellow;mso-highlight:yellow'>hand</span> <span
+style='background:red;mso-highlight:red'>Neck pain is associated with weakness </span><span
+style='background:yellow;mso-highlight:yellow'>in (have disabled that in UI)</span>
+Neck pain increases with looking up, looking down, turning head to right and
+turning head to left. Neck pain interferes with sleeping <span
+style='background:yellow;mso-highlight:yellow'>and Neck</span> pain is improved
+with <span style='background:yellow;mso-highlight:yellow'>resting This</span>
+is a test file.<br>
+<br>
+<br>
+<br>
+<br>
+<span style='background:red;mso-highlight:red'>The patient also complains <span
+class=GramE>of .</span></span> <br>
+<br>
+<b>REVIEW OF SYSTEMS:</b> <br>
+<br>
+The patient admits to Abdominal Pain, Fever and blood in <span class=GramE>urine
+.</span><span style='mso-spacerun:yes'>  </span><span style='background:yellow;
+mso-highlight:yellow'>The patient denies (everything that is not selected<span
+class=GramE>)</span></span><br>
+<br>
+<b>PAST MEDICAL HISTORY:</b> Noncontributory <br>
+<br>
+<b>PAST SURGICAL HISTORY:</b> Noncontributory <br>
+<br>
+<b>SOCIAL HISTORY:</b> Patient denies smoking, <span class=SpellE>drinking,<span
+style='background:red;mso-highlight:red'>drugs,social</span></span><span
+style='background:red;mso-highlight:red'> drinking</span>. <span
+style='background:yellow;mso-highlight:yellow'>(<span class=GramE>should</span>
+only print those that are selected)</span><br>
+<br>
+<b>MEDICATIONS:</b> None <br>
+<br>
+<b>ALLERGIES:</b> No known drug allergies <br>
+<br>
+<b>WORK STATUS:</b> Patient works as a <span class=SpellE><span
+style='background:yellow;mso-highlight:yellow'>teacher.He</span></span> has
+missed 2 days of work after the <span class=SpellE><span style='background:
+yellow;mso-highlight:yellow'>accident.Patient</span></span> has continued work
+despite the pain.. <br>
+<br>
+<b>PHISYCIAL EXAM</b> <br>
+<br>
+<b><!--<b>GENERAL:</b>The patient presents in an uncomfortable state.-->GENERAL:</b>
+No acute distress; awake, alert, oriented to name, time and place. <br>
+<br>
+<b><span style='background:red;mso-highlight:red'>VITAL:</span></b> </span><span
+style='background:yellow;mso-highlight:yellow'>(should not print if nothing is
+selected in text box.)</span></p>
+
+<p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman"'><br>
+<b>Cervical Spine Examination:</b> reveals palpable spasms and tenderness to
+palpation in <span class=SpellE>paracervical</span> musculature, bilateral <span
+class=SpellE>trapezius</span> and bilateral rhomboids worse on the <span
+class=GramE>left .</span> <span class=GramE>Pain with extension, flexion and
+lateral rotation to left and right.</span> Positive facet loading maneuver
+bilaterally equal resulting in pain. Positive facet joint tenderness
+bilaterally .The <span class=SpellE>Spurling</span> test is positive
+bilaterally. This is a test file.ROM is as follows<span class=GramE>: .</span>
+There are palpable taut bands/trigger points at bilateral paraspinal level C5-7<span
+class=GramE>,bilateral</span> with referral patterns laterally to the region in
+a fan-like <span class=SpellE>pattern,bilateral</span> <span class=SpellE>levator</span>
+<span class=SpellE>scapulae,bilateral</span> <span class=SpellE>trapezius</span>
+<span style='background:red;mso-highlight:red'>with referral to the scapula.</span>
+<span style='background:yellow;mso-highlight:yellow'>(This has been removed
+from UI, but it still prints)</span><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<b>Neurological <span class=SpellE>Exam<span class=GramE>:<span
+style='font-weight:normal'>The</span></span></span></b> patient is alert and
+cooperative and responding appropriately. Cranial nerves - II-XII are grossly <span
+class=GramE>intact .</span> <br>
+<br>
+<b><span style='background:yellow;mso-highlight:yellow'>REFLEX <span
+class=SpellE>EXAMINATION:<span style='font-weight:normal'>Left</span></span></span></b><span
+style='background:yellow;mso-highlight:yellow'> Triceps 1,Right Triceps 2,Left
+Biceps 2,Right Biceps 1,Left <span class=SpellE>Brachioradialis</span> 2,Right <span
+class=SpellE>Brachioradialis</span> 2,Left Knee 2,Right Knee 2,Left Ankle
+2,Right Ankle 2 <br>
+<br>
+<b>SENSORY EXAMINATION:</b> It is <span class=SpellE>intacthypoesthesia</span>
+at left Lateral arm (C5),hypoesthesia at right Middle finger (C7), <br>
+<br>
+<b>MOTOR <span class=SpellE>EXAMINATION:<span style='font-weight:normal'>,Right</span></span></b>
+Shoulder Abduction 3+,Left Wrist Flexion 4+,Left Hip Flexion 5*</span> <br>
+<span style='background:yellow;mso-highlight:yellow'>(The wordings for the above
+is not correct, A give P the wordings that we use now.)</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman"'><br>
+<b><span style='background:yellow;mso-highlight:yellow'>Diagnostic Studies<span
+class=GramE>:<span style='font-weight:normal'>04</span></span></span></b><span
+style='background:yellow;mso-highlight:yellow'>/02/2019</span> - MRI of the
+Cervical spine <span style='background:yellow;mso-highlight:yellow'>(missing “
+reveals”)</span> bulge at C4-7, HNP at <span style='background:yellow;
+mso-highlight:yellow'>C5-8.this</span> is a test file.<br>
+04/02/2019 - MRI of the <span style='background:yellow;mso-highlight:yellow'>Lumber</span>
+reveals bulge at L2-3, HNP at L4-<span style='background:yellow;mso-highlight:
+yellow'>S1.this</span> is a test file. <br>
+<br>
+<span class=GramE><b>DIAGNOSES :</b></span> <br>
+<br>
+<b>Plan:</b><br>
+This is a test file.<br>
+<br>
+<b><span style='background:red;mso-highlight:red'>Request cervical trigger
+point injections x3<span class=GramE>:<span style='font-weight:normal'>Because</span></span></span></b><span
+style='background:red;mso-highlight:red'> the patient presents with tender
+palpable taut bands/trigger points with referral patterns as noted on today's
+exam, and the patient has had conservative care with several Â&nbsp;weeks of
+physical therapy along with anti-<span class=SpellE>inflammatories</span>, I
+Â&nbsp;would like to request trigger point injections under ultrasound guidance
+those noted trigger points under ultrasound guidance on those noted trigger
+points. Â&nbsp;This injection should decrease pain and inflammation and assist
+the therapist to obtain an increase in range of motion to expedite recovery.</span>
+<span style='background:yellow;mso-highlight:yellow'>(<span class=GramE>this</span>
+was an <b style='mso-bidi-font-weight:normal'>Execute</b>, but it populated <b
+style='mso-bidi-font-weight:normal'>Request</b> data)</span><br>
+<br>
+<b>Request MRI of the cervical <span class=SpellE>spine<span class=GramE>:<span
+style='font-weight:normal'>to</span></span></span></b> rule out herniated
+nucleus <span class=SpellE>pulposus</span>/soft tissue injury.<br>
+<br>
+<b>Request cervical medial branch block at (side) (level) x2<span class=GramE>:<span
+style='font-weight:normal'>The</span></span></b> patient presents with
+persistent (NON-ACUTE), non-radiating cervical pain, worse with extension and
+side bending, despite an attempted by overall limited success from therapy and
+medications, I would like to request a diagnostic cervical MBB, which will be
+necessary to evaluate a <span class=SpellE>facetogenic</span> problem. I would
+like to rule out a <span class=SpellE>facetogenic</span> pain by performing a <span
+class=SpellE>medial</span> branch block. Â&nbsp;I am requesting x 2, so that I
+can avoid false positives as that occurs up to 50% of the time. Â&nbsp;2
+positive medial branch blocks would increase the specificity to about 87%. It
+is the standard of care prior to performing a cervical radiofrequency ablation.
+Â&nbsp;I would like to request performing the medial branch block at (level)
+bilaterally. If both cervical medial branch blocks are positive, then I'll
+proceed with a cervical radiofrequency ablation. <br>
+<br>
+<b>GAIT<span class=GramE>: <span style='font-weight:normal'>.</span></span></b>
+<b>Procedures: </b>If the patient continues to have tender palpable taut
+bands/trigger points with referral patterns as noted in the future on
+examination, I will consider doing trigger point injections. <br>
+<br>
+<b>Medications: </b>None <br>
+<br>
+<b>Care: </b><span class=SpellE><span style='background:yellow;mso-highlight:
+yellow'>Acupuncture<span class=GramE>,Chiropratic</span></span></span><span
+style='background:yellow;mso-highlight:yellow'>.</span> <br>
+<br>
+<b>Goals: </b>To increase range of motion, strength, <span class=GramE>flexibility</span>,
+to decrease pain and to improve body biomechanics and activities of daily
+living and improve the functional status. <br>
+<br>
+<b>Precautions: </b>Patient education provided <span class=SpellE>via<span
+class=GramE>,physician</span></span> and Universal. <br>
+<br>
+<b>Consultation: </b>Neurologist. <br>
+<br>
+<span class=GramE><b>Treatment :</b>#</span>treatment <br>
+<br>
+<b>Follow-up :</b>2-4 weeks <o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

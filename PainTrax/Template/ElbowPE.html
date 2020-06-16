@@ -3,7 +3,11 @@
     <br />
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Elbow Examination:</b></span><label style="visibility:hidden">#leftelbowtitle</label>
-        <label class="control-label"> there is tenderness upon palpation of the elbow. Range of motion is </label>
+
+
+        <input type="checkbox" id="chktendernessL" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the elbow " />There is tenderness upon palpation of the elbow.
+        <br />
+        <input type="checkbox" id="chkROML" class="nocomma" onclick="checkMe(this)" value="Range of motion is " /> Range of motion is
         <section class="dropdown">
             <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this)" value="mildly decreased. " />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionLeft', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
@@ -34,7 +38,11 @@
     <br />
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Elbow Examination:</b></span><label style="visibility:hidden">#rightelbowtitle</label>
-        <label class="control-label"> there is tenderness upon palpation of the elbow. Range of motion is </label>
+
+        <input type="checkbox" id="chktendernessL" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the elbow " /> There is tenderness upon palpation of the elbow.
+
+        <input type="checkbox" id="chkROMR" class="nocomma" onclick="checkMe(this)" value="Range of motion is " /> Range of motion is
+
 
         <section class="dropdown">
             <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this)" value="mildly decreased. " />

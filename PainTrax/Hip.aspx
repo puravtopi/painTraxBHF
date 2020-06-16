@@ -155,15 +155,12 @@
                     <div class="col-md-3">
                         <label class="control-label"><b><u>PHYSICAL EXAM:</u></b></label>
                     </div>
-                    <div class="col-md-9">
-                        <div runat="server" id="divPE">
-                        </div>
-                    </div>
-                    <div class="col-md-9" style="margin-top: 5px; display: none">
+
+                    <div class="col-md-9" style="margin-top: 5px;">
 
                         <asp:Repeater runat="server" ID="repROM" OnItemDataBound="repROM_ItemDataBound">
                             <HeaderTemplate>
-                                <table style="width: 40%; display: none">
+                                <table style="width: 40%;">
 
                                     <thead>
                                         <tr>
@@ -194,12 +191,10 @@
                                 <tr>
                                     <td style="text-align: left;">
                                         <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
-                                    <%--<td>
-                                                <asp:TextBox ID="txtLEFlexionLeftWas" Text="30" Width="50px" runat="server"></asp:TextBox></td>--%>
+                                   
                                     <td>
                                         <asp:TextBox ID="txtleft" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
-                                    <%-- <td>
-                                                <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
+                                   
                                     <td>
                                         <asp:TextBox ID="txtright" Width="50px" Text='<%# Eval("right") %>' onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
                                     <td>
@@ -211,7 +206,7 @@
                             </FooterTemplate>
                         </asp:Repeater>
 
-                        <table style="width: 400px;">
+                        <table style="width: 700px;display:none">
                             <tr>
                                 <td class="table_cell">
                                     <label>ROM</label></td>
@@ -283,6 +278,9 @@
 
                 </div>
 
+
+                <div runat="server" id="divPE">
+                </div>
 
 
                 <asp:HiddenField runat="server" ID="hdPEvalue" />

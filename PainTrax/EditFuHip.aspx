@@ -145,7 +145,7 @@
                         <label class="control-label"><b><u>PHYSICAL EXAM:</u></b></label>
                     </div>
 
-                    <div class="col-md-9" style="margin-top: 5px;display:none">
+                    <div class="col-md-9" style="margin-top: 5px;">
 
                         <asp:Repeater runat="server" ID="repROM" OnItemDataBound="repROM_ItemDataBound">
                             <HeaderTemplate>

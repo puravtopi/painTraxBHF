@@ -1,26 +1,28 @@
-﻿<div class="col-md-9 row" style="margin-top: 5px">
+﻿
+    
+
+<div class="col-md-9 row" style="margin-top: 5px">
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Hip Examination:</b> </span><label style="visibility:hidden">#lefthiptitle</label>
-        <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the
-        <input type="checkbox" ID="chkGreaterTrochanterLeft" onclick="checkMe(this)" value="greater trochanter" />greater trochanter
-        <input type="checkbox" ID="chkPosteriorLeft" onclick="checkMe(this)" value="posterior aspect of the greater trochanter" />posterior aspect of the greater trochanter
-        <input type="checkbox" ID="chkIliotibialLeft" onclick="checkMe(this)" value="iliotibial band" />iliotibial band
-        <label>. &nbsp;</label>
+        <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the " /> There is tenderness upon palpation of the
+        <input type="checkbox" ID="chkGreaterTrochanterLeft" onclick="checkMe(this)" value="greater trochanter" /> greater trochanter
+        <input type="checkbox" ID="chkPosteriorLeft" onclick="checkMe(this)" value="posterior aspect of the greater trochanter" /> posterior aspect of the greater trochanter
+        <input type="checkbox" ID="chkIliotibialLeft" onclick="checkMe(this)" value="iliotibial band" /> iliotibial band
+        <label>.</label>
         <br />
         <section style="display:none">
-            <label>Range of motion is </label>
+            <span>Range of motion is </span>
             <section class="dropdown">
-                <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this)" value="mildly decreased. " />
+                <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this)" value="" />
                 <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionLeft', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
             </section>
 
         </section>
-        <label class="control-label">Tests:</label>
-        <input type="checkbox" ID="chkOberLeft" onclick="checkMe(this)" value="Ober" /> Ober
-        <input type="checkbox" ID="chkFaberLeft" onclick="checkMe(this)" value="FABER" />FABER
-        <input type="checkbox" ID="chkTrendelenburgLeft" onclick="checkMe(this)" value="Trendelenburg" />Trendelenburg
-        <span> test - positive.</span>
-        <br />
+
+
+
+
+
 
 
         <section class="col-md-3">
@@ -41,28 +43,24 @@
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Hip Examination:</b> </span><label style="visibility:hidden">#rigthhiptitle</label>
 
-        <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="reveals tenderness upon palpation of the " /> reveals tenderness upon palpation of the
-        <input type="checkbox" ID="chkGreaterTrochanterRight" onclick="checkMe(this)" value="greater trochanter" />greater trochanter
-        <input type="checkbox" ID="chkPosteriorRight" onclick="checkMe(this)" value="posterior aspect of the greater trochanter" />posterior aspect of the greater trochanter
-        <input type="checkbox" ID="chkIliotibialRight" onclick="checkMe(this)" value="iliotibial band" />iliotibial band
+        <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the " />There is tenderness upon palpation of the
+        <input type="checkbox" ID="chkGreaterTrochanterRight" onclick="checkMe(this)" value="greater trochanter" /> greater trochanter
+        <input type="checkbox" ID="chkPosteriorRight" onclick="checkMe(this)" value="posterior aspect of the greater trochanter" /> posterior aspect of the greater trochanter
+        <input type="checkbox" ID="chkIliotibialRight" onclick="checkMe(this)" value="iliotibial band" /> iliotibial band
         <label>.</label>
         <br />
         <section style="display:none">
             <p>
-                <label>Range of motion is </label>
+                <span>Range of motion is </span>
                 <section class="dropdown">
-                    <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this)" value="mildly decreased. " />
+                    <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this)" value="" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionRight', this.value)" id="ddlRangeOfMotionRight"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
                 </section>
 
             </p>
         </section>
 
-        <span class="control-label"><b>Tests: </b></span>
-        <input type="checkbox" ID="chkOberLeft" onclick="checkMe(this)" value="Ober" /> Ober
-        <input type="checkbox" ID="chkFaberLeft" onclick="checkMe(this)" value="FABER" />FABER
-        <input type="checkbox" ID="chkTrendelenburgLeft" onclick="checkMe(this)" value="Trendelenburg" />Trendelenburg
-        <span> test - positive.</span>
+      
         <br />
 
 
@@ -80,7 +78,28 @@
 
     </div>
 
+    <br />
+    <label Style="float: left;">The Ober test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtOber" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtOber', this.value)" id="ddlOber"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <label Style="float: left;">The FABER test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtFABER" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtFABER', this.value)" id="ddlFABER"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <label Style="float: left;">The Trendelenburg test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtTrendelenburg" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtTrendelenburg', this.value)" id="ddlTrendelenburg"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+
 </div>
+
 <style>
     .dropdown {
         position: relative;
@@ -161,7 +180,10 @@
         $(txt).attr('value', val);
     }
 
+    function selectVal(txtid, val) {
 
+        $("#" + txtid).attr('value', val);
+    }
 
     function startButton(event) {
         controlname = "#txtFreeForm";

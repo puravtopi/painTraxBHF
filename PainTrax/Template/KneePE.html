@@ -1,25 +1,27 @@
 ﻿<div class="col-md-9 row" style="margin-top: 5px">
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Knee Examination:</b> </span><label style="visibility:hidden">#leftkneetitle</label>
-        <label class="control-label"> reveals tenderness upon palpation of the </label>
+
+        <input type="checkbox" id="chkkneerevelLeft" value="reveals tenderness upon palpation of the " class="nocomma" onclick="checkMe(this)" /> reveals tenderness upon palpation of the
+
         <input type="text" ID="txtPalpationText1Left" onchange="txtMe(this)" Style="margin-left: 0px;" />
         <input type="text" ID="txtPalpationText2Left" onchange="txtMe(this)" Style="margin-left: 0px;" />
-        <input type="checkbox" ID="chkMedialLeft" onclick="checkMe(this)" value="medial" />medial
-        <input type="checkbox" ID="chkLateralLeft" onclick="checkMe(this)" value="lateral" />lateral
-        <input type="checkbox" ID="chkSuperiorLeft" onclick="checkMe(this)" value="superior" />superior
-        <input type="checkbox" ID="chkInferiorLeft" onclick="checkMe(this)" value="inferior" />inferior
-        <input type="checkbox" ID="chkSupermedialLeft" onclick="checkMe(this)" value="superomedial" />superomedial
-        <input type="checkbox" ID="chkSuperoLateralLeft" onclick="checkMe(this)" value="superolateral" />superolateral
-        <input type="checkbox" ID="chkInferomedialLeft" onclick="checkMe(this)" value="inferomedial" />inferomedial
-        <input type="checkbox" ID="chkInferoLateralLeft" onclick="checkMe(this)" value="inferolateral" />inferolateral
-        <input type="checkbox" ID="chkPeripatellarLeft" onclick="checkMe(this)" value="peripatellar" />peripatellar
+        <input type="checkbox" ID="chkMedialLeft" onclick="checkMe(this)" value="medial" /> medial
+        <input type="checkbox" ID="chkLateralLeft" onclick="checkMe(this)" value="lateral" /> lateral
+        <input type="checkbox" ID="chkSuperiorLeft" onclick="checkMe(this)" value="superior" /> superior
+        <input type="checkbox" ID="chkInferiorLeft" onclick="checkMe(this)" value="inferior" /> inferior
+        <input type="checkbox" ID="chkSupermedialLeft" onclick="checkMe(this)" value="superomedial" /> superomedial
+        <input type="checkbox" ID="chkSuperoLateralLeft" onclick="checkMe(this)" value="superolateral" /> superolateral
+        <input type="checkbox" ID="chkInferomedialLeft" onclick="checkMe(this)" value="inferomedial" /> inferomedial
+        <input type="checkbox" ID="chkInferoLateralLeft" onclick="checkMe(this)" value="inferolateral" /> inferolateral
+        <input type="checkbox" ID="chkPeripatellarLeft" onclick="checkMe(this)" value="peripatellar" /> peripatellar
         <label>.</label>
 
         <section style="display:none">
             <br />
             <span class="control-label"><b>Tests:</b></span>
-            <input type="checkbox" ID="chkMcMurrayLeft" onclick="checkMe(this)" value="McMurray's" />McMurray
-            <input type="checkbox" ID="chkLachmanLeft" onclick="checkMe(this)" value="Lachman's" />Lachman
+            <input type="checkbox" ID="chkMcMurrayLeft" onclick="checkMe(this)" value="McMurrays" />McMurray
+            <input type="checkbox" ID="chkLachmanLeft" onclick="checkMe(this)" value="Lachmans" />Lachman
             <input type="checkbox" ID="chkAnteriorLeft" onclick="checkMe(this)" value="Anterior drawer" />Anterior drawer
             <input type="checkbox" ID="chkPosteriorLeft" onclick="checkMe(this)" value="Posterior drawer" />Posterior drawer
             <input type="checkbox" ID="chkVarusLeft" onclick="checkMe(this)" value="Varus stress" />Varus stress
@@ -46,24 +48,24 @@
     <br />
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Knee Examination:</b> </span><label style="visibility:hidden">#rightkneetitle</label>
-        <label class="control-label"> reveals tenderness upon palpation of the&nbsp;</label>
+        <input type="checkbox" id="chkkneerevelRight" value="reveals tenderness upon palpation of the " class="nocomma" onclick="checkMe(this)" /> reveals tenderness upon palpation of the
         <input type="text" ID="txtPalpationText1Right" onchange="txtMe(this)" Style="margin-Right: 0px;" />
         <input type="text" ID="txtPalpationText2Right" onchange="txtMe(this)" Style="margin-Right: 0px;" />
-        <input type="checkbox" ID="chkMedialRight" onclick="checkMe(this)" value="medial" />medial
-        <input type="checkbox" ID="chkLateralRight" onclick="checkMe(this)" value="lateral" />lateral
-        <input type="checkbox" ID="chkSuperiorRight" onclick="checkMe(this)" value="superior" />superior
-        <input type="checkbox" ID="chkInferiorRight" onclick="checkMe(this)" value="inferior" />inferior
-        <input type="checkbox" ID="chkSupermedialRight" onclick="checkMe(this)" value="superomedial" />superomedial
-        <input type="checkbox" ID="chkSuperoLateralRight" onclick="checkMe(this)" value="superolateral" />superolateral
-        <input type="checkbox" ID="chkInferomedialRight" onclick="checkMe(this)" value="inferomedial" />inferomedial
-        <input type="checkbox" ID="chkInferoLateralRight" onclick="checkMe(this)" value="inferolateral" />inferolateral
-        <input type="checkbox" ID="chkPeripatellarRight" onclick="checkMe(this)" value="peripatellar" />peripatellar
+        <input type="checkbox" ID="chkMedialRight" onclick="checkMe(this)" value="medial" /> medial
+        <input type="checkbox" ID="chkLateralRight" onclick="checkMe(this)" value="lateral" /> lateral
+        <input type="checkbox" ID="chkSuperiorRight" onclick="checkMe(this)" value="superior" /> superior
+        <input type="checkbox" ID="chkInferiorRight" onclick="checkMe(this)" value="inferior" /> inferior
+        <input type="checkbox" ID="chkSupermedialRight" onclick="checkMe(this)" value="superomedial" /> superomedial
+        <input type="checkbox" ID="chkSuperoLateralRight" onclick="checkMe(this)" value="superolateral" /> superolateral
+        <input type="checkbox" ID="chkInferomedialRight" onclick="checkMe(this)" value="inferomedial" /> inferomedial
+        <input type="checkbox" ID="chkInferoLateralRight" onclick="checkMe(this)" value="inferolateral" /> inferolateral
+        <input type="checkbox" ID="chkPeripatellarRight" onclick="checkMe(this)" value="peripatellar" /> peripatellar
         <label>.</label>
 
         <br />
         <section style="display:none">
             <span class="control-label"><b>Tests: </b></span>
-            <input type="checkbox" ID="chkMcMurrayLeft" onclick="checkMe(this)" value="McMurray" />McMurray
+            <input type="checkbox" ID="chkMcMurrayLeft" onclick="checkMe(this)" value="McMurray" /> McMurray
             <input type="checkbox" ID="chkLachmanLeft" onclick="checkMe(this)" value="Lachman" />Lachman
             <input type="checkbox" ID="chkAnteriorLeft" onclick="checkMe(this)" value="Anterior drawer" />Anterior drawer
             <input type="checkbox" ID="chkPosteriorLeft" onclick="checkMe(this)" value="Posterior drawer" />Posterior drawer
@@ -87,7 +89,76 @@
 
     </div>
 
+    <br />
+    <label Style="float: left;">The McMurrays test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtMcMurray" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtMcMurray', this.value)" id="ddlMcMurray"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <label Style="float: left;">The Lachmans test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtLachman" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtLachman', this.value)" id="ddlLachman"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <label Style="float: left;">The Anterior drawer test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtantdraw" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtantdraw', this.value)" id="ddlantdraw"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <label Style="float: left;">The Posterior drawer test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtposdraw" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtposdraw', this.value)" id="ddlposdraw"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <label Style="float: left;">The Varus stress test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtvarstress" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtvarstress', this.value)" id="ddlvarstress"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <label Style="float: left;">The Varus stress test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtvarstress" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtvarstress', this.value)" id="ddlvarstress"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <label Style="float: left;">The Valgus stress test is </label>&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtvalstress" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtvalstress', this.value)" id="ddlvalstress"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
 </div>
+
+<style>
+    .dropdown {
+        position: relative;
+        width: 200px;
+        display: inline-block;
+    }
+
+        .dropdown select {
+            width: 100%;
+        }
+
+        .dropdown > * {
+            box-sizing: border-box;
+            height: 2em;
+        }
+
+        .dropdown select {
+        }
+
+        .dropdown input {
+            position: absolute;
+            width: calc(100% - 20px);
+        }
+</style>
+
 
 <script>
     function checkMe(chk) {
@@ -101,6 +172,11 @@
             $(chk).removeAttr('checked');
         }
 
+    }
+
+    function selectVal(txtid, val) {
+
+        $("#" + txtid).attr('value', val);
     }
 
     function txtMe(txt) {

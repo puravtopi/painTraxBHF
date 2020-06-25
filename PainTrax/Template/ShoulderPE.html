@@ -14,7 +14,7 @@
         <input type="checkbox" ID="chkScapularLeft" onclick="checkMe(this)" value="scapular region" /> scapular region
         <input type="checkbox" ID="chkDeepLabralLeft" onclick="checkMe(this)" value="deep labral region" /> deep labral region
         <label>.</label>
-        <input type="checkbox" id="chkPEleft1" value="The shoulder pain is improved with " class="nocomma" onclick="checkMe(this)" checked /> There is muscle spasm present at the&nbsp;
+        <input type="checkbox" id="chkPEleft1" value="There is muscle spasm present at the " class="nocomma" onclick="checkMe(this)" checked /> There is muscle spasm present at the&nbsp;
 
         <input type="checkbox" ID="chkDeltoidLeft" onclick="checkMe(this)" value="deltoid muscle" /> deltoid muscle
         <input type="checkbox" ID="chkTrapeziusLeft" onclick="checkMe(this)" value="trapezius muscule" /> trapezius muscule
@@ -44,9 +44,12 @@
             <button type="button" id="start_button" onclick="startButton2(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#shoulderleftrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
-
+       
+        <label style="visibility:hidden">#shoulderleftmri</label>
 
     </div>
     <br />
@@ -63,7 +66,7 @@
         <input type="checkbox" ID="chkScapularRight" onclick="checkMe(this)" value="scapular region" /> scapular region
         <input type="checkbox" ID="chkDeepLabralRight" onclick="checkMe(this)" value="deep labral region" /> deep labral region
         <label>.</label>
-        <input type="checkbox" id="chkPEright1" value="The shoulder pain is improved with " class="nocomma" onclick="checkMe(this)" checked /> There is muscle spasm present at the&nbsp;
+        <input type="checkbox" id="chkPEright1" value="There is muscle spasm present at the " class="nocomma" onclick="checkMe(this)" checked /> There is muscle spasm present at the&nbsp;
         <input type="checkbox" ID="chkDeltoidRight" onclick="checkMe(this)" value="deltoid muscle" /> deltoid muscle
         <input type="checkbox" ID="chkTrapeziusRight" onclick="checkMe(this)" value="trapezius muscule" /> trapezius muscule
         <input type="checkbox" ID="chkecchymosisRight" onclick="checkMe(this)" value="ecchymosis" /> ecchymosis
@@ -92,47 +95,84 @@
             <button type="button" id="start_button" onclick="startButton2(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#shoulderrightrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
-
+        <label style="visibility:hidden">#shoulderrightmri</label>
     </div>
 
-    <br />
-    <label Style="float: left;">The Neer test is</label>&nbsp;
+    <input type="checkbox" id="chkNeer" value="The Neer test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Neer test is&nbsp;
+
     <section class="dropdown">
         <input type="text" id="txtNeer" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtNeer', this.value)" id="ddlNeer"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtNeer', this.value)" id="ddlNeer">
+            <option></option>
+            <option>normal.</option>
+            <option>positive on left.</option>
+            <option>positive on right.</option>
+            <option>positive bilaterally.</option>
+        </select>
     </section>
     <br />
-    <label Style="float: left;">The Hawkins test is</label>&nbsp;
+
+    <input type="checkbox" id="chkHawkins" value="The Hawkins test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Hawkins test is&nbsp;
+
     <section class="dropdown">
         <input type="text" id="txtHawkins" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtHawkins', this.value)" id="ddlHawkins"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtHawkins', this.value)" id="ddlHawkins">
+            <option></option>
+            <option>normal.</option>
+            <option>positive on left.</option>
+            <option>positive on right.</option>
+            <option>positive bilaterally.</option>
+        </select>
     </section>
     <br />
-    <label Style="float: left;">The Yergason test is</label>&nbsp;
+    <input type="checkbox" id="chkYergason" value="The Yergason test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Yergason test is&nbsp;
+
     <section class="dropdown">
         <input type="text" id="txtYergason" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtYergason', this.value)" id="ddlYergason"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtYergason', this.value)" id="ddlYergason">
+            <option></option>
+            <option>normal.</option>
+            <option>positive on left.</option>
+            <option>positive on right.</option>
+            <option>positive bilaterally.</option>
+        </select>
     </section>
     <br />
-    <label Style="float: left;">The Drop arm test is</label>&nbsp;
+
+    <input type="checkbox" id="chkDrop" value="The Yergason test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Drop test is&nbsp;
+   
     <section class="dropdown">
         <input type="text" id="txtDA" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtDA', this.value)" id="ddlDA"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtDA', this.value)" id="ddlDA">
+            <option></option>
+            <option>normal.</option>
+            <option>positive on left.</option>
+            <option>positive on right.</option>
+            <option>positive bilaterally.</option>
+        </select>
     </section>
     <br />
-    <label Style="float: left;">The Reverse beer can test is</label>&nbsp;
+    <input type="checkbox" id="chkReverse" value="The Reverse test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Reverse test is&nbsp;
     <section class="dropdown">
         <input type="text" id="txtRBC" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRBC', this.value)" id="ddlRBC"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRBC', this.value)" id="ddlRBC">
+            <option></option>
+            <option>normal.</option>
+            <option>positive on left.</option>
+            <option>positive on right.</option>
+            <option>positive bilaterally.</option>
+        </select>
     </section>
     <br />
 
 </div>
 
 
-<div id="divTP">
+<section id="divTP">
     <div class="row">
         <div class="col-md-3">
             <span class="control-label"><b><u>Trigger Point:</u></b></span>
@@ -197,7 +237,7 @@
             <span> with referral to the scapula.</span>
         </div>
     </div>
-</div>
+</section>
 
 <style>
     .dropdown {

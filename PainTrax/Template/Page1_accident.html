@@ -6,8 +6,8 @@
 
 
         <p>
-            <textarea Style="float: left;Width:650px" ID="txt_vital" onchange="txtAreaMe(this)">
-Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck, chest, and abdomen is benign.  Patient is an alert, oriented, and cooperative.
+            <textarea Style="float: left;Width:650px" ID="txt_vital" onchange="txtAreaMe(this)">H: __’__", W: __lbs, SpO2: __, HR: __, BSA: ____ sqm.
+
 </textarea>
 
 
@@ -44,7 +44,7 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
             <p>
 
                 <section class="dropdown" style="width:600px">
-                    <input type="text" id="txt_accident_desc"  onchange="txtMe(this)" />
+                    <input type="text" id="txt_accident_desc" onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txt_accident_desc', this.value)" id="ddl_accident_desc">
                         <option value=""></option>
                         <option value="presents with complaints of pain in the">presents with complaints of pain in the</option>
@@ -65,7 +65,7 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
             <p class="inline">
                 Belt Restrained
                 <section class="dropdown">
-                    <input type="text" id="txt_belt" onchange="txtMe(this)"  />
+                    <input type="text" id="txt_belt" onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txt_belt', this.value)" id="ddl_belt">
                         <option value="" />
                         <option value="restrained driver">restrained driver</option>
@@ -78,7 +78,7 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
                 &nbsp;
                 Vehicle was involved in
                 <section class="dropdown">
-                    <input type="text" id="txt_invovledin"  onchange="txtMe(this)" />
+                    <input type="text" id="txt_invovledin" onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txt_invovledin', this.value)" id="ddl_invovledin">
                         <option value=""></option>
                         <option value="rear end">rear end</option>
@@ -99,16 +99,14 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
             <br />
             <b class="labelcolor">Accident/Injury Details</b>
             <p>
-                <textarea Style="float: left;Width:650px" ID="txt_accident_desc_1" onchange="txtAreaMe(this)">
-
-</textarea>
+                <textarea Style="float: left;Width:650px" ID="txt_accident_desc_1" onchange="txtAreaMe(this)"></textarea>
 
 
             </p>
             <div class="clearfix"></div>
             <br />
             <p style="display: inline; margin-top: 10px">
-                <b class="labelcolor">Police/Airbag :</b> &nbsp;
+                <b class="labelcolor">EMS :</b> &nbsp;
                 <section class="dropdown">
                     <input type="text" id="txt_EMS" onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txt_EMS', this.value)" id="ddl_EMS">
@@ -116,7 +114,7 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
                         <option value="arrived">arrived</option>
                         <option value="did not arrive at the scene" selected="selected">did not arrive at the scene</option>-->
                         <option value=""></option>
-						<option value="Airbags were not deployed and police were not notified">Airbags were not deployed and police were not notified.</option>
+                        <option value="Airbags were not deployed and police were not notified">Airbags were not deployed and police were not notified.</option>
                         <option value="Airbags were deployed and police were not notified">Airbags were deployed and police were not notified.</option>
                         <option value="Airbags were deployed but police were not notified">Airbags were deployed but police were not notified.</option>
                         <option value="Airbags were deployed and police were notified">Airbags were deployed and police were notified.</option>
@@ -158,9 +156,20 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
                 <input type="text" id="txt_prescription" onchange="txtMe(this)" disabled="disabled" />.
 
             </p>
+            <p>
+                <strong class="labelcolor">Degree of Disability: </strong>
+                <input type='radio' name="disability" id="rblPatial" Value="partial" onchange="checkMe(this)" />Partial
+                <input type='radio' name="disability" id="rbl25" Value="25%" onchange="checkMe(this)" />25%
+                <input type='radio' name="disability" id="rbl50" Value="50%" onchange="checkMe(this)" />50%
+                <input type='radio' name="disability" id="rbl75" Value="75%" onchange="checkMe(this)" />75%
+                <input type='radio' name="disability" id="rbl100" Value="100%" onchange="checkMe(this)" />100%
+                <input type='radio' name="disability" id="rblNone" Value="None" onchange="checkMe(this)" />None
+                <br />
+                <br />
+            </p>
 
             <p>
-                <b class="labelcolor">Work History :</b>&nbsp;
+                <b class="labelcolor">Work Status :</b>&nbsp;
                 <section class="dropdown">
                     <input type="text" id="txt_work_status" value="Patient works as " onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txt_work_status', this.value)" id="ddl_work_status">
@@ -175,9 +184,9 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
                     </select>
                 </section>
 
-                has missed
+                <!--has missed-->
                 <input type='text' ID="txtMissed" onchange="txtMe(this)">
-                of work after the accident.
+                <!--of work after the accident.
 
                 <section class="dropdown" style="width:350px">
                     <input type="text" id="txtReturnedToWork" value="Patient has continued work despite the pain" onchange="txtMe(this)" />
@@ -186,7 +195,14 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
                         <option value="Patient has not returned since the accident.">Patient has not returned since the accident</option>
                         <option value="Patient has continued work despite the pain" selected="selected">Patient has continued work despite the pain</option>
                     </select>
-                </section>
+
+                </section>-->
+                <!--<strong class="labelcolor">Work Status:</strong>-->
+                <input type='radio' name="WorkStatus" id="rblStatus" Value="Able to go back to work" onchange="checkMe(this)" />Able to go back to work
+                <input type='radio' name="WorkStatus" id="rblrblStatus1" Value="Working" onchange="checkMe(this)" />Working
+                <input type='radio' name="WorkStatus" id="rblStatus2" Value="Not Working" onchange="checkMe(this)" />Not Working
+                <input type='radio' name="WorkStatus" id="rblStatus3" Value="Partially Working" onchange="checkMe(this)" />Partially Working
+
 
             </p>
             <p class="inline">
@@ -238,17 +254,22 @@ Height is _ feet _ inches, weight is ___ pounds.  Examination of the head, neck,
                 <input type='checkbox' ID="chkGlobal" value="global" onclick="checkMe(this)" />global.
             </p>
 
-            <textarea Style="float: left;Width:650px" ID="txt_accident_desc_3" onchange="txtAreaMe(this)">
-Patient felt pain after the accident, and later presented to Chiropractors office for conservative treatment. Patient's symptoms have somewhat improved but still complains of pain. Patient has been referred for further consultation for pain management. Pain has progressively increased in both intensity and frequency necessitating a pain consultation
+            <p>
+                <label>The patient reports </label>
 
+
+                <input type='checkbox' ID="chkAnxiety" value="Anxiety" onclick="checkMe(this)" /> Anxiety
+                <input type='checkbox' ID="chknausea" value="nausea" onclick="checkMe(this)" /> nausea
+                <input type='checkbox' ID="chkdizziness" value="dizziness" onclick="checkMe(this)" /> dizziness
+                <input type='checkbox' ID="chkvomiting" value="vomiting" onclick="checkMe(this)" /> vomiting.
+
+            </p>
+
+
+<textarea Style="float: left;Width:650px" ID="txt_accident_desc_3" onchange="txtAreaMe(this)">
 </textarea>
 
-            <div class="clearfix"></div>
 
-
-            <textarea Style="float: left;Width:650px" ID="txt_accident_desc_4" onchange="txtAreaMe(this)">
-
-</textarea>
             <div class="clearfix"></div>
 
 

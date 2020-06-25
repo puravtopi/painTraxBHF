@@ -92,7 +92,7 @@ public partial class Page3 : System.Web.UI.Page
             //query = query + "'" + chk_bowel_bladder.Checked + "','" + chk_recent_wt.Checked + "',";
             //query = query + "'" + chk_episodic_ligth.Checked + "','" + chk_rashes.Checked + "','" + Session["PatientIE_ID"].ToString() + "',";
             //query = query + "'" + chk_sleep_disturbance.Checked + "','" + chk_blurred.Checked + "','" + chk_hearing_loss.Checked + "','" + chk_depression.Checked + "',1,'" + chk_bloodinurine.Checked + "','" + hdHTMLContent.Value + "' )";
-            query = "insert into tblPage2HTMLContent(PatientIE_ID,topSectionHTML,degreeSectionHTML,rosSectionHTML)values(@PatientIE_ID,@topSectionHTML,@degreeSectionHTML,@rosSectionHTML)";
+            query = "insert into tblPage2HTMLContent(PatientIE_ID,topSectionHTML,degreeSectionHTML,rosSectionHTML,complainSectionHTML)values(@PatientIE_ID,@topSectionHTML,@degreeSectionHTML,@rosSectionHTML,@complainSectionHTML)";
         }
         else
         {
@@ -104,7 +104,7 @@ public partial class Page3 : System.Web.UI.Page
             //query = query + "',NightSweats='" + chk_sleep_disturbance.Checked + "',DoubleVision='" + chk_blurred.Checked;
             //query = query + "',HearingLoss='" + chk_hearing_loss.Checked + "',Depression = '" + chk_depression.Checked + "',ISFirst=1 , dloodinurine = '" + chk_bloodinurine.Checked + "',HTMLContent='" + hdHTMLContent.Value + "',";
             //query = query + " Where PatientIE_ID=" + Session["PatientIE_ID"].ToString() + "";
-            query = "update tblPage2HTMLContent set topSectionHTML=@topSectionHTML,degreeSectionHTML=@degreeSectionHTML,rosSectionHTML=@rosSectionHTML where PatientIE_ID=@PatientIE_ID";
+            query = "update tblPage2HTMLContent set topSectionHTML=@topSectionHTML,degreeSectionHTML=@degreeSectionHTML,rosSectionHTML=@rosSectionHTML,complainSectionHTML=@complainSectionHTML where PatientIE_ID=@PatientIE_ID";
         }
 
 
@@ -115,6 +115,7 @@ public partial class Page3 : System.Web.UI.Page
             command.Parameters.AddWithValue("@topSectionHTML", hdtopHTMLContent.Value);
             command.Parameters.AddWithValue("@degreeSectionHTML", hddegreeHTMLContent.Value);
             command.Parameters.AddWithValue("@rosSectionHTML", hdrosHTMLContent.Value);
+            command.Parameters.AddWithValue("@complainSectionHTML", hdcomplainHTMLContent.Value);
 
             connection.Open();
             var results = command.ExecuteNonQuery();
@@ -535,6 +536,7 @@ public partial class Page3 : System.Web.UI.Page
 
 
     }
+
     private void bindData()
     {
         DBHelperClass db = new DBHelperClass();
@@ -655,6 +657,7 @@ public partial class Page3 : System.Web.UI.Page
             divdegreeHTML.InnerHtml = ds.Tables[0].Rows[0]["degreeSectionHTML"].ToString();
             divtopHTML.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
             divrosHTML.InnerHtml = ds.Tables[0].Rows[0]["rosSectionHTML"].ToString();
+            divcomplainHTML.InnerHtml = ds.Tables[0].Rows[0]["complainSectionHTML"].ToString();
         }
         else
             bindHtml();
@@ -790,8 +793,7 @@ public partial class Page3 : System.Web.UI.Page
                 chk_weakness_in_leg.Checked = false;
         }
     }
-
-
+    
     protected string GetFreeForm()
     {
         string restrictions = string.Empty;
@@ -854,99 +856,7 @@ public partial class Page3 : System.Web.UI.Page
 
         return (!string.IsNullOrEmpty(FreeForm)) ? FreeForm : "None";
     }
-
-    protected void txtDMTL3_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "MenuHighlight();", true);
-    }
-    protected void TextBox4_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "MenuHighlight();", true);
-    }
-    protected void TextBox5_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "MenuHighlight();", true);
-    }
-    protected void TextBox6_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox7_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox8_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox10_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox21_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox24_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox25_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox9_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void txtUEC5Right_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox11_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox12_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox13_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox14_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox15_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox16_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox17_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox18_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox19_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-    protected void TextBox20_TextChanged(object sender, EventArgs e)
-    {
-        Settextboxvalue(sender);
-    }
-
+    
     private void Settextboxvalue(object sender)
     {
         TextBox txtcurrent = (TextBox)(sender);
@@ -1006,276 +916,7 @@ public partial class Page3 : System.Web.UI.Page
             }
         }
     }
-
-    protected void A_Fall_History_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Answering_The_Door_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Appliances_Laundry_Appliances_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Bending_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Carrying_Large_Objects_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Carrying_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Cleaning_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Cognitive_Impairment_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Decrease_In_Sensitivity_To_Heat_Pain_Pressure_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Diminished_Sense_Of_Touch_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Doing_Laundry_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Driving_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Emptying_The_Mailbox_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Getting_Dressed_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Getting_In_And_Out_Of_The_Home_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Getting_In_And_Out_Of_Bed_Chairs_Sofas_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Hearing_Problems_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Holding_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Household_Chores_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Incontinence_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Kneeling_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Lack_Of_Coordination_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Lifting_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Lifting_Heavy_Or_Bulky_Objects__CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Limited_Reach_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Moving_About_In_Individual_Rooms_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Moving_From_One_Room_To_Another_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Opening_Closing_Or_Locking_Windows_And_Doors_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Operating_Light_Switches_Faucets_Kitchen_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Physical_Weakness_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Playing_With_Children_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Poor_Grip_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Poor_Vision_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Poor_Balance_Gait_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Preparing_Meals_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Pulling_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Pushing_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Reaching_Items_In_Closets_And_Cabinets_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Reduced_Mobility_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Sex_Sexual_Dysfunction_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Sitting_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Socializing_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Sports_Activities_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Standing_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Stooping_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Twisting_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Use_Of_Cane_Walker_Wheelchair_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Using_The_Stairs_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Using_The_Bathtub_Or_Shower_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Using_The_Kitchen_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Using_The_Toilet_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Using_The_Telephone_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Walking_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
-
-    protected void Working_CheckedChanged(object sender, EventArgs e)
-    {
-        constructstring();
-    }
+       
     protected void lbtnProcedureDetails_Click(object sender, EventArgs e)
     {
         if (Session["PatientIE_ID"] != null)
@@ -1283,6 +924,7 @@ public partial class Page3 : System.Web.UI.Page
             Response.Redirect("~/TimeSheet.aspx?PId=" + Convert.ToString(Session["PatientIE_ID"]));
         }
     }
+
     private void constructstring()
     {
         string text = string.Empty;
@@ -1416,6 +1058,10 @@ public partial class Page3 : System.Web.UI.Page
         path = Server.MapPath("~/Template/Page2_ros.html");
         body = File.ReadAllText(path);
         divrosHTML.InnerHtml = body;
+
+        path = Server.MapPath("~/Template/Page2_complain.html");
+        body = File.ReadAllText(path);
+        divcomplainHTML.InnerHtml = body;
 
     }
 

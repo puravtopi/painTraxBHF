@@ -15,8 +15,8 @@
     <table>
         <tr>
             <td>
-                <input type="checkbox" id="chkspur" value="The Spurling test is " class="nocomma" onclick="checkMe(this)" checked />The Spurling test is 
-              
+                <input type="checkbox" id="chkspur" value="The Spurling test is " class="nocomma" onclick="checkMe(this)"  /> The Spurling test is
+
                 <section class="dropdown">
                     <input type="text" id="txtSpurlings" onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtSpurlings', this.value)" id="ddlSpurlings"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
@@ -24,8 +24,8 @@
                 <span>. </span>
             </td>
             <td>
-                <input type="checkbox" id="chkspur" value="The cervical distraction test is " class="nocomma" onclick="checkMe(this)" checked />The cervical distraction test is
-                
+                <input type="checkbox" id="chkspur" value="The cervical distraction test is " class="nocomma" onclick="checkMe(this)"  />&nbsp;The cervical distraction test is&nbsp;
+
                 <section class="dropdown">
                     <input type="text" id="txtdistraction" onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtdistraction', this.value)" id="ddldistraction"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
@@ -37,79 +37,95 @@
 </div>
 <label style="display:none">#romneck</label>
 
-
-
 <section id="divTP" class="row">
-
     <div class="col-md-3">
         <span class="control-label"><b><u>Trigger Point:</u></b></span>
     </div>
     <div class="col-md-9" style="margin-top: 5px">
-
-        <span>There are palpable taut bands/trigger points at </span>
-
+        <span>There are palpable taut bands/trigger points with referral patterns as depicted below. </span>
     </div>
     <table>
         <tr>
             <td>
                 <select ID="ddlTPSide1" Style="height: 30px; width: 100px">
+                    <option></option>
+                    <option>left</option>
+                    <option>right</option>
                     <option>Bilateral</option>
                 </select>
-                <input type="text" ID="txtTPText1" onchange="txtMe(this)" Style="margin-left: 10px;width:500px" Text="levator scapulae" />
+                <input type="text" ID="txtTPText1" onchange="txtMe(this)" class="txtTP" Style="margin-left: 10px;width:500px" Text="paraspinal level C5-C7, with referral patterns laterally to the region in a fan-like pattern" />
             </td>
         </tr>
         <tr>
             <td>
                 <select ID="ddlTPSide2" Style="height: 30px; width: 100px">
+                    <option></option>
+                    <option>left</option>
+                    <option>right</option>
                     <option>Bilateral</option>
                 </select>
-                <input type="text" ID="txtTPText2" onchange="txtMe(this)" Style="margin-left: 10px;width:500px" Text="trapezius" />
+                <input type="text" ID="txtTPText2" onchange="txtMe(this)" class="txtTP" Style="margin-left: 10px;width:500px" Text="levator scapulae" />
             </td>
         </tr>
         <tr>
             <td>
                 <select ID="ddlTPSide3" Style="height: 30px; width: 100px">
+                    <option></option>
+                    <option>left</option>
+                    <option>right</option>
                     <option>Bilateral</option>
                 </select>
-                <input type="text" ID="txtTPText3" onchange="txtMe(this)" Style="margin-left: 10px;width:500px" Text="posterior scalenes" />
+                <input type="text" ID="txtTPText3" onchange="txtMe(this)" class="txtTP" Style="margin-left: 10px;width:500px" Text="trapezius" />
             </td>
         </tr>
         <tr>
             <td>
                 <select ID="ddlTPSide4" Style="height: 30px; width: 100px">
+                    <option></option>
+                    <option>left</option>
+                    <option>right</option>
                     <option>Bilateral</option>
                 </select>
-                <input type="text" ID="txtTPText4" onchange="txtMe(this)" Style="margin-left: 10px;width:500px" Text="sternocleidomastoid" />
+                <input type="text" ID="txtTPText4" onchange="txtMe(this)" class="txtTP" Style="margin-left: 10px;width:500px" Text="posterior scalenes" />
             </td>
         </tr>
         <tr>
             <td>
                 <select ID="ddlTPSide5" Style="height: 30px; width: 100px">
+                    <option></option>
+                    <option>left</option>
+                    <option>right</option>
                     <option>Bilateral</option>
                 </select>
-                <input type="text" ID="txtTPText5" onchange="txtMe(this)" Style="margin-left: 10px;width:500px" Text="splenius cervicis" />
+                <input type="text" ID="txtTPText5" onchange="txtMe(this)" class="txtTP" Style="margin-left: 10px;width:500px" Text="sternocleidomastoid" />
             </td>
         </tr>
         <tr>
             <td>
                 <select ID="ddlTPSide6" Style="height: 30px; width: 100px">
+                    <option></option>
+                    <option>left</option>
+                    <option>right</option>
                     <option>Bilateral</option>
                 </select>
-                <input type="text" ID="txtTPText6" onchange="txtMe(this)" Style="margin-left: 10px;width:500px" Text="splenius capitis" />
+                <input type="text" ID="txtTPText6" onchange="txtMe(this)" class="txtTP" Style="margin-left: 10px;width:500px" Text="splenius cervicis" />
             </td>
         </tr>
-        <tr style="display:none">
+        <tr>
             <td>
-                <select ID="ddlTPSide7" Style="height: 30px; width: 100px"></select>
-                <input type="text" ID="txtTPText7" onchange="txtMe(this)" Style="margin-left: 10px;width:500px" />
+                <select ID="ddlTPSide7" Style="height: 30px; width: 100px">
+                    <option></option>
+                    <option>left</option>
+                    <option>right</option>
+                    <option>Bilateral</option>
+                </select>
+                <input type="text" ID="txtTPText7" onchange="txtMe(this)" class="txtTP" Style="margin-left: 10px;width:500px" Text="splenius capitis" />
             </td>
         </tr>
     </table>
 
-
 </section>
 <label style="display:none">#necknotebp</label>
-
 <section class="row">
     <section class="col-md-3">
         <span class="control-label">Notes</span>
@@ -125,10 +141,8 @@
 </section>
 
 
-
-
-
 <style>
+
     .dropdown {
         position: relative;
         width: 200px;

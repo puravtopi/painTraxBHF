@@ -6,26 +6,26 @@
         <label>The patient complains of low back pain that is </label>
         <input type="text" id="txtPainScale" style="width:40px;text-align:left" value="8" onchange="txtMe(this)" />
         <label>/10, with 10 being the worst, which is </label>
-        <input id="chkcontent" type="checkbox" value="constant" onclick="checkMe(this)" />constant
-        <input id="chkintermittent" type="checkbox" value="intermittent" onclick="checkMe(this)" />intermittent.
-        <input id="chksharp" type="checkbox" value="sharp" onclick="checkMe(this)" checked="checked" />sharp
+        <input id="chkcontent" type="checkbox" value="constant" onclick="checkMe(this)" /> constant
+        <input id="chkintermittent" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent
+        <input id="chksharp" type="checkbox" value="sharp" onclick="checkMe(this)" checked="checked" /> sharp
 
-        <input id="chkelectric" type="checkbox" value="electric" onclick="checkMe(this)" />electric
-        <input id="chkshooting" type="checkbox" value="shooting" onclick="checkMe(this)" />shooting
-        <input id="chkthrobbling" type="checkbox" value="throbbing" onclick="checkMe(this)" />throbbing
+        <input id="chkelectric" type="checkbox" value="electric" onclick="checkMe(this)" /> electric
+        <input id="chkshooting" type="checkbox" value="shooting" onclick="checkMe(this)" checked="checked" /> shooting
+        <input id="chkthrobbling" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing
 
-        <input id="chkpulsating" type="checkbox" value="pulsating" onclick="checkMe(this)" />pulsating
-        <input id="chkdull" type="checkbox" value="dull" onclick="checkMe(this)" checked="checked" />dull
-        <input id="chkachy" type="checkbox" value="achy" onclick="checkMe(this)" checked="checked" />achy
+        <input id="chkpulsating" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating
+        <input id="chkdull" type="checkbox" value="dull" onclick="checkMe(this)" /> dull
+        <input id="chkachy" type="checkbox" value="achy" onclick="checkMe(this)" /> achy
         <label> in nature. </label>
-
         <br />
         <input id="txtradiates" style="visibility:hidden" />
         <input id="txtburningTo" style="visibility:hidden" /><br />
-        <label class="control-label">The low back pain radiates to </label>:
-        <input id="txtRadiant" type="text" style="width:700px;text-align:left" value="" onchange="txtMe(this)" />
-        <label>.</label>
-        <table class="table">
+        <input type="checkbox" id="chkLowbackpain2" value="The low back pain radiates to  " class="nocomma" onclick="checkMe(this)" checked /> The low back pain radiates to
+
+        <input id="txtRadiant" type="text" style="width:700px;text-align:left" value="" onchange="txtMe(this); disableTable(this, 'tblLB1');" />
+        <!--<label>.</label>-->
+        <table class="table" id="tblLB1">
             <thead>
                 <tr>
                     <th>
@@ -61,7 +61,6 @@
                     <th class="table_cell">
                         <span>Toe</span>
                     </th>
-
                 </tr>
             </thead>
             <tbody>
@@ -130,7 +129,6 @@
                     <td class="table_cell">
                         <input type='radio' ID="chkToeRight1" name="R4D" value="right toe" onclick="checkMe(this)" />
                     </td>
-
                 </tr>
                 <tr>
                     <td style="">Bilateral</td>
@@ -200,21 +198,21 @@
                 </tr>
             </tbody>
         </table>
-   
 
-        <label class="control-label">The low back pain is associated with </label>
-        <input type="checkbox" id="chknumbness" onclick="checkMe(this)" value="numbness" checked="checked" />numbness
-        <input type="checkbox" id="chktingling" onclick="checkMe(this)" value="tingling" checked="checked" />tingling
-        <input type="checkbox" id="chkburning" onclick="checkMe(this)" value="burning sensation" />burning sensation
+        <input type="checkbox" id="chkLowbackpain4" value="The low back pain is associated with " class="nocomma" onclick="checkMe(this)" checked />
+        &nbsp;The low back pain is associated with
+        <input type="checkbox" id="chknumbness" onclick="checkMe(this)" value="numbness" checked="checked" /> numbness
+        <input type="checkbox" id="chktingling" onclick="checkMe(this)" value="tingling" checked="checked" /> tingling
+        <input type="checkbox" id="chkburning" onclick="checkMe(this)" value="burning sensation" class="nocomma" /> burning sensation
         <div style="display:none">
             <input type="checkbox" id="chkelectric1" onclick="checkMe(this)" value="electric" />electric
             <input type="checkbox" id="chkpinsneedles" onclick="checkMe(this)" value="pins and needles" />pins & needles
         </div>
         <label> to </label>
-        <input id="txtRadiant2" type="text" style="width:370px;text-align:left" value="" onchange="txtMe(this)" />
-        <label>.</label>
+        <input id="txtRadiant2" type="text" style="width:370px;text-align:left" value="" onchange="txtMe(this); disableTable(this,'tblLB2')" />
+        <!-- <label>.</label>-->
         <br />
-        <table class="table">
+        <table class="table" id="tblLB2">
             <thead>
                 <tr>
                     <th>
@@ -251,7 +249,6 @@
                     <th class="table_cell">
                         <span>Toe</span>
                     </th>
-
                 </tr>
             </thead>
             <tbody>
@@ -287,7 +284,6 @@
                     <td class="table_cell">
                         <input type="radio" id="chkToeLeft2" name="A4D" value="left Toe" onclick="checkMe(this)" />
                     </td>
-
                 </tr>
                 <tr>
                     <td>Right</td>
@@ -321,7 +317,6 @@
                     <td class="table_cell">
                         <input type="radio" id="chk4thDigitRight2" name="A4D" value="right toe" onclick="checkMe(this)" />
                     </td>
-
                 </tr>
                 <tr>
                     <td>Bilateral</td>
@@ -355,7 +350,6 @@
                     <td class="table_cell">
                         <input type="radio" id="chkToeBilateral2" name="A4D" value="bilateral toe" onclick="checkMe(this)" />
                     </td>
-
                 </tr>
                 <tr>
                     <td>None</td>
@@ -389,53 +383,47 @@
                     <td class="table_cell">
                         <input type="radio" id="chkToe2None" name="A4D" value="" onclick="checkMe(this)" />
                     </td>
-
                 </tr>
             </tbody>
         </table>
-       
+
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-lg-12">
-
         <div class="col-md-9" style="margin-top: 5px">
-
             <input type="checkbox" id="chkLowbackpain2" value="Lower back pain is associated with weakness in " class="nocomma" onclick="checkMe(this)" checked />&nbsp;Lower back pain is associated with weakness in
-         
+
             <input type="text" id="txtPainWeaknesIn" style="width:240px;" onchange="txtMe(this);" />
             <label>.</label>
-            <label id="lblLowbackpain">The Lower back pain is worsened with </label>
-            <input type="checkbox" id="chkworsesitting" value="sitting" checked="checked" onclick="checkMe(this)" />sitting,&nbsp;
-            <input type="checkbox" id="chkworsestanding" value="standing" checked="checked" onclick="checkMe(this)" />standing,&nbsp;
-            <input type="checkbox" id="chkWorselyingdown" value="lying down" checked="checked" onclick="checkMe(this)" />lying down,&nbsp;
-            <input type="checkbox" id="chkWorsemovement" value="movement" checked="checked" onclick="checkMe(this)" />movement,&nbsp;
-            <input type="checkbox" id="chkworsebending" value="bending" checked="checked" onclick="checkMe(this)" />bending,&nbsp;
-            <input type="checkbox" id="chkworselifting" value="lifting" checked="checked" onclick="checkMe(this)" />lifting,&nbsp;
-            <input type="checkbox" id="chkworsegoingformseating" value="going from seating to standing up" checked="checked" onclick="checkMe(this)" />going from seating to standing up,&nbsp;
-            <input type="checkbox" id="chkworsewalking" value="walking" checked="checked" onclick="checkMe(this)" />walking,&nbsp;
-            <input type="checkbox" id="chkworseclimbingstairs" value="climbing stairs" checked="checked" onclick="checkMe(this)" />climbing stairs,&nbsp;
-            <input type="checkbox" id="chkworsedescendingstairs" value="descending stairs" checked="checked" onclick="checkMe(this)" />descending stairs,&nbsp;
-            <input type="checkbox" id="chkworsedriving" value="driving" checked="checked" onclick="checkMe(this)" />driving,&nbsp;
-            <input type="checkbox" id="chkworseworking" value="working" checked="checked" onclick="checkMe(this)" class="nocomma" />working&nbsp;
-            <input type="text" id="txtworsend2" style="width:240px;" onchange="txtMe(this); removeClass(this,'chkworseworking')" />
+            <input type="checkbox" id="chklbackpainwors" value="The Lower back pain is worsened with " class="nocomma" onclick="checkMe(this)" checked /> The Lower back pain is worsened with
+            
+            <input type="checkbox" id="chkworsesitting" value="sitting" checked="checked" onclick="checkMe(this)" /> sitting,&nbsp;
+            <input type="checkbox" id="chkworsestanding" value="standing" checked="checked" onclick="checkMe(this)" /> standing,&nbsp;
+            <input type="checkbox" id="chkWorsebendingforward" value="bending forward" checked="checked" onclick="checkMe(this)" /> bending forward,&nbsp;
+            <input type="checkbox" id="chkWorsebendingbackwards" value="bending backwards" checked="checked" onclick="checkMe(this)" /> bending backwards,&nbsp;
+            <input type="checkbox" id="chkworsesleeping" value="sleeping" checked="checked" onclick="checkMe(this)" /> sleeping,&nbsp;
+            <input type="checkbox" id="chkworsetwistingright" value="twisting right" checked="checked" onclick="checkMe(this)" /> twisting right,&nbsp;
+            <input type="checkbox" id="chkworsetwistingleft" value="twisting left" checked="checked" onclick="checkMe(this)" /> twisting left,&nbsp;
+            <input type="checkbox" id="chkworselifting" value="lifting" checked="checked" onclick="checkMe(this)" /> lifting&nbsp;
+            
+           
+            <input type="text" id="txtworsend2" style="width:240px;" onchange="txtMe(this);" />
             <label>.</label>
-            <label id="Label4">low back pain is improved with </label>
-            <input type="checkbox" id="chkImprovedResting" value="resting" onclick="checkMe(this)" checked="checked" />resting,&nbsp;
-            <input type="checkbox" id="chkImprovedMedication" value="medication" onclick="checkMe(this)" />medication,&nbsp;
-            <input type="checkbox" id="chkImprovedTherapy" value="therapy" onclick="checkMe(this)" />therapy,&nbsp;
-            <input type="checkbox" id="chkImprovedSleeping" value="sleeping" onclick="checkMe(this)" />sleeping,&nbsp;
-            <input type="checkbox" id="chkImprovedMovement" value="movement" onclick="checkMe(this)" />movement
-            <label>.</label>
+            <input type="checkbox" id="chkLowbackpain2" value="The lower back pain is improved with " class="nocomma" onclick="checkMe(this)" checked /> The lower back pain is improved with
 
+            <input type="checkbox" id="chkImprovedResting" value="resting" onclick="checkMe(this)" checked="checked" /> resting,&nbsp;
+            <input type="checkbox" id="chkImprovedMedication" value="medication" onclick="checkMe(this)" /> medication,&nbsp;
+            <input type="checkbox" id="chkImprovedTherapy" value="therapy" onclick="checkMe(this)" /> therapy,&nbsp;
+            <input type="checkbox" id="chkImprovedSleeping" value="sleeping" onclick="checkMe(this)" /> sleeping,&nbsp;
+            <input type="checkbox" id="chkImprovedMovement" value="movement" onclick="checkMe(this)" /> movement
+            <label>.</label>
         </div>
     </div>
 </div>
-
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3" >
         <span class="control-label">Notes</span>
     </div>
     <div class="col-md-9" style="margin-top: 5px">
@@ -446,7 +434,6 @@
         <section style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></section>
     </div>
 </div>
-
 <script>
 
     function removeClass(txt, chkid) {
@@ -458,6 +445,17 @@
             $('#' + chkid).addClass("nocomma");
         else
             $('#' + chkid).removeClass("nocomma");
+    }
+
+    function disableTable(txt, chkid) {
+        var val = $(txt).val();
+
+
+
+        if (val === '')
+            $('#' + chkid).find("*").removeAttr("disabled");
+        else
+            $('#' + chkid).find("*").attr("disabled", "disabled");
     }
 
     function referce1() {
@@ -534,4 +532,3 @@
         start_timestamp = event.timeStamp;
     }
 </script>
-

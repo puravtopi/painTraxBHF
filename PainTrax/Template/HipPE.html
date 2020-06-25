@@ -60,7 +60,7 @@
             </p>
         </section>
 
-      
+
         <br />
 
 
@@ -79,19 +79,22 @@
     </div>
 
     <br />
-    <label Style="float: left;">The Ober test is </label>&nbsp;
+    <input type="checkbox" id="chkOber" value="The Ober test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Ober test is&nbsp;
+   
     <section class="dropdown">
         <input type="text" id="txtOber" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtOber', this.value)" id="ddlOber"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
     </section>
     <br />
-    <label Style="float: left;">The FABER test is </label>&nbsp;
+    <input type="checkbox" id="chkMcMurrays" value="The FABER test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The FABER test is&nbsp;
+   
     <section class="dropdown">
         <input type="text" id="txtFABER" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtFABER', this.value)" id="ddlFABER"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
     </section>
     <br />
-    <label Style="float: left;">The Trendelenburg test is </label>&nbsp;
+    <input type="checkbox" id="chkTrendelenburg" value="The Trendelenburg test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Trendelenburg test is&nbsp;
+    
     <section class="dropdown">
         <input type="text" id="txtTrendelenburg" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtTrendelenburg', this.value)" id="ddlTrendelenburg"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>

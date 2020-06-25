@@ -1,0 +1,90 @@
+﻿
+
+<h4 class="labelcolor">Complaints:</h4>
+
+
+<div class="form-horizontal">
+    <div class="span3">
+        <input type='checkbox' TabIndex="15" ID="chk_depression" Value="Depression " onclick="checkMe(this)" />Depression
+    </div>
+
+    <div class="span3">
+        <input type='checkbox' TabIndex="16" ID="chk_dizziness" Value="Dizziness" onclick="checkMe(this)" />Dizziness
+    </div>
+
+    <div class="span3">
+        <input type='checkbox' TabIndex="17" ID="chk_headaches" Value="Headaches" onclick="checkMe(this)" />Headaches
+    </div>
+
+
+    <div style="clear: both"></div>
+</div>
+<div class="form-horizontal">
+    <div class="span3">
+        <input type='checkbox' TabIndex="19" ID="chk_nausea" Value="Nausea" onclick="checkMe(this)" />Nausea
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="20" ID="chk_numbness_in_arm" Value="Numbness in Arm / Hand" onclick="checkMe(this)" />Numbness in Arm / Hand
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="21" ID="chk_numbess_in_leg" Value="Numbness in Leg" onclick="checkMe(this)" />Numbness in Leg
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="22" ID="chk_pain_radiating_leg" Value="Pain Radiating Down Leg" onclick="checkMe(this)" />Pain Radiating Down Leg
+    </div>
+    <div style="clear: both"></div>
+</div>
+
+<div class="form-horizontal">
+    <div class="span3">
+        <input type='checkbox' TabIndex="23" ID="chk_pain_radiating_shoulder" Value="Pain Radiating Down Shoulder" onclick="checkMe(this)" />Pain Radiating Down Shoulder
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="24" ID="chk_rashes" Value="Rashes" onclick="checkMe(this)" />Rashes
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="25" ID="chk_anxiety" Value="Anxiety" onclick="checkMe(this)" />Anxiety
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="26" ID="chk_tingling_in_arms" Value="Tingling in Arms" onclick="checkMe(this)" />Tingling in Arms
+    </div>
+    <div style="clear: both"></div>
+</div>
+<div class="form-horizontal">
+    <div class="span3">
+        <input type='checkbox' TabIndex="27" ID="chk_tingling_in_legs" Value="Tingling in Legs" onclick="checkMe(this)" />Tingling in Legs
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="28" ID="chk_vomiting" Value="Vomiting" onclick="checkMe(this)" />Vomiting
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="29" ID="chk_weakness_in_arm" Value="Weakness in Arm / Hand" onclick="checkMe(this)" />Weakness in Arm / Hand
+    </div>
+    <div class="span3">
+        <input type='checkbox' TabIndex="30" ID="chk_weakness_in_leg" Value="Weakness in Leg" onclick="checkMe(this)" />Weakness in Leg
+    </div>
+    <div style="clear: both"></div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+
+
+    function checkMe(chk) {
+
+        if ($(chk).prop("checked")) {
+            if ($(chk).attr("type") === "radio")
+                $("[name=" + $(chk).attr("name") + "]").removeAttr('checked');
+            $(chk).attr('checked', 'checked');
+        }
+        else {
+            $(chk).removeAttr('checked');
+        }
+
+    }
+
+
+</script>

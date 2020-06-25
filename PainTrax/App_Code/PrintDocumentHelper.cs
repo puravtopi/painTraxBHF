@@ -109,10 +109,11 @@ public class PrintDocumentHelper
                     }
                     else if (type == "text")
                     {
-                        // Regex rx = new Regex(@"^\s*""?|""?\s*$");
+                         Regex rx = new Regex(@"^\s*""?|""?\s*$");
                         // value = rx.Replace(value, "");
                         // Response.Write(value);
-                        if (!string.IsNullOrEmpty(value))
+                        classname = rx.Replace(classname, "");
+                        if (!string.IsNullOrEmpty(value) &&   classname != "txtTP")
                             sb.Append(value + " ");
                     }
                 }
@@ -440,7 +441,7 @@ public class PrintDocumentHelper
             }
             if (i == 0)
             {
-                if (!string.IsNullOrEmpty(str[0]))
+                if (!string.IsNullOrEmpty(str[0]) && !string.IsNullOrEmpty(str[1]))
                     sb.Append("<br/><br/>");
             }
         }
@@ -618,7 +619,7 @@ public class PrintDocumentHelper
             }
             if (i == 0)
             {
-                if (!string.IsNullOrEmpty(str[0]))
+                if (!string.IsNullOrEmpty(str[0]) && !string.IsNullOrEmpty(str[1]))
                     sb.Append("<br/><br/>");
             }
         }

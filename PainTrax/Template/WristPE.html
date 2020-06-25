@@ -9,12 +9,12 @@
         <label> aspect of the wrist.</label>
 
 
-        <input type="checkbox" id="chkwirstROML" value="ROM is " class="nocomma" checked="checked"/> ROM is 
+        <input type="checkbox" id="chkwirstROML" value="ROM is " class="nocomma" checked="checked" /> ROM is
         <section class="dropdown">
             <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this)" value="mildly decreased. " />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionLeft', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
         </section>
-      
+
         <section style="display:none">
             <br />
             <span class="control-label"><b>Tests: </b></span>
@@ -87,37 +87,44 @@
 
     </div>
     <br />
-    <label Style="float: left;">The Tinnels test is</label>&nbsp;
+
+    <input type="checkbox" id="chkTinnels" value="The Tinnels test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Tinnels test is&nbsp;
+
     <section class="dropdown">
         <input type="text" id="txtTinnels" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtTinnels', this.value)" id="ddlTinnels"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
     </section>
     <br />
-    <label Style="float: left;">The Phalens test is</label>&nbsp;
+    <input type="checkbox" id="chkPhalens" value="The Phalens test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Phalens test is&nbsp;
+  
     <section class="dropdown">
         <input type="text" id="txtPhalens" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPhalens', this.value)" id="ddlPhalens"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
     </section>
     <br />
-    <label Style="float: left;">The Finkelsteins test is</label>&nbsp;
+    <input type="checkbox" id="chkFinkelsteins" value="The Finkelsteins test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Finkelsteins test is&nbsp;
+
     <section class="dropdown">
         <input type="text" id="txtFinkelsteins" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtFinkelsteins', this.value)" id="ddlFinkelsteins"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
     </section>
     <br />
-    <label Style="float: left;">The Pain upon ulnar deviation test is</label>&nbsp;
+    <input type="checkbox" id="chkPUUD" value="The Pain upon ulnar deviation test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Pain upon ulnar deviation test is&nbsp;
+   
     <section class="dropdown">
         <input type="text" id="txtPUUD" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPUUD', this.value)" id="ddlPUUD"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
     </section>
     <br />
-    <label Style="float: left;">The Pain upon radial deviation test is</label>&nbsp;
+    <input type="checkbox" id="chkPURD" value="The Pain upon radial deviation test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Pain upon radial deviation test is&nbsp;
+
     <section class="dropdown">
         <input type="text" id="txtPURD" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPURD', this.value)" id="ddlPURD"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
     </section>
     <br />
-    <label Style="float: left;">The Pain upon dorsi flexion test is</label>&nbsp;
+    <input type="checkbox" id="chkPUDF" value="The Pain upon dorsi flexion test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The  Pain upon dorsi flexion test is&nbsp;
+
     <section class="dropdown">
         <input type="text" id="txtPUDF" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPUDF', this.value)" id="ddlPUDF"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>

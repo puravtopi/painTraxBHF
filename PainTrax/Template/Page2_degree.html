@@ -1,34 +1,6 @@
 <div class="form-horizontal">
 
-    <strong class="labelcolor">General:</strong>
-    <input type='text' ID="txtGeneral" onchange="txtMe(this)" style="Width:782px" value="AAOx3. No acute distress." />
-    <br />
-    <br />
-    <strong class="labelcolor">HEENT:</strong>
-    <input type='text' ID="txtHEENT" onchange="txtMe(this)" style="Width:782px" value="Within normal limits."/>
-    <br />
-    <br />
-        <strong class="labelcolor">Occpital headaches:</strong>
-    <p class="inline">
-        <section class="dropdown">
-            <input type="text" id="txtOcc" value="Non traumatic" onchange="txtMe(this)" />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtOcc', this.value)" id="ddlOcc" style="Width:700px">
-                <option value=""></option>
-                <option selected="selected">Non traumatic</option>
-                <option>Tenderness at base of skull bilaterally</option>
-                <option>Palpation with pressure produced shooting pain to the back of head</option>
-            </select>
-        </section>
-    </p>
-    <br />
 
-    <strong class="labelcolor">Chest, Cardiovascular, Abdomen:</strong>
-    <input type='text' ID="txtCCA" onchange="txtMe(this)" style="Width:782px" value="Within normal limits." />
-    <br />
-    <br />
-    <strong class="labelcolor">Psych/Neuro:</strong>
-    <input type='text' ID="txtPhy" onchange="txtMe(this)" style="Width:782px" value="No focal deficits. Cranial nerves are grossly intact. No clonus."/>
-    <br />
     <br />
     <strong class="labelcolor">Gait:</strong>
     <p class="inline">
@@ -42,7 +14,7 @@
                 <option value=""></option>
                 <option value="Normal" selected="selected">Normal</option>
                 <option value="Guarded">Guarded</option>
-                <option value="Antalgic<">Antalgic<</option>
+                <option value="Antalgic">Antalgic</option>
             </select>
         </section>
     </p>
@@ -53,38 +25,152 @@
 </div>
 
 <div class="form-horizontal">
-    <strong class="labelcolor">Degree of Disability: </strong>
-    <input type='radio' name="disability" id="rblPatial" Value="partial" onchange="checkMe(this)" />Partial
-    <input type='radio' name="disability" id="rbl25" Value="25%" onchange="checkMe(this)" />25%
-    <input type='radio' name="disability" id="rbl50" Value="50%" onchange="checkMe(this)" />50%
-    <input type='radio' name="disability" id="rbl75" Value="75%" onchange="checkMe(this)" />75%
-    <input type='radio' name="disability" id="rbl100" Value="100%" onchange="checkMe(this)" />100%
-    <input type='radio' name="disability" id="rblNone" Value="None" onchange="checkMe(this)" />None
+   
     <br />
-    <br />
-    <strong class="labelcolor">Activities of daily living affected: </strong>
-    <input type='text' ID="txtADLA onchange="txtMe(this)" style="Width:782px" value="" />
-    <!--<input type='checkbox' id="chkhousework" Value="housework, " onchange="checkMe(this)" />housework
-    <input type='checkbox' id="chkwork-related" Value="job work-related duties, " onchange="checkMe(this)" />job, work-related duties
-    <input type='checkbox' id="chkdriving" Value="driving, " onchange="checkMe(this)" />driving
-    <input type='checkbox' id="chksittingincar" Value="sitting in car, " onchange="checkMe(this)" />sitting in car
-    <input type='checkbox' id="chkwalking" Value="walking up/down downstairs" onchange="checkMe(this)" />walking up/down downstairs-->
-    <br />
-    <br />
-    <strong class="labelcolor">Restrictions: </strong>
-    <input type='checkbox' id="chkBending" Value="bending/twisting" onclick="checkMe(this)" />&nbsp;bending
-    <input type='checkbox' id="chkClimbing" Value="climbing stairs/ladders" onclick="checkMe(this)" />&nbsp;climbing stairs/ladders
-    <input type='checkbox' id="chkEnvironmental" Value="environmental conditions" onclick="checkMe(this)" />&nbsp;environmental conditions
-    <input type='checkbox' id="chkKneeling" Value="kneeling" onclick="checkMe(this)" />&nbsp;kneeling
-    <input type='checkbox' id="chkLifting" Value="lifting" onclick="checkMe(this)" />&nbsp;lifting
-    <input type='checkbox' id="chkOperatingHeavy" Value="operating heavy equipment" onclick="checkMe(this)" />&nbsp;operating heavy equipment
-    <input type='checkbox' id="chkOperatingofmotor" Value="operation of motor vehicles" onclick="checkMe(this)" />&nbsp;operation of motor vehicles
-    <input type='checkbox' id="chkPersonal" Value="personal protective equipment" onclick="checkMe(this)" />&nbsp;personal protective equipment
-    <input type='checkbox' id="chkSitting" Value="sitting" onclick="checkMe(this)" />&nbsp;sitting
-    <input type='checkbox' id="chkStanding" Value="standing" onclick="checkMe(this)" />&nbsp;standing
-    <input type='checkbox' id="chkUseofPublic" Value="use of public transportation" onclick="checkMe(this)" />&nbsp;use of public transportation
-    <input type='checkbox' id="chkUseofUpper" Value="use of upper extremities" onclick="checkMe(this)" />&nbsp;use of upper extremities
-    <br />
+
+    <div class="table-responsive">
+
+        <strong class="labelcolor">Activities of daily living affected: </strong>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+
+                    <td>ADL</td>
+                    <td>Perform</td>
+                    <td>Not Perform</td>
+                    <td>With difficulty</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="chkpersonalhygiene" onclick="checkMe(this)" value="personal hygiene, grooming, dressing, toileting" />personal hygiene, grooming, dressing, toileting
+                    </td>
+                    <td>
+                        
+                        <input type='radio' name="Perform1" id="rblPerform1" Value="Perform" onchange="checkMe(this)" />
+
+
+                    </td>
+                    <td>
+
+                       
+                        <input type='radio' name="Perform11" id="rblPerform11" Value="NotPerform" onchange="checkMe(this)" />
+                    </td>
+
+                    <td>
+
+                        <input type="text" id="txtWithDifficulty1" Style="height: 20px;Width:200px" onchange="txtMe(this)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="chkwalking" onclick="checkMe(this)" value="walking, transferring, ambulating" />walking, transferring, ambulating
+                    </td>
+                    <td>
+                      
+                        <input type='radio' name="Perform2" id="rblPerform2" Value="Perform" onchange="checkMe(this)" />
+
+                    </td>
+                    <td>
+
+                    
+                        <input type='radio' name="Perform22" id="rblPerform22" Value="NotPerform" onchange="checkMe(this)" />
+                    </td>
+
+                    <td>
+
+                        <input type="text" id="txtWithDifficulty2" Style="height: 20px;Width:200px" onchange="txtMe(this)" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="checkbox" id="chkeatingindependently" onclick="checkMe(this)" value="eating independently" />eating independently
+                    </td>
+                    <td>
+                        
+                        <input type='radio' name="Perform3" id="rblPerform3" Value="Perform" onchange="checkMe(this)" />
+
+                    </td>
+                    <td>
+
+                      
+                        <input type='radio' name="Perform33" id="rblPerform33" Value="NotPerform" onchange="checkMe(this)" />
+                    </td>
+
+                    <td>
+
+                        <input type="text" id="txtWithDifficulty3" Style="height: 20px;Width:200px" onchange="txtMe(this)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="chkcook" onclick="checkMe(this)" value="cook, clean, maintain households" />cook, clean, maintain households
+                    </td>
+                    <td>
+                        
+                        <input type='radio' name="Perform4" id="rblPerform4" Value="Perform" onchange="checkMe(this)" />
+
+                    </td>
+                    <td>
+
+                      
+                        <input type='radio' name="Perform44" id="rblPerform44" Value="NotPerform" onchange="checkMe(this)" />
+                    </td>
+
+                    <td>
+                        <input type="text" id="txtWithDifficulty4" Style="height: 20px;Width:200px" onchange="txtMe(this)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="chkshop" onclick="checkMe(this)" value="shop for food" />shop for food
+                    </td>
+                    <td>
+                       
+                        <input type='radio' name="Perform5" id="rblPerform5" Value="Perform" onchange="checkMe(this)" />
+
+                    </td>
+                    <td>
+
+                        
+                        <input type='radio' name="Perform55" id="rblPerform55" Value="NotPerform" onchange="checkMe(this)" />
+                    </td>
+
+                    <td>
+
+                        <input type="text" id="txtWithDifficulty5" Style="height: 20px;Width:200px" onchange="txtMe(this)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="chkSleeping" onclick="checkMe(this)" value="Sleeping" />Sleeping
+                    </td>
+                    <td>
+                       
+                        <input type='radio' name="Perform6" id="rblPerform6" Value="Perform" onchange="checkMe(this)" />
+
+                    </td>
+                    <td>
+
+                     
+                        <input type='radio' name="Perform66" id="rblPerform66" Value="NotPerform" onchange="checkMe(this)" />
+                    </td>
+
+                    <td>
+
+                        <input type="text" id="txtWithDifficulty6" Style="height: 20px;Width:200px" onchange="txtMe(this)" />
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+ 
     <br />
     <br />
     <strong class="labelcolor">Others:</strong>
@@ -92,18 +178,34 @@
     <br />
     <br />
     <br />
-    <strong class="labelcolor">Work Status: </strong>
-    <br />
-    <input type='checkbox' id="chkAbletoWork" Value="Able to go back to work " onclick="checkMe(this)" />
-    Able to go back to work <input type="text" id="txtbackwork" onchange="txtMe(this)" />
-    <br />
-    <input type='checkbox' id="chkWorking" Value="Working" onclick="checkMe(this)" />&nbsp;Working <input type="text" id="txtWorking" onchange="txtMe(this)" />
-    <br />
-    <input type='checkbox' id="chkNotWorking" Value="Not Working" onclick="checkMe(this)" />&nbsp;Not working <input type="text" id="txtNotWorking" onchange="txtMe(this)" />
-    <br />
-    <input type='checkbox' id="chkPartiallyWorking" Value="Partially Working" onclick="checkMe(this)" />&nbsp;Partially working <input type="text" id="txtPartiallyWorking" onchange="txtMe(this)" />
 
 </div>
+
+
+<style>
+    .dropdown {
+        position: relative;
+        width: 200px;
+        display: inline-block;
+    }
+
+        .dropdown select {
+            width: 100%;
+        }
+
+        .dropdown > * {
+            box-sizing: border-box;
+            height: 2em;
+        }
+
+        .dropdown select {
+        }
+
+        .dropdown input {
+            position: absolute;
+            width: calc(100% - 20px);
+        }
+</style>
 
 <script>
     function txtMe(txt) {

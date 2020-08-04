@@ -22,9 +22,9 @@
 
             <input type="checkbox" id="chkleftspecifically" class="nocomma" onclick="checkMe(this)" value="The patient complains of pain specifically at the " />The patient complains of pain specifically at the
 
-            <input type="checkbox" id="chkMedMalleolusL" value="medial malleolus" onclick="checkMe(this)" />medial malleolus,
-            <input type="checkbox" id="chkLatMalleolusL" value="lateral malleolus" onclick="checkMe(this)" />lateral malleolus,
-            <input type="checkbox" id="chkAchillesL" value="achilles tendon" onclick="checkMe(this)" />achilles tendon
+            <input type="checkbox" id="chkMedMalleolusL" value="medial malleolus" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />medial malleolus,
+            <input type="checkbox" id="chkLatMalleolusL" value="lateral malleolus" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />lateral malleolus,
+            <input type="checkbox" id="chkAchillesL" value="achilles tendon" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />achilles tendon
             <label>.</label>
 
 
@@ -59,9 +59,9 @@
             <label> in nature.</label>
             <input type="checkbox" id="chkrightspecifically" class="nocomma" onclick="checkMe(this)" value="The patient complains of pain specifically at the " />The patient complains of pain specifically at the
 
-            <input type="checkbox" id="chkMedMalleolusR" onclick="checkMe(this)" value="medial malleolus" />medial malleolus,
-            <input type="checkbox" id="chkLatMalleolusR" onclick="checkMe(this)" value="lateral malleolus" />lateral malleolus,
-            <input type="checkbox" id="chkAchillesR" onclick="checkMe(this)" value="achilles tendon" />achilles tendon
+            <input type="checkbox" id="chkMedMalleolusR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="medial malleolus" />medial malleolus,
+            <input type="checkbox" id="chkLatMalleolusR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="lateral malleolus" />lateral malleolus,
+            <input type="checkbox" id="chkAchillesR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="achilles tendon" />achilles tendon
             <label>.</label>
 
 
@@ -93,6 +93,17 @@
             $(chk).removeAttr('checked');
         }
 
+    }
+
+    function checkDefault(chk, deafCheck) {
+
+        if ($("#" + deafCheck).prop("checked") == false) {
+
+            if ($(chk).prop("checked")) {
+                $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
     }
 
     function txtMe(txt) {

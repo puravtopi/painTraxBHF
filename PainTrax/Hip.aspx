@@ -306,7 +306,7 @@
                             <div class="col-md-9" style="margin-top: 5px">
                                 <asp:TextBox runat="server" ID="txtFreeFormA" TextMode="MultiLine" Width="700px" Height="100px"></asp:TextBox>
                                 <asp:ImageButton ID="AddDiag" Style="text-align: left;" ImageUrl="~/img/a1.png" Height="50px" Width="50px" runat="server" OnClientClick="openModelPopup();" OnClick="AddDiag_Click" />
-                                <%--<input type="button" value="Default" style="float: right left; align-self: baseline; text-align: start;" onclick="saveDefault()" />--%>
+                                <input type="button" value="Default" style="float: right left; align-self: baseline; text-align: start;" onclick="saveDefault()" />
                             </div>
                         </div>
 

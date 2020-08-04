@@ -1220,7 +1220,7 @@
     <Unabletotoewalk>False</Unabletotoewalk>
     <Other>
     </Other>
-    <DiagCervialBulgeDate>
+    <DiagCervialBulgeDate>01/01/2000
     </DiagCervialBulgeDate>
     <DiagCervialBulgeStudy>MRI</DiagCervialBulgeStudy>
     <DiagCervialBulge>False</DiagCervialBulge>
@@ -1240,7 +1240,7 @@
     </DiagThoracicBulgeHNP2>
     <DiagLumberBulgeDate>
     </DiagLumberBulgeDate>
-    <DiagLumberBulgeStudy>MRI</DiagLumberBulgeStudy>
+    <DiagLumberBulgeStudy></DiagLumberBulgeStudy>
     <DiagLumberBulge>False</DiagLumberBulge>
     <DiagLumberBulgeText>
     </DiagLumberBulgeText>
@@ -1252,7 +1252,7 @@
     <DiagLeftShoulder>False</DiagLeftShoulder>
     <DiagLeftShoulderText>
     </DiagLeftShoulderText>
-    <DiagRightShoulderStudy>MRI</DiagRightShoulderStudy>
+    <DiagRightShoulderStudy>X-rays</DiagRightShoulderStudy>
     <DiagRightShoulder>False</DiagRightShoulder>
     <DiagRightShoulderText>
     </DiagRightShoulderText>
@@ -1277,19 +1277,19 @@
     <Other2Study>LE NCV/EMG</Other2Study>
     <Other2Text>
     </Other2Text>
-    <Other3Study>MRI</Other3Study>
+    <Other3Study></Other3Study>
     <Other3Text>
     </Other3Text>
-    <Other4Study>MRI</Other4Study>
+    <Other4Study></Other4Study>
     <Other4Text>
     </Other4Text>
-    <Other5Study>CT Scan</Other5Study>
+    <Other5Study></Other5Study>
     <Other5Text>
     </Other5Text>
-    <Other6Study>X-rays</Other6Study>
+    <Other6Study></Other6Study>
     <Other6Text>
     </Other6Text>
-    <Other7Study>X-rays</Other7Study>
+    <Other7Study></Other7Study>
     <Other7Text>
     </Other7Text>
     <OtherMedicine>

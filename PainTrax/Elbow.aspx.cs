@@ -106,8 +106,10 @@ public partial class Elbow : System.Web.UI.Page
             {
                 Response.Redirect("Page1.aspx");
             }
+            bindgridPoup();
+            BindDCDataGrid();
         }
-        BindDCDataGrid();
+      
         Logger.Info(Session["uname"].ToString() + "- Visited in  Elbow for -" + Convert.ToString(Session["LastNameIE"]) + Convert.ToString(Session["FirstNameIE"]) + "-" + DateTime.Now);
     }
     public string SaveUI(string ieID, string ieMode, bool bpIsChecked)
@@ -778,8 +780,28 @@ public partial class Elbow : System.Web.UI.Page
                 SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
             ds = gDbhelperobj.selectData(SqlStr);
 
-            dgvDiagCodesPopup.DataSource = ds;
-            dgvDiagCodesPopup.DataBind();
+            DataTable newTable = new DataTable();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                if (Request.QueryString["P"].ToLower() == "l")
+                    newTable = ds.Tables[0].Select(" Description like '%left%' ").CopyToDataTable();
+                else if (Request.QueryString["P"].ToLower() == "r")
+                    newTable = ds.Tables[0].Select(" Description like '%right%' ").CopyToDataTable();
+
+                dgvDiagCodesPopup.DataSource = newTable;
+                dgvDiagCodesPopup.DataBind();
+            }
+
+            if (newTable != null && newTable.Rows.Count > 0)
+            {
+                dgvDiagCodesPopup.DataSource = newTable;
+                dgvDiagCodesPopup.DataBind();
+            }
+            else
+            {
+                dgvDiagCodesPopup.DataSource = ds;
+                dgvDiagCodesPopup.DataBind();
+            }
         }
         catch (Exception ex)
         {

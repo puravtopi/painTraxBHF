@@ -20,8 +20,8 @@
         <input type="checkbox" id="chkpaintwith" onclick="checkMe(this)" class="nocomma" value="The mid-back pain " />
         The mid-back pain
         <section class="dropdown">
-            <input type="text" id="txtmindpain" onchange="txtMe(this)" />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtmindpain', this.value)" id="ddlmindpain">
+            <input type="text" id="txtmindpain" onchange="txtMe(this);selectTestCHK('chkpaintwith', this.value);" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtmindpain', this.value); selectTestCHK('chkpaintwith', this.value);" id="ddlmindpain">
                 <option></option>
                 <option>does not radiate</option>
                 <option>radiates to the left side</option>
@@ -122,6 +122,14 @@
             $(chk).removeAttr('checked');
         }
 
+    }
+
+    function selectTestCHK(chkid, val) {
+
+        if (val == '')
+            $("#" + chkid).prop("checked", false);
+        else
+            $("#" + chkid).prop("checked", true);
     }
 
     function txtMe(txt) {

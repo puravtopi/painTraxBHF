@@ -243,6 +243,7 @@ public partial class FuNeck : System.Web.UI.Page
 
             TblRow["PESides"] = hdPESides.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
+            TblRow["TPDesc"] = hdPETP.Value;
 
             string strname = "", strleft = "", strright = "", strnormal = "", strcname = "", strcrom = "", strcnormal = "";
 
@@ -357,6 +358,7 @@ public partial class FuNeck : System.Web.UI.Page
             TblRow = sqlTbl.Rows[0];
 
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("      ", string.Empty);
+            hdPETP.Value = TblRow["TPDesc"].ToString();
 
             CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
 

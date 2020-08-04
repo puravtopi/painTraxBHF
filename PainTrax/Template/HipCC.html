@@ -20,11 +20,11 @@
             <label>in nature.</label>
 
             <input type="checkbox" id="chkhipworsL" value="The hip pain worsened with " class="nocomma" checked="checked" />The hip pain worsened with
-            <input type="checkbox" id="chkWorseSittingL" value="sitting" onclick="checkMe(this)" checked /> sitting,
-            <input type="checkbox" id="chkWorseStandingL" value="standing" onclick="checkMe(this)" /> standing,
-            <input type="checkbox" id="chkWorseMovementL" value="movement" onclick="checkMe(this)" /> movement,
-            <input type="checkbox" id="chkWorseActivitiesL" value="activities" onclick="checkMe(this)" checked /> activities
-            <input type="text" id="txtHip1L" style="width:240px" class="nocomma"/>
+            <input type="checkbox" id="chkWorseSittingL" value="sitting" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" checked /> sitting,
+            <input type="checkbox" id="chkWorseStandingL" value="standing" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" /> standing,
+            <input type="checkbox" id="chkWorseMovementL" value="movement" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" /> movement,
+            <input type="checkbox" id="chkWorseActivitiesL" value="activities" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" checked /> activities
+            <input type="text" id="txtHip1L" style="width:240px" class="nocomma" />
             <span>.</span>
 
             <br />
@@ -60,10 +60,10 @@
 
 
             <input type="checkbox" id="chkhipworsR" value="The hip pain worsened with " class="nocomma" checked="checked" />The hip pain worsened with
-            <input type="checkbox" id="chkWorseSittingR" value="sitting" onclick="checkMe(this)" checked /> sitting,
-            <input type="checkbox" id="chkWorseStandingR" value="standing" onclick="checkMe(this)" /> standing,
-            <input type="checkbox" id="chkWorseMovementR" value="movement" onclick="checkMe(this)" /> movement,
-            <input type="checkbox" id="chkWorseActivitiesR" value="activities" onclick="checkMe(this)" checked /> activities
+            <input type="checkbox" id="chkWorseSittingR" value="sitting" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" checked /> sitting,
+            <input type="checkbox" id="chkWorseStandingR" value="standing" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" /> standing,
+            <input type="checkbox" id="chkWorseMovementR" value="movement" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" /> movement,
+            <input type="checkbox" id="chkWorseActivitiesR" value="activities" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" checked /> activities
             <input type="text" id="txtHip1R" style="width:240px" class="nocomma" onchange="txtMe(this)" />
             <label>.</label>
             <br />
@@ -96,6 +96,18 @@
         }
 
     }
+
+    function checkDefault(chk, deafCheck) {
+
+        if ($("#" + deafCheck).prop("checked") == false) {
+
+            if ($(chk).prop("checked")) {
+                $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
+    }
+
 
     function txtMe(txt) {
         var val = $(txt).val();

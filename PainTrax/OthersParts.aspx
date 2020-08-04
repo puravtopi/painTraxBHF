@@ -311,6 +311,25 @@
                     </asp:UpdatePanel>
                 </div>
 
+                   <div class="row" >
+                    <div class="col-md-3">
+                        <label class="control-label labelcolor">FOLLOW UP:</label><asp:TextBox ID="txtFollowUpIn" runat="server" />
+                        &nbsp;
+                        <asp:TextBox ID="txtFollowUpInDate" runat="server" placeholder="MM/dd/yyyy" Visible="false" />
+                    </div>
+                    <div class="col-md-9" style="margin-top: 5px">
+                        <%--<label class="control-label">weeks. </label>
+                        <label class="control-label">It is my opinion that the injuries that </label>
+                        <asp:TextBox ID="txtFullName1" runat="server" />
+                        <label class="control-label">sustained to the </label>
+                        <asp:TextBox ID="txtInjureBodyParts" runat="server" />
+                        <label class="control-label">are causally related to </label>
+                        <asp:TextBox ID="cboAccident" runat="server" />
+                        <label class="control-label">that occurred on </label>
+                        <asp:TextBox ID="txtOccuredOn" runat="server" />
+                        <label class="control-label">as described by the patient.</label>--%>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-3">
                         <label class="control-label"></label>

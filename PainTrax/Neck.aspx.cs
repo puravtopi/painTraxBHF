@@ -250,6 +250,7 @@ public partial class Neck : System.Web.UI.Page
                 TblRow["PEvalueoriginal"] = hdPEvalueoriginal.Value;
                 TblRow["PESides"] = hdPESides.Value;
                 TblRow["PESidesText"] = hdPESidesText.Value;
+                TblRow["TPDesc"] = hdPETP.Value;
 
                 string strname = "", strleft = "", strright = "", strnormal = "", strcname = "", strcrom = "", strcnormal = "";
 
@@ -378,7 +379,7 @@ public partial class Neck : System.Web.UI.Page
             //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
             //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("    ", string.Empty);
-
+            hdPETP.Value = TblRow["TPDesc"].ToString();
 
             CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
 
@@ -388,7 +389,7 @@ public partial class Neck : System.Web.UI.Page
 
             int val = checkTP();
 
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",1);bindSidesVal('" + sqlTbl.Rows[0]["PESides"].ToString() + "','" + sqlTbl.Rows[0]["PESidesText"].ToString() + "');", true);
+           // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",1);bindSidesVal('" + sqlTbl.Rows[0]["PESides"].ToString() + "','" + sqlTbl.Rows[0]["PESidesText"].ToString() + "');", true);
 
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
             _fldPop = false;

@@ -36,7 +36,6 @@ public partial class POC : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            bindPOC();
             if (Request.QueryString["PId"] != null)
             {
                 int patientIEID = Convert.ToInt32(Request.QueryString["PId"]);
@@ -48,10 +47,7 @@ public partial class POC : System.Web.UI.Page
                 int patientIEID = Convert.ToInt32(Session["PatientIE_ID"]);
                 hfPatientIE_ID.Value = Session["PatientIE_ID"].ToString();
                 PrintProcedures(patientIEID);
-
             }
-
-           
         }
         if (!string.IsNullOrEmpty(Convert.ToString(Session["DVLbl"])))
         {
@@ -309,13 +305,13 @@ public partial class POC : System.Web.UI.Page
                                         if (Convert.ToInt32(row[10]) != 0)
                                         {
                                             html.Append("<td >");
-                                            html.Append("<input type='text' class='ProcText' onclick='PopupNE($(this));' data-LevelsDefault='" + row[31] + "' data-SidesDefault='" + row[32] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[30] + "' data-Sides='" + row[27] + "' data-HasSides ='" + row[28] + "' data-PPID='" + row[10] + "' data-PatientIEID='" + row[24] + "' data-PatientFUID='" + row[25] + "' data-Level='" + row[13] + "' data-Medi='" + row[11] + "' data-Musc='" + row[12] + "' data-PID='" + row[0] + "'data-ReqPos='" + row[20] + "'data-SubPID='" + row[23] + "' data-Body='" + row[8] + "' data-Bodyid='" + row[7] + "' data-Position='Schedule' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "'  data-Medication='" + row[9] + "'  data-Date='" + date1 + "' data-MCode='" + row[1] + "'   id='" + row[0] + "_S_" + row[1] + "_" + row[2] + "' value='" + date1 + "' />");
+                                            html.Append("<input type='text' class='ProcText' onclick='PopupNE($(this));' data-LevelsDefault='" + row[31] + "' data-SidesDefault='" + row[32] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[30] + "' data-Sides='" + row[27] + "' data-HasSides ='" + row[28] + "' data-PPID='" + row[10] + "' data-PatientIEID='" + row[24] + "' data-PatientFUID='" + row[25] + "' data-Level='" + row[13] + "' data-Medi='" + row[11] + "' data-Musc='" + row[12] + "' data-PID='" + row[0] + "'data-ReqPos='" + row[20] + "'data-SubPID='" + row[23] + "' data-Body='" + row[8] + "' data-Bodyid='" + row[7] + "' data-Position='Schedule' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "'  data-Medication='" + row[9] + "'  data-Date='" + date1 + "'   id='" + row[0] + "_S_" + row[1] + "_" + row[2] + "' value='" + date1 + "' />");
                                             html.Append("</td>");
                                         }
                                         else
                                         {
                                             html.Append("<td >");
-                                            html.Append("<input type='text' class='ProcText' onclick='Popup($(this));' data-LevelsDefault='" + row[31] + "' data-SidesDefault='" + row[32] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[30] + "' data-Sides='" + row[27] + "' data-HasSides ='" + row[28] + "' data-PPID='" + row[10] + "' data-PatientIEID='" + row[24] + "' data-PatientFUID='" + row[25] + "' data-Level='" + row[13] + "' data-Medi='" + row[11] + "' data-Musc='" + row[12] + "' data-PID='" + row[0] + "' data-SubPID='" + row[23] + "' data-Body='" + row[8] + "' data-Bodyid='" + row[7] + "' data-Position='Schedule' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "'  data-Medication='" + row[9] + "'  data-Date='" + date1 + "' data-MCode='" + row[1] + "'   id='" + row[0] + "_S_" + row[1] + "_" + row[2] + "' value='' />");
+                                            html.Append("<input type='text' class='ProcText' onclick='Popup($(this));' data-LevelsDefault='" + row[31] + "' data-SidesDefault='" + row[32] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[30] + "' data-Sides='" + row[27] + "' data-HasSides ='" + row[28] + "' data-PPID='" + row[10] + "' data-PatientIEID='" + row[24] + "' data-PatientFUID='" + row[25] + "' data-Level='" + row[13] + "' data-Medi='" + row[11] + "' data-Musc='" + row[12] + "' data-PID='" + row[0] + "' data-SubPID='" + row[23] + "' data-Body='" + row[8] + "' data-Bodyid='" + row[7] + "' data-Position='Schedule' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "'  data-Medication='" + row[9] + "'  data-Date='" + date1 + "'   id='" + row[0] + "_S_" + row[1] + "_" + row[2] + "' value='' />");
                                             html.Append("</td>");
                                         }
                                     }
@@ -345,13 +341,13 @@ public partial class POC : System.Web.UI.Page
                                         if (Convert.ToInt32(row[10]) != 0)
                                         {
                                             html.Append("<td>");
-                                            html.Append("<input type='text' onclick='PopupNE($(this));' data-LevelsDefault='" + row[31] + "' data-SidesDefault='" + row[32] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[30] + "' data-Sides='" + row[27] + "' data-HasSides ='" + row[28] + "' data-PPID='" + row[10] + "' data-PatientIEID='" + row[24] + "' data-PatientFUID='" + row[25] + "'data-PID='" + row[0] + "'data-ReqPos='" + row[22] + "' data-Level='" + row[13] + "' data-Medi='" + row[11] + "' data-Musc='" + row[12] + "' data-SubPID='" + row[23] + "' data-Body='" + row[8] + "' data-Bodyid='" + row[7] + "' data-Position='Execute' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "' data-Medication='" + row[9] + "' data-SignPath='" + row[33] + "'    data-Date='" + date1 + "' data-MCode='"+ row[1] +"'   class='ProcText' id='" + row[0] + "_E_" + row[1] + "_" + row[2] + "' value='" + date1 + "' />");
+                                            html.Append("<input type='text' onclick='PopupNE($(this));' data-LevelsDefault='" + row[31] + "' data-SidesDefault='" + row[32] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[30] + "' data-Sides='" + row[27] + "' data-HasSides ='" + row[28] + "' data-PPID='" + row[10] + "' data-PatientIEID='" + row[24] + "' data-PatientFUID='" + row[25] + "'data-PID='" + row[0] + "'data-ReqPos='" + row[22] + "' data-Level='" + row[13] + "' data-Medi='" + row[11] + "' data-Musc='" + row[12] + "' data-SubPID='" + row[23] + "' data-Body='" + row[8] + "' data-Bodyid='" + row[7] + "' data-Position='Execute' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "' data-Medication='" + row[9] + "' data-SignPath='" + row[33] + "'    data-Date='" + date1 + "'   class='ProcText' id='" + row[0] + "_E_" + row[1] + "_" + row[2] + "' value='" + date1 + "' />");
                                             html.Append("</td>");
                                         }
                                         else
                                         {
                                             html.Append("<td>");
-                                            html.Append("<input type='text' onclick='Popup($(this));' data-LevelsDefault='" + row[31] + "' data-SidesDefault='" + row[32] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[30] + "' data-Sides='" + row[27] + "' data-HasSides ='" + row[28] + "' data-PPID='" + row[10] + "' data-PatientIEID='" + row[24] + "' data-PatientFUID='" + row[25] + "' data-PID='" + row[0] + "' data-Level='" + row[13] + "' data-Medi='" + row[11] + "' data-Musc='" + row[12] + "' data-SubPID='" + row[23] + "' data-Body='" + row[8] + "' data-Bodyid='" + row[7] + "' data-Position='Execute' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "' data-Medication='" + row[9] + "'  data-Date='" + date1 + "' data-CF='" + row[34] + "' data-MCode='" + row[1] + "'     class='ProcText' id='" + row[0] + "_E_" + row[1] + "_" + row[2] + "' value='' />");
+                                            html.Append("<input type='text' onclick='Popup($(this));' data-LevelsDefault='" + row[31] + "' data-SidesDefault='" + row[32] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[30] + "' data-Sides='" + row[27] + "' data-HasSides ='" + row[28] + "' data-PPID='" + row[10] + "' data-PatientIEID='" + row[24] + "' data-PatientFUID='" + row[25] + "' data-PID='" + row[0] + "' data-Level='" + row[13] + "' data-Medi='" + row[11] + "' data-Musc='" + row[12] + "' data-SubPID='" + row[23] + "' data-Body='" + row[8] + "' data-Bodyid='" + row[7] + "' data-Position='Execute' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "' data-Medication='" + row[9] + "'  data-Date='" + date1 + "' data-CF='" + row[34] + "'     class='ProcText' id='" + row[0] + "_E_" + row[1] + "_" + row[2] + "' value='' />");
                                             html.Append("</td>");
                                         }
                                 }
@@ -509,7 +505,7 @@ public partial class POC : System.Web.UI.Page
 
 
     [WebMethod]
-    public static string Save(long ProcedureDetailID, long ProcedureMasterID, long _patientIEID, long? _patientFUID, string SubProcedureID, string BodyPart, long ProcedureID, string Medication, string Muscle, string Level, string Position, string date, string req, int BodyPartID, int IsFromNew, int? PatientProcedureID, Int16 IsConsidered, string Side, string BlobStr = "")
+    public static string Save(long ProcedureDetailID, long ProcedureMasterID, long _patientIEID, long? _patientFUID, string SubProcedureID, string BodyPart, long ProcedureID, string Medication, string Muscle, string Level, string Position, string date, string req, int BodyPartID, int IsFromNew, int? PatientProcedureID, Int16 IsConsidered, string Side, string BlobStr="")
     {
         BusinessLogic _bl = new BusinessLogic();
         string Req_Pos = ""; string Sch_Pos = ""; string Exe_Pos = ""; string FU_Pos = "";
@@ -565,9 +561,10 @@ public partial class POC : System.Web.UI.Page
                 DateTime Executed = DateTime.ParseExact(date, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 Exe_Pos = Position;
                 count = _bl.savePatientProcedureDetail(ProcedureDetailID, ProcedureMasterID, _patientIEID, _patientFUID, BodyPartID, ProcedureID, null, null, null, null, Executed, BodyPart, Medication, Muscle, Level, Req_Pos, Sch_Pos, Exe_Pos, FU_Pos, 0, IsFromNew, PatientProcedureID, req, IsConsidered, Side, SubProcedureID, fname);
-
-                // File.WriteAllBytes(fullpath, blob);
-
+		if (string.IsNullOrEmpty(BlobStr) == false)
+		{
+                	File.WriteAllBytes(fullpath, blob);
+		}
                 break;
         }
         // return count;
@@ -795,13 +792,13 @@ public partial class POC : System.Web.UI.Page
                                 if (Convert.ToInt32(row[8]) != 0)
                                 {
                                     html.Append("<td >");
-                                    html.Append("<input type='text' onclick='PopupNE($(this));' data-LevelsDefault='" + row[28] + "' data-SidesDefault='" + row[29] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[27] + "' data-PPID='" + row[8] + "' data-PatientIEID='" + row[21] + "' data-PatientFUID='" + row[22] + "'data-PID='" + row[0] + "'data-ReqPos='" + row[20] + "' data-Level='" + row[11] + "' data-Medi='" + row[9] + "' data-Musc='" + row[10] + "' data-Body='" + row[6] + "' data-Position='Execute' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-InhouseProc='" + row[2] + "' data-Medication='" + row[9] + "'  data-Date='" + date1 + "' data-MCode='"+ row[1] +"'   class='ProcText' id='" + row[0] + "_E_" + row[1] + "_" + row[2] + "' value='" + date1 + "' />");
+                                    html.Append("<input type='text' onclick='PopupNE($(this));' data-LevelsDefault='" + row[28] + "' data-SidesDefault='" + row[29] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[27] + "' data-PPID='" + row[8] + "' data-PatientIEID='" + row[21] + "' data-PatientFUID='" + row[22] + "'data-PID='" + row[0] + "'data-ReqPos='" + row[20] + "' data-Level='" + row[11] + "' data-Medi='" + row[9] + "' data-Musc='" + row[10] + "' data-Body='" + row[6] + "' data-Position='Execute' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-InhouseProc='" + row[2] + "' data-Medication='" + row[9] + "'  data-Date='" + date1 + "'   class='ProcText' id='" + row[0] + "_E_" + row[1] + "_" + row[2] + "' value='" + date1 + "' />");
                                     html.Append("</td>");
                                 }
                                 else
                                 {
                                     html.Append("<td >");
-                                    html.Append("<input type='text' onclick='Popup($(this));' data-LevelsDefault='" + row[28] + "' data-SidesDefault='" + row[29] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[27] + "' data-PPID='" + row[8] + "' data-PatientIEID='" + row[21] + "' data-PatientFUID='" + row[22] + "' data-PID='" + row[0] + "' data-Level='" + row[11] + "' data-Medi='" + row[9] + "' data-Musc='" + row[10] + "' data-Body='" + row[6] + "' data-Position='Execute' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "' data-Medication='" + row[9] + "'  data-Date='" + date1 + "' data-MCode='" + row[1] + "'   class='ProcText' id='" + row[0] + "_E_" + row[1] + "_" + row[2] + "' value='' />");
+                                    html.Append("<input type='text' onclick='Popup($(this));' data-LevelsDefault='" + row[28] + "' data-SidesDefault='" + row[29] + "' data-toggle='tooltip' title='" + notify + "' data-Procedure_Detail_ID='" + row[27] + "' data-PPID='" + row[8] + "' data-PatientIEID='" + row[21] + "' data-PatientFUID='" + row[22] + "' data-PID='" + row[0] + "' data-Level='" + row[11] + "' data-Medi='" + row[9] + "' data-Musc='" + row[10] + "' data-Body='" + row[6] + "' data-Position='Execute' data-HasLevel='" + row[4] + "' data-Pos='" + row[3] + "' data-Muscle='" + row[5] + "' data-Subcode='" + row[6] + "' data-InhouseProc='" + row[2] + "' data-Medication='" + row[9] + "'  data-Date='" + date1 + "'   class='ProcText' id='" + row[0] + "_E_" + row[1] + "_" + row[2] + "' value='' />");
                                     html.Append("</td>");
                                 }
                         }
@@ -985,88 +982,6 @@ public partial class POC : System.Web.UI.Page
         // return count;
         return count;
 
-    }
-
-    [System.Web.Services.WebMethod]
-    public static string checkStatus(string MCode , string BodyPart, int PatientIEID)
-    {
-        BusinessLogic _bl = new BusinessLogic();
-        string precode = "";
-        int status = _bl.CheckExecuteStatus(MCode, BodyPart,out precode, PatientIEID.ToString());
-
-        return "{ \"cnt\" : \""+ status +"\",\"mcode\": \""+ precode +"\" }";
-    }
-
-    public void bindPOC()
-    {
-        try
-        {
-            DBHelperClass db = new DBHelperClass();
-
-
-            string SqlStr = @"Select 
-                        CASE 
-                              WHEN p.Requested is not null 
-                               THEN Convert(varchar,p.ProcedureDetail_ID) +'_R'
-                              ELSE 
-                        		case when p.Scheduled is not null
-                        			THEN  Convert(varchar,p.ProcedureDetail_ID) +'_S'
-                        		ELSE
-                        		   CASE
-                        				WHEN p.Executed is not null
-                        				THEN Convert(varchar,p.ProcedureDetail_ID) +'_E'
-                              END  END END as ID, 
-                        CASE 
-                              WHEN p.Requested is not null 
-                               THEN p.Heading
-                              ELSE 
-                        		case when p.Scheduled is not null
-                        			THEN p.S_Heading
-                        		ELSE
-                        		   CASE
-                        				WHEN p.Executed is not null
-                        				THEN p.E_Heading
-                              END  END END as Heading, 
-                        	  CASE 
-                              WHEN p.Requested is not null 
-                               THEN p.PDesc
-                              ELSE 
-                        		case when p.Scheduled is not null
-                        			THEN p.S_PDesc
-                        		ELSE
-                        		   CASE
-                        				WHEN p.Executed is not null
-                        				THEN p.E_PDesc
-                              END  END END as PDesc,
- CASE 
-                              WHEN p.Requested is not null 
-                               THEN p.Requested
-                              ELSE 
-                        		case when p.Scheduled is not null
-                        			THEN p.Scheduled
-                        		ELSE
-                        		   CASE
-                        				WHEN p.Executed is not null
-                        				THEN p.Executed
-                              END  END END as PDate,
-BodyPart
-                        	 -- ,p.Requested,p.Heading RequestedHeading,p.Scheduled,p.S_Heading ScheduledHeading,p.Executed,p.E_Heading ExecutedHeading
-                         from tblProceduresDetail p WHERE PatientIE_ID = " + Session["PatientIE_ID"].ToString() + "  and IsConsidered=0  Order By BodyPart,Heading"; ;
-
-
-            DataSet dsPOC = db.selectData(SqlStr);
-
-            string strPoc = "";
-            if (dsPOC != null && dsPOC.Tables[0].Rows.Count > 0)
-            {
-                repSummery.DataSource = dsPOC;
-                repSummery.DataBind();
-            }
-        }
-        catch (Exception ex)
-        {
-
-        }
     }
 
 }

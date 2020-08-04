@@ -149,9 +149,9 @@
 
 
     <div id="divrosHTML" runat="server"></div>
-    <br />
-    <div id="divcomplainHTML" runat="server"></div>
-    <br />
+  
+    <div id="divcomplainHTML" runat="server" style="display:none"></div>
+ 
     <div id="divtopHTML" runat="server"></div>
     <br />
     <div id="divdegreeHTML" runat="server"></div>

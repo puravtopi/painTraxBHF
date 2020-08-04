@@ -89,49 +89,8 @@
             word-wrap: break-word;
         }
     </style>
-
-
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title"><a class="collapse" style="cursor: pointer;" id="#Summarytable">Summary</a></h4>
-        </div>
-        <div id="Summarytablediv" class="panel-collapse collapse" style="display: block">
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <asp:Repeater runat="server" ID="repSummery">
-                        <HeaderTemplate>
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Body Part</th>
-                                        <th>Heading</th>
-                                    </tr>
-                                </thead>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td><%# Eval("PDate","{0:MM/dd/yyyy}") %></td>
-                                <td><%# Eval("BodyPart") %></td>
-                                <td><%# Eval("Heading") %></td>
-
-                            </tr>
-                        </ItemTemplate>
-                        <FooterTemplate></table></FooterTemplate>
-                    </asp:Repeater>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"></div>
     <div>
         <asp:HiddenField ID="hdnControlconsider" runat="server" />
-
-
-
-
         <!--Grid Container-->
         <div class="panel-group" id="Consider">
             <asp:PlaceHolder ID="PlaceHolder2" runat="server"></asp:PlaceHolder>
@@ -140,7 +99,6 @@
         <div class="panel-group" id="accordion">
             <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
         </div>
-
         <%-- <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>--%>
     </div>
 
@@ -214,10 +172,10 @@
                             <label id="Date" class="align boldertext">Date</label>
                             <input type="text" id="date" class="date" style="margin-left: 52px" />
                         </div>
-                        <div class="col-lg-3" id="canvDiv" style="display: none">
+                        <div class="col-lg-3" id="canvDiv">
                             <label id="lblSign" class="align boldertext">Sign</label>
 
-                            <div id="signature-pad" class="signature-pad" style="display: none">
+                            <div id="signature-pad" class="signature-pad">
                                 <canvas id="canvSign"></canvas>
                                 <div class="signature-pad--actions">
                                     <div>
@@ -233,7 +191,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3" id="signEdit" style="display: none">
+                        <div class="col-lg-3" id="signEdit">
                             <label id="lblSignEdit" class="align boldertext">Sign</label>
 
                             <img id="imgSignEdit" />
@@ -365,11 +323,10 @@
             //    SubCode = 0;
             //}
 
-            //  download();
+            download();
 
             var PositionValue = $('#PositionValue').val();
-            // var blobstr = $('#hidBlob').val();
-            var blobstr = "";
+            var blobstr = $('#hidBlob').val();
 
             var Muscle = $('#Muscle').val();
             var Medication = $('#Medication').val();
@@ -584,10 +541,10 @@
         function clearSign() {
 
             $('#signEdit').hide();
-            $('#signature-pad').hide();
-            $('#lblSign').hide();
+            $('#signature-pad').show();
+            $('#lblSign').show();
 
-            // $('#canvSign').height(200);
+            $('#canvSign').height(200);
 
             resizeCanvas();
 
@@ -808,184 +765,159 @@
         function Popup(t) {
 
 
-            var retVal = true;
-            if (t[0].dataset.position == "Schedule") {
+            debugger;
+            $('#NewProc').val('1')
+            $('#ProcedureDetailId').val(t[0].dataset.procedure_detail_id);
+            $('#ProcedureId').val(t[0].dataset.pid);
+            $('#HasMedication').val(t[0].dataset.medication);
+            $('#Hasmuscle').val(t[0].dataset.muscle);
+            $('#Haslevel').val(t[0].dataset.haslevel);
+            $('#HasSides').val(t[0].dataset.hassides);
+            $("#<%=positionVal.ClientID%>").val(t[0].dataset.position);
+            $("#<%=BodyPartID.ClientID%>").val(t[0].dataset.body);
+            $("#<%=BodyPartval.ClientID%>").val(t[0].dataset.bodyid);
+            $('#PPID').val(t[0].dataset.ppid);
+            $('#HasSubcode').val(t[0].dataset.subcode);
+            $('#SubCodeVal').val(t[0].dataset.subpid);
+            $('#CatHeading').text(t[0].dataset.position);
+            $('#SubCode').html('');
+            $('#Level').html('');
+            $('#Muscle').html('');
+            $('#Medication').html('');
+            $('#Level').html('');
+            $('#date').html($('#ctl00_ContentPlaceHolder1_dov').val());
+            $('#PositionValue').val(t[0].dataset.pos);
+            $('#PositionValue').show();
+            $('#Positionlbl').show();
 
-                var mcode = t[0].dataset.mcode;
-                var idID = document.getElementById('<%= hfPatientIE_ID.ClientID %>').value;
-                var BPart = t[0].dataset.body;
-
-                var checkdata = "{MCode:'" + mcode + "',BodyPart:'" + BPart + "',PatientIEID:'" + idID + "'}";
+            $('#signEdit').hide();
 
 
+
+            if (t[0].dataset.position == 'Execute' && t[0].dataset.cf == 'True') {
+                $('#lblSign').show();
+                $('#signature-pad').show();
+            }
+            else {
+                $('#lblSign').hide();
+                $('#signature-pad').hide();
+            }
+
+            if (t[0].dataset.subcode == "True") {
                 $.ajax({
                     type: "POST",
-                    url: "POC.aspx/checkStatus",
-                    async: false,
-                    data: checkdata,
+                    url: "POC.aspx/GetSubCodeFromDB",
+                    data: "{'SubCode':'" + t[0].dataset.pid + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "JSON",
                     success: function (output) {
-                        var data = JSON.parse(output.d);
+                        //debugger;
+                        $('#SubProcedure').html('');
+                        var json = JSON.parse(output.d);
+                        $.each(json, function (index, value) {
+                            $('#SubProcedure').append($('<option>').text(value.SubCode).attr('value', value.SubCode));
+                        });
+                    }
+                });
+                $('#SubProcedure').show();
+                $('#SubProcedurelbl').show();
+            }
 
-                        var cnt = data.cnt;
+            if (t[0].dataset.muscle == "True") {
 
-                        if (cnt == 0) {
-                            retVal = confirm(data.mcode + ' is not done. you still like to continue ?');
+                $.ajax({
+                    type: "POST",
+                    url: "POC.aspx/GetMuscleFromDB",
+                    data: "{'Muscle':'" + t[0].dataset.pid + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "JSON",
+                    success: function (output) {
+                        ////debugger;
+                        $('#Muscle').html('');
+                        var json = JSON.parse(output.d);
+                        $.each(json, function (index, value) {
+                            $('#Muscle').append($('<option>').text(value.Muscle).attr('value', value.Muscle));
+                        });
+                    }
+                });
+                $('#Muscle').show();
+                $('#Musclelbl').show();
+            }
 
-                        }
+            if (t[0].dataset.medication == "True") {
+
+                $.ajax({
+                    type: "POST",
+                    url: "POC.aspx/GetMedicationFromDB",
+                    data: "{'Medication':'" + t[0].dataset.pid + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "JSON",
+                    success: function (output) {
+                        ////debugger;
+                        $('#Medication').html('');
+                        var json = JSON.parse(output.d);
+                        $.each(json, function (index, value) {
+                            $('#Medication').append($('<option>').text(value.Medicaton).attr('value', value.Medicaton));
+                        });
+                        $('#Medication').val($('#MedicationVal').val());
                     }
                 });
 
+                $('#Medication').show();
+                $('#Medicationlbl').show();
             }
 
-            if (retVal) {
-                $('#NewProc').val('1')
-                $('#ProcedureDetailId').val(t[0].dataset.procedure_detail_id);
-                $('#ProcedureId').val(t[0].dataset.pid);
-                $('#HasMedication').val(t[0].dataset.medication);
-                $('#Hasmuscle').val(t[0].dataset.muscle);
-                $('#Haslevel').val(t[0].dataset.haslevel);
-                $('#HasSides').val(t[0].dataset.hassides);
-                $("#<%=positionVal.ClientID%>").val(t[0].dataset.position);
-                $("#<%=BodyPartID.ClientID%>").val(t[0].dataset.body);
-                $("#<%=BodyPartval.ClientID%>").val(t[0].dataset.bodyid);
-                $('#PPID').val(t[0].dataset.ppid);
-                $('#HasSubcode').val(t[0].dataset.subcode);
-                $('#SubCodeVal').val(t[0].dataset.subpid);
-                $('#CatHeading').text(t[0].dataset.position);
-                $('#SubCode').html('');
-                $('#Level').html('');
-                $('#Muscle').html('');
-                $('#Medication').html('');
-                $('#Level').html('');
-                $('#date').html($('#ctl00_ContentPlaceHolder1_dov').val());
-                $('#PositionValue').val(t[0].dataset.pos);
-                $('#PositionValue').show();
-                $('#Positionlbl').show();
-
-                $('#signEdit').hide();
-
-
-
-
-
-                if (t[0].dataset.subcode == "True") {
-                    $.ajax({
-                        type: "POST",
-                        url: "POC.aspx/GetSubCodeFromDB",
-                        data: "{'SubCode':'" + t[0].dataset.pid + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "JSON",
-                        success: function (output) {
-                            //debugger;
-                            $('#SubProcedure').html('');
-                            var json = JSON.parse(output.d);
-                            $.each(json, function (index, value) {
-                                $('#SubProcedure').append($('<option>').text(value.SubCode).attr('value', value.SubCode));
-                            });
-                        }
-                    });
-                    $('#SubProcedure').show();
-                    $('#SubProcedurelbl').show();
-                }
-
-                if (t[0].dataset.muscle == "True") {
-
-                    $.ajax({
-                        type: "POST",
-                        url: "POC.aspx/GetMuscleFromDB",
-                        data: "{'Muscle':'" + t[0].dataset.pid + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "JSON",
-                        success: function (output) {
-                            ////debugger;
-                            $('#Muscle').html('');
-                            var json = JSON.parse(output.d);
-                            $.each(json, function (index, value) {
-                                $('#Muscle').append($('<option>').text(value.Muscle).attr('value', value.Muscle));
-                            });
-                        }
-                    });
-                    $('#Muscle').show();
-                    $('#Musclelbl').show();
-                }
-
-                if (t[0].dataset.medication == "True") {
-
-                    $.ajax({
-                        type: "POST",
-                        url: "POC.aspx/GetMedicationFromDB",
-                        data: "{'Medication':'" + t[0].dataset.pid + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "JSON",
-                        success: function (output) {
-                            ////debugger;
-                            $('#Medication').html('');
-                            var json = JSON.parse(output.d);
-                            $.each(json, function (index, value) {
-                                $('#Medication').append($('<option>').text(value.Medicaton).attr('value', value.Medicaton));
-                            });
-                            $('#Medication').val($('#MedicationVal').val());
-                        }
-                    });
-
-                    $('#Medication').show();
-                    $('#Medicationlbl').show();
-                }
-
-                if (t[0].dataset.haslevel != "True") {
-                    $('#Level').hide();
-                    $('#Levellbl').hide();
-                }
-                else {
-                    $('#Level').val(t[0].dataset.levelsdefault);
-                    $('#Level').show();
-                    $('#Levellbl').show();
-                }
-                if (t[0].dataset.hassides != "True") {
-                    $('#Side').hide();
-                    $('#Sidelbl').hide();
-
-                }
-                else {
-                    $('#Side').val(t[0].dataset.sidesdefault);
-                    $('#Side').show();
-                    $('#Sidelbl').show();
-                }
-                if (t[0].dataset.medication != "True") {
-                    $('#Medication').hide();
-                    $('#Medicationlbl').hide();
-                }
-                else {
-                    $('#Medication').show();
-                    $('#Medicationlbl').show();
-                }
-                if (t[0].dataset.muscle != "True") {
-                    $('#Muscle').hide();
-                    $('#Musclelbl').hide();
-                }
-                else {
-
-                    $('#Muscle').show();
-                    $('#Musclelbl').show();
-                }
-                if (t[0].dataset.subcode != "True") {
-                    $('#SubProcedure').hide();
-                    $('#SubProcedurelbl').hide();
-                }
-                else {
-
-                    $('#SubProcedure').show();
-                    $('#SubProcedurelbl').show();
-                }
-
-                $('#SelectPopup').modal('show');
+            if (t[0].dataset.haslevel != "True") {
+                $('#Level').hide();
+                $('#Levellbl').hide();
             }
+            else {
+                $('#Level').val(t[0].dataset.levelsdefault);
+                $('#Level').show();
+                $('#Levellbl').show();
+            }
+            if (t[0].dataset.hassides != "True") {
+                $('#Side').hide();
+                $('#Sidelbl').hide();
+
+            }
+            else {
+                $('#Side').val(t[0].dataset.sidesdefault);
+                $('#Side').show();
+                $('#Sidelbl').show();
+            }
+            if (t[0].dataset.medication != "True") {
+                $('#Medication').hide();
+                $('#Medicationlbl').hide();
+            }
+            else {
+                $('#Medication').show();
+                $('#Medicationlbl').show();
+            }
+            if (t[0].dataset.muscle != "True") {
+                $('#Muscle').hide();
+                $('#Musclelbl').hide();
+            }
+            else {
+
+                $('#Muscle').show();
+                $('#Musclelbl').show();
+            }
+            if (t[0].dataset.subcode != "True") {
+                $('#SubProcedure').hide();
+                $('#SubProcedurelbl').hide();
+            }
+            else {
+
+                $('#SubProcedure').show();
+                $('#SubProcedurelbl').show();
+            }
+
+            $('#SelectPopup').modal('show');
+
         }
 
         function PopupNE(t) {
-
 
 
             debugger
@@ -1029,7 +961,14 @@
             $('#Medication').html('');
 
 
+            if ($("#<%=positionVal.ClientID%>").val() == 'Execute') {
+                $('#lblSign').hide();
+                $('#signature-pad').hide();
+                $('#signEdit').show();
 
+
+                $('#imgSignEdit').attr('src', 'Sign/' + $('#hidSign').val());
+            }
 
 
             $('#CatHeading').text($("#<%=positionVal.ClientID%>").val());
@@ -1183,7 +1122,15 @@
 
 
 
+            if ($("#<%=positionVal.ClientID%>").val() == 'Execute') {
+                $('#lblSign').show();
+                $('#signature-pad').show();
 
+            }
+            else {
+                $('#lblSign').hide();
+                $('#signature-pad').hide();
+            }
 
             if ($('#Haslevel').val() != "True") {
                 $('#Level').hide();

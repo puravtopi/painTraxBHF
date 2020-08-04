@@ -287,7 +287,7 @@
 
                                                 <tr>
 
-                                                    <td style="">lumber spine exam
+                                                    <td style="">Lumbar spine exam
                                                     </td>
 
                                                     <td style="">ROM
@@ -317,7 +317,7 @@
                                         </FooterTemplate>
                                     </asp:Repeater>
                                 </td>
-                                <td>
+                                <td style="vertical-align:top">
                                     <asp:Repeater runat="server" ID="repROM">
                                         <HeaderTemplate>
                                             <table style="width: 100%;">
@@ -370,6 +370,7 @@
                 <asp:HiddenField runat="server" ID="hdPEvalue" />
                 <asp:HiddenField runat="server" ID="hdPESides" />
                 <asp:HiddenField runat="server" ID="hdPESidesText" />
+                   <asp:HiddenField runat="server" ID="hdPETP" />
 
                 <%--  <div class="table-responsive">
                             <table class="table table-bordered">

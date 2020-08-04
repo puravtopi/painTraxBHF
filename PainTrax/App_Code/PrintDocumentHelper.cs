@@ -448,19 +448,200 @@ public class PrintDocumentHelper
         return sb.Replace(" .", ". ").Replace(".", ". ").ToString();
     }
 
+    //public string getDocumentStringLeftRightPE(string html, string bodypart = "")
+    //{
+
+    //    String strfile = html;
+    //    String[] str = new String[2];
+    //    StringBuilder sb = new StringBuilder();
+    //    int leftstart, leftend, rightstart, rightend;
+    //    leftstart = strfile.IndexOf(@"<div id=""WrapLeftPE""");
+    //    leftend = strfile.IndexOf(@"</div>", leftstart);
+    //    str[0] = strfile.Substring(leftstart, leftend - leftstart);
+    //    rightstart = strfile.IndexOf(@"<div id=""WrapRightPE""");
+    //    rightend = strfile.IndexOf(@"</div>", rightstart);
+    //    str[1] = strfile.Substring(rightstart, rightend - rightstart);
+
+    //    //            Response.Write(str[0]);
+    //    //          Response.Write(str[1]);
+    //    Regex rex = new Regex(@"<div.*display:[ ]*none.*>");
+    //    if (rex.IsMatch(str[0]))
+    //        str[0] = "";
+    //    if (rex.IsMatch(str[1]))
+    //        str[1] = "";
+    //    for (int i = 0; i < 2; i++)
+    //    {
+    //        //String pattern = @"(<input\s*(.+?)\s*/>|<label>\s*(.+?)\s*</label>)";
+    //        String pattern = @"(<input\s*(.+?)\s*>|<label.*>\s*(.+?)\s*</label>|<textarea.*>\s*(.+?)\s*</textarea>)";
+    //        //String pattern = @"<input\s*(.+?)\s*/>";
+    //        //String pattern = @"<label>\s*(.+?)\s*</label>";
+    //        RegexOptions regexOptions = RegexOptions.Multiline;
+    //        Regex regex = new Regex(pattern, regexOptions);
+
+    //        Dictionary<string, string> d = new Dictionary<string, string>();
+    //        string prevtype = "", type = "";
+    //        int chkgrp = 0;
+
+    //        if (!string.IsNullOrEmpty(bodypart))
+    //        {
+    //            if (i == 0 && string.IsNullOrEmpty(str[0]) == false)
+    //            {
+    //                sb.Append("<b>LEFT " + bodypart.ToUpper() + " EXAMINATION: </b> ");
+    //            }
+    //            else if (i == 1 && string.IsNullOrEmpty(str[1]) == false)
+    //            {
+    //                sb.Append("<b>RIGHT " + bodypart.ToUpper() + " EXAMINATION: </b> ");
+    //            }
+    //        }
+
+    //        foreach (Match match in regex.Matches(str[i]))
+    //        {
+    //            prevtype = type;
+    //            if (match.Success)
+    //            {
+
+    //                /*  for (int i = 0; i < match.Groups.Count - 1; i++)
+    //                     {
+    //                         Response.Write("Match ["+i.ToString()+"]: " + match.Groups[i].Value + "<br>");
+    //                     }*/
+    //                if (match.Groups[2].Value.Length != 0)
+    //                {
+    //                    String tagvalue = match.Groups[2].Value;
+
+    //                    String[] attrib = tagvalue.Split(' ');
+    //                    string id = "", value = "", classname="";
+    //                    bool check = false;
+
+
+
+    //                    foreach (string att in attrib)
+    //                    {
+    //                        if (att.ToLower().StartsWith("id"))
+    //                        {
+    //                            String[] test = att.Split('=');
+    //                            id = test[1];
+    //                        }
+    //                        if (att.Contains("class"))
+    //                        {
+    //                            if (att.ToLower().StartsWith("class"))
+    //                            {
+    //                                String[] test = att.Split('=');
+    //                                classname = test[1];
+    //                            }
+    //                        }
+    //                        if (att.ToLower().StartsWith("value"))
+    //                        {
+    //                            String[] test = att.Split('=');
+    //                            int startindex = tagvalue.IndexOf("value=") + 7;
+    //                            int endindex = tagvalue.IndexOf("\"", startindex);
+    //                            value = tagvalue.Substring(startindex, endindex - startindex);
+    //                            //        Response.Write("value=" + value  + "<br>");
+    //                            //        Response.Write(value + "<br>");
+    //                        }
+    //                        if (att.ToLower().StartsWith("checked"))
+    //                        {
+    //                            check = true;
+    //                        }
+
+    //                        if (att.ToLower().StartsWith("type"))
+    //                        {
+    //                            String[] test = att.Split('=');
+    //                            type = test[1].ToLower();
+    //                            Regex rx = new Regex(@"^\s*""?|""?\s*$");
+
+    //                            type = rx.Replace(type, "");
+    //                            //      Response.Write("type="+type+"<br>");
+    //                        }
+    //                        // d.ToString();
+    //                    }
+
+    //                    //Response.Write(prevtype);
+    //                    if (type == "checkbox" || type == "radio")
+    //                    {
+
+    //                        Regex rx = new Regex(@"^\s*""?|""?\s*$");
+    //                        id = rx.Replace(id, "");
+    //                        value = rx.Replace(value, "");
+    //                        classname = rx.Replace(classname,"");
+    //                        string strVal = (string)value;
+    //                        if (value.Length > 0 && check && strVal.Substring(strVal.Length - 1) == ".")
+    //                        {
+    //                            chkgrp += 1;
+    //                            sb.Append(value);
+    //                        }
+    //                        else if(value.Length > 0 && check)
+    //                        {
+    //                            chkgrp += 1;
+    //                            if (classname == "nocomma")
+    //                                sb.Append(value + " ");
+    //                            else
+    //                                sb.Append(value + ", ");
+    //                        }
+    //                    }
+    //                    else if (type == "text")
+    //                    {
+    //                        //  Regex rx = new Regex(@"^\s*""?|""?\s*$");
+    //                        // value = rx.Replace(value, "");
+    //                        //    Response.Write(value);
+    //                        sb.Append(value + " ");
+    //                    }
+
+
+    //                }
+    //                else if (match.Groups[2].Value.Length == 0)
+    //                {
+    //                    if ((prevtype == "checkbox" || prevtype == "radio") && chkgrp > 0)
+    //                    {
+    //                       // sb.Remove(sb.Length - 2, 2).Append(" ");
+    //                        if (chkgrp > 0)
+    //                        {
+    //                            if (sb.ToString().LastIndexOf(",") >= 0)
+    //                                sb.Replace(",", " and ", sb.ToString().LastIndexOf(","), 1);
+    //                        }
+    //                        chkgrp = 0;
+    //                    }
+    //                    String tagvalue = match.Groups[1].Value;
+    //                    Regex rx = new Regex("<[^>]*>");
+    //                    tagvalue = rx.Replace(tagvalue, "");
+    //                    sb.Append(tagvalue);
+    //                }
+    //            }
+    //        }
+    //        if ((prevtype == "checkbox" || prevtype == "radio") && chkgrp > 0)
+    //        {
+    //            sb.Remove(sb.Length - 2, 2).Append(" ");
+    //            if (chkgrp > 0)
+    //            {
+    //                if (sb.ToString().LastIndexOf(",") >= 0)
+    //                    sb.Replace(",", " and ", sb.ToString().LastIndexOf(","), 1);
+    //            }
+    //            chkgrp = 0;
+    //        }
+    //        if (i == 0)
+    //        {
+    //            if (!string.IsNullOrEmpty(str[0]) && !string.IsNullOrEmpty(str[1]))
+    //                sb.Append("<br/><br/>");
+    //        }
+    //    }
+    //    return sb.Replace(" .", ". ").Replace(".", ". ").ToString();
+    //}
+
     public string getDocumentStringLeftRightPE(string html, string bodypart = "")
     {
 
         String strfile = html;
-        String[] str = new String[2];
+        String[] str = new String[3];
         StringBuilder sb = new StringBuilder();
-        int leftstart, leftend, rightstart, rightend;
+        int leftstart, leftend, rightstart, rightend,teststart,testend;
         leftstart = strfile.IndexOf(@"<div id=""WrapLeftPE""");
         leftend = strfile.IndexOf(@"</div>", leftstart);
         str[0] = strfile.Substring(leftstart, leftend - leftstart);
         rightstart = strfile.IndexOf(@"<div id=""WrapRightPE""");
         rightend = strfile.IndexOf(@"</div>", rightstart);
         str[1] = strfile.Substring(rightstart, rightend - rightstart);
+        teststart = strfile.IndexOf(@"<div id=""TestPE""");
+        testend = strfile.IndexOf(@"</div>", teststart);
+        str[2] = strfile.Substring(teststart, testend - teststart);
 
         //            Response.Write(str[0]);
         //          Response.Write(str[1]);
@@ -469,7 +650,7 @@ public class PrintDocumentHelper
             str[0] = "";
         if (rex.IsMatch(str[1]))
             str[1] = "";
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             //String pattern = @"(<input\s*(.+?)\s*/>|<label>\s*(.+?)\s*</label>)";
             String pattern = @"(<input\s*(.+?)\s*>|<label.*>\s*(.+?)\s*</label>|<textarea.*>\s*(.+?)\s*</textarea>)";
@@ -509,7 +690,7 @@ public class PrintDocumentHelper
                         String tagvalue = match.Groups[2].Value;
 
                         String[] attrib = tagvalue.Split(' ');
-                        string id = "", value = "", classname="";
+                        string id = "", value = "", classname = "";
                         bool check = false;
 
 
@@ -562,14 +743,14 @@ public class PrintDocumentHelper
                             Regex rx = new Regex(@"^\s*""?|""?\s*$");
                             id = rx.Replace(id, "");
                             value = rx.Replace(value, "");
-                            classname = rx.Replace(classname,"");
+                            classname = rx.Replace(classname, "");
                             string strVal = (string)value;
                             if (value.Length > 0 && check && strVal.Substring(strVal.Length - 1) == ".")
                             {
                                 chkgrp += 1;
                                 sb.Append(value);
                             }
-                            else if(value.Length > 0 && check)
+                            else if (value.Length > 0 && check)
                             {
                                 chkgrp += 1;
                                 if (classname == "nocomma")
@@ -592,7 +773,7 @@ public class PrintDocumentHelper
                     {
                         if ((prevtype == "checkbox" || prevtype == "radio") && chkgrp > 0)
                         {
-                           // sb.Remove(sb.Length - 2, 2).Append(" ");
+                            // sb.Remove(sb.Length - 2, 2).Append(" ");
                             if (chkgrp > 0)
                             {
                                 if (sb.ToString().LastIndexOf(",") >= 0)

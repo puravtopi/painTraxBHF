@@ -21,8 +21,8 @@
     <input type="checkbox" id="chkROMis" onclick="checkMe(this)" class="nocomma" value="ROM is " /> ROM is
     &nbsp;&nbsp;
     <section class="dropdown">
-        <input type="text" id="txtROMs" onchange="txtMe(this)" value="mildly decreased. " />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtROMs', this.value)" id="ddlROMs">
+        <input type="text" id="txtROMs" onchange="txtMe(this);selectTestCHK('chkROMis', this.value);" value="" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtROMs', this.value); selectTestCHK('chkROMis', this.value);" id="ddlROMs">
             <option></option>
             <option>mildly decreased. </option>
             <option>moderately decreased. </option>
@@ -32,7 +32,7 @@
     <span>.</span>
 
 </div>
-<section id="divTP" class="row">
+<!--<section id="divTP" class="row">
 
     <div class="col-md-3">
         <span class="control-label"><b><u>Trigger Point:</u></b></span>
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-</section>
+</section>-->
 
 <section class="row">
     <section class="col-md-3">

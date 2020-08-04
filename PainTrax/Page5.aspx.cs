@@ -46,8 +46,8 @@ public partial class Page5 : System.Web.UI.Page
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 cn.Close();
-                DataRow rw = ds.Tables[0].AsEnumerable().FirstOrDefault(tt => tt.Field<int>("count1") == 0);
-                if (rw != null)
+                //  DataRow rw = ds.Tables[0].AsEnumerable().FirstOrDefault(tt => tt.Field<int>("count1") == 0);
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
                 {
                     // row exists
                     PopulateUIDefaults();
@@ -443,10 +443,11 @@ public partial class Page5 : System.Web.UI.Page
     {
         XmlDocument xmlDoc = new XmlDocument();
         string filename;
-        filename = "~/Template/Default_" + Session["uname"].ToString() + ".xml";
-        if (File.Exists(Server.MapPath(filename)))
-        { xmlDoc.Load(Server.MapPath(filename)); }
-        else { xmlDoc.Load(Server.MapPath("~/Template/Default_Admin.xml")); }
+        //filename = "~/Template/Default_" + Session["uname"].ToString() + ".xml";
+        //if (File.Exists(Server.MapPath(filename)))
+        //{ xmlDoc.Load(Server.MapPath(filename)); }
+        //else { xmlDoc.Load(Server.MapPath("~/Template/Default_Admin.xml")); }
+        xmlDoc.Load(Server.MapPath("~/Template/Default_Admin.xml"));
         XmlNodeList nodeList = xmlDoc.DocumentElement.SelectNodes("/Defaults/IEPage3");
         foreach (XmlNode node in nodeList)
         {
@@ -525,7 +526,7 @@ public partial class Page5 : System.Web.UI.Page
             chkProlongedSitStand.Checked = node.SelectSingleNode("ProlongedSitStand") == null ? chkProlongedSitStand.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ProlongedSitStand").InnerText);
             if (txtCareOther.Text == "") txtCareOther.Text = node.SelectSingleNode("CareOther") == null ? txtCareOther.Text.ToString().Trim() : node.SelectSingleNode("CareOther").InnerText;
             //chkCardiac.Checked = node.SelectSingleNode("Cardiac") == null ? chkCardiac.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("Cardiac").InnerText);
-           // chkWeightBearing.Checked = node.SelectSingleNode("WeightBearing") == null ? chkWeightBearing.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("WeightBearing").InnerText);
+            // chkWeightBearing.Checked = node.SelectSingleNode("WeightBearing") == null ? chkWeightBearing.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("WeightBearing").InnerText);
             chkEducationProvided.Checked = node.SelectSingleNode("EducationProvided") == null ? chkEducationProvided.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("EducationProvided").InnerText);
             chkViaPhysician.Checked = node.SelectSingleNode("ViaPhysician") == null ? chkViaPhysician.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ViaPhysician").InnerText);
             chkViaPrintedMaterial.Checked = node.SelectSingleNode("ViaPrintedMaterial") == null ? chkViaPrintedMaterial.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ViaPrintedMaterial").InnerText);
@@ -540,6 +541,10 @@ public partial class Page5 : System.Web.UI.Page
             if (txtFollowUpIn.Text == "") txtFollowUpIn.Text = node.SelectSingleNode("FollowUpIn") == null ? txtFollowUpIn.Text.ToString().Trim() : node.SelectSingleNode("FollowUpIn").InnerText;
             if (txtPrecautions.Text == "") txtPrecautions.Text = node.SelectSingleNode("Precautions") == null ? txtPrecautions.Text.ToString().Trim() : node.SelectSingleNode("Precautions").InnerText;
             if (txtOtherMedicine.Text == "") txtOtherMedicine.Text = node.SelectSingleNode("OtherMedicine") == null ? txtPrecautions.Text.ToString().Trim() : node.SelectSingleNode("OtherMedicine").InnerText;
+
+
+
+
             _fldPop = false;
         }
     }

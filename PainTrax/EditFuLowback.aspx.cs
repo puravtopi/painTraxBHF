@@ -144,6 +144,7 @@ public partial class EditFuLowback : System.Web.UI.Page
             TblRow["PEvalueoriginal"] = hdPEvalueoriginal.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
             TblRow["PESides"] = hdPESides.Value;
+            TblRow["TPDesc"] = hdPETP.Value;
 
             string strname = "", strleft = "", strright = "", strnormal = "", strcname = "", strcrom = "", strcnormal = "";
 
@@ -321,6 +322,7 @@ public partial class EditFuLowback : System.Web.UI.Page
             //txtFreeFormCC.Text = TblRow["freeformcc"].ToString().Trim();
             txtFreeFormA.Text = TblRow["freeforma"].ToString().Trim().Replace("      ", string.Empty);
             txtFreeFormP.Text = TblRow["freeformp"].ToString().Trim();
+            hdPETP.Value = TblRow["TPDesc"].ToString();
 
             _fldPop = false;
         }

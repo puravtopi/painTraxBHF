@@ -6,22 +6,53 @@
 
 
         <input type="checkbox" id="chktendernessL" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the elbow. " />There is tenderness upon palpation of the elbow.
-       
+
         <input type="checkbox" id="chkROML" class="nocomma" onclick="checkMe(this)" value="Range of motion is " /> Range of motion is
         <section class="dropdown">
-            <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this)" value="mildly decreased. " />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionLeft', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
+            <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this);selectTestCHK('chkROML', this.value)" value="" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtRangeOfMotionLeft', this.value);selectTestCHK('chkROML', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
         </section>
         <span>.</span>
         <br />
-        <input type="checkbox" id="chkelbowtinelleft" value="Tinel is " class="nocomma" onclick="checkMe(this)" checked />&nbsp;Tinel is&nbsp;
+        <table>
+            <tr>
+                <td>
+                    <input type="checkbox" id="chkelbowphalenleft" value="Tinel is " class="nocomma" onclick="checkMe(this)" />&nbsp;Phalen is&nbsp;
 
 
-        <section class="dropdown">
-            <input type="text" id="txtTinelLeft" onchange="txtMe(this)" />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtTinelLeft', this.value)" id="ddlTinelLeft"></select>
-        </section>
-        <span>.</span>
+                    <section class="dropdown">
+                        <input type="text" id="txtPhalenLeft" onchange="txtMe(this);selectTestCHK('chkelbowphalenleft', this.value)" />
+                        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtPhalenLeft', this.value);selectTestCHK('chkelbowphalenleft', this.value)" id="ddlPhalenLeft">
+                            <option></option>
+
+                            <option>positive on left.</option>
+                            <option>positive on right.</option>
+                            <option>positive bilaterally.</option>
+                        </select>
+                    </section>
+                    <span>.</span>
+                </td>
+                <td>
+                    <input type="checkbox" id="chkelbowtinelleft" value="Tinel is " class="nocomma" onclick="checkMe(this)" />&nbsp;Tinel is&nbsp;
+
+
+                    <section class="dropdown">
+                        <input type="text" id="txtTinelLeft" onchange="txtMe(this);selectTestCHK('chkelbowtinelleft', this.value)" />
+                        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTinelLeft', this.value); selectTestCHK('chkelbowtinelleft', this.value)" id="ddlTinelLeft">
+                            <option></option>
+
+                            <option>positive on left.</option>
+                            <option>positive on right.</option>
+                            <option>positive bilaterally.</option>
+                        </select>
+                    </section>
+                    <span>.</span>
+                </td>
+            </tr>
+        </table>
+
+        <br />
+
         <section class="col-md-3">
             <span class="control-label">Notes</span>
         </section>
@@ -40,26 +71,44 @@
         <span><b>Right Elbow Examination:</b></span><label style="visibility:hidden">#rightelbowtitle</label>
 
         <input type="checkbox" id="chktendernessL" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the elbow " /> There is tenderness upon palpation of the elbow.
-        
-       
+
+
         <input type="checkbox" id="chkROMR" class="nocomma" onclick="checkMe(this)" value="Range of motion is " /> Range of motion is
 
 
         <section class="dropdown">
-            <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this)" value="mildly decreased. " />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionRight', this.value)" id="ddlRangeOfMotionRight"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
+            <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this);selectTestCHK('chkROMR', this.value)" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtRangeOfMotionRight', this.value);selectTestCHK('chkROMR', this.value)" id="ddlRangeOfMotionRight"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
         </section>
         <span>.</span>
         <br />
-        <input type="checkbox" id="chkelbowtinelright" value="Tinel is " class="nocomma" onclick="checkMe(this)" checked />&nbsp;Tinel is&nbsp;
+        <table>
+            <tr>
+                <td>
+                    <input type="checkbox" id="chkelbowphalenright" value="Tinel is " class="nocomma" onclick="checkMe(this)" />&nbsp;Phalen is&nbsp;
 
 
-        <section class="dropdown">
-            <input type="text" id="txtTinelRight" onchange="txtMe(this)" />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtTinelRight', this.value)" id="ddlTinelRight"></select>
-        </section>
+                    <section class="dropdown">
+                        <input type="text" id="txtPhalenright" onchange="txtMe(this);selectTestCHK('chkelbowphalenright', this.value)" />
+                        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtPhalenright', this.value);selectTestCHK('chkelbowphalenright', this.value)" id="ddlPhalenright"></select>
+                    </section>
+                    <span>.</span>
+                </td>
+                <td>
+
+                    <input type="checkbox" id="chkelbowtinelright" value="Tinel is " class="nocomma" onclick="checkMe(this)" />&nbsp;Tinel is&nbsp;
+
+
+                    <section class="dropdown">
+                        <input type="text" id="txtTinelRight" onchange="txtMe(this);selectTestCHK('chkelbowtinelright', this.value)" />
+                        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTinelRight', this.value); selectTestCHK('chkelbowtinelright', this.value)" id="ddlTinelRight"></select>
+                    </section>
+                    <span>.</span>
+                </td>
+            </tr>
+        </table>
         <br />
-        <span>.</span>
+
         <section class="col-md-3">
             <span class="control-label">Notes</span>
         </section>
@@ -74,7 +123,10 @@
 
     </div>
     <br />
-
+    <br />
+    <div id="TestPE">
+        <label></label>
+    </div>
 </div>
 
 <style>
@@ -104,12 +156,12 @@
 
 <script type="text/javascript">
 
-   // window.load = PopulateDropDownList();
+    // window.load = PopulateDropDownList();
 
     function PopulateDropDownList() {
 
 
-     //   var ddlRangeOfMotionRight = document.getElementById("ddlRangeOfMotionRight");
+        //   var ddlRangeOfMotionRight = document.getElementById("ddlRangeOfMotionRight");
 
         if (ddlRangeOfMotionRight.options.length === 0) {
 
@@ -164,6 +216,14 @@
                 }
             });
         }
+    }
+
+    function selectTestCHK(chkid, val) {
+
+        if (val !== '')
+            $("#" + chkid).attr("checked", "checked");
+        else
+            $("#" + chkid).removeAttr("checked");
     }
 
     function txtMe(txt) {

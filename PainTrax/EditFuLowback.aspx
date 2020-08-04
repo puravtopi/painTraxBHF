@@ -661,6 +661,7 @@
                 <asp:HiddenField runat="server" ID="hdPEvalueoriginal" />
                 <asp:HiddenField runat="server" ID="hdPESides" />
                 <asp:HiddenField runat="server" ID="hdPESidesText" />
+                   <asp:HiddenField runat="server" ID="hdPETP" />
 
                <%-- <div class="row">
                     <div class="col-md-3">

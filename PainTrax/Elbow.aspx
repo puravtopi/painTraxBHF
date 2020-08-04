@@ -314,11 +314,8 @@
 
                                 <asp:TextBox runat="server" ID="txtFreeFormA" TextMode="MultiLine" Width="700px" Height="100px"></asp:TextBox>
                                 <asp:ImageButton ID="AddDiag" ImageUrl="~/img/a1.png" Height="50px" Width="50px" runat="server" OnClientClick="openModelPopup();" OnClick="AddDiag_Click" />
-                                <%--<br />
-                            <br />
-                            <br />
-                            <br />
-                            <input type="button" value="Default" style="float: left; text-align: left;" onclick="saveDefault()" />--%>
+
+                               <input type="button" value="Default" style="float: right left; align-self: baseline; text-align: start;" onclick="saveDefault()" />
                             </div>
                         </div>
 
@@ -750,6 +747,9 @@
             return s.replace(first_char, function (m) { return m.toUpperCase(); });
         }
 
+        function saveDefault() {
+            document.getElementById('<%= btnDaigSave.ClientID %>').click();
+        }
 
     </script>
 </asp:Content>

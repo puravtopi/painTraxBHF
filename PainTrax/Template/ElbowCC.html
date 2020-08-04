@@ -22,17 +22,17 @@
             <label> in nature.</label>
 
             <input type="checkbox" id="chkcpmL" value="The patient complains of pain specifically at " onclick="checkMe(this)" checked class="nocomma" />The patient complains of pain specifically at
-            <input type="checkbox" id="chkMedEpicondyleL" onclick="checkMe(this)" value="medial epicondyle" /> medial epicondyle,
-            <input type="checkbox" id="chkMedEpicondyleL" onclick="checkMe(this)" value="lateral epicondyle" /> lateral epicondyle,
-            <input type="checkbox" id="chkOlecranonL" onclick="checkMe(this)" value="olecranon aspect of the elbow" /> olecranon aspect of the elbow
+            <input type="checkbox" id="chkMedEpicondyleL" onclick="checkMe(this);checkDefault(this, 'chkcpmL');" value="medial epicondyle" /> medial epicondyle,
+            <input type="checkbox" id="chkMedEpicondyleL" onclick="checkMe(this);checkDefault(this, 'chkcpmL');" value="lateral epicondyle" /> lateral epicondyle,
+            <input type="checkbox" id="chkOlecranonL" onclick="checkMe(this);checkDefault(this, 'chkcpmL');" value="olecranon aspect of the elbow" /> olecranon aspect of the elbow
             <label>.</label>
             <input type="checkbox" id="chkkelbowleft" value="The knee pain is improved with " class="nocomma" onclick="checkMe(this)" checked />&nbsp;The elbow pain is increases with
 
-            <input type="checkbox" id="chkmovementL" onclick="checkMe(this)" value="movement" /> movement,
-            <input type="checkbox" id="chkraisingthearmL" onclick="checkMe(this)" value="raising the arm" checked /> raising the arm,
-            <input type="checkbox" id="chkliftingobjectsL" onclick="checkMe(this)" value="lifting objects" checked /> lifting objects,
-            <input type="checkbox" id="chkrotationL" onclick="checkMe(this)" value="rotation" /> rotation,
-            <input type="checkbox" id="chkworkingL" onclick="checkMe(this)" value="working" /> working
+            <input type="checkbox" id="chkmovementL" onclick="checkMe(this);checkDefault(this, 'chkkelbowleft');" value="movement" /> movement,
+            <input type="checkbox" id="chkraisingthearmL" onclick="checkMe(this);checkDefault(this, 'chkkelbowleft');" value="raising the arm" checked /> raising the arm,
+            <input type="checkbox" id="chkliftingobjectsL" onclick="checkMe(this);checkDefault(this, 'chkkelbowleft');" value="lifting objects" checked /> lifting objects,
+            <input type="checkbox" id="chkrotationL" onclick="checkMe(this);checkDefault(this, 'chkkelbowleft');" value="rotation" /> rotation,
+            <input type="checkbox" id="chkworkingL" onclick="checkMe(this);checkDefault(this, 'chkkelbowleft');" value="working" /> working
             <input type="text" id="txtPainScaleL2" style="Width:240px" value="" onchange="txtMe(this)" />
             <label>.</label>
 
@@ -66,17 +66,17 @@
             <input id="chkachyR" type="checkbox" value="achy" onclick="checkMe(this)" checked /> achy
             <label> in nature.</label>
             <input type="checkbox" id="chkcpmR" value="The patient complains of pain specifically at " onclick="checkMe(this)" checked class="nocomma" />The patient complains of pain specifically at
-            <input type="checkbox" id="chkMedEpicondyleR" onclick="checkMe(this)" value="medial epicondyle" /> medial epicondyle,
-            <input type="checkbox" id="chkLatEpicondyleR" onclick="checkMe(this)" value="lateral epicondyle" /> lateral epicondyle,
-            <input type="checkbox" id="chkOlecranonR" onclick="checkMe(this)" value="olecranon aspect of the elbow" /> olecranon aspect of the elbow
+            <input type="checkbox" id="chkMedEpicondyleR" onclick="checkMe(this);checkDefault(this, 'chkcpmR');" value="medial epicondyle" /> medial epicondyle,
+            <input type="checkbox" id="chkLatEpicondyleR" onclick="checkMe(this);checkDefault(this, 'chkcpmR');" value="lateral epicondyle" /> lateral epicondyle,
+            <input type="checkbox" id="chkOlecranonR" onclick="checkMe(this);checkDefault(this, 'chkcpmR');" value="olecranon aspect of the elbow" /> olecranon aspect of the elbow
             <label>.</label>
             <input type="checkbox" id="chkkelbowright" value="The knee pain is improved with " class="nocomma" onclick="checkMe(this)" checked />&nbsp;The elbow pain is increases with
 
-            <input type="checkbox" id="chkmovementR" onclick="checkMe(this)" value="movement" /> movement,
-            <input type="checkbox" id="chkraisingthearmR" onclick="checkMe(this)" value="raising the arm" checked /> raising the arm,
-            <input type="checkbox" id="chkliftingobjectsR" onclick="checkMe(this)" value="lifting objects" checked /> lifting objects,
-            <input type="checkbox" id="chkrotationR" onclick="checkMe(this)" value="rotation" /> rotation,
-            <input type="checkbox" id="chkworkingR" onclick="checkMe(this)" value="working" /> working
+            <input type="checkbox" id="chkmovementR" onclick="checkMe(this);checkDefault(this, 'chkkelbowright');" value="movement" /> movement,
+            <input type="checkbox" id="chkraisingthearmR" onclick="checkMe(this);checkDefault(this, 'chkkelbowright');" value="raising the arm" checked /> raising the arm,
+            <input type="checkbox" id="chkliftingobjectsR" onclick="checkMe(this);checkDefault(this, 'chkkelbowright');" value="lifting objects" checked /> lifting objects,
+            <input type="checkbox" id="chkrotationR" onclick="checkMe(this);checkDefault(this, 'chkkelbowright');" value="rotation" /> rotation,
+            <input type="checkbox" id="chkworkingR" onclick="checkMe(this);checkDefault(this, 'chkkelbowright');" value="working" /> working
             <input type="text" id="txtPainScaleR2" style="Width:240px" value="" onchange="txtMe(this)" />
             <label>.</label>
 
@@ -120,6 +120,18 @@
         debugger
         var val = $(txt).val();
         $(txt).text(val);
+    }
+
+
+    function checkDefault(chk, deafCheck) {
+
+        if ($("#" + deafCheck).prop("checked") == false) {
+
+            if ($(chk).prop("checked")) {
+                $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
     }
 
     function startButton1(event) {

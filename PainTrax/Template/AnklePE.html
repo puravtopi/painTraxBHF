@@ -4,10 +4,10 @@
 
         <span><b>Left Ankle Examination:</b> </span><label style="visibility:hidden">#leftankletitle</label>
 
-        <input type="checkbox" id="chkleftrom" class="nocomma" onclick="checkMe(this)" value="ROM is " checked />ROM is&nbsp;
+        <input type="checkbox" id="chkleftrom" class="nocomma" onclick="checkMe(this)" value="ROM is "  />ROM is&nbsp;
         <section class="dropdown">
-            <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this)" value="mildly decreased. " />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionLeft', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
+            <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this);selectTestCHK('chkleftrom', this.value)" value="" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtRangeOfMotionLeft', this.value);selectTestCHK('chkleftrom', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
         </section>
         <input type="checkbox" ID="chkWithLocalLeft" onclick="checkMe(this)" value=" with local tenderness upon palpation of the " class="nocomma" checked />&nbsp;with local tenderness upon palpation of the
         <input type="checkbox" ID="chkPalpationMedMalleolusLeft" onclick="checkMe(this)" value="medial malleolus" />&nbsp;medial malleolus
@@ -49,10 +49,10 @@
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Ankle Examination:</b> </span><label style="visibility:hidden">#rigthankletitle</label>
 
-        <input type="checkbox" id="chkrightrom" class="nocomma" onclick="checkMe(this)" value="ROM is" checked />ROM is&nbsp;
+        <input type="checkbox" id="chkrightrom" class="nocomma" onclick="checkMe(this)" value="ROM is"  />ROM is&nbsp;
         <section class="dropdown">
-            <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this)" value="mildly decreased. " />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtRangeOfMotionRight', this.value)" id="ddlRangeOfMotionRight"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
+            <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this);selectTestCHK('chkrightrom', this.value)" value="" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtRangeOfMotionRight', this.value);selectTestCHK('chkrightrom', this.value)" id="ddlRangeOfMotionRight"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
         </section>
         <input type="checkbox" ID="chkPalpationMedMalleolusRight" onclick="checkMe(this)" value=" with local tenderness upon palpation of the " checked="checked" class="nocomma" />&nbsp;with local tenderness upon palpation of the
         <input type="checkbox" ID="chkPalpationMedMalleolusRight" onclick="checkMe(this)" value="medial malleolus" />&nbsp;medial malleolus
@@ -92,7 +92,10 @@
         </section>
 
     </div>
-
+    <br />
+    <div id="TestPE">
+        <label></label>
+    </div>
 </div>
 
 <style>
@@ -174,6 +177,14 @@
             $(chk).removeAttr('checked');
         }
 
+    }
+
+    function selectTestCHK(chkid, val) {
+
+        if (val !== '')
+            $("#" + chkid).attr("checked", "checked");
+        else
+            $("#" + chkid).removeAttr("checked");
     }
 
     function startButton(event) {

@@ -149,6 +149,7 @@ public partial class Lowback : System.Web.UI.Page
             TblRow["LeftTest"] = hdLeftTest.Value;
             TblRow["RightTest"] = hdRightTest.Value;
             TblRow["TextVal"] = hdTextVal.Value;
+            TblRow["TPDesc"] = hdPETP.Value;
 
             string strname = "", strleft = "", strright = "", strnormal = "", strcname = "", strcrom = "", strcnormal = "";
 
@@ -301,6 +302,7 @@ public partial class Lowback : System.Web.UI.Page
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
             CF.InnerHtml = TblRow["CCvalue"].ToString();
+            hdPETP.Value = TblRow["TPDesc"].ToString();
 
 
             divPE.InnerHtml = TblRow["PEvalue"].ToString();

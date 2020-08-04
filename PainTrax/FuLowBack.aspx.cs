@@ -156,6 +156,8 @@ public partial class FuLowBack : System.Web.UI.Page
             TblRow["LeftTest"] = hdLeftTest.Value;
             TblRow["RightTest"] = hdRightTest.Value;
             TblRow["TextVal"] = hdTextVal.Value;
+            TblRow["TPDesc"] = hdPETP.Value;
+
 
 
             string strname = "", strleft = "", strright = "", strnormal = "", strcname = "", strcrom = "", strcnormal = "";
@@ -324,6 +326,7 @@ public partial class FuLowBack : System.Web.UI.Page
             //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("      ", string.Empty);
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
+            hdPETP.Value = TblRow["TPDesc"].ToString();
 
             _fldPop = false;
         }

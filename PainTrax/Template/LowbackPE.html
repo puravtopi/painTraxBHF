@@ -1,61 +1,44 @@
 ﻿
-
 <div class="col-md-9 row" style="margin-top: 5px">
 
-
-
-    <label> The lumbar spine exam reveals tenderness upon palpation at  </label>
-    <input id="txtspineexam" type="text" style="width:100px;text-align:left" value="L1-S1" onchange="txtMe(this)" />
-    <label>levels </label>
-    <section class="dropdown">
-        <input type="text" id="txtWorse1" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtWorse1', this.value)" id="ddlWorse1">
-            <option></option>
-            <option>bilaterally with muscle spasm present.</option>
-            <option>right with muscle spasm present.</option>
-            <option>left with muscle spasm present.</option>
-            <option>bilaterally with muscle spasm present, right greater than left.</option>
-            <option>bilaterally with muscle spasm present, left greater than right.</option>
-        </select>
-    </section>
    
     <br />
     <table>
         <tr>
             <td>
-                <input type="checkbox" id="chkSLR" value="The Strainght leg raise test is " class="nocomma" onclick="checkMe(this)"  />&nbsp;The Strainght leg raise test is
+                <input type="checkbox" id="chkSLR" value="The Strainght leg raise test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Strainght leg raise test is
 
                 <section class="dropdown">
-                    <input type="text" id="txtSLR" onchange="txtMe(this)" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtSLR', this.value)" id="ddlSLR">
+                    <input type="text" id="txtSLR" onchange="txtMe(this);selectTestCHK('chkSLR', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtSLR', this.value);selectTestCHK('chkSLR', this.value)" id="ddlSLR">
                         <option></option>
-                        <option>normal.</option>
+
                         <option>positive on left.</option>
                         <option>positive on right.</option>
                         <option>positive bilaterally.</option>
                     </select>
-                </section>
+                </section> 
                 <span>.</span>
             </td>
             <td>
-                <input type="checkbox" id="chkFABR" value="The Braggard test is " class="nocomma" onclick="checkMe(this)"  />&nbsp;The Braggard test is
+                <input type="checkbox" id="chkFABR" value="The Braggard test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Braggard test is
 
                 <section class="dropdown">
-                    <input type="text" id="txtBraggard" onchange="txtMe(this)" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtBraggard', this.value)" id="ddlBraggard"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+                    <input type="text" id="txtBraggard" onchange="txtMe(this);selectTestCHK('chkFABR', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtBraggard', this.value);selectTestCHK('chkFABR', this.value)" id="ddlBraggard"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
                 </section>
                 <span>.</span>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="checkbox" id="chkKS" value="The Kernig sign test is " class="nocomma" onclick="checkMe(this)"  />&nbsp;The Kernig sign test is
+                <input type="checkbox" id="chkKS" value="The Kernig sign test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Kernig sign test is
 
                 <section class="dropdown">
-                    <input type="text" id="txtKS" onchange="txtMe(this)" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtKS', this.value)" id="ddlKS">
+                    <input type="text" id="txtKS" onchange="txtMe(this);selectTestCHK('chkKS', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtKS', this.value);selectTestCHK('chkKS', this.value)" id="ddlKS">
                         <option></option>
-                        <option>normal.</option>
+
                         <option>positive on left.</option>
                         <option>positive on right.</option>
                         <option>positive bilaterally.</option>
@@ -64,24 +47,24 @@
                 <span>.</span>
             </td>
             <td>
-                <input type="checkbox" id="chkBT" value="The Brudzinski test is " class="nocomma" onclick="checkMe(this)"  />&nbsp;The Brudzinski test is
+                <input type="checkbox" id="chkBT" value="The Brudzinski test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Brudzinski test is
 
                 <section class="dropdown">
-                    <input type="text" id="txtBT" onchange="txtMe(this)" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtBT', this.value)" id="ddlBT"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+                    <input type="text" id="txtBT" onchange="txtMe(this);selectTestCHK('chkBT', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtBT', this.value);selectTestCHK('chkBT', this.value)" id="ddlBT"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
                 </section>
                 <span>.</span>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="checkbox" id="chkSC" value="The Sacroiliac compression test is " class="nocomma" onclick="checkMe(this)"  />&nbsp;The Sacroiliac compression test is
+                <input type="checkbox" id="chkSC" value="The Sacroiliac compression test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Sacroiliac compression test is
 
                 <section class="dropdown">
-                    <input type="text" id="txtSC" onchange="txtMe(this)" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtSC', this.value)" id="ddlSC">
+                    <input type="text" id="txtSC" onchange="txtMe(this);selectTestCHK('chkSC', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtSC', this.value);selectTestCHK('chkSC', this.value)" id="ddlSC">
                         <option></option>
-                        <option>normal.</option>
+
                         <option>positive on left.</option>
                         <option>positive on right.</option>
                         <option>positive bilaterally.</option>
@@ -90,24 +73,24 @@
                 <span>.</span>
             </td>
             <td>
-                <input type="checkbox" id="chkSNT" value="The Sacral notch tenderness test is " class="nocomma" onclick="checkMe(this)"  />&nbsp;The Sacral notch tenderness test is
+                <input type="checkbox" id="chkSNT" value="The Sacral notch tenderness test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Sacral notch tenderness test is
 
                 <section class="dropdown">
-                    <input type="text" id="txtSNT" onchange="txtMe(this)" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtSNT', this.value)" id="ddlSNT"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+                    <input type="text" id="txtSNT" onchange="txtMe(this);selectTestCHK('chkSNT', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtSNT', this.value);selectTestCHK('chkSNT', this.value)" id="ddlSNT"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
                 </section>
                 <span>.</span>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="checkbox" id="chkOTC" value="The Ober test causing pain at the SI joint test is " class="nocomma" onclick="checkMe(this)"  />&nbsp;The Ober test causing pain at the SI joint test is
+                <input type="checkbox" id="chkOTC" value="The Ober test causing pain at the SI joint test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Ober test causing pain at the SI joint test is
 
                 <section class="dropdown">
-                    <input type="text" id="txtOTC" onchange="txtMe(this)" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtOTC', this.value)" id="ddlOTC">
+                    <input type="text" id="txtOTC" onchange="txtMe(this);selectTestCHK('chkOTC', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtOTC', this.value); selectTestCHK('chkOTC', this.value);" id="ddlOTC">
                         <option></option>
-                        <option>normal.</option>
+
                         <option>positive on left.</option>
                         <option>positive on right.</option>
                         <option>positive bilaterally.</option>
@@ -115,32 +98,28 @@
                 </section>
                 <span>.</span>
             </td>
-           
+
         </tr>
     </table>
 
 
 
-     
 
-
-  
     <label style="display:none">#romlowback</label>
 </div>
-
 <br />
-
 <div id="divTP">
     <div class="row">
         <div class="col-md-3">
             <span class="control-label"><b><u>Trigger Point:</u></b></span>
         </div>
-        <!--<div class="col-md-9" style="margin-top: 5px">
+        <div class="col-md-9" style="margin-top: 5px">
+            <span>On exam, patient has taut tender bands in the   <input type="text" ID="txtTP" onchange="txtMe(this);writeTPtxt()" class="txtTP" Style="margin-left: 10px;Width:400px" /> muscles. </span>
 
-            <span>There are palpable taut bands/trigger points at </span>
 
-        </div>-->
-        <table>
+        </div>
+
+        <!--<table>
             <tr>
                 <td>
                     <select ID="ddlTPSide1" Style="height: 30px; width: 100px">
@@ -169,8 +148,8 @@
                      <select ID="ddlTPSide4" Style="height: 30px; width: 100px"></select>
                      <input type="text" ID="txtTPText4" onchange="txtMe(this)" Style="margin-left: 10px;Width:557px" />
                  </td>
-             </tr>-->
-        </table>
+             </tr>
+        </table>-->
         <div class="row">
             <div class="col-md-3">
                 <label class="control-label"></label>
@@ -182,9 +161,7 @@
     </div>
 </div>
 
-
 <label style="display:none">#lowbacknotebp</label>
-
 <section class="row">
     <section class="col-md-3 ">
         <span class="control-label">Notes</span>
@@ -198,8 +175,8 @@
     </section>
 </section>
 
-
 <style>
+
     .dropdown {
         position: relative;
         width: 200px;
@@ -356,6 +333,30 @@
             $('#' + txtleft).prop("disabled", $(chk).prop("checked"));
             $('#' + txtright).prop("disabled", $(chk).prop("checked"));
         }
+    }
+
+    function selectTestCHK(chkid, val) {
+
+        if (val !== '')
+            $("#" + chkid).attr("checked", "checked");
+        else
+            $("#" + chkid).removeAttr("checked");
+    }
+
+
+    function writeTPtxt() {
+
+
+
+        var str = $('#txtTP').val();
+
+        var strspan = " On exam, patient has taut tender bands in the  #txtmsg muscles. ";
+        strspan = strspan.replace('#txtmsg', str);
+
+
+
+        $('#ctl00_ContentPlaceHolder1_hdPETP').val(strspan);
+
     }
 
     function txtMe(txt) {

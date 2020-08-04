@@ -75,7 +75,7 @@
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
 
 
-               <%-- <div class="row">
+                <%-- <div class="row">
                     <div class="col-md-3">
                         <label class="control-label">Notes:</label>
                     </div>
@@ -118,88 +118,87 @@
                     <div class="col-md-3">
                         <label class="control-label"><b><u>PHYSICAL EXAM:</u></b></label>
                         <div class="col-md-9" style="margin-top: 5px">
-                           <table style="width: 100%">
-                            <tr>
-                                <td>
-                                    <asp:Repeater runat="server" ID="repROMCervical">
-                                        <HeaderTemplate>
-                                            <table style="width: 100%;">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td>
+                                        <asp:Repeater runat="server" ID="repROMCervical">
+                                            <HeaderTemplate>
+                                                <table style="width: 100%;">
 
-                                                <tr>
-                                                
-                                                    <td style="">Cervical spine exam
-                                                    </td>
-                                                
-                                                    <td style="">ROM
-                                                    </td>
-                                               
-                                                    <td style="">Normal
-                                                    </td>
-                                                </tr>
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td style="text-align: left;">
-                                                    <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
-                                                <%--<td>
-                                                <asp:TextBox ID="txtLEFlexionLeftWas" Text="30" Width="50px" runat="server"></asp:TextBox></td>--%>
-                                                <td>
-                                                    <asp:TextBox ID="txtrom" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("rom") %>'></asp:TextBox></td>
-                                                <%-- <td>
-                                                <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
-                                               
-                                                <td>
-                                                    <asp:TextBox ID="txtnormal" ReadOnly="true" Text='<%# Eval("normal") %>' Width="50px" runat="server"></asp:TextBox></td>
-                                            </tr>
-                                        </ItemTemplate>
-                                        <FooterTemplate>
-                                            </table>
-                                        </FooterTemplate>
-                                    </asp:Repeater>
-                                </td>
-                                <td>
-                                    <asp:Repeater runat="server" ID="repROM" >
-                                        <HeaderTemplate>
-                                            <table style="width: 100%;">
+                                                    <tr>
 
-                                               
+                                                        <td style="">Cervical spine exam
+                                                        </td>
+
+                                                        <td style="">ROM
+                                                        </td>
+
+                                                        <td style="">Normal
+                                                        </td>
+                                                    </tr>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
                                                 <tr>
-                                                    <td></td>
-                                                    <td style="">Left
-                                                    </td>
-                                                    <%--<td style="">IS
-                                            </td>--%>
-                                                    <td style="">Right
-                                                    </td>
-                                                    <%--<td style="">IS
-                                            </td>--%>
-                                                    <td style="">Normal
-                                                    </td>
-                                                </tr>
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td style="text-align: left;">
-                                                    <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
-                                                <%--<td>
-                                                <asp:TextBox ID="txtLEFlexionLeftWas" Text="30" Width="50px" runat="server"></asp:TextBox></td>--%>
-                                                <td>
-                                                    <asp:TextBox ID="txtleft" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
-                                                <%-- <td>
+                                                    <td style="text-align: left;">
+                                                        <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
+
+                                                    <td>
+                                                        <asp:TextBox ID="txtrom" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("rom") %>'></asp:TextBox></td>
+                                                    <%-- <td>
                                                 <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
-                                                <td>
-                                                    <asp:TextBox ID="txtright" Width="50px" Text='<%# Eval("right") %>' onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
-                                                <td>
-                                                    <asp:TextBox ID="txtnormal" ReadOnly="true" Text='<%# Eval("normal") %>' Width="50px" runat="server"></asp:TextBox></td>
-                                            </tr>
-                                        </ItemTemplate>
-                                        <FooterTemplate>
-                                            </table>
-                                        </FooterTemplate>
-                                    </asp:Repeater>
-                                </td>
-                            </tr>
-                        </table>
+
+                                                    <td>
+                                                        <asp:TextBox ID="txtnormal" ReadOnly="true" Text='<%# Eval("normal") %>' Width="50px" runat="server"></asp:TextBox></td>
+                                                </tr>
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                </table>
+                                            </FooterTemplate>
+                                        </asp:Repeater>
+                                    </td>
+                                    <td>
+                                        <asp:Repeater runat="server" ID="repROM">
+                                            <HeaderTemplate>
+                                                <table style="width: 100%;">
+
+
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="">Left
+                                                        </td>
+                                                        <%--<td style="">IS
+                                            </td>--%>
+                                                        <td style="">Right
+                                                        </td>
+                                                        <%--<td style="">IS
+                                            </td>--%>
+                                                        <td style="">Normal
+                                                        </td>
+                                                    </tr>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td style="text-align: left;">
+                                                        <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
+                                                    <%--<td>
+                                                <asp:TextBox ID="txtLEFlexionLeftWas" Text="30" Width="50px" runat="server"></asp:TextBox></td>--%>
+                                                    <td>
+                                                        <asp:TextBox ID="txtleft" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
+                                                    <%-- <td>
+                                                <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
+                                                    <td>
+                                                        <asp:TextBox ID="txtright" Width="50px" Text='<%# Eval("right") %>' onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtnormal" ReadOnly="true" Text='<%# Eval("normal") %>' Width="50px" runat="server"></asp:TextBox></td>
+                                                </tr>
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                </table>
+                                            </FooterTemplate>
+                                        </asp:Repeater>
+                                    </td>
+                                </tr>
+                            </table>
                             <br />
 
                             <div id="divPE" runat="server"></div>
@@ -208,6 +207,7 @@
                             <asp:HiddenField runat="server" ID="hdPEvalueoriginal" />
                             <asp:HiddenField runat="server" ID="hdPESidesText" />
                             <asp:HiddenField runat="server" ID="hdPESides" />
+                                   <asp:HiddenField runat="server" ID="hdPETP" />
 
 
                             <%--  <asp:Label Font-Bold="false" Style="float: left;" Text="The cervical spine exam reveals tenderness upon palpation at " runat="server"></asp:Label>
@@ -226,7 +226,7 @@
                     </div>
 
 
-                  <%--  <div class="row">
+                    <%--  <div class="row">
                         <div class="col-md-3">
                             <label class="control-label">Notes:</label>
                         </div>
@@ -258,6 +258,9 @@
                                         <asp:TextBox runat="server" Style="float: left;" ID="txtFreeFormA" TextMode="MultiLine" Width="700px" Height="100px"></asp:TextBox>
                                         <%-- <asp:ImageButton ID="AddDiag" Style="float: left; text-align: left;" ImageUrl="~/img/a1.png" Height="50px" Width="50px" runat="server" OnClientClick="basicPopup();" OnClick="AddDiag_Click" />--%>
                                         <asp:ImageButton ID="AddDiag" Style="float: left; text-align: left;" ImageUrl="~/img/a1.png" Height="50px" Width="50px" runat="server" OnClientClick="openModelPopup();" OnClick="AddDiag_Click" />
+
+
+
                                         <asp:GridView ID="dgvDiagCodes" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="false">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="DiagCode" ItemStyle-Width="100">
@@ -399,10 +402,8 @@
                         <div class="row" style="margin-top: 15px">
                             <div class="col-md-3"></div>
                             <div class="col-md-9" style="margin-top: 5px">
-                                <%--                   <asp:ImageButton ID="LoadDV" Style="float: left;" display="none" runat="server" OnClick="LoadDV_Click" ImageUrl="~/img/edit.gif" />--%>
-                                <%--  <div style="display: none">--%>
+
                                 <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn blue" />
-                                <%--  </div>--%>
                                 <asp:HiddenField ID="patientID" runat="server" />
                             </div>
                         </div>

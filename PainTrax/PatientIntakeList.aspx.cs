@@ -1004,6 +1004,7 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
 
         printpage1str = printpage1str.Replace("#gender", gender);
+        printpage1str = printpage1str.Replace("#lgender", gender.ToLower());
         printpage1str = printpage1str.Replace("#sex", sex);
         printpage1str = printpage1str.Replace("#doe", doe);
         printpage1str = printpage1str.Replace("#name", name);
@@ -1376,38 +1377,36 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
 
             string strExceptions = "";
-            if (string.IsNullOrEmpty(page3_1["txtDTR1"]) && string.IsNullOrEmpty(page3_1["txtDTR1"]))
+            if (!string.IsNullOrEmpty(page3_1["txtDTR1"]) && !string.IsNullOrEmpty(page3_1["txtDTR1"]))
             {
-                if (!string.IsNullOrEmpty(page3_1["LTricepstxt"]) && page3_1["LTricepstxt"] != "2")
-                    strExceptions = "left triceps " + page3_1["LTricepstxt"] + "/2";
-                if (!string.IsNullOrEmpty(page3_1["RTricepstxt"]) && page3_1["RTricepstxt"] != "2")
-                    strExceptions = strExceptions + ", " + "right triceps " + page3_1["RTricepstxt"] + "/2";
-                if (!string.IsNullOrEmpty(page3_1["LBicepstxt"]) && page3_1["LBicepstxt"] != "2")
-                    strExceptions = strExceptions + ", " + "left biceps " + page3_1["LBicepstxt"] + "/2";
-                if (!string.IsNullOrEmpty(page3_1["RBicepstxt"]) && page3_1["RBicepstxt"] != "2")
-                    strExceptions = strExceptions + ", " + "right biceps " + page3_1["RBicepstxt"] + "/2";
-                if (!string.IsNullOrEmpty(page3_1["LBrachioradialis"]) && page3_1["LBrachioradialis"] != "2")
-                    strExceptions = strExceptions + ", " + "left brachioradialis " + page3_1["LBrachioradialis"] + "/2";
-                if (!string.IsNullOrEmpty(page3_1["RBrachioradialis"]) && page3_1["RBrachioradialis"] != "2")
-                    strExceptions = strExceptions + ", " + "right brachioradialis " + page3_1["RBrachioradialis"] + "/2";
-
-                if (!string.IsNullOrEmpty(page3_1["LKnee"]) && page3_1["LKnee"] != "2")
-                    strExceptions = strExceptions + ", left knee " + page3_1["LKnee"] + "/2";
-                if (!string.IsNullOrEmpty(page3_1["RKnee"]) && page3_1["RKnee"] != "2")
-                    strExceptions = strExceptions + ", " + "right knee " + page3_1["RKnee"] + "/2";
-                if (!string.IsNullOrEmpty(page3_1["LAnkle"]) && page3_1["LAnkle"] != "2")
-                    strExceptions = strExceptions + ", " + "left ankle " + page3_1["LAnkle"] + "/2";
-                if (!string.IsNullOrEmpty(page3_1["RAnkle"]) && page3_1["RAnkle"] != "2")
-                    strExceptions = strExceptions + ", " + "right ankle " + page3_1["RAnkle"] + "/2";
-            }
-            else
-            {
-
                 if (!string.IsNullOrEmpty(page3_1["txtDTR1"]))
                     strExceptions = page3_1["txtDTR1"];
                 if (!string.IsNullOrEmpty(page3_1["txtDTR2"]))
                     strExceptions = strExceptions + " " + page3_1["txtDTR2"];
             }
+
+            if (!string.IsNullOrEmpty(page3_1["LTricepstxt"]) && page3_1["LTricepstxt"] != "2")
+                strExceptions = " left triceps " + page3_1["LTricepstxt"] + "/2";
+            if (!string.IsNullOrEmpty(page3_1["RTricepstxt"]) && page3_1["RTricepstxt"] != "2")
+                strExceptions = strExceptions + ", " + "right triceps " + page3_1["RTricepstxt"] + "/2";
+            if (!string.IsNullOrEmpty(page3_1["LBicepstxt"]) && page3_1["LBicepstxt"] != "2")
+                strExceptions = strExceptions + ", " + "left biceps " + page3_1["LBicepstxt"] + "/2";
+            if (!string.IsNullOrEmpty(page3_1["RBicepstxt"]) && page3_1["RBicepstxt"] != "2")
+                strExceptions = strExceptions + ", " + "right biceps " + page3_1["RBicepstxt"] + "/2";
+            if (!string.IsNullOrEmpty(page3_1["LBrachioradialis"]) && page3_1["LBrachioradialis"] != "2")
+                strExceptions = strExceptions + ", " + "left brachioradialis " + page3_1["LBrachioradialis"] + "/2";
+            if (!string.IsNullOrEmpty(page3_1["RBrachioradialis"]) && page3_1["RBrachioradialis"] != "2")
+                strExceptions = strExceptions + ", " + "right brachioradialis " + page3_1["RBrachioradialis"] + "/2";
+
+            if (!string.IsNullOrEmpty(page3_1["LKnee"]) && page3_1["LKnee"] != "2")
+                strExceptions = strExceptions + ", left knee " + page3_1["LKnee"] + "/2";
+            if (!string.IsNullOrEmpty(page3_1["RKnee"]) && page3_1["RKnee"] != "2")
+                strExceptions = strExceptions + ", " + "right knee " + page3_1["RKnee"] + "/2";
+            if (!string.IsNullOrEmpty(page3_1["LAnkle"]) && page3_1["LAnkle"] != "2")
+                strExceptions = strExceptions + ", " + "left ankle " + page3_1["LAnkle"] + "/2";
+            if (!string.IsNullOrEmpty(page3_1["RAnkle"]) && page3_1["RAnkle"] != "2")
+                strExceptions = strExceptions + ", " + "right ankle " + page3_1["RAnkle"] + "/2";
+
 
 
             if (!string.IsNullOrEmpty(strExceptions))
@@ -1432,182 +1431,177 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
             //strRE = strRElist;
 
+            strExceptions = "";
             if (!string.IsNullOrEmpty(page3_1["txtSensory"]))
-                str = str.Replace("#sen_exm", "<b>SENSORY EXAMINATION: </b>" + page3_1["txtSensory"] + "<br/><br/>");
+                strExceptions = page3_1["txtSensory"].ToString();
+
+
+            if (!string.IsNullOrEmpty(page3_1["LLateralarm"]))
+                strExceptions = page3_1["LLateralarm"] + " at left lateral arm (C5)";
+            if (!string.IsNullOrEmpty(page3_1["RLateralarm"]))
+                strExceptions = page3_1["RLateralarm"] + " at right lateral arm (C5)";
+
+            if (!string.IsNullOrEmpty(page3_1["LLateralforearm"]))
+                strExceptions = strExceptions + ", " + page3_1["LLateralforearm"] + " at left lateral forearm, thumb, index (C6)";
+            if (!string.IsNullOrEmpty(page3_1["RLateralforearm"]))
+                strExceptions = strExceptions + ", " + page3_1["RLateralforearm"] + " at right lateral forearm, thumb, index (C6)";
+
+            if (!string.IsNullOrEmpty(page3_1["LMiddlefinger"]))
+                strExceptions = strExceptions + ", " + page3_1["LMiddlefinger"] + " at left middle finger (C7)";
+            if (!string.IsNullOrEmpty(page3_1["RMiddlefinger"]))
+                strExceptions = strExceptions + ", " + page3_1["RMiddlefinger"] + " at right middle finger (C7)";
+
+            if (!string.IsNullOrEmpty(page3_1["LMidialForearm"]))
+                strExceptions = strExceptions + ", " + page3_1["LMidialForearm"] + " at left medial forearm, ring, little finger (C8)";
+            if (!string.IsNullOrEmpty(page3_1["RMidialForearm"]))
+                strExceptions = strExceptions + ", " + page3_1["RMidialForearm"] + " at right medial forearm, ring, little finger (C8)";
+
+            if (!string.IsNullOrEmpty(page3_1["LMidialarm"]))
+                strExceptions = strExceptions + ", " + page3_1["LMidialarm"] + " at left medial arm (T1)";
+            if (!string.IsNullOrEmpty(page3_1["RMidialarm"]))
+                strExceptions = strExceptions + ", " + page3_1["RMidialarm"] + " at right medial arm (T1)";
+
+            if (!string.IsNullOrEmpty(page3_1["LCervical"]))
+                strExceptions = strExceptions + ", " + page3_1["LCervical"] + " at left cervical paraspinals";
+            if (!string.IsNullOrEmpty(page3_1["RCervical"]))
+                strExceptions = strExceptions + ", " + page3_1["RCervical"] + " at right cervical paraspinals";
+
+            if (!string.IsNullOrEmpty(page3_1["LtxtDMTL3"]))
+                strExceptions = strExceptions + ", " + page3_1["LtxtDMTL3"] + " at left distal medial thigh (L3)";
+            if (!string.IsNullOrEmpty(page3_1["RtxtDMTL3"]))
+                strExceptions = strExceptions + ", " + page3_1["RtxtDMTL3"] + " at right distal medial thigh (L3)";
+
+            if (!string.IsNullOrEmpty(page3_1["LtxtMLFL4"]))
+                strExceptions = strExceptions + ", " + page3_1["LtxtMLFL4"] + " at left medial left foot (L4)";
+            if (!string.IsNullOrEmpty(page3_1["RtxtMLFL4"]))
+                strExceptions = strExceptions + ", " + page3_1["RtxtMLFL4"] + " at right medial left foot (L4)";
+
+            if (!string.IsNullOrEmpty(page3_1["LtxtDOFL5"]))
+                strExceptions = strExceptions + ", " + page3_1["LtxtDOFL5"] + " at left dorsum of the foot (L5)";
+            if (!string.IsNullOrEmpty(page3_1["RtxtDOFL5"]))
+                strExceptions = strExceptions + ", " + page3_1["RtxtDOFL5"] + " at right dorsum of the foot (L5)";
+
+            if (!string.IsNullOrEmpty(page3_1["LtxtLTS1"]))
+                strExceptions = strExceptions + ", " + page3_1["LtxtLTS1"] + " at left lateral foot (S1)";
+            if (!string.IsNullOrEmpty(page3_1["RtxtLTS1"]))
+                strExceptions = strExceptions + ", " + page3_1["RtxtLTS1"] + " at right lateral foot (S1)";
+
+            if (!string.IsNullOrEmpty(page3_1["LtxtLP"]))
+                strExceptions = strExceptions + ", " + page3_1["LtxtLP"] + " at left lumbar paraspinals";
+            if (!string.IsNullOrEmpty(page3_1["RtxtLP"]))
+                strExceptions = strExceptions + ", " + page3_1["RtxtLP"] + " at right lumbar paraspinals";
+
+
+
+            string senexam = strExceptions.Trim(',');
+
+            if (!string.IsNullOrEmpty(senexam))
+                str = str.Replace("#sen_exm", "<b>SENSORY EXAMINATION: </b>" + senexam + "<br/><br/>");
             else
-            {
+                str = str.Replace("#sen_exm", "");
 
 
-                strExceptions = "";
-                if (!string.IsNullOrEmpty(page3_1["LLateralarm"]))
-                    strExceptions = page3_1["LLateralarm"] + " at left lateral arm (C5)";
-                if (!string.IsNullOrEmpty(page3_1["RLateralarm"]))
-                    strExceptions = page3_1["RLateralarm"] + " at right lateral arm (C5)";
-
-                if (!string.IsNullOrEmpty(page3_1["LLateralforearm"]))
-                    strExceptions = strExceptions + ", " + page3_1["LLateralforearm"] + " at left lateral forearm, thumb, index (C6)";
-                if (!string.IsNullOrEmpty(page3_1["RLateralforearm"]))
-                    strExceptions = strExceptions + ", " + page3_1["RLateralforearm"] + " at right lateral forearm, thumb, index (C6)";
-
-                if (!string.IsNullOrEmpty(page3_1["LMiddlefinger"]))
-                    strExceptions = strExceptions + ", " + page3_1["LMiddlefinger"] + " at left middle finger (C7)";
-                if (!string.IsNullOrEmpty(page3_1["RMiddlefinger"]))
-                    strExceptions = strExceptions + ", " + page3_1["RMiddlefinger"] + " at right middle finger (C7)";
-
-                if (!string.IsNullOrEmpty(page3_1["LMidialForearm"]))
-                    strExceptions = strExceptions + ", " + page3_1["LMidialForearm"] + " at left medial forearm, ring, little finger (C8)";
-                if (!string.IsNullOrEmpty(page3_1["RMidialForearm"]))
-                    strExceptions = strExceptions + ", " + page3_1["RMidialForearm"] + " at right medial forearm, ring, little finger (C8)";
-
-                if (!string.IsNullOrEmpty(page3_1["LMidialarm"]))
-                    strExceptions = strExceptions + ", " + page3_1["LMidialarm"] + " at left medial arm (T1)";
-                if (!string.IsNullOrEmpty(page3_1["RMidialarm"]))
-                    strExceptions = strExceptions + ", " + page3_1["RMidialarm"] + " at right medial arm (T1)";
-
-                if (!string.IsNullOrEmpty(page3_1["LCervical"]))
-                    strExceptions = strExceptions + ", " + page3_1["LCervical"] + " at left cervical paraspinals";
-                if (!string.IsNullOrEmpty(page3_1["RCervical"]))
-                    strExceptions = strExceptions + ", " + page3_1["RCervical"] + " at right cervical paraspinals";
-
-                if (!string.IsNullOrEmpty(page3_1["LtxtDMTL3"]))
-                    strExceptions = strExceptions + ", " + page3_1["LtxtDMTL3"] + " at left distal medial thigh (L3)";
-                if (!string.IsNullOrEmpty(page3_1["RtxtDMTL3"]))
-                    strExceptions = strExceptions + ", " + page3_1["RtxtDMTL3"] + " at right distal medial thigh (L3)";
-
-                if (!string.IsNullOrEmpty(page3_1["LtxtMLFL4"]))
-                    strExceptions = strExceptions + ", " + page3_1["LtxtMLFL4"] + " at left medial left foot (L4)";
-                if (!string.IsNullOrEmpty(page3_1["RtxtMLFL4"]))
-                    strExceptions = strExceptions + ", " + page3_1["RtxtMLFL4"] + " at right medial left foot (L4)";
-
-                if (!string.IsNullOrEmpty(page3_1["LtxtDOFL5"]))
-                    strExceptions = strExceptions + ", " + page3_1["LtxtDOFL5"] + " at left dorsum of the foot (L5)";
-                if (!string.IsNullOrEmpty(page3_1["RtxtDOFL5"]))
-                    strExceptions = strExceptions + ", " + page3_1["RtxtDOFL5"] + " at right dorsum of the foot (L5)";
-
-                if (!string.IsNullOrEmpty(page3_1["LtxtLTS1"]))
-                    strExceptions = strExceptions + ", " + page3_1["LtxtLTS1"] + " at left lateral foot (S1)";
-                if (!string.IsNullOrEmpty(page3_1["RtxtLTS1"]))
-                    strExceptions = strExceptions + ", " + page3_1["RtxtLTS1"] + " at right lateral foot (S1)";
-
-                if (!string.IsNullOrEmpty(page3_1["LtxtLP"]))
-                    strExceptions = strExceptions + ", " + page3_1["LtxtLP"] + " at left lumbar paraspinals";
-                if (!string.IsNullOrEmpty(page3_1["RtxtLP"]))
-                    strExceptions = strExceptions + ", " + page3_1["RtxtLP"] + " at right lumbar paraspinals";
-
-
-
-                string senexam = strExceptions.Trim(',');
-
-                if (!string.IsNullOrEmpty(senexam))
-                    str = str.Replace("#sen_exm", "<b>SENSORY EXAMINATION: </b>" + senexam + "<br/><br/>");
-                else
-                    str = str.Replace("#sen_exm", "");
-
-            }
-
+            strExceptions = "";
 
             if (!string.IsNullOrEmpty(page3_1["txtMST"]))
-                str = str.Replace("#mmst", "<b>MOTOR EXAMINATION: </b>" + page3_1["txtMST"] + "<br/><br/>");
+                strExceptions = page3_1["txtMST"].ToString();
+
+
+            if (!string.IsNullOrEmpty(page3_1["LAbduction"]))
+                strExceptions = "left shoulder abduction " + page3_1["LAbduction"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RAbduction"]))
+                strExceptions = strExceptions + ", " + "right shoulder abduction  " + page3_1["RAbduction"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LFlexion"]))
+                strExceptions = strExceptions + ", " + "left shoulder flexion " + page3_1["LFlexion"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RFlexion"]))
+                strExceptions = strExceptions + ", " + "right shoulder flexion " + page3_1["RFlexion"] + "/5";
+
+
+            if (!string.IsNullOrEmpty(page3_1["LElbowExtension"]))
+                strExceptions = strExceptions + ", " + "left elbow extension " + page3_1["LElbowExtension"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RElbowExtension"]))
+                strExceptions = strExceptions + ", " + "right elbow extension " + page3_1["RElbowExtension"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LElbowFlexion"]))
+                strExceptions = strExceptions + ", " + "left elbow flexion " + page3_1["LElbowFlexion"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RElbowFlexion"]))
+                strExceptions = strExceptions + ", " + "right elbow flexion " + page3_1["RElbowFlexion"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LSupination"]))
+                strExceptions = strExceptions + ", " + "left elbow supination " + page3_1["LSupination"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RSupination"]))
+                strExceptions = strExceptions + ", " + "right elbow supination " + page3_1["RSupination"] + "/5";
+
+
+            if (!string.IsNullOrEmpty(page3_1["LPronation"]))
+                strExceptions = strExceptions + ", " + "left elbow pronation " + page3_1["LPronation"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RPronation"]))
+                strExceptions = strExceptions + ", " + "right elbow pronation " + page3_1["RPronation"] + "/5";
+
+
+            if (!string.IsNullOrEmpty(page3_1["LWristFlexion"]))
+                strExceptions = strExceptions + ", " + "left wrist flexion " + page3_1["LWristFlexion"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RWristFlexion"]))
+                strExceptions = strExceptions + ", " + "right wrist flexion " + page3_1["RWristFlexion"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LWristExtension"]))
+                strExceptions = strExceptions + ", " + "left wrist extension " + page3_1["LWristExtension"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RWristExtension"]))
+                strExceptions = strExceptions + ", " + "right wrist extension " + page3_1["RWristExtension"] + "/5";
+
+
+            if (!string.IsNullOrEmpty(page3_1["LGrip"]))
+                strExceptions = strExceptions + ", " + "left hand grip strength " + page3_1["LGrip"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RGrip"]))
+                strExceptions = strExceptions + ", " + "right hand grip strength " + page3_1["RGrip"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LFinger"]))
+                strExceptions = strExceptions + ", " + "left hand finger abduction	 " + page3_1["LFinger"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RFinger"]))
+                strExceptions = strExceptions + ", " + "right hand finger abduction	 " + page3_1["RFinger"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LHipFlexion"]))
+                strExceptions = strExceptions + ", " + "left hip flexion " + page3_1["LHipFlexion"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RHipFlexion"]))
+                strExceptions = strExceptions + ", " + "right hip flexion " + page3_1["RHipFlexion"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LHipAbduction"]))
+                strExceptions = strExceptions + ", left hip abduction " + page3_1["LHipAbduction"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RHipAbduction"]))
+                strExceptions = strExceptions + ", " + "right hip abduction " + page3_1["RHipAbduction"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LKneeExtension"]))
+                strExceptions = strExceptions + ", left knee extension " + page3_1["LKneeExtension"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RKneeExtension"]))
+                strExceptions = strExceptions + ", " + "right knee extension " + page3_1["RKneeExtension"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LKneeFlexion"]))
+                strExceptions = strExceptions + ", left knee flexion " + page3_1["LKneeFlexion"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RKneeFlexion"]))
+                strExceptions = strExceptions + ", " + "right knee flexion " + page3_1["RKneeFlexion"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LDorsiflexion"]))
+                strExceptions = strExceptions + ", left ankle dorsiflexion " + page3_1["LDorsiflexion"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RDorsiflexion"]))
+                strExceptions = strExceptions + ", " + "right ankle dorsiflexion " + page3_1["RDorsiflexion"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LPlantar"]))
+                strExceptions = strExceptions + ", left ankle plantar flexion " + page3_1["LPlantar"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RPlantar"]))
+                strExceptions = strExceptions + ", " + "right ankle plantar flexion " + page3_1["RPlantar"] + "/5";
+
+            if (!string.IsNullOrEmpty(page3_1["LExtensor"]))
+                strExceptions = strExceptions + ", left ankle extensor hallucis longus " + page3_1["LExtensor"] + "/5";
+            if (!string.IsNullOrEmpty(page3_1["RExtensor"]))
+                strExceptions = strExceptions + ", " + "right ankle extensor hallucis longus " + page3_1["RExtensor"] + "/5";
+
+
+            if (!string.IsNullOrEmpty(strExceptions))
+                str = str.Replace("#mmst", "<b>MOTOR EXAMINATION: </b>" + strExceptions.TrimStart(',').TrimEnd('.') + ".<br/><br/>");
             else
-            {
+                str = str.Replace("#mmst", "");
 
-
-                strExceptions = "";
-                if (!string.IsNullOrEmpty(page3_1["LAbduction"]))
-                    strExceptions = "left shoulder abduction " + page3_1["LAbduction"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RAbduction"]))
-                    strExceptions = strExceptions + ", " + "right shoulder abduction  " + page3_1["RAbduction"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LFlexion"]))
-                    strExceptions = strExceptions + ", " + "left shoulder flexion " + page3_1["LFlexion"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RFlexion"]))
-                    strExceptions = strExceptions + ", " + "right shoulder flexion " + page3_1["RFlexion"] + "/5";
-
-
-                if (!string.IsNullOrEmpty(page3_1["LElbowExtension"]))
-                    strExceptions = strExceptions + ", " + "left elbow extension " + page3_1["LElbowExtension"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RElbowExtension"]))
-                    strExceptions = strExceptions + ", " + "right elbow extension " + page3_1["RElbowExtension"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LElbowFlexion"]))
-                    strExceptions = strExceptions + ", " + "left elbow flexion " + page3_1["LElbowFlexion"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RElbowFlexion"]))
-                    strExceptions = strExceptions + ", " + "right elbow flexion " + page3_1["RElbowFlexion"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LSupination"]))
-                    strExceptions = strExceptions + ", " + "left elbow supination " + page3_1["LSupination"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RSupination"]))
-                    strExceptions = strExceptions + ", " + "right elbow supination " + page3_1["RSupination"] + "/5";
-
-
-                if (!string.IsNullOrEmpty(page3_1["LPronation"]))
-                    strExceptions = strExceptions + ", " + "left elbow pronation " + page3_1["LPronation"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RPronation"]))
-                    strExceptions = strExceptions + ", " + "right elbow pronation " + page3_1["RPronation"] + "/5";
-
-
-                if (!string.IsNullOrEmpty(page3_1["LWristFlexion"]))
-                    strExceptions = strExceptions + ", " + "left wrist flexion " + page3_1["LWristFlexion"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RWristFlexion"]))
-                    strExceptions = strExceptions + ", " + "right wrist flexion " + page3_1["RWristFlexion"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LWristExtension"]))
-                    strExceptions = strExceptions + ", " + "left wrist extension " + page3_1["LWristExtension"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RWristExtension"]))
-                    strExceptions = strExceptions + ", " + "right wrist extension " + page3_1["RWristExtension"] + "/5";
-
-
-                if (!string.IsNullOrEmpty(page3_1["LGrip"]))
-                    strExceptions = strExceptions + ", " + "left hand grip strength " + page3_1["LGrip"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RGrip"]))
-                    strExceptions = strExceptions + ", " + "right hand grip strength " + page3_1["RGrip"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LFinger"]))
-                    strExceptions = strExceptions + ", " + "left hand finger abduction	 " + page3_1["LFinger"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RFinger"]))
-                    strExceptions = strExceptions + ", " + "right hand finger abduction	 " + page3_1["RFinger"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LHipFlexion"]))
-                    strExceptions = strExceptions + ", " + "left hip flexion " + page3_1["LHipFlexion"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RHipFlexion"]))
-                    strExceptions = strExceptions + ", " + "right hip flexion " + page3_1["RHipFlexion"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LHipAbduction"]))
-                    strExceptions = strExceptions + ", left hip abduction " + page3_1["LHipAbduction"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RHipAbduction"]))
-                    strExceptions = strExceptions + ", " + "right hip abduction " + page3_1["RHipAbduction"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LKneeExtension"]))
-                    strExceptions = strExceptions + ", left knee extension " + page3_1["LKneeExtension"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RKneeExtension"]))
-                    strExceptions = strExceptions + ", " + "right knee extension " + page3_1["RKneeExtension"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LKneeFlexion"]))
-                    strExceptions = strExceptions + ", left knee flexion " + page3_1["LKneeFlexion"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RKneeFlexion"]))
-                    strExceptions = strExceptions + ", " + "right knee flexion " + page3_1["RKneeFlexion"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LDorsiflexion"]))
-                    strExceptions = strExceptions + ", left ankle dorsiflexion " + page3_1["LDorsiflexion"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RDorsiflexion"]))
-                    strExceptions = strExceptions + ", " + "right ankle dorsiflexion " + page3_1["RDorsiflexion"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LPlantar"]))
-                    strExceptions = strExceptions + ", left ankle plantar flexion " + page3_1["LPlantar"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RPlantar"]))
-                    strExceptions = strExceptions + ", " + "right ankle plantar flexion " + page3_1["RPlantar"] + "/5";
-
-                if (!string.IsNullOrEmpty(page3_1["LExtensor"]))
-                    strExceptions = strExceptions + ", left ankle extensor hallucis longus " + page3_1["LExtensor"] + "/5";
-                if (!string.IsNullOrEmpty(page3_1["RExtensor"]))
-                    strExceptions = strExceptions + ", " + "right ankle extensor hallucis longus " + page3_1["RExtensor"] + "/5";
-
-
-                if (!string.IsNullOrEmpty(strExceptions))
-                    str = str.Replace("#mmst", "<b>MOTOR EXAMINATION: </b>" + strExceptions.TrimStart(',').TrimEnd('.') + ".<br/><br/>");
-                else
-                    str = str.Replace("#mmst", "");
-            }
         }
         else
         {
@@ -1923,10 +1917,10 @@ public partial class PatientIntakeList : System.Web.UI.Page
                 strCare = strCare + ", Chiropratic";
 
             if (CommonConvert.ToBoolean(ds.Tables[0].Rows[0]["PhysicalTherapy"].ToString()))
-                strCare = strCare + ", PhysicalTherapy";
+                strCare = strCare + ", Physical Therapy";
 
             if (CommonConvert.ToBoolean(ds.Tables[0].Rows[0]["AvoidHeavyLifting"].ToString()))
-                strCare = strCare + ", AvoidHeavyLifting";
+                strCare = strCare + ", Avoid Heavy Lifting";
 
             if (CommonConvert.ToBoolean(ds.Tables[0].Rows[0]["Carrying"].ToString()))
                 strCare = strCare + ", Carrying";
@@ -2057,10 +2051,7 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
             str = str.Replace("#consultation", string.IsNullOrEmpty(sb.ToString().TrimStart(',')) ? "" : "<b><u>CONSULTATION</u>: </b>" + sb.ToString().ToLower().TrimStart(',') + ".<br/><br/> ");
 
-            if (!string.IsNullOrEmpty(ds.Tables[0].Rows[0]["FollowUpIn"].ToString().Trim()))
-                str = str.Replace("#follow-up", "<b>FOLLOW-UP: </b>" + ds.Tables[0].Rows[0]["FollowUpIn"].ToString().Trim() + "<br/><br/>");
-            else
-                str = str.Replace("#follow-up", "");
+
 
             query = "Select * from tblMedicationRx WHERE PatientIE_ID=" + lnk.CommandArgument;
             ds = db.selectData(query);
@@ -2205,7 +2196,7 @@ public partial class PatientIntakeList : System.Web.UI.Page
         }
 
         //neck PE printing string
-        query = ("select PEvalue,PESides,PESidesText,NameROM,LeftROM,RightROM,NormalROM,CNameROM,CROM,CNormalROM from tblbpNeck where PatientIE_ID= " + lnk.CommandArgument + "");
+        query = ("select PEvalue,PESides,PESidesText,NameROM,LeftROM,RightROM,NormalROM,CNameROM,CROM,CNormalROM,TPDesc from tblbpNeck where PatientIE_ID= " + lnk.CommandArgument + "");
         string neckPE = "";
         cm = new SqlCommand(query, cn);
         da = new SqlDataAdapter(cm);
@@ -2217,7 +2208,8 @@ public partial class PatientIntakeList : System.Web.UI.Page
             if (!string.IsNullOrEmpty(ds.Tables[0].Rows[0]["PEvalue"].ToString()))
             {
                 neckPE = helper.getDocumentString(ds.Tables[0].Rows[0]["PEvalue"].ToString());
-                neckTP = this.getTPString(ds.Tables[0].Rows[0]["PESides"].ToString(), ds.Tables[0].Rows[0]["PESidesText"].ToString());
+                neckTP = ds.Tables[0].Rows[0]["TPDesc"].ToString();
+                //  neckTP = this.getTPString(ds.Tables[0].Rows[0]["PESides"].ToString(), ds.Tables[0].Rows[0]["PESidesText"].ToString());
             }
 
             if (!string.IsNullOrEmpty(ds.Tables[0].Rows[0]["NameROM"].ToString()))
@@ -2242,7 +2234,7 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
                 if (!string.IsNullOrEmpty(neckTP))
                 {
-                    neckTP = " There are palpable taut bands/trigger points at " + neckTP.TrimStart(',') + ". ";
+                    neckTP = neckTP.TrimStart(',') + ". ";
 
                     finalrom = finalrom.Replace("..", ".") + neckTP;
                 }
@@ -2295,7 +2287,7 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
 
         //lowback PE printing string
-        query = ("select PEvalue,PESides,PESidesText,NameROM,LeftROM,RightROM,NormalROM,CNameROM,CROM,CNormalROM,NameTest,LeftTest,RightTest,TextVal  from tblbpLowback where PatientIE_ID= " + lnk.CommandArgument + "");
+        query = ("select PEvalue,PESides,PESidesText,NameROM,LeftROM,RightROM,NormalROM,CNameROM,CROM,CNormalROM,NameTest,LeftTest,RightTest,TextVal,TPDesc  from tblbpLowback where PatientIE_ID= " + lnk.CommandArgument + "");
         string lowbackPE = "", lowbackTP = "";
         cm = new SqlCommand(query, cn);
         da = new SqlDataAdapter(cm);
@@ -2307,7 +2299,8 @@ public partial class PatientIntakeList : System.Web.UI.Page
             if (!string.IsNullOrEmpty(ds.Tables[0].Rows[0]["PEvalue"].ToString()))
             {
                 lowbackPE = helper.getDocumentString(ds.Tables[0].Rows[0]["PEvalue"].ToString());
-                lowbackTP = this.getTPString(ds.Tables[0].Rows[0]["PESides"].ToString(), ds.Tables[0].Rows[0]["PESidesText"].ToString());
+                //  lowbackTP = this.getTPString(ds.Tables[0].Rows[0]["PESides"].ToString(), ds.Tables[0].Rows[0]["PESidesText"].ToString());
+                lowbackTP = ds.Tables[0].Rows[0]["TPDesc"].ToString();
 
 
             }
@@ -2339,7 +2332,7 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
             if (!string.IsNullOrEmpty(lowbackTP))
             {
-                lowbackTP = " There are palpable taut bands/trigger points at " + lowbackTP.TrimStart(',') + ". ";
+                lowbackTP = lowbackTP.TrimStart(',') + ". ";
 
                 finalrom = finalrom.Replace("..", ".") + lowbackTP;
             }
@@ -2909,11 +2902,18 @@ public partial class PatientIntakeList : System.Web.UI.Page
         {
             str = str.Replace("#otherCC", !string.IsNullOrEmpty(ds.Tables[0].Rows[0]["OthersCC"].ToString()) ? ds.Tables[0].Rows[0]["OthersCC"].ToString() + "<br /><br />" : "");
             str = str.Replace("#otherPE", !string.IsNullOrEmpty(ds.Tables[0].Rows[0]["OthersPE"].ToString()) ? ds.Tables[0].Rows[0]["OthersPE"].ToString() + "<br /><br />" : "");
+
+
+            if (!string.IsNullOrEmpty(ds.Tables[0].Rows[0]["FollowUpIn"].ToString().Trim()))
+                str = str.Replace("#follow-up", "<b>FOLLOW-UP: </b>" + ds.Tables[0].Rows[0]["FollowUpIn"].ToString().Trim() + "<br/><br/>");
+            else
+                str = str.Replace("#follow-up", "");
         }
         else
         {
             str = str.Replace("#otherCC", "");
             str = str.Replace("#otherPE", "");
+            str = str.Replace("#follow-up", "");
         }
 
 
@@ -3103,7 +3103,7 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
 
             if (!string.IsNullOrEmpty(page1["txt_accident_desc_1"]))
-                str = str + page1["txt_accident_desc_1"];
+                str = str + page1["txt_accident_desc_1"] + " ";
 
 
 
@@ -3137,10 +3137,16 @@ public partial class PatientIntakeList : System.Web.UI.Page
 
             str = str + "The patient is seen at " + location.Replace(".", "") + ". ";
 
+
+            if (page1.ContainsKey("txt_belt"))
+            {
+                str = str + " The patient states #lgender was the " + page1["txt_belt"].ToString() + " of a vehicle which was involved in a ";
+            }
+
             if (page1.ContainsKey("txt_invovledin"))
             {
                 if (!string.IsNullOrEmpty(page1["txt_invovledin"]))
-                    str = str + " Patient's vehicle was hit on the " + page1["txt_invovledin"] + ". ";
+                    str = str + page1["txt_invovledin"] + ". ";
             }
 
             //// str = "On " + CommonConvert.DateFormat(ds.Tables[0].Rows[0]["DOE"].ToString()) + ", " + fullname + ", a " + ds.Tables[0].Rows[0]["AGE"].ToString().Trim() + "-year-old " + sex + " " + page1["txt_accident_desc"] + " which occurred on the date of " + CommonConvert.DateFormat(ds.Tables[0].Rows[0]["DOA"].ToString()) + ". The patient was seen at the " + location + " ";
@@ -3173,29 +3179,29 @@ public partial class PatientIntakeList : System.Web.UI.Page
                 if (page1["rdbwhospno"] == "true")
                     str = str + " on the same day the accident occurred. ";
                 else
-                    str = str + (page1["txt_day"] == "1" ? "1 day" : page1["txt_day"] + " days") + " after the accident occurred.";
+                    str = str + (page1["txt_day"] == "1" ? " 1 day" : page1["txt_day"] + " days") + " after the accident occurred.";
 
 
             }
 
 
-            //if (page1["chk_mri"] == "true" || page1["chk_CT"] == "true" || page1["chk_xray"] == "true")
-            //{
-            //    str = str + "At the hospital, the patient had ";
+            if (page1["chk_mri"] == "true" || page1["chk_CT"] == "true" || page1["chk_xray"] == "true")
+            {
+                str = str + " At the hospital, the patient had ";
 
-            //    string strtemp = "";
+                string strtemp = "";
 
-            //    if (page1["chk_mri"] == "true" && !string.IsNullOrEmpty(page1["txt_mri"]))
-            //        strtemp = strtemp + ", MRI of the " + page1["txt_mri"];
-            //    if (page1["chk_CT"] == "true" && !string.IsNullOrEmpty(page1["txt_CT"]))
-            //        strtemp = strtemp + ", CT of the " + page1["txt_CT"];
-            //    if (page1["chk_xray"] == "true" && !string.IsNullOrEmpty(page1["txt_x_ray"]))
-            //        strtemp = strtemp + ", X-ray of the" + page1["txt_x_ray"];
+                if (page1["chk_mri"] == "true" && !string.IsNullOrEmpty(page1["txt_mri"]))
+                    strtemp = strtemp + ", MRI of the " + page1["txt_mri"];
+                if (page1["chk_CT"] == "true" && !string.IsNullOrEmpty(page1["txt_CT"]))
+                    strtemp = strtemp + ", CT of the " + page1["txt_CT"];
+                if (page1["chk_xray"] == "true" && !string.IsNullOrEmpty(page1["txt_x_ray"]))
+                    strtemp = strtemp + ", X-ray of the " + page1["txt_x_ray"];
 
-            //    if (!string.IsNullOrEmpty(strtemp))
-            //        str = str + strtemp.TrimStart(',') + " done. ";
+                if (!string.IsNullOrEmpty(strtemp))
+                    str = str + strtemp.TrimStart(',') + " done. ";
 
-            //}
+            }
 
             //if (!string.IsNullOrEmpty(page1["txt_prescription"]))
             //    str = str + "At the hospital prescription was given for " + page1["txt_prescription"];
@@ -3215,44 +3221,45 @@ public partial class PatientIntakeList : System.Web.UI.Page
             //if (page1["rdbdocyes"] == "true")
             //    str = str + "The patient visited " + page1["txt_docname"].ToString() + " since the incident. ";
 
-            //if (page1["chkComplainingofHeadaches"] == "true")
-            //{REFLEX EXAMINATION
-            //    str = str + gender + " is complaining of headaches as a result of the accident. ";
+            if (page1["chkComplainingofHeadaches"] == "true")
+            {
+              
+                str = str + "The patient is complaining of is complaining of headaches as a result of the accident. ";
 
-            //    if (!string.IsNullOrEmpty(page1["txtPersistent"]))
-            //        str = str + "The headaches started after the accident and are " + page1["txtPersistent"] + ". ";
-            //}
+                if (!string.IsNullOrEmpty(page1["txtPersistent"]))
+                    str = str + "The headaches started after the accident and are " + page1["txtPersistent"] + ". ";
+            }
 
-            //if (page1["chkHeadechesAssociated"] == "true")
-            //{
-            //    str = str + " The headaches are associated with nausea and dizziness. ";
-            //}
+            if (page1["chkHeadechesAssociated"] == "true")
+            {
+                str = str + " The headaches are associated with nausea and dizziness. ";
+            }
 
-            //string strOp = "";
+            string strOp = "";
 
-            //if (page1["chkfrontal"] == "true")
-            //    strOp = "frontal";
+            if (page1["chkfrontal"] == "true")
+                strOp = "frontal";
 
-            //if (page1["chkLeftParietal"] == "true")
-            //    strOp = strOp + ", left Parietal";
+            if (page1["chkLeftParietal"] == "true")
+                strOp = strOp + ", left Parietal";
 
-            //if (page1["chkRightParietal"] == "true")
-            //    strOp = strOp + ", right Parietal";
+            if (page1["chkRightParietal"] == "true")
+                strOp = strOp + ", right Parietal";
 
-            //if (page1["chkLeftTemporal"] == "true")
-            //    strOp = strOp + ", left Temporal";
+            if (page1["chkLeftTemporal"] == "true")
+                strOp = strOp + ", left Temporal";
 
-            //if (page1["chkRightTemporal"] == "true")
-            //    strOp = strOp + ", right Temporal";
+            if (page1["chkRightTemporal"] == "true")
+                strOp = strOp + ", right Temporal";
 
-            //if (page1["chkOccipital"] == "true")
-            //    strOp = strOp + ", occipital";
+            if (page1["chkOccipital"] == "true")
+                strOp = strOp + ", occipital";
 
-            //if (page1["chkGlobal"] == "true")
-            //    strOp = strOp + ", global";
+            if (page1["chkGlobal"] == "true")
+                strOp = strOp + ", global";
 
-            //if (!string.IsNullOrEmpty(strOp))
-            //    str = str + "The headaches are " + strOp.TrimStart(',') + ". ";
+            if (!string.IsNullOrEmpty(strOp))
+                str = str + " The headaches are " + strOp.TrimStart(',') + ". ";
 
 
             Int64 idId = Convert.ToInt64(patientIE_ID);
@@ -3381,7 +3388,7 @@ public partial class PatientIntakeList : System.Web.UI.Page
             HtmlTextWriter hw = new HtmlTextWriter(sw);
 
             System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
-   new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
+    new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
 
             createDiv.InnerHtml = strHTML;
 
@@ -5828,41 +5835,49 @@ public partial class PatientIntakeList : System.Web.UI.Page
         if (_injured.Contains("LownBack"))
             str = str + ", lownback";
 
+
+        if (_injured.Contains("RightShoulder"))
+            str = str + ", right shoulder";
+        if (_injured.Contains("LeftShoulder"))
+            str = str + ", left shoulder";
+
+
+
+
+        if (_injured.Contains("RightKnee"))
+            str = str + ", right knee";
+        if (_injured.Contains("LeftKnee"))
+            str = str + ", left knee";
+
+
+
+
+        if (_injured.Contains("RightElbow"))
+            str = str + ", right elbow";
+        if (_injured.Contains("LeftElbow"))
+            str = str + ", left elbow";
+
+
+
+        if (_injured.Contains("RightWrist"))
+            str = str + ", right wrist";
+
+        if (_injured.Contains("LeftWrist"))
+            str = str + ", left wrist";
+
+
+        if (_injured.Contains("RightHip"))
+            str = str + ", right hip";
+
+        if (_injured.Contains("LeftHip"))
+            str = str + ", left hip";
+
+
         if (_injured.Contains("RightAnkle"))
             str = str + ", right ankle";
 
         if (_injured.Contains("LeftAnkle"))
             str = str + ", left ankle";
-
-        if (_injured.Contains("LeftElbow"))
-            str = str + ", left elbow";
-
-        if (_injured.Contains("RightElbow"))
-            str = str + ", right elbow";
-
-        if (_injured.Contains("LeftHip"))
-            str = str + ", left hip";
-
-        if (_injured.Contains("RightHip"))
-            str = str + ", right hip";
-
-        if (_injured.Contains("LeftKnee"))
-            str = str + ", left knee";
-
-        if (_injured.Contains("RightKnee"))
-            str = str + ", right knee";
-
-        if (_injured.Contains("LeftShoulder"))
-            str = str + ", left shoulder";
-
-        if (_injured.Contains("RightShoulder"))
-            str = str + ", right shoulder";
-
-        if (_injured.Contains("LeftWrist"))
-            str = str + ", left wrist";
-
-        if (_injured.Contains("RightWrist"))
-            str = str + ", right wrist";
 
         return str.TrimStart(',');
     }
@@ -5881,13 +5896,13 @@ public partial class PatientIntakeList : System.Web.UI.Page
             {
 
                 i++;
-                if (part.Contains("Left"))
-                {
-                    _part = part.Insert(4, " ");
-                }
-                else if (part.Contains("Right"))
+                if (part.Contains("Right"))
                 {
                     _part = part.Insert(5, " ");
+                }
+                else if (part.Contains("Left"))
+                {
+                    _part = part.Insert(4, " ");
                 }
                 else
                     _part = part;

@@ -47,6 +47,7 @@
                     <input type="text" id="txt_accident_desc" onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txt_accident_desc', this.value)" id="ddl_accident_desc">
                         <option value=""></option>
+
                         <option value="presents with complaints of pain in the">presents with complaints of pain in the</option>
                         <option value="presents for the evaluation of the injuries sustained in a motor vehicle accident">presents for the evaluation of the injuries sustained in a motor vehicle accident</option>
                         <option value="presents for the evaluation of the injuries sustained as a pedestrian struck">presents for the evaluation of the injuries sustained as a pedestrian struck</option>
@@ -110,10 +111,17 @@
                 <section class="dropdown">
                     <input type="text" id="txt_EMS" onchange="txtMe(this)" />
                     <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txt_EMS', this.value)" id="ddl_EMS">
-                        <!--<option value=""></option>
-                        <option value="arrived">arrived</option>
-                        <option value="did not arrive at the scene" selected="selected">did not arrive at the scene</option>-->
                         <option value=""></option>
+                        <option value="arrived">arrived</option>
+                        <option value="did not arrive at the scene" selected="selected">did not arrive at the scene</option>
+
+                    </select>
+                </section>
+                <section class="dropdown">
+                    <input type="text" id="txt_airbage" onchange="txtMe(this)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txt_airbage', this.value)" id="ddl_airbage">
+                        <option value=""></option>
+
                         <option value="Airbags were not deployed and police were not notified">Airbags were not deployed and police were not notified.</option>
                         <option value="Airbags were deployed and police were not notified">Airbags were deployed and police were not notified.</option>
                         <option value="Airbags were deployed but police were not notified">Airbags were deployed but police were not notified.</option>
@@ -122,6 +130,7 @@
                 </section>
 
                 Hospitalized
+
 
                 <input type="radio" id="rdbhospno" name="hos" Value="no" checked="checked" onclick="checkMe(this)" />No
                 <input type="radio" id="rdbhospyes" name="hos" Value="yes" onclick="checkMe(this)" />Yes
@@ -254,7 +263,7 @@
                 <input type='checkbox' ID="chkGlobal" value="global" onclick="checkMe(this)" />global.
             </p>
 
-            <p>
+            <p style="display:none">
                 <label>The patient reports </label>
 
 
@@ -502,7 +511,7 @@
 
         $("input[name=wanttohosp]").click(function (e) {
 
-            alert('call');
+
 
             if ($("input[name=wanttohosp]:checked").val() === "yes") {
                 $("#txt_day").removeAttr("disabled");

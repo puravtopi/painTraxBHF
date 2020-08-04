@@ -3,29 +3,31 @@
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Shoulder Examination:</b></span><label style="visibility:hidden">#leftshouldertitle</label>
 
-        <input type="checkbox" id="chkshlrevelLeft" value="reveals tenderness upon palpation of the " class="nocomma" onclick="checkMe(this)" /> reveals tenderness upon palpation of the
+        <section style="display:none">
+            <input type="checkbox" id="chkshlrevelLeft" value="reveals tenderness upon palpation of the " class="nocomma" onclick="checkMe(this)" /> reveals tenderness upon palpation of the
 
 
-        <input type="text" ID="txtPalpationText1Left" onchange="txtMe(this)" Style="margin-left: 0px;" />
-        <input type="checkbox" ID="chkACJointLeft" onclick="checkMe(this)" value="AC joint" /> AC joint
-        <input type="checkbox" ID="chkGlenohumeralLeft" onclick="checkMe(this)" value="glenohumeral region" /> glenohumeral region
-        <input type="checkbox" ID="chkCorticoidLeft" onclick="checkMe(this)" value="corticoid region" /> corticoid region
-        <input type="checkbox" ID="chkSupraspinatusLeft" onclick="checkMe(this)" value="supraspintus tendon" /> supraspintus tendon
-        <input type="checkbox" ID="chkScapularLeft" onclick="checkMe(this)" value="scapular region" /> scapular region
-        <input type="checkbox" ID="chkDeepLabralLeft" onclick="checkMe(this)" value="deep labral region" /> deep labral region
-        <label>.</label>
-        <input type="checkbox" id="chkPEleft1" value="There is muscle spasm present at the " class="nocomma" onclick="checkMe(this)" checked /> There is muscle spasm present at the&nbsp;
+            <input type="text" ID="txtPalpationText1Left" onchange="txtMe(this)" Style="margin-left: 0px;" />
+            <input type="checkbox" ID="chkACJointLeft" onclick="checkMe(this)" value="AC joint" /> AC joint
+            <input type="checkbox" ID="chkGlenohumeralLeft" onclick="checkMe(this)" value="glenohumeral region" /> glenohumeral region
+            <input type="checkbox" ID="chkCorticoidLeft" onclick="checkMe(this)" value="corticoid region" /> corticoid region
+            <input type="checkbox" ID="chkSupraspinatusLeft" onclick="checkMe(this)" value="supraspintus tendon" /> supraspintus tendon
+            <input type="checkbox" ID="chkScapularLeft" onclick="checkMe(this)" value="scapular region" /> scapular region
+            <input type="checkbox" ID="chkDeepLabralLeft" onclick="checkMe(this)" value="deep labral region" /> deep labral region
+            <span>.</span>
+            <input type="checkbox" id="chkPEleft1" value="There is muscle spasm present at the " class="nocomma" onclick="checkMe(this)" /> There is muscle spasm present at the&nbsp;
 
-        <input type="checkbox" ID="chkDeltoidLeft" onclick="checkMe(this)" value="deltoid muscle" /> deltoid muscle
-        <input type="checkbox" ID="chkTrapeziusLeft" onclick="checkMe(this)" value="trapezius muscule" /> trapezius muscule
-        <input type="checkbox" ID="chkecchymosisLeft" onclick="checkMe(this)" value="ecchymosis" /> ecchymosis
-        <input type="checkbox" ID="chkedemaLeft" onclick="checkMe(this)" value="edema" /> edema
-        <input type="checkbox" ID="chklimitationLeft" onclick="checkMe(this)" value="severe limitation in range of motion" /> severe limitation in range of motion
-        <label>.</label>
+            <input type="checkbox" ID="chkDeltoidLeft" onclick="checkMe(this);checkDefault(this, 'chkPEleft1');" value="deltoid muscle" /> deltoid muscle
+            <input type="checkbox" ID="chkTrapeziusLeft" onclick="checkMe(this);checkDefault(this, 'chkPEleft1');" value="trapezius muscule" /> trapezius muscule
+            <input type="checkbox" ID="chkecchymosisLeft" onclick="checkMe(this);checkDefault(this, 'chkPEleft1');" value="ecchymosis" /> ecchymosis
+            <input type="checkbox" ID="chkedemaLeft" onclick="checkMe(this);checkDefault(this, 'chkPEleft1');" value="edema" /> edema
+            <input type="checkbox" ID="chklimitationLeft" onclick="checkMe(this);checkDefault(this, 'chkPEleft1');" value="severe limitation in range of motion" /> severe limitation in range of motion
+            <span>.</span>
+
+            <br />
+        </section>
 
 
-
-        <br />
         <section style="display:none">
             <span class="control-label"><b>Tests: </b></span>
             <input type="checkbox" ID="chkNeerLeft" onclick="checkMe(this)" value="Neer" /> Neer
@@ -48,35 +50,38 @@
             <label style="visibility:hidden">#shoulderleftrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
-       
+
         <label style="visibility:hidden">#shoulderleftmri</label>
 
     </div>
-    <br />
+
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Shoulder Examination:</b> </span><label style="visibility:hidden">#rightshouldertitle</label>
-        <input type="checkbox" id="chkshlrevelRight" value="reveals tenderness upon palpation of the " class="nocomma" onclick="checkMe(this)" /> reveals tenderness upon palpation of the
 
-        <input type="text" ID="txtPalpationText1Right" onchange="txtMe(this)" Style="margin-left: 0px;" />
+        <section style="display:none">
+            <input type="checkbox" id="chkshlrevelRight" value="reveals tenderness upon palpation of the " class="nocomma" onclick="checkMe(this)" /> reveals tenderness upon palpation of the
 
-        <input type="checkbox" ID="chkACJointRight" onclick="checkMe(this)" value="AC joint" /> AC joint
-        <input type="checkbox" ID="chkGlenohumeralRight" onclick="checkMe(this)" value="glenohumeral region" /> glenohumeral region
-        <input type="checkbox" ID="chkCorticoidRight" onclick="checkMe(this)" value="corticoid region" /> corticoid region
-        <input type="checkbox" ID="chkSupraspinatusRight" onclick="checkMe(this)" value="supraspintus tendon" /> supraspintus tendon
-        <input type="checkbox" ID="chkScapularRight" onclick="checkMe(this)" value="scapular region" /> scapular region
-        <input type="checkbox" ID="chkDeepLabralRight" onclick="checkMe(this)" value="deep labral region" /> deep labral region
-        <label>.</label>
-        <input type="checkbox" id="chkPEright1" value="There is muscle spasm present at the " class="nocomma" onclick="checkMe(this)" checked /> There is muscle spasm present at the&nbsp;
-        <input type="checkbox" ID="chkDeltoidRight" onclick="checkMe(this)" value="deltoid muscle" /> deltoid muscle
-        <input type="checkbox" ID="chkTrapeziusRight" onclick="checkMe(this)" value="trapezius muscule" /> trapezius muscule
-        <input type="checkbox" ID="chkecchymosisRight" onclick="checkMe(this)" value="ecchymosis" /> ecchymosis
-        <input type="checkbox" ID="chkedemaRight" onclick="checkMe(this)" value="edema" /> edema
-        <input type="checkbox" ID="chklimitationRight" onclick="checkMe(this)" value="severe limitation in range of motion" /> severe limitation in range of motion
-        <label>.</label>
+            <input type="text" ID="txtPalpationText1Right" onchange="txtMe(this)" Style="margin-left: 0px;" />
+
+            <input type="checkbox" ID="chkACJointRight" onclick="checkMe(this)" value="AC joint" /> AC joint
+            <input type="checkbox" ID="chkGlenohumeralRight" onclick="checkMe(this)" value="glenohumeral region" /> glenohumeral region
+            <input type="checkbox" ID="chkCorticoidRight" onclick="checkMe(this)" value="corticoid region" /> corticoid region
+            <input type="checkbox" ID="chkSupraspinatusRight" onclick="checkMe(this)" value="supraspintus tendon" /> supraspintus tendon
+            <input type="checkbox" ID="chkScapularRight" onclick="checkMe(this)" value="scapular region" /> scapular region
+            <input type="checkbox" ID="chkDeepLabralRight" onclick="checkMe(this)" value="deep labral region" /> deep labral region
+            <span>.</span>
+            <input type="checkbox" id="chkPEright1" value="There is muscle spasm present at the " class="nocomma" onclick="checkMe(this)" /> There is muscle spasm present at the&nbsp;
+            <input type="checkbox" ID="chkDeltoidRight" onclick="checkMe(this);checkDefault(this, 'chkPEright1');" value="deltoid muscle" /> deltoid muscle
+            <input type="checkbox" ID="chkTrapeziusRight" onclick="checkMe(this);checkDefault(this, 'chkPEright1');" value="trapezius muscule" /> trapezius muscule
+            <input type="checkbox" ID="chkecchymosisRight" onclick="checkMe(this);checkDefault(this, 'chkPEright1');" value="ecchymosis" /> ecchymosis
+            <input type="checkbox" ID="chkedemaRight" onclick="checkMe(this);checkDefault(this, 'chkPEright1');" value="edema" /> edema
+            <input type="checkbox" ID="chklimitationRight" onclick="checkMe(this);checkDefault(this, 'chkPEright1');" value="severe limitation in range of motion" /> severe limitation in range of motion
+            <span>.</span>
 
 
 
-        <br />
+            <br />
+        </section>
         <section style="display:none">
             <span class="control-label"><b>Tests: </b></span>
             <input type="checkbox" ID="chkNeerLeft" onclick="checkMe(this)" value="Neer" /> Neer
@@ -102,33 +107,60 @@
         <label style="visibility:hidden">#shoulderrightmri</label>
     </div>
 
-    <input type="checkbox" id="chkNeer" value="The Neer test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Neer test is&nbsp;
+    <div id="TestPE">
+        <input type="checkbox" id="chkImpingement" value="The Impingement test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Impingement test is&nbsp;
+        <section class="dropdown">
+            <input type="text" id="txtImpingement" onchange="txtMe(this);selectTestCHK('chkImpingement', this.value)" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtImpingement', this.value);selectTestCHK('chkImpingement', this.value)" id="ddlImp">
+                <option></option>
 
-    <section class="dropdown">
-        <input type="text" id="txtNeer" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtNeer', this.value)" id="ddlNeer">
-            <option></option>
-            <option>normal.</option>
-            <option>positive on left.</option>
-            <option>positive on right.</option>
-            <option>positive bilaterally.</option>
-        </select>
-    </section>
-    <br />
+                <option>positive on left.</option>
+                <option>positive on right.</option>
+                <option>positive bilaterally.</option>
+            </select>
+        </section>
+        <br />
+        <input type="checkbox" id="chkApley" value="The Apley test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Apley test is&nbsp;
 
-    <input type="checkbox" id="chkHawkins" value="The Hawkins test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Hawkins test is&nbsp;
+        <section class="dropdown">
+            <input type="text" id="txtApley" onchange="txtMe(this);selectTestCHK('chkApley', this.value)" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtApley', this.value);selectTestCHK('chkApley', this.value)" id="ddlHawkins">
+                <option></option>
 
-    <section class="dropdown">
-        <input type="text" id="txtHawkins" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtHawkins', this.value)" id="ddlHawkins">
-            <option></option>
-            <option>normal.</option>
-            <option>positive on left.</option>
-            <option>positive on right.</option>
-            <option>positive bilaterally.</option>
-        </select>
-    </section>
-    <br />
+                <option>positive on left.</option>
+                <option>positive on right.</option>
+                <option>positive bilaterally.</option>
+            </select>
+        </section>
+        <br />
+        <input type="checkbox" id="chkNeer" value="The Neer test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Neer test is&nbsp;
+
+        <section class="dropdown">
+            <input type="text" id="txtNeer" onchange="txtMe(this);selectTestCHK('chkNeer', this.value)" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtNeer', this.value);selectTestCHK('chkNeer', this.value)" id="ddlNeer">
+                <option></option>
+
+                <option>positive on left.</option>
+                <option>positive on right.</option>
+                <option>positive bilaterally.</option>
+            </select>
+        </section>
+        <br />
+
+        <input type="checkbox" id="chkHawkins" value="The Hawkins test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Hawkins test is&nbsp;
+
+        <section class="dropdown">
+            <input type="text" id="txtHawkins" onchange="txtMe(this);selectTestCHK('chkHawkins', this.value)" />
+            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtHawkins', this.value);selectTestCHK('chkHawkins', this.value)" id="ddlHawkins">
+                <option></option>
+
+                <option>positive on left.</option>
+                <option>positive on right.</option>
+                <option>positive bilaterally.</option>
+            </select>
+        </section>
+    </div>
+    <!--<br />
     <input type="checkbox" id="chkYergason" value="The Yergason test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Yergason test is&nbsp;
 
     <section class="dropdown">
@@ -144,7 +176,7 @@
     <br />
 
     <input type="checkbox" id="chkDrop" value="The Yergason test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Drop test is&nbsp;
-   
+
     <section class="dropdown">
         <input type="text" id="txtDA" onchange="txtMe(this)" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtDA', this.value)" id="ddlDA">
@@ -166,7 +198,7 @@
             <option>positive on right.</option>
             <option>positive bilaterally.</option>
         </select>
-    </section>
+    </section>-->
     <br />
 
 </div>
@@ -355,6 +387,26 @@
         else {
             $(chk).removeAttr('checked');
         }
+    }
+
+
+    function checkDefault(chk, deafCheck) {
+
+        if ($("#" + deafCheck).prop("checked") == false) {
+                       
+            if ($(chk).prop("checked")) {
+                $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
+    }
+
+    function selectTestCHK(chkid, val) {
+
+        if (val !== '')
+            $("#" + chkid).attr("checked", "checked");
+        else
+            $("#" + chkid).removeAttr("checked");
     }
 
     function txtMe(txt) {

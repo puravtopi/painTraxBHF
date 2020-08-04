@@ -115,6 +115,11 @@ public partial class OthersParts : System.Web.UI.Page
             TblRow["OthersP"] = txtOthersP.Text.ToString();
             TblRow["TreatMentDetails"] = Request.Form[txtTreatmentParagraph.UniqueID];
             TblRow["TreatMentDelimit"] = bindTeratMentPrintvalue();
+            TblRow["FollowUpIn"] = txtFollowUpIn.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(txtFollowUpInDate.Text))
+                TblRow["FollowUpInDate"] = DateTime.ParseExact(txtFollowUpInDate.Text, "MM/dd/yyyy", null);
+            else
+                TblRow["FollowUpInDate"] = DBNull.Value;
 
 
             if (_ieMode == "New")
@@ -171,6 +176,7 @@ public partial class OthersParts : System.Web.UI.Page
             txtOthersPE.Text = TblRow["OthersPE"].ToString().Trim();
             txtOthersA.Text = TblRow["OthersA"].ToString().Trim();
             txtOthersP.Text = TblRow["OthersP"].ToString().Trim();
+            txtFollowUpIn.Text = TblRow["FollowUpIn"].ToString();
             txtTreatmentParagraph.Text = !string.IsNullOrEmpty(TblRow["TreatMentDetails"].ToString().Trim()) ? TblRow["TreatMentDetails"].ToString().Trim() : "";
             BindTreatmentEditValues(TblRow["TreatMentDelimit"].ToString().Trim());
 

@@ -6,12 +6,12 @@
     <right></right>
     <normal>120</normal>
   </ROM>
-  <ROM>
+  <!--<ROM>
     <name>Lateral flexion</name>
     <left></left>
     <right></right>
     <normal>30</normal>
-  </ROM>
+  </ROM>-->
   <Cervical>
     <name>Forward flexion</name>
     <rom></rom>

@@ -20,19 +20,20 @@
             <label> in nature.</label>
 
             <input type="checkbox" value="The shoulder pain worsens with " class="nocomma" id="chkshlpainL" onclick="checkMe(this)" /> The shoulder pain worsens with
-            <input type="checkbox" id="chkWorseMovementL" onclick="checkMe(this)" value="raising the arm" checked /> raising the arm,
-            <input type="checkbox" id="chkWorseLiftingL" onclick="checkMe(this)" value="lifting objects" checked /> lifting objects,
-            <input type="checkbox" id="chkWorseRotationL" onclick="checkMe(this)" value="rotation" /> rotation,
-            <input type="checkbox" id="chkWorseWorkingL" onclick="checkMe(this)" value="working" /> working,
-            <input type="checkbox" id="chkWorseActivitiesL" onclick="checkMe(this)" value="overhead activities" checked /> overhead activities
-           
+            <input type="checkbox" id="chkWorseMovementL" onclick="checkMe(this); checkDefault(this, 'chkshlpainL');" value="raising the arm" checked /> raising the arm,
+            <input type="checkbox" id="chkWorseLiftingL" onclick="checkMe(this); checkDefault(this, 'chkshlpainL');" value="lifting objects" checked /> lifting objects,
+            <input type="checkbox" id="chkWorseRotationL" onclick="checkMe(this); checkDefault(this, 'chkshlpainL');" value="rotation" /> rotation,
+            <input type="checkbox" id="chkWorseWorkingL" onclick="checkMe(this); checkDefault(this, 'chkshlpainL');" value="working" /> working,
+            <input type="checkbox" id="chkWorseActivitiesL" onclick="checkMe(this); checkDefault(this, 'chkshlpainL');" value="overhead activities" checked /> overhead activities
+
             <label>.</label>
             <input type="checkbox" id="chkleft1" value="The shoulder pain is improved with " class="nocomma" onclick="checkMe(this)" checked /> The shoulder pain is improved with&nbsp;
 
-            <input type="checkbox" id="chkImprovedRestingL" onclick="checkMe(this)" value="resting" checked /> resting,
-            <input type="checkbox" id="chkImprovedMedicationL" onclick="checkMe(this)" value="medication" /> medication,
-            <input type="checkbox" id="chkImprovedTherapyL" onclick="checkMe(this)" value="therapy" /> therapy,
-            <input type="checkbox" id="chkImprovedSleepingL" onclick="checkMe(this)" value="sleeping" /> sleeping
+            <input type="checkbox" id="chkImprovedRestingL" onclick="checkMe(this); checkDefault(this, 'chkleft1');" value="resting" checked /> resting,
+            <input type="checkbox" id="chkImprovedMedicationL" onclick="checkMe(this); checkDefault(this, 'chkleft1');" value="medication" /> medication,
+            <input type="checkbox" id="chkImprovedTherapyL" onclick="checkMe(this); checkDefault(this, 'chkleft1');" value="therapy" /> therapy,
+            <input type="checkbox" id="chkImprovedSleepingL" onclick="checkMe(this); checkDefault(this, 'chkleft1');" value="sleeping" /> sleeping
+            <input type="text" id="txtImproved2" style="width:240px;" onchange="txtMe(this);" />
             <label>.</label>
 
             <section class="col-md-3">
@@ -65,19 +66,20 @@
 
             <input type="checkbox" value="The shoulder pain worsens with " class="nocomma" id="chkshlpainR" onclick="checkMe(this)" /> The shoulder pain worsens with
 
-            <input type="checkbox" id="chkWorseLyingR" onclick="checkMe(this)" value="lying" /> lying,
-            <input type="checkbox" id="chkWorseMovementR" onclick="checkMe(this)" value="raising the arm" checked /> raising the arm,
-            <input type="checkbox" id="chkWorseLiftingR" onclick="checkMe(this)" value="lifting objects" checked /> lifting objects,
-            <input type="checkbox" id="chkWorseRotationR" onclick="checkMe(this)" value="rotation" /> rotation,
-            <input type="checkbox" id="chkWorseWorkingR" onclick="checkMe(this)" value="working" /> working,
-            <input type="checkbox" id="chkWorseActivitiesR" onclick="checkMe(this)" value="overhead activities" checked /> overhead activities
+            <input type="checkbox" id="chkWorseLyingR" onclick="checkMe(this); checkDefault(this, 'chkshlpainR');" value="lying" /> lying,
+            <input type="checkbox" id="chkWorseMovementR" onclick="checkMe(this); checkDefault(this, 'chkshlpainR');" value="raising the arm" checked /> raising the arm,
+            <input type="checkbox" id="chkWorseLiftingR" onclick="checkMe(this); checkDefault(this, 'chkshlpainR');" value="lifting objects" checked /> lifting objects,
+            <input type="checkbox" id="chkWorseRotationR" onclick="checkMe(this); checkDefault(this, 'chkshlpainR');" value="rotation" /> rotation,
+            <input type="checkbox" id="chkWorseWorkingR" onclick="checkMe(this); checkDefault(this, 'chkshlpainR');" value="working" /> working,
+            <input type="checkbox" id="chkWorseActivitiesR" onclick="checkMe(this); checkDefault(this, 'chkshlpainR');" value="overhead activities" checked /> overhead activities
             <label>.</label>
             <input type="checkbox" id="chkright1" value="The shoulder pain is improved with " class="nocomma" onclick="checkMe(this)" checked /> The shoulder pain is improved with&nbsp;
 
-            <input type="checkbox" id="chkImprovedRestingR" onclick="checkMe(this)" value="resting" checked /> resting,
-            <input type="checkbox" id="chkImprovedMedicationR" onclick="checkMe(this)" value="medication" /> medication,
-            <input type="checkbox" id="chkImprovedTherapyR" onclick="checkMe(this)" value="therapy" /> therapy,
-            <input type="checkbox" id="chkImprovedSleepingR" onclick="checkMe(this)" value="sleeping" /> sleeping
+            <input type="checkbox" id="chkImprovedRestingR" onclick="checkMe(this); checkDefault(this, 'chkright1');" value="resting" checked /> resting,
+            <input type="checkbox" id="chkImprovedMedicationR" onclick="checkMe(this); checkDefault(this, 'chkright1');" value="medication" /> medication,
+            <input type="checkbox" id="chkImprovedTherapyR" onclick="checkMe(this); checkDefault(this, 'chkright1');" value="therapy" /> therapy,
+            <input type="checkbox" id="chkImprovedSleepingR" onclick="checkMe(this); checkDefault(this, 'chkright1');" value="sleeping" /> sleeping
+            <input type="text" id="txtImprovedR" style="width:240px;" onchange="txtMe(this);" />
             <label>.</label>
 
             <section class="col-md-3">

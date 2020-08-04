@@ -282,7 +282,7 @@
                                         </FooterTemplate>
                                     </asp:Repeater>
                                 </td>
-                                <td>
+                                <td style="vertical-align:top">
                                     <asp:Repeater runat="server" ID="repROM">
                                         <HeaderTemplate>
                                             <table style="width: 100%;">
@@ -335,6 +335,7 @@
                         <asp:HiddenField runat="server" ID="hdPEDistraction" />
                         <asp:HiddenField runat="server" ID="hdPESides" />
                         <asp:HiddenField runat="server" ID="hdPESidesText" />
+                        <asp:HiddenField runat="server" ID="hdPETP" />
 
                     </div>
                 </div>
@@ -443,57 +444,7 @@
                                         <asp:TextBox ID="txtPDesc" runat="server" CssClass="form-control" Width="600px" TextMode="MultiLine" Text='<%# Eval("PDesc") %>'></asp:TextBox>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <%--<asp:TemplateField HeaderText="IsChkd">
-
-                                            <ItemTemplate>
-                                                <asp:CheckBox ID="CheckBox2" runat="server" value='<%# Convert.ToBoolean(Eval("IsChkd")) %>' AutoPostBack="true" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
-                                <%-- <asp:TemplateField HeaderText="MCODE" ItemStyle-Width="150">
-                                            <ItemTemplate>
-                                                <asp:Label ID="mcode" runat="server" Text='<%# Eval("MCODE") %>'></asp:Label>
-                                                
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
-                                <%-- <asp:TemplateField HeaderText="BodyPart" >
-                                            <ItemTemplate>
-                                                <label><%# Eval("BodayParts") %></label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
-
-
-
-                                <%--  <asp:TemplateField HeaderText="IsChkd" ItemStyle-Width="20">
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="CheckBox4" CssClass="checkbox" runat="server" Checked='<%# Convert.ToBoolean(Eval("PN")) %>' />
- test                                    </ItemTemplate>
-                                </asp:TemplateField>--%>
-                                <%-- <asp:TemplateField HeaderText="CC">
-                                    <ItemTemplate>
-                                        <asp:TextBox ID="txtcc" runat="server" TextMode="MultiLine" Text='<%# Eval("CCDesc") %>'></asp:TextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="PE">
-                                    <ItemTemplate>
-                                        <asp:TextBox ID="txtpe" runat="server" TextMode="MultiLine" Text='<%# Eval("PEDesc") %>'></asp:TextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="A/D">
-                                    <ItemTemplate>
-                                        <asp:TextBox ID="txtadesc" runat="server" TextMode="MultiLine" Text='<%# Eval("ADesc") %>'></asp:TextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="P">
-                                    <ItemTemplate>
-                                        <asp:TextBox ID="txtpdesc" runat="server" TextMode="MultiLine" Text='<%# Eval("PDesc") %>'></asp:TextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>--%>
-
-                                <%-- <asp:TemplateField HeaderText="PN" ItemStyle-Width="20">
-                                            <ItemTemplate>
-                                                <asp:CheckBox ID="CheckBox3" Enabled="false" runat="server" value='<%# Eval("PN") %>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
+                               
                             </Columns>
                         </asp:GridView>
                     </div>

@@ -513,7 +513,7 @@
                         </table>
                     </div>
                 </div>
-                <asp:UpdatePanel runat="server" ID="upMedicine" UpdateMode="Conditional">
+                <asp:UpdatePanel runat="server" ID="upMedicine" UpdateMode="Conditional" Visible="false">
                     <ContentTemplate>
                         <div class="row">
                             <div class="col-md-3">
@@ -551,8 +551,7 @@
                 </asp:UpdatePanel>
 
                 <div >
-
-                    <div class="row">
+                    <div class="row" style="display:none">
                         <div class="col-md-3">
                             <label class="control-label labelcolor">PROCEDURE:</label>
                         </div>
@@ -595,9 +594,10 @@
                             <%--<asp:CheckBox ID="chkCardiac" Text="cardiac  " runat="server" />
                             <asp:CheckBox ID="chkWeightBearing" Text="weight bearing precaution and " runat="server" />--%>
                             <%--<asp:TextBox ID="txtPrecautions" Width="300" runat="server" />.--%>
-                            <asp:TextBox ID="txtPrecautions"  runat="server" TextMode="MultiLine" Width="700px" Height="100px"
-                                 Text="All the treatment options have been discussed with the patient in detail. Pain management compliance was discussed with patient.Patient may need urine toxicology for the possibility of prescribing controlled medicine because pain still complains of pain affecting activities of daily living. Pain contract signed in chart. Patient understood and agrees with the plan."></asp:TextBox>
-                        </div>                        <div class="col-md-9" style="margin-top: 5px">
+                            <asp:TextBox ID="txtPrecautions" runat="server" TextMode="MultiLine" Width="700px" Height="100px"
+                                Text="All the treatment options have been discussed with the patient in detail. Pain management compliance was discussed with patient.Patient may need urine toxicology for the possibility of prescribing controlled medicine because pain still complains of pain affecting activities of daily living. Pain contract signed in chart. Patient understood and agrees with the plan."></asp:TextBox>
+                        </div>
+                        <div class="col-md-9" style="margin-top: 5px">
                             <asp:CheckBox ID="chkEducationProvided" Text="Patient education provided via  " runat="server" />
                             <asp:CheckBox ID="chkViaPhysician" Text="physician  " runat="server" />
                             <asp:CheckBox ID="chkViaPrintedMaterial" Text="printed material  " runat="server" />
@@ -606,7 +606,7 @@
                             <asp:TextBox ID="txtViaVideo" runat="server" />
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="display:none">
                         <div class="col-md-3">
                             <label class="control-label labelcolor">CONSULTATION :</label>
                         </div>
@@ -620,7 +620,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="display:none">
                     <div class="col-md-3">
                         <label class="control-label labelcolor">FOLLOW UP:</label><asp:TextBox ID="txtFollowUpIn" runat="server" />
                         &nbsp;

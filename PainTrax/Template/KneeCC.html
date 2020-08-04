@@ -20,13 +20,13 @@
             <label> in nature.</label>
 
             <input type="checkbox" id="chkkneepainL" value="The knee pain worsens with " class="nocomma" onclick="checkMe(this)" /> The knee pain worsens with
-            <input type="checkbox" id="chkWorsesquattingL" value="squatting" onclick="checkMe(this)" /> squatting
-            <input type="checkbox" id="chkWorseWalkingL" value="walking" onclick="checkMe(this)" checked /> walking
-            <input type="checkbox" id="chkWorseupStairsL" value="climbing stairs" onclick="checkMe(this)" checked /> climbing stairs
-            <input type="checkbox" id="chkWorsegoingdownstairs" value="going downstairs" onclick="checkMe(this)" checked /> going downstairs
-			<input type="checkbox" id="chkWorsestanding" value="standing" onclick="checkMe(this)" checked /> standing
-		    <input type="checkbox" id="chkWorsegettingupfromchair" value="getting up from chair" onclick="checkMe(this)" /> getting up from chair
-            <input type="checkbox" id="chkWorsegettingoutofcar" value="getting out of car" onclick="checkMe(this)" checked /> getting out of car
+            <input type="checkbox" id="chkWorsesquattingL" value="squatting" onclick="checkMe(this);checkDefault(this, 'chkkneepainL');" /> squatting
+            <input type="checkbox" id="chkWorseWalkingL" value="walking" onclick="checkMe(this);checkDefault(this, 'chkkneepainL');" checked /> walking
+            <input type="checkbox" id="chkWorseupStairsL" value="climbing stairs" onclick="checkMe(this);checkDefault(this, 'chkkneepainL');" checked /> climbing stairs
+            <input type="checkbox" id="chkWorsegoingdownstairs" value="going downstairs" onclick="checkMe(this);checkDefault(this, 'chkkneepainL');" checked /> going downstairs
+			<input type="checkbox" id="chkWorsestanding" value="standing" onclick="checkMe(this);checkDefault(this, 'chkkneepainL');" checked /> standing
+		    <input type="checkbox" id="chkWorsegettingupfromchair" value="getting up from chair" onclick="checkMe(this);checkDefault(this, 'chkkneepainL');" /> getting up from chair
+            <input type="checkbox" id="chkWorsegettingoutofcar" value="getting out of car" onclick="checkMe(this);checkDefault(this, 'chkkneepainL');" checked /> getting out of car
             <!--<input type="checkbox" id="chkWorsemovementL" value="movement" onclick="checkMe(this)" checked /> movement
             <input type="checkbox" id="chkWorseWalkingL" value="walking" onclick="checkMe(this)" checked /> walking
             <input type="checkbox" id="chkWorseupStairsL" value="climbing stairs" onclick="checkMe(this)" checked /> climbing stairs
@@ -36,10 +36,10 @@
             <label>.</label>
             <input type="checkbox" id="chkkneeimpleft" value="The knee pain is improved with " class="nocomma" onclick="checkMe(this)" checked />&nbsp;The knee pain is improved with
 
-            <input type="checkbox" id="chkImprovedRestingL" value="resting" onclick="checkMe(this)" checked /> resting
-            <input type="checkbox" id="chkImprovedMedicationL" value="medication" onclick="checkMe(this)" /> medication
-            <input type="checkbox" id="chkImprovedTherapyL" value="therapy" onclick="checkMe(this)" /> therapy
-            <input type="checkbox" id="chkImprovedSleepingL" value="sleeping" onclick="checkMe(this)" /> sleeping
+            <input type="checkbox" id="chkImprovedRestingL" value="resting" onclick="checkMe(this);checkDefault(this, 'chkkneeimpleft');" checked /> resting
+            <input type="checkbox" id="chkImprovedMedicationL" value="medication" onclick="checkMe(this);checkDefault(this, 'chkkneeimpleft');" /> medication
+            <input type="checkbox" id="chkImprovedTherapyL" value="therapy" onclick="checkMe(this);checkDefault(this, 'chkkneeimpleft');" /> therapy
+            <input type="checkbox" id="chkImprovedSleepingL" value="sleeping" onclick="checkMe(this);checkDefault(this, 'chkkneeimpleft');" /> sleeping
             <label>.</label>
 
 
@@ -73,18 +73,20 @@
             <label> in nature.</label>
 
             <input type="checkbox" id="chkkneepainR" value="The knee pain worsens with " class="nocomma" onclick="checkMe(this)" /> The knee pain worsens with
-            <input type="checkbox" id="chkWorsemovementR" value="movement" onclick="checkMe(this)" checked /> movement
-            <input type="checkbox" id="chkWorseWalkingR" value="walking" onclick="checkMe(this)" checked /> walking
-            <input type="checkbox" id="chkWorseupStairsR" value="climbing stairs" onclick="checkMe(this)" checked /> climbing stairs
-            <input type="checkbox" id="chkWorsesquattingR" value="squatting" onclick="checkMe(this)" /> squatting
-            <input type="checkbox" id="chkWorseactivitiesR" value="activities" onclick="checkMe(this)" checked /> activities
-            <input type="text" id="txtPainScaleR" style="Width:140px" value="" onchange="txtMe(this)" />
+            <input type="checkbox" id="chkWorsesquattingR" value="squatting" onclick="checkMe(this);checkDefault(this, 'chkkneepainR');" /> squatting
+            <input type="checkbox" id="chkWorseWalkingR" value="walking" onclick="checkMe(this);checkDefault(this, 'chkkneepainR');" checked /> walking
+            <input type="checkbox" id="chkWorseupStairsR" value="climbing stairs" onclick="checkMe(this);checkDefault(this, 'chkkneepainR');" checked /> climbing stairs
+            <input type="checkbox" id="chkWorsegoingdownstairsR" value="going downstairs" onclick="checkMe(this);checkDefault(this, 'chkkneepainR');" checked /> going downstairs
+            <input type="checkbox" id="chkWorsestandingR" value="standing" onclick="checkMe(this);checkDefault(this, 'chkkneepainR');" checked /> standing
+            <input type="checkbox" id="chkWorsegettingupfromchairR" value="getting up from chair" onclick="checkMe(this);checkDefault(this, 'chkkneepainR');" /> getting up from chair
+            <input type="checkbox" id="chkWorsegettingoutofcarR" value="getting out of car" onclick="checkMe(this);checkDefault(this, 'chkkneepainR');" checked /> getting out of car
+            <input type="text" id="txtPainScaleLR" style="Width:140px" value="" onchange="txtMe(this)" />
             <label>.</label>
             <input type="checkbox" id="chkkneeimpright" value="The knee pain is improved with " class="nocomma" onclick="checkMe(this)" checked />&nbsp;The knee pain is improved with
-            <input type="checkbox" id="chkImprovedRestingR" value="resting" onclick="checkMe(this)" checked /> resting
-            <input type="checkbox" id="chkImprovedMedicationR" value="medication" onclick="checkMe(this)" /> medication
-            <input type="checkbox" id="chkImprovedTherapyR" value="therapy" onclick="checkMe(this)" /> therapy
-            <input type="checkbox" id="chkImprovedSleepingR" value="sleeping" onclick="checkMe(this)" /> sleeping
+            <input type="checkbox" id="chkImprovedRestingR" value="resting" onclick="checkMe(this);checkDefault(this, 'chkkneeimpright');" checked /> resting
+            <input type="checkbox" id="chkImprovedMedicationR" value="medication" onclick="checkMe(this);checkDefault(this, 'chkkneeimpright');" /> medication
+            <input type="checkbox" id="chkImprovedTherapyR" value="therapy" onclick="checkMe(this);checkDefault(this, 'chkkneeimpright');" /> therapy
+            <input type="checkbox" id="chkImprovedSleepingR" value="sleeping" onclick="checkMe(this);checkDefault(this, 'chkkneeimpright');" /> sleeping
             <label>.</label>
 
 
@@ -115,6 +117,17 @@
             $(chk).removeAttr('checked');
         }
 
+    }
+
+    function checkDefault(chk, deafCheck) {
+
+        if ($("#" + deafCheck).prop("checked") == false) {
+
+            if ($(chk).prop("checked")) {
+                $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
     }
 
     function txtMe(txt) {

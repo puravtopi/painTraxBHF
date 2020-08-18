@@ -130,6 +130,7 @@
 
              
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCCv" />
                
                 <div class="row"style="display:none">
                     <div class="col-md-3">
@@ -187,11 +188,11 @@
                                     <%--<td>
                                                 <asp:TextBox ID="txtLEFlexionLeftWas" Text="30" Width="50px" runat="server"></asp:TextBox></td>--%>
                                     <td>
-                                        <asp:TextBox ID="txtleft" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
+                                        <asp:TextBox ID="txtleft"  CssClass="paincls" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
                                     <%-- <td>
                                                 <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
                                     <td>
-                                        <asp:TextBox ID="txtright" Width="50px" Text='<%# Eval("right") %>' onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
+                                        <asp:TextBox ID="txtright"  CssClass="paincls" Width="50px" Text='<%# Eval("right") %>' onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
                                     <td>
                                         <asp:TextBox ID="txtnormal" ReadOnly="true" Text='<%# Eval("normal") %>' Width="50px" runat="server"></asp:TextBox></td>
                                 </tr>
@@ -317,6 +318,7 @@
 
                   
                     <asp:HiddenField runat="server" ID="hdPEvalue" />
+                    <asp:HiddenField runat="server" ID="hdorgPE" />
                   
 
                 </div>

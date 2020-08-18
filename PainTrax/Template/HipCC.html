@@ -5,25 +5,25 @@
     <div class="col-md-9" style="margin-top: 5px">
         <div id="WrapLeft" #leftdiv>
             <label class="control-label">The patient complains of left hip pain that is </label>
-            <input type="text" id="txtPainScaleL" style="Width:40px" value="8" onchange="txtMe(this)" />
+            <input type="text" id="txtPainScaleL" style="Width:40px" class="paincls" value="8" onchange="txtMe(this)" />
             <label class="control-label">/10, with 10 being the worst, which is </label>
             <input id="chkcontentL" type="checkbox" value="constant" onclick="checkMe(this)" /> constant,
             <input id="chkintermittentL" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent,
-            <input id="chksharpL" type="checkbox" value="sharp" onclick="checkMe(this)" checked /> sharp,
+            <input id="chksharpL" type="checkbox" value="sharp" onclick="checkMe(this)"  /> sharp,
 
             <input id="chkelectricL" type="checkbox" value="electric" onclick="checkMe(this)" />electric,
             <input id="chkshootingL" type="checkbox" value="shooting" onclick="checkMe(this)" /> shooting,
             <input id="chkthrobblingL" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing,
             <input id="chkpulsatingL" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating,
-            <input id="chkdullL" type="checkbox" value="dull" onclick="checkMe(this)" checked /> dull,
-            <input id="chkachyL" type="checkbox" value="achy" onclick="checkMe(this)" checked /> achy,
+            <input id="chkdullL" type="checkbox" value="dull" onclick="checkMe(this)"  /> dull,
+            <input id="chkachyL" type="checkbox" value="achy" onclick="checkMe(this)"  /> achy,
             <label>in nature.</label>
 
-            <input type="checkbox" id="chkhipworsL" value="The hip pain worsened with " class="nocomma" checked="checked" />The hip pain worsened with
-            <input type="checkbox" id="chkWorseSittingL" value="sitting" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" checked /> sitting,
-            <input type="checkbox" id="chkWorseStandingL" value="standing" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" /> standing,
-            <input type="checkbox" id="chkWorseMovementL" value="movement" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" /> movement,
-            <input type="checkbox" id="chkWorseActivitiesL" value="activities" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" checked /> activities
+            <input type="checkbox" id="chkhipworsL" value="The hip pain worsened with " class="nocomma"  />The hip pain worsened with
+            <input type="checkbox" id="chkWorseSittingL" class="chkpainL" value="sitting" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');"  /> sitting,
+            <input type="checkbox" id="chkWorseStandingL" class="chkpainL" value="standing" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" /> standing,
+            <input type="checkbox" id="chkWorseMovementL" class="chkpainL" value="movement" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" /> movement,
+            <input type="checkbox" id="chkWorseActivitiesL" class="chkpainL" value="activities" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');"  /> activities
             <input type="text" id="txtHip1L" style="width:240px" class="nocomma" />
             <span>.</span>
 
@@ -44,26 +44,26 @@
         </div>
         <div id="WrapRight" #rigthtdiv>
             <label class="control-label">The patient complains of right hip pain that is </label>
-            <input type="text" id="txtPainScaleR" style="Width:40px" value="8" onchange="txtMe(this)" />
+            <input type="text" id="txtPainScaleR" style="Width:40px" class="paincls" value="8" onchange="txtMe(this)" />
             <label class="control-label">/10, with 10 being the worst, which is </label>
             <input id="chkcontentR" type="checkbox" value="constant" onclick="checkMe(this)" /> constant,
             <input id="chkintermittentR" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent,
-            <input id="chksharpR" type="checkbox" value="sharp" onclick="checkMe(this)" checked /> sharp,
+            <input id="chksharpR" type="checkbox" value="sharp" onclick="checkMe(this)"  /> sharp,
 
             <input id="chkelectricR" type="checkbox" value="electric" onclick="checkMe(this)" /> electric,
             <input id="chkshootingR" type="checkbox" value="shooting" onclick="checkMe(this)" /> shooting,
             <input id="chkthrobblingR" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing,
             <input id="chkpulsatingR" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating,
-            <input id="chkdullR" type="checkbox" value="dull" onclick="checkMe(this)" checked /> dull,
-            <input id="chkachyR" type="checkbox" value="achy" onclick="checkMe(this)" checked /> achy,
+            <input id="chkdullR" type="checkbox" value="dull" onclick="checkMe(this)"  /> dull,
+            <input id="chkachyR" type="checkbox" value="achy" onclick="checkMe(this)"  /> achy,
             <label>in nature.</label>
 
 
-            <input type="checkbox" id="chkhipworsR" value="The hip pain worsened with " class="nocomma" checked="checked" />The hip pain worsened with
-            <input type="checkbox" id="chkWorseSittingR" value="sitting" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" checked /> sitting,
-            <input type="checkbox" id="chkWorseStandingR" value="standing" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" /> standing,
-            <input type="checkbox" id="chkWorseMovementR" value="movement" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" /> movement,
-            <input type="checkbox" id="chkWorseActivitiesR" value="activities" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" checked /> activities
+            <input type="checkbox" id="chkhipworsR" value="The hip pain worsened with " class="nocomma"  />The hip pain worsened with
+            <input type="checkbox" id="chkWorseSittingR" class="chkpainR" value="sitting" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');"  /> sitting,
+            <input type="checkbox" id="chkWorseStandingR" class="chkpainR" value="standing" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" /> standing,
+            <input type="checkbox" id="chkWorseMovementR" class="chkpainR" value="movement" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" /> movement,
+            <input type="checkbox" id="chkWorseActivitiesR" class="chkpainR" value="activities" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');"  /> activities
             <input type="text" id="txtHip1R" style="width:240px" class="nocomma" onchange="txtMe(this)" />
             <label>.</label>
             <br />
@@ -99,10 +99,47 @@
 
     function checkDefault(chk, deafCheck) {
 
+        debugger
+
+
+        var isCheck = false;
+        var className = "";
         if ($("#" + deafCheck).prop("checked") == false) {
 
             if ($(chk).prop("checked")) {
                 $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
+
+
+        if (deafCheck === "chkhipworsL")
+            className = "chkpainL";
+        else if (deafCheck === "chkhipworsR")
+            className = "chkpainR";
+        else if (deafCheck === "chkrightrevel")
+            className = "chkuponR";
+        else if (deafCheck === "chkleftrevel")
+            className = "chkuponL";
+
+
+
+
+        if ($("#" + deafCheck).prop("checked") == true) {
+
+
+
+
+            if ($(chk).prop("checked") == false) {
+
+                $("input:checkbox[class=" + className + "]").each(function () {
+                    if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                        isCheck = true;
+                    }
+                });
+
+                if (!isCheck)
+                    $("#" + deafCheck).removeAttr('checked');
 
             }
         }

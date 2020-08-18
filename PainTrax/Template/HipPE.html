@@ -5,9 +5,9 @@
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Hip Examination:</b> </span><label style="visibility:hidden">#lefthiptitle</label>
         <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the " /> There is tenderness upon palpation of the
-        <input type="checkbox" ID="chkGreaterTrochanterLeft" onclick="checkMe(this)" value="greater trochanter" /> greater trochanter
-        <input type="checkbox" ID="chkPosteriorLeft" onclick="checkMe(this)" value="posterior aspect of the greater trochanter" /> posterior aspect of the greater trochanter
-        <input type="checkbox" ID="chkIliotibialLeft" onclick="checkMe(this)" value="iliotibial band" /> iliotibial band
+        <input type="checkbox" ID="chkGreaterTrochanterLeft" class="chkuponL" onclick="checkMe(this);checkDefault(this, 'chkleftrevel');" value="greater trochanter" /> greater trochanter
+        <input type="checkbox" ID="chkPosteriorLeft" class="chkuponL" onclick="checkMe(this);checkDefault(this, 'chkleftrevel');" value="posterior aspect of the greater trochanter" /> posterior aspect of the greater trochanter
+        <input type="checkbox" ID="chkIliotibialLeft" class="chkuponL" onclick="checkMe(this);checkDefault(this, 'chkleftrevel');" value="iliotibial band" /> iliotibial band
         <label>.</label>
         <br />
         <section style="display:none">
@@ -44,9 +44,9 @@
         <span><b>Right Hip Examination:</b> </span><label style="visibility:hidden">#rigthhiptitle</label>
 
         <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the " />There is tenderness upon palpation of the
-        <input type="checkbox" ID="chkGreaterTrochanterRight" onclick="checkMe(this)" value="greater trochanter" /> greater trochanter
-        <input type="checkbox" ID="chkPosteriorRight" onclick="checkMe(this)" value="posterior aspect of the greater trochanter" /> posterior aspect of the greater trochanter
-        <input type="checkbox" ID="chkIliotibialRight" onclick="checkMe(this)" value="iliotibial band" /> iliotibial band
+        <input type="checkbox" ID="chkGreaterTrochanterRight" class="chkuponR" onclick="checkMe(this);checkDefault(this, 'chkrightrevel');" value="greater trochanter" /> greater trochanter
+        <input type="checkbox" ID="chkPosteriorRight" class="chkuponR" onclick="checkMe(this);checkDefault(this, 'chkrightrevel');" value="posterior aspect of the greater trochanter" /> posterior aspect of the greater trochanter
+        <input type="checkbox" ID="chkIliotibialRight" class="chkuponR" onclick="checkMe(this);checkDefault(this, 'chkrightrevel');" value="iliotibial band" /> iliotibial band
         <label>.</label>
         <br />
         <section style="display:none">
@@ -80,21 +80,21 @@
 
     <div id="TestPE">
         <br />
-        <input type="checkbox" id="chkOber" value="The Ober test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Ober test is&nbsp;
+        <input type="checkbox" id="chkOber" value="Ober test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Ober test is&nbsp;
 
         <section class="dropdown">
             <input type="text" id="txtOber" onchange="txtMe(this);selectTestCHK('chkOber', this.value)" />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtOber', this.value);selectTestCHK('chkOber', this.value)" id="ddlOber"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
         </section>
         <br />
-        <input type="checkbox" id="chkMcMurrays" value="The FABER test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The FABER test is&nbsp;
+        <input type="checkbox" id="chkMcMurrays" value="FABER test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The FABER test is&nbsp;
 
         <section class="dropdown">
             <input type="text" id="txtFABER" onchange="txtMe(this);selectTestCHK('chkMcMurrays', this.value)" />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtFABER', this.value);selectTestCHK('chkMcMurrays', this.value)" id="ddlFABER"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
         </section>
         <br />
-        <input type="checkbox" id="chkTrendelenburg" value="The Trendelenburg test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Trendelenburg test is&nbsp;
+        <input type="checkbox" id="chkTrendelenburg" value="Trendelenburg test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Trendelenburg test is&nbsp;
 
         <section class="dropdown">
             <input type="text" id="txtTrendelenburg" onchange="txtMe(this);selectTestCHK('chkTrendelenburg', this.value)" />
@@ -179,6 +179,8 @@
             $(chk).removeAttr('checked');
         }
     }
+
+  
 
     function selectTestCHK(chkid, val) {
 

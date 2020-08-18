@@ -313,7 +313,7 @@
 
                    <div class="row" >
                     <div class="col-md-3">
-                        <label class="control-label labelcolor">FOLLOW UP:</label><asp:TextBox ID="txtFollowUpIn" runat="server" />
+                        <label class="control-label labelcolor">FOLLOW UP:</label><asp:TextBox ID="txtFollowUpIn" runat="server" Text="2-4 weeks." />
                         &nbsp;
                         <asp:TextBox ID="txtFollowUpInDate" runat="server" placeholder="MM/dd/yyyy" Visible="false" />
                     </div>

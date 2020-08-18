@@ -46,26 +46,7 @@
         <div class="row">
             <div class="col-lg-10" id="content">
 
-                <%--    <ul class="breadcrumb">
-                                <li>
-                                    <i class="icon-home"></i>
-                                    <a href="Page1.aspx"><span class="label">Page1</span></a>
-                                </li>
-                                <li id="lipage2">
-                                    <i class="icon-edit"></i>
-                                    <a href="Page2.aspx"><span class="label label-success">Page2</span></a>
-                                </li>
-                                <li id="li1" runat="server" enable="false">
-                                    <i class="icon-edit"></i>
-                                    <a href="Page3.aspx"><span class="label">Page3</span></a>
-                                </li>
-                                <li id="li2" runat="server" enable="false">
-                                    <i class="icon-edit"></i>
-                                    <a href="Page4.aspx"><span class="label">Page4</span></a>
-                                </li>
-                            </ul>--%>
-                <%--             <div class="row">
-                        <div class="col-md-12">--%>
+              
 
                 <div runat="server" id="CF">
                 </div>
@@ -73,46 +54,9 @@
                 <asp:HiddenField runat="server" ID="hdId" Value="0" />
 
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                  <asp:HiddenField runat="server" ID="hdorgvalCC" />
 
-
-                <%-- <div class="row">
-                    <div class="col-md-3">
-                        <label class="control-label">Notes:</label>
-                    </div>
-                    <div class="col-md-9" style="margin-top: 5px">
-                         <asp:Label runat="server" Text="Neck pain is associated with weakness in &nbsp;" Font-Bold="False"></asp:Label>
-                        <asp:TextBox ID="txtWeeknessIn" runat="server"></asp:TextBox>
-                        <asp:Label runat="server" ID="lblneckpain" Text=".  Neck pain is worsened with  " Font-Bold="False"></asp:Label>
-                        <asp:CheckBox ID="chkWorseSitting" runat="server" Checked="true" Text="sitting,  " />
-                        <asp:CheckBox ID="chkWorseStanding" runat="server" Checked="true" Text="standing,  " />
-                        <asp:CheckBox ID="chkWorseLyingDown" runat="server" Checked="true" Text="lying down,  " />
-                        <asp:CheckBox ID="chkWorseMovement" runat="server" Text="movement activities,  " />
-                        <asp:CheckBox ID="chkWorseSeatingtoStandingUp" runat="server" Text="going from seating to standing up,  " />
-                        <asp:CheckBox ID="chkWorseWalking" runat="server" Text="walking,  " />
-                        <asp:CheckBox ID="chkWorseClimbingStairs" runat="server" Text="climbing stairs,  " />
-                        <asp:CheckBox ID="chkWorseDescendingStairs" runat="server" Text="descending stairs,  " />
-                        <asp:CheckBox ID="chkWorseDriving" runat="server" Text="driving,  " />
-                        <asp:CheckBox ID="chkWorseWorking" runat="server" Text="working,  " />
-                        <asp:CheckBox ID="chkWorseBending" runat="server" Text="bending,  " />
-                        <asp:CheckBox ID="chkWorseLifting" runat="server" Text="lifting,  " />
-                        <asp:CheckBox ID="chkWorseTwisting" runat="server" Text="twisting " />
-                        <asp:Label ID="lbland" runat="server" Text="&nbsp;and&nbsp;" />
-                        <asp:TextBox ID="txtWorseOtherText" runat="server"></asp:TextBox>
-                        <asp:Label ID="Label4" runat="server" Text=". Neck pain is improved with "></asp:Label>
-                        <asp:CheckBox ID="chkImprovedResting" runat="server" Text="resting, " />
-                        <asp:CheckBox ID="chkImprovedMedication" runat="server" Text="medication, " />
-                        <asp:CheckBox ID="chkImprovedTherapy" runat="server" Text="therapy, " />
-                        <asp:CheckBox ID="chkImprovedSleeping" runat="server" Text="sleeping, " />
-                        <asp:CheckBox ID="chkImprovedMovement" runat="server" Text="movement. " />
-                        <div class="col-md-9" style="margin-top: 5px">
-                            <asp:TextBox runat="server" ID="txtFreeFormCC" TextMode="MultiLine" Width="700px" Height="100px"></asp:TextBox>
-                            <button type="button" id="start_button1" onclick="startButton1(event)">
-                                <img src="images/mic.gif" alt="start" /></button>
-                            <div style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></div>
-                        </div>
-
-                    </div>
-                </div>--%>
+            
 
                 <div class="row">
                     <div class="col-md-3">
@@ -143,7 +87,7 @@
                                                         <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
 
                                                     <td>
-                                                        <asp:TextBox ID="txtrom" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("rom") %>'></asp:TextBox></td>
+                                                        <asp:TextBox ID="txtrom" runat="server" Width="50px" CssClass="paincls" onkeypress="return onlyNumbers(event);" Text='<%# Eval("rom") %>'></asp:TextBox></td>
                                                     <%-- <td>
                                                 <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
 
@@ -183,11 +127,11 @@
                                                     <%--<td>
                                                 <asp:TextBox ID="txtLEFlexionLeftWas" Text="30" Width="50px" runat="server"></asp:TextBox></td>--%>
                                                     <td>
-                                                        <asp:TextBox ID="txtleft" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
+                                                        <asp:TextBox ID="txtleft" runat="server" Width="50px" CssClass="paincls" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
                                                     <%-- <td>
                                                 <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
                                                     <td>
-                                                        <asp:TextBox ID="txtright" Width="50px" Text='<%# Eval("right") %>' onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
+                                                        <asp:TextBox ID="txtright" Width="50px" Text='<%# Eval("right") %>' CssClass="paincls" onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
                                                     <td>
                                                         <asp:TextBox ID="txtnormal" ReadOnly="true" Text='<%# Eval("normal") %>' Width="50px" runat="server"></asp:TextBox></td>
                                                 </tr>
@@ -487,6 +431,9 @@
     <%-- </form>--%>
 
     <script type="text/javascript">
+
+        
+
         function Confirmbox(e, page) {
 
             e.preventDefault();
@@ -514,6 +461,8 @@
                 $('#divTP').show();
 
         }
+
+     
 
 
         function bindSidesVal(valStr, valStr1) {

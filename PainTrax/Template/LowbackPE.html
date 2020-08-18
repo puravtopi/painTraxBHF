@@ -1,12 +1,26 @@
 ﻿
 <div class="col-md-9 row" style="margin-top: 5px">
+    <label>
+        Reveals tenderness upon palpation at
+    </label>
+    <input id="txtspineexam" type="text" style="width:100px;text-align:left" value="C2-7" onchange="txtMe(this)" />
+    <label> levels </label>
+    <section class="dropdown">
+        <input type="text" id="txtWorse1" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtWorse1', this.value)" id="ddlWorse1">
+            <option></option>
+            <option> bilaterally</option>
+            <option> on the left</option>
+            <option> on the right</option>
+        </select>
+    </section>
+    <label> with muscle spasm present. </label>
 
-   
     <br />
     <table>
         <tr>
             <td>
-                <input type="checkbox" id="chkSLR" value="The Strainght leg raise test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Strainght leg raise test is
+                <input type="checkbox" id="chkSLR" value="Straight leg raise test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Straight leg raise test is
 
                 <section class="dropdown">
                     <input type="text" id="txtSLR" onchange="txtMe(this);selectTestCHK('chkSLR', this.value)" />
@@ -17,11 +31,11 @@
                         <option>positive on right.</option>
                         <option>positive bilaterally.</option>
                     </select>
-                </section> 
+                </section>
                 <span>.</span>
             </td>
             <td>
-                <input type="checkbox" id="chkFABR" value="The Braggard test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Braggard test is
+                <input type="checkbox" id="chkFABR" value="Braggard test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Braggard test is
 
                 <section class="dropdown">
                     <input type="text" id="txtBraggard" onchange="txtMe(this);selectTestCHK('chkFABR', this.value)" />
@@ -32,7 +46,7 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" id="chkKS" value="The Kernig sign test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Kernig sign test is
+                <input type="checkbox" id="chkKS" value="Kernig sign test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Kernig sign test is
 
                 <section class="dropdown">
                     <input type="text" id="txtKS" onchange="txtMe(this);selectTestCHK('chkKS', this.value)" />
@@ -47,7 +61,7 @@
                 <span>.</span>
             </td>
             <td>
-                <input type="checkbox" id="chkBT" value="The Brudzinski test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Brudzinski test is
+                <input type="checkbox" id="chkBT" value="Brudzinski test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Brudzinski test is
 
                 <section class="dropdown">
                     <input type="text" id="txtBT" onchange="txtMe(this);selectTestCHK('chkBT', this.value)" />
@@ -58,7 +72,7 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" id="chkSC" value="The Sacroiliac compression test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Sacroiliac compression test is
+                <input type="checkbox" id="chkSC" value="Sacroiliac compression test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Sacroiliac compression test is
 
                 <section class="dropdown">
                     <input type="text" id="txtSC" onchange="txtMe(this);selectTestCHK('chkSC', this.value)" />
@@ -73,7 +87,7 @@
                 <span>.</span>
             </td>
             <td>
-                <input type="checkbox" id="chkSNT" value="The Sacral notch tenderness test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Sacral notch tenderness test is
+                <input type="checkbox" id="chkSNT" value="Sacral notch tenderness test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Sacral notch tenderness test is
 
                 <section class="dropdown">
                     <input type="text" id="txtSNT" onchange="txtMe(this);selectTestCHK('chkSNT', this.value)" />
@@ -84,7 +98,7 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" id="chkOTC" value="The Ober test causing pain at the SI joint test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Ober test causing pain at the SI joint test is
+                <input type="checkbox" id="chkOTC" value="Ober's test causing pain at the SI joint test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Ober's test causing pain at the SI joint test is
 
                 <section class="dropdown">
                     <input type="text" id="txtOTC" onchange="txtMe(this);selectTestCHK('chkOTC', this.value)" />

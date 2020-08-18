@@ -301,6 +301,7 @@
                 </div>
 
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCC" />
 
                   <div class="col-md-9" style="margin-top: 5px; ">
 
@@ -363,6 +364,7 @@
 
 
                     <asp:HiddenField runat="server" ID="hdPEvalue" />
+                    <asp:HiddenField runat="server" ID="hdorgPE" />
                     <asp:HiddenField runat="server" ID="hdPESides" />
                     <asp:HiddenField runat="server" ID="hdPESidesText" />
 

@@ -4,14 +4,14 @@
     </div>
     <div class="col-md-9" style="margin-top: 5px">
         <label>The patient complains of neck pain that is </label>
-        <input id="txtPainScale" type="text" style="width:40px;text-align:left" value="8" onchange="txtMe(this)" />
+        <input id="txtPainScale" class="paincls" type="text" style="width:40px;text-align:left" value="8" onchange="txtMe(this)" />
         <label>/10, with 10 being the worst and </label>
         <input id="chkcontent" type="checkbox" value="constant" onclick="checkMe(this)" /> constant
         <input id="chkintermittent" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent.
-        <input id="chksharp" type="checkbox" value="sharp" onclick="checkMe(this)" checked /> sharp
+        <input id="chksharp" type="checkbox" value="sharp" onclick="checkMe(this)"  /> sharp
 
         <input id="chkelectric" type="checkbox" value="electric" onclick="checkMe(this)" /> electric
-        <input id="chkshooting" type="checkbox" value="shooting" onclick="checkMe(this)" checked /> shooting
+        <input id="chkshooting" type="checkbox" value="shooting" onclick="checkMe(this)"  /> shooting
         <input id="chkthrobbling" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing
 
         <input id="chkpulsating" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating
@@ -21,10 +21,10 @@
         <br />
         <input id="txtradiates" style="visibility:hidden" #txtradiates />
         <input id="txtburningTo" style="visibility:hidden" #txtburningTo /><br />
-        <input type="checkbox" id="chkneckradiant" class="nocomma" value="The neck pain radiates to " onclick="checkMe(this)" checked />&nbsp;The neck pain radiates to&nbsp;
+        <input type="checkbox" id="chkneckradiant" class="nocomma" value="The neck pain radiates to " onclick="checkMe(this)"  />&nbsp;The neck pain radiates to&nbsp;
 
 
-        <input id="txtRadiant" type="text" style="width:700px;text-align:left" value="" onchange="txtMe(this);disableTable(this,'tblneck1')" />
+        <input id="txtRadiant" type="text" style="width:700px;text-align:left" value="" onchange="txtMe(this);" />
         <span>.</span>
         <table class="table" id="tblneck1">
             <thead>
@@ -102,16 +102,16 @@
                         <input type="radio" id="chk1stDigitLeft1" name="R1D" value="left 1st digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk2ndDigitLeft1" name="R2D" value="left 2st digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk2ndDigitLeft1" name="R2D" value="left 2nd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk3rdDigitLeft1" name="R3D" value="left 3st digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk3rdDigitLeft1" name="R3D" value="left 3rd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk4thDigitLeft1" name="R4D" value="left 4st digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk4thDigitLeft1" name="R4D" value="left 4th digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk5thDigitLeft1" name="R5D" value="left 5st digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk5thDigitLeft1" name="R5D" value="left 5th digit" onclick="checkMe(this)" />
                     </td>
                     <!--<td class="table_cell">
                     <input type="radio" id="chkFingersLeft1" name="RF" value="left fingers" onclick="checkMe(this)" />
@@ -144,16 +144,16 @@
                         <input type="radio" id="chk1stDigitRight1" name="R1D" value="right 1st digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk2ndDigitRight1" name="R2D" value="right 2st digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk2ndDigitRight1" name="R2D" value="right 2nd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk3rdDigitRight1" name="R3D" value="right 3st digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk3rdDigitRight1" name="R3D" value="right 3rd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk4thDigitRight1" name="R4D" value="right 4st digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk4thDigitRight1" name="R4D" value="right 4th digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk5thDigitRight1" name="R5D" value="right 5st digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk5thDigitRight1" name="R5D" value="right 5th digit" onclick="checkMe(this)" />
                     </td>
                     <!--<td class="table_cell">
                     <input type="radio" id="chkFingersRight1" name="RF" value="right fingers" onclick="checkMe(this)" />
@@ -183,13 +183,13 @@
                     <input type="radio" id="chkWristBilateral1" name="RWR" value="bilateral wrist" onclick="checkMe(this)" />
                 </td>-->
                     <td class="table_cell">
-                        <input type="radio" id="chk1stDigitBilateral1" name="R1D" value="bilateral 1th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk1stDigitBilateral1" name="R1D" value="bilateral 1st digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk2ndDigitBilateral1" name="R2D" value="bilateral 2th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk2ndDigitBilateral1" name="R2D" value="bilateral 2nd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk3rdDigitBilateral1" name="R3D" value="bilateral 3th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk3rdDigitBilateral1" name="R3D" value="bilateral 3rd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type="radio" id="chk4thDigitBilateral1" name="R4D" value="bilateral 4th digit" onclick="checkMe(this)" />
@@ -246,17 +246,17 @@
             </tbody>
         </table>
         <label style="visibility:hidden">.</label>
-        <input type="checkbox" id="chkneckradiant" class="nocomma" value="The neck pain is associated with " onclick="checkMe(this)" checked />&nbsp;The neck pain is associated with&nbsp;
+        <input type="checkbox" id="chkneckassoc" class="nocomma" value="The neck pain is associated with " onclick="checkMe(this)"  />&nbsp;The neck pain is associated with&nbsp;
 
-        <input type="checkbox" id="chknumbness" value="numbness" checked onclick="checkMe(this)" /> numbness
-        <input type="checkbox" id="chktingling" value="tingling" checked onclick="checkMe(this)" /> tingling
-        <input type="checkbox" id="chkburning" value="burning sensation" onclick="checkMe(this)" />burning sensation
+        <input type="checkbox" id="chknumbness" value="numbness" class="chkassoc"  onclick="checkMe(this);checkDefault(this, 'chkneckassoc');" /> numbness
+        <input type="checkbox" id="chktingling" value="tingling"  class="chkassoc" onclick="checkMe(this);checkDefault(this, 'chkneckassoc');" /> tingling
+        <input type="checkbox" id="chkburning" value="burning sensation"  onclick="checkMe(this);checkDefault(this, 'chkneckassoc');" />burning sensation
         <div style="display:none">
             <input type="checkbox" id="chkelectric1" value="electric" onclick="checkMe(this)" />electric
             <input type="checkbox" id="chkpinsneedles" value="pins & needles" onclick="checkMe(this)" />pins & needles
         </div>
         <label> to </label>
-        <input id="txtRadiant2" type="text" style="width:370px;text-align:left" value="" onchange="txtMe(this);disableTable(this,'tblneck2')" />
+        <input id="txtRadiant2" type="text" style="width:370px;text-align:left" value="" onchange="txtMe(this);" />
 
         <span>.</span>
         <br />
@@ -333,13 +333,13 @@
                         <input type="radio" id="chkWristLeft2" name="AWR" value="left wrist" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk1stDigitLeft2" name="A1D" value="left 1th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk1stDigitLeft2" name="A1D" value="left 1st digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk2ndDigitLeft2" name="A2D" value="left 2th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk2ndDigitLeft2" name="A2D" value="left 2nd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk3rdDigitLeft2" name="A3D" value="left 3th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk3rdDigitLeft2" name="A3D" value="left 3rd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type="radio" id="chk4thDigitLeft2" name="A4D" value="left 4th digit" onclick="checkMe(this)" />
@@ -375,13 +375,13 @@
                         <input type="radio" id="chkWristRight2" name="AWR" value="right wrist" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk1stDigitRight2" name="A1D" value="right 1th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk1stDigitRight2" name="A1D" value="right 1st digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk2ndDigitRight2" name="A2D" value="right 2th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk2ndDigitRight2" name="A2D" value="right 2nd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk3rdDigitRight2" name="A3D" value="right 3th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk3rdDigitRight2" name="A3D" value="right 3rd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type="radio" id="chk4thDigitRight2" name="A4D" value="right 4th digit" onclick="checkMe(this)" />
@@ -417,13 +417,13 @@
                         <input type="radio" id="chkWristBilateral2" name="AWR" value="bilateral wrists" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk1stDigitBilateral2" name="A1D" value="bilateral 1th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk1stDigitBilateral2" name="A1D" value="bilateral 1st digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk2ndDigitBilateral2" name="A2D" value="bilateral 2th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk2ndDigitBilateral2" name="A2D" value="bilateral 2nd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk3rdDigitBilateral2" name="A3D" value="bilateral 3th digit" onclick="checkMe(this)" />
+                        <input type="radio" id="chk3rdDigitBilateral2" name="A3D" value="bilateral 3rd digit" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type="radio" id="chk4thDigitBilateral2" name="A4D" value="bilateral 4th digit" onclick="checkMe(this)" />
@@ -489,42 +489,29 @@
             <span class="control-label">Notes:</span>
         </section>
         <div class="col-md-9" style="margin-top: 5px">
-            <input type="checkbox" id="chkneckpain" class="nocomma" value="Neck pain is associated with weakness in " onclick="checkMe(this)" checked /> Neck pain is associated with weakness in
+            <input type="checkbox" id="chkneckpain" class="nocomma" value="Neck pain is associated with weakness in " onclick="checkMe(this)" /> Neck pain is associated with weakness in
 
             <input id="txtneckPain_0" type="text" style="display:none" onchange="txtMe(this)" />
-            <input id="txtneckPain_1" type="text" onchange="txtMe(this)" /><label>.</label>
-            <input type="checkbox" id="chkneckpainworthwith" class="nocomma" value="Neck pain is worsened with " onclick="checkMe(this)" checked /> Neck pain is worsened with
-            <input type="checkbox" id="chklooking" value="looking up" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');" checked /> looking up,
-            <input type="checkbox" id="chklookingdown" value="looking down" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');" checked /> looking down,
-            <input type="checkbox" id="chkturningright" value=" turning head to right" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');" checked />  turning head to right,
-            <input type="checkbox" id="chkturningleft" value="turning head to left" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');" checked /> turning head to left,
-            <input type="checkbox" id="chkdriving" value="driving" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');" checked /> driving,
-            <input type="checkbox" id="chktwisting" value="twisting" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');" checked /> twisting
-            <!--<input type="checkbox" id="chkneckpainworthwith" class="nocomma" value="Neck pain is worsened with " onclick="checkMe(this)" checked /> Neck pain is worsened with
-    <input type="checkbox" id="chksitting" value="sitting" onclick="checkMe(this)" checked /> sitting,
-    <input type="checkbox" id="chkstanding" value="standing" onclick="checkMe(this)" checked /> standing,
-    <input type="checkbox" id="chklyingdown" value="lying down" onclick="checkMe(this)" checked /> lying down,
-    <input type="checkbox" id="chkmovement activities" value="movement activities" onclick="checkMe(this)" checked /> movement activities,
-    <input type="checkbox" id="chkgoingfromseating" value="going from seating to standing up" onclick="checkMe(this)" checked /> going from seating to standing up,
-    <input type="checkbox" id="chkwalking" value="walking" onclick="checkMe(this)" checked /> walking,
-    <input type="checkbox" id="chekclimbingstairs" value="climbing stairs" onclick="checkMe(this)" checked /> climbing stairs,
-    <input type="checkbox" id="chekdescendingstairs" value="descending stairs" onclick="checkMe(this)" checked /> descending stairs,
-    <input type="checkbox" id="chkdriving" value="driving" onclick="checkMe(this)" checked /> driving,
-    <input type="checkbox" id="chkworking" value="working" onclick="checkMe(this)" checked /> working,
-    <input type="checkbox" id="chkbending" value="bending" onclick="checkMe(this)" checked /> bending,
-    <input type="checkbox" id="chklifting" value="lifting" onclick="checkMe(this)" checked /> lifting,
-    <input type="checkbox" id="chktwisting" value="twisting" class="nocomma" onclick="checkMe(this)" checked />twisting-->
+            <input id="txtneckPain_1" type="text" onchange="txtMe(this); selectTestCHK('chkneckpain', this.val)" /><label>.</label>
+            <input type="checkbox" id="chkneckpainworthwith" class="nocomma" value="Neck pain is worsened with " onclick="checkMe(this)"  /> Neck pain is worsened with
+            <input type="checkbox" id="chklooking" value="looking up" class="chkpain" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');"  /> looking up,
+            <input type="checkbox" id="chklookingdown" value="looking down" class="chkpain" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');"  /> looking down,
+            <input type="checkbox" id="chkturningright" value=" turning head to right" class="chkpain" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');"  />  turning head to right,
+            <input type="checkbox" id="chkturningleft" value="turning head to left" class="chkpain" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');"  /> turning head to left,
+            <input type="checkbox" id="chkdriving" value="driving" class="chkpain" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');"  /> driving,
+            <input type="checkbox" id="chktwisting" value="twisting" class="chkpain" onclick="checkMe(this); checkDefault(this, 'chkneckpainworthwith');"  /> twisting
+         
             <input id="txtneckpain_2" type="text" onchange="txtMe(this);"  /><label>.</label>
 
 
-            <input type="checkbox" id="chkneckpainimprovedwith" class="nocomma" value="Neck pain is improved with " onclick="checkMe(this)" checked /> Neck pain is improved with
+            <input type="checkbox" id="chkneckpainimprovedwith" class="nocomma" value="Neck pain is improved with " onclick="checkMe(this)"  /> Neck pain is improved with
 
-            <input type="checkbox" id="chkImprovedResting" value="resting" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" checked /> resting
-            <input type="checkbox" id="chkImprovedMedication" value="medication" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" /> medication
-            <input type="checkbox" id="chkImprovedTherapy" value="therapy" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" /> therapy
-            <input type="checkbox" id="chkImprovedSleeping" value="sleeping" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" /> sleeping
+            <input type="checkbox" id="chkImprovedResting" value="resting" class="chkimproved" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');"  /> resting
+            <input type="checkbox" id="chkImprovedMedication" value="medication" class="chkimproved" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" /> medication
+            <input type="checkbox" id="chkImprovedTherapy" value="therapy" class="chkimproved" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" /> therapy
+            <input type="checkbox" id="chkImprovedSleeping" value="sleeping" class="chkimproved" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" /> sleeping
 
-            <input type="checkbox" id="chkmvement" value="movement" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" />movement
+            <input type="checkbox" id="chkmvement" value="movement" class="chkimproved" onclick="checkMe(this); checkDefault(this, 'chkneckpainimprovedwith');" />movement
             <input id="txtneckpain_3" type="text" onchange="txtMe(this);"  /><label>.</label>
         </div>
     </section>
@@ -587,12 +574,56 @@
 
     }
 
+    function selectTestCHK(chkid, val) {
+
+        if (val !== '')
+            $("#" + chkid).attr("checked", "checked");
+        else
+            $("#" + chkid).removeAttr("checked");
+    }
+
     function checkDefault(chk, deafCheck) {
 
+        debugger
+
+
+        var isCheck = false;
+        var className = "";
         if ($("#" + deafCheck).prop("checked") == false) {
 
             if ($(chk).prop("checked")) {
                 $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
+
+
+        if (deafCheck === "chkneckpain")
+            className = "chkpain";
+        else if (deafCheck === "chkneckpainimprovedwith")
+            className = "chkimproved";
+        else if (deafCheck === "chkneckpainimprovedwith")
+            className = "chkassoc";
+       
+
+
+
+
+        if ($("#" + deafCheck).prop("checked") == true) {
+
+
+
+
+            if ($(chk).prop("checked") == false) {
+
+                $("input:checkbox[class=" + className + "]").each(function () {
+                    if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                        isCheck = true;
+                    }
+                });
+
+                if (!isCheck)
+                    $("#" + deafCheck).removeAttr('checked');
 
             }
         }

@@ -342,7 +342,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="table-responsive">
-                                    <asp:GridView ID="gvPatientDetails" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered table-hover" DataKeyNames="PatientIE_ID" OnRowDataBound="OnRowDataBound" AllowPaging="True" OnPageIndexChanging="gvPatientDetails_PageIndexChanging1" PagerStyle-CssClass="pager" PageSize="25">
+                                    <asp:GridView ID="gvPatientDetails" runat="server" AutoGenerateColumns="false" AllowSorting="true" OnSorting="gvPatientDetails_Sorting" CssClass="table table-striped table-bordered table-hover" DataKeyNames="PatientIE_ID" OnRowDataBound="OnRowDataBound" AllowPaging="True" OnPageIndexChanging="gvPatientDetails_PageIndexChanging1" PagerStyle-CssClass="pager" PageSize="25">
                                         <Columns>
                                             <asp:TemplateField>
                                                 <ItemTemplate>
@@ -385,13 +385,15 @@
                                             </asp:TemplateField>
 
                                             <asp:BoundField DataField="Sex" HeaderText="Title" />
-                                            <asp:BoundField DataField="lastname" HeaderText="LastName" />
-                                            <asp:BoundField DataField="firstname" HeaderText="FirstName" />
+
+                                           
+                                            <asp:BoundField DataField="lastname" HeaderText="LastName" SortExpression="lastname" />
+                                            <asp:BoundField DataField="firstname" HeaderText="FirstName" SortExpression="firstname"/>
                                             <asp:BoundField DataField="DOB" HeaderText="DOB" DataFormatString="{0:d}" />
                                             <asp:BoundField DataField="DOA" HeaderText="DOA" DataFormatString="{0:d}" />
                                             <asp:BoundField DataField="DOE" HeaderText="DOE" DataFormatString="{0:d}" />
                                             <asp:BoundField DataField="Compensation" HeaderText="Case Type" />
-                                            <asp:BoundField DataField="location" HeaderText="Location" />
+                                            <asp:BoundField DataField="location" HeaderText="Location" SortExpression="location"/>
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <asp:HyperLink runat="server" CssClass="btn btn-link" ID="hlEdit" NavigateUrl='<%# "~/Page1.aspx?id="+Eval("PatientIE_ID") %>' Text="Edit IE">

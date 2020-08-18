@@ -1,41 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ROMS>
   <ROM>
-    <name>Flexion</name>
+    <name>Plantar Flexion</name>
     <left></left>
     <right></right>
-    <normal>120</normal>
+    <normal>30</normal>
   </ROM>
   <ROM>
-    <name>Extension</name>
+    <name>Dorsiflexion</name>
     <left></left>
     <right></right>
     <normal>30</normal>
   </ROM>
 
   <ROM>
-    <name>Abduction</name>
+    <name>Eversion/Inversion</name>
     <left></left>
     <right></right>
-    <normal>45</normal>
+    <normal>10</normal>
   </ROM>
-  <ROM>
-    <name>Adduction</name>
-    <left></left>
-    <right></right>
-    <normal>30</normal>
-  </ROM>
-
-  <ROM>
-    <name>Internal rotation</name>
-    <left></left>
-    <right></right>
-    <normal>45</normal>
-  </ROM>
-  <ROM>
-    <name>External rotation</name>
-    <left></left>
-    <right></right>
-    <normal>45</normal>
-  </ROM>
+  
 </ROMS>

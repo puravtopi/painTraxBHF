@@ -96,6 +96,8 @@ public partial class Neck : System.Web.UI.Page
             }
             bindgridPoup();
             BindDCDataGrid();
+
+           
         }
 
 
@@ -245,9 +247,10 @@ public partial class Neck : System.Web.UI.Page
 
                 TblRow["ISFirst"] = true;
                 TblRow["CCvalue"] = hdCCvalue.Value;
+                TblRow["CCvalueoriginal"] = hdorgval.Value;
 
                 TblRow["PEvalue"] = hdPEvalue.Value;
-                TblRow["PEvalueoriginal"] = hdPEvalueoriginal.Value;
+                TblRow["PEvalueoriginal"] = hdorgvalPE.Value;
                 TblRow["PESides"] = hdPESides.Value;
                 TblRow["PESidesText"] = hdPESidesText.Value;
                 TblRow["TPDesc"] = hdPETP.Value;
@@ -381,10 +384,13 @@ public partial class Neck : System.Web.UI.Page
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("    ", string.Empty);
             hdPETP.Value = TblRow["TPDesc"].ToString();
 
+
             CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
 
             divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
 
+           
+            hdorgval.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
             hdorgvalPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
 
             int val = checkTP();

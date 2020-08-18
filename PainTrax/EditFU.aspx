@@ -67,6 +67,9 @@
             htmlval = $("#ctl00_ContentPlaceHolder1_divsocialHTML").html();
             $('#<%= hdsocialHTMLContent.ClientID %>').val(htmlval);
 
+              htmlval = $("#ctl00_ContentPlaceHolder1_divHistory").html();
+            $('#<%= hdtopHTMLContent.ClientID %>').val(htmlval);
+
 
 
             document.getElementById('<%= btnSave.ClientID %>').click();
@@ -194,18 +197,10 @@
                 <asp:TextBox ID="FamilyHistory" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
-            <td>Past Medical History</td>
-            <td>
-                <asp:TextBox ID="PMH" runat="server"></asp:TextBox></td>
-            <td>Past Surgical History</td>
-            <td>
-                <asp:TextBox ID="PSH" runat="server"></asp:TextBox></td>
-            <td>Medication</td>
-            <td>
-                <asp:TextBox ID="Medication" runat="server"></asp:TextBox></td>
-            <td>Allergies</td>
-            <td>
-                <asp:TextBox ID="Allergies" runat="server"></asp:TextBox></td>
+           <td colspan="5" style="width: 100%">
+                <div id="divHistory" runat="server" style="width: 100%">
+                </div>
+            </td>
         </tr>
           <tr>
             <td>Note</td>
@@ -303,6 +298,7 @@
 
                 <asp:HiddenField runat="server" ID="hddegreeHTMLContent" />
                 <asp:HiddenField runat="server" ID="hdsocialHTMLContent" />
+                 <asp:HiddenField runat="server" ID="hdtopHTMLContent" />
 
 
                 <div id="divdegreeHTML" runat="server"></div>

@@ -48,6 +48,13 @@
     </style>
     <script type="text/javascript">
 
+        
+        function clnVal() {
+            alert('call');
+            $('.paincls').val('');
+        }
+
+
         function Confirmbox(e, page) {
             e.preventDefault();
             var answer = confirm('Do you want to save the data?');
@@ -271,7 +278,7 @@
                                                     <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
 
                                                 <td>
-                                                    <asp:TextBox ID="txtrom" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("rom") %>'></asp:TextBox></td>
+                                                    <asp:TextBox ID="txtrom" runat="server" Width="50px" CssClass="paincls" onkeypress="return onlyNumbers(event);" Text='<%# Eval("rom") %>'></asp:TextBox></td>
 
                                                 <td>
                                                     <asp:TextBox ID="txtnormal" ReadOnly="true" Text='<%# Eval("normal") %>' Width="50px" runat="server"></asp:TextBox></td>

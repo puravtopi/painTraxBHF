@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-9" style="margin-top: 5px">
         <label class="control-label">The patient complains of mid-back pain that is </label>
-        <input type="text" id="txtPainScale" style="Width:40px" value="7" onchange="txtMe(this)" />
+        <input type="text" id="txtPainScale" style="Width:40px" class="paincls" value="7" onchange="txtMe(this)" />
         <label class="control-label">/10, with 10 being the worst, which is </label>
         <input type="checkbox" id="chkcontent" onclick="checkMe(this)" value="constant" /> constant &nbsp;
         <input type="checkbox" id="chkintermittent" onclick="checkMe(this)" value="intermittent" /> intermittent &nbsp;
@@ -14,8 +14,8 @@
         <input type="checkbox" id="chkshooting" onclick="checkMe(this)" value="shooting" /> shooting &nbsp;
         <input type="checkbox" id="chkthrobbing" onclick="checkMe(this)" value="throbbing" /> throbbing &nbsp;
         <input type="checkbox" id="chkpulsating" onclick="checkMe(this)" value="pulsating" /> pulsating&nbsp;
-        <input type="checkbox" id="chkdull" onclick="checkMe(this)" value="dull" checked /> dull &nbsp;
-        <input type="checkbox" id="chkachy" onclick="checkMe(this)" value="achy" checked /> achy &nbsp;
+        <input type="checkbox" id="chkdull" onclick="checkMe(this)" value="dull" /> dull &nbsp;
+        <input type="checkbox" id="chkachy" onclick="checkMe(this)" value="achy" /> achy &nbsp;
         <label> in nature.</label>
         <input type="checkbox" id="chkpaintwith" onclick="checkMe(this)" class="nocomma" value="The mid-back pain " />
         The mid-back pain
@@ -32,17 +32,17 @@
         <label>.</label>
         <input type="checkbox" id="chkwwrosewith" onclick="checkMe(this)" class="nocomma" value="The mid-back pain worse with " />
         The mid-back pain worse with
-        <input type="checkbox" id="chkworsesitting" onclick="checkMe(this)" checked value="sitting" /> sitting &nbsp;
-        <input type="checkbox" id="chkworsestanding" onclick="checkMe(this)" checked value="standing" /> standing &nbsp;
-        <input type="checkbox" id="chkworsebendingforward" onclick="checkMe(this)" checked value="bending forward" /> bending forward &nbsp;
-        <input type="checkbox" id="chkworsebendingbackward" onclick="checkMe(this)" checked value="bending forward" /> bending forward &nbsp;
-        <input type="checkbox" id="chkworsesleeping" onclick="checkMe(this)" value="sleeping" /> sleeping &nbsp;
-        <input type="checkbox" id="chkworsetwisting" onclick="checkMe(this)" value="twisting" /> twisting &nbsp;
-        <input type="checkbox" id="chkworselifting" onclick="checkMe(this)" value="lifting " /> lifting  &nbsp;
-        <!--<input type="checkbox" id="chkworsesitting" onclick="checkMe(this)" checked value="sitting" /> sitting &nbsp;
-        <input type="checkbox" id="chkworsestanding" onclick="checkMe(this)" checked value="standing" /> standing &nbsp;
-        <input type="checkbox" id="chkworsebendingforward" onclick="checkMe(this)" checked value="lying down" /> lying down &nbsp;
-        <input type="checkbox" id="chkworsebendingbackward" onclick="checkMe(this)" checked value="movement" /> movement &nbsp;
+        <input type="checkbox" id="chkworsesitting" class="chkpain" onclick="checkMe(this);checkDefault(this, 'chkwwrosewith');"  value="sitting" /> sitting &nbsp;
+        <input type="checkbox" id="chkworsestanding" class="chkpain" onclick="checkMe(this);checkDefault(this, 'chkwwrosewith');"  value="standing" /> standing &nbsp;
+        <input type="checkbox" id="chkworsebendingforward" class="chkpain" onclick="checkMe(this);checkDefault(this, 'chkwwrosewith');"  value="bending forward" /> bending forward &nbsp;
+        <input type="checkbox" id="chkworsebendingbackward" class="chkpain" onclick="checkMe(this);checkDefault(this, 'chkwwrosewith');"  value="bending forward" /> bending forward &nbsp;
+        <input type="checkbox" id="chkworsesleeping" class="chkpain" onclick="checkMe(this);checkDefault(this, 'chkwwrosewith');" value="sleeping" /> sleeping &nbsp;
+        <input type="checkbox" id="chkworsetwisting" class="chkpain" onclick="checkMe(this);checkDefault(this, 'chkwwrosewith');" value="twisting" /> twisting &nbsp;
+        <input type="checkbox" id="chkworselifting" class="chkpain" onclick="checkMe(this);checkDefault(this, 'chkwwrosewith');" value="lifting " /> lifting  &nbsp;
+        <!--<input type="checkbox" id="chkworsesitting" onclick="checkMe(this)"  value="sitting" /> sitting &nbsp;
+        <input type="checkbox" id="chkworsestanding" onclick="checkMe(this)"  value="standing" /> standing &nbsp;
+        <input type="checkbox" id="chkworsebendingforward" onclick="checkMe(this)"  value="lying down" /> lying down &nbsp;
+        <input type="checkbox" id="chkworsebendingbackward" onclick="checkMe(this)"  value="movement" /> movement &nbsp;
         <input type="checkbox" id="chkworsecarryingheavyitems" onclick="checkMe(this)" value="bending" /> bending &nbsp;
         <input type="checkbox" id="chkworsetwistingleft" onclick="checkMe(this)" value="lifting" /> lifting &nbsp;
         <input type="checkbox" id="chkworsetwistingright" onclick="checkMe(this)" value="going from seating to standing up" /> going from seating to standing up &nbsp;
@@ -54,11 +54,11 @@
         <label>.</label>
         <input type="checkbox" id="chkimpwith" onclick="checkMe(this)" class="nocomma" value="The mid-back back pain is improved with " /> The mid-back back pain is improved with
 
-        <input type="checkbox" id="chkimprovedresting" onclick="checkMe(this)" checked value="resting" /> resting &nbsp;
-        <input type="checkbox" id="chkimprovedmedication" onclick="checkMe(this)" value="medication" /> medication &nbsp;
-        <input type="checkbox" id="chkimprovedtherapy" onclick="checkMe(this)" value="therapy" /> therapy &nbsp;
-        <input type="checkbox" id="chkimprovedsleeping" onclick="checkMe(this)" value="sleeping" /> sleeping
-        <input type="checkbox" id="chkimprovedmovment" onclick="checkMe(this)" value="movement" /> movement
+        <input type="checkbox" id="chkimprovedresting" class="chkimprove" onclick="checkMe(this);checkDefault(this, 'chkimpwith');"  value="resting" /> resting &nbsp;
+        <input type="checkbox" id="chkimprovedmedication" class="chkimprove" onclick="checkMe(this);checkDefault(this, 'chkimpwith');" value="medication" /> medication &nbsp;
+        <input type="checkbox" id="chkimprovedtherapy" class="chkimprove" onclick="checkMe(this);checkDefault(this, 'chkimpwith');" value="therapy" /> therapy &nbsp;
+        <input type="checkbox" id="chkimprovedsleeping" class="chkimprove" onclick="checkMe(this);checkDefault(this, 'chkimpwith');" value="sleeping" /> sleeping
+        <input type="checkbox" id="chkimprovedmovment" class="chkimprove" onclick="checkMe(this);checkDefault(this, 'chkimpwith');" value="movement" /> movement
         <label>.</label>
     </div>
 </div>
@@ -122,6 +122,44 @@
             $(chk).removeAttr('checked');
         }
 
+    }
+
+    function checkDefault(chk, deafCheck) {
+
+        debugger
+
+
+        var isCheck = false;
+        var className = "";
+        if ($("#" + deafCheck).prop("checked") == false) {
+
+            if ($(chk).prop("checked")) {
+                $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
+
+
+        if (deafCheck === "chkimpwith")
+            className = "chkimprove";
+        else if (deafCheck === "chkwwrosewith")
+            className = "chkpain";
+
+        if ($("#" + deafCheck).prop("checked") == true) {
+
+            if ($(chk).prop("checked") == false) {
+
+                $("input:checkbox[class=" + className + "]").each(function () {
+                    if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                        isCheck = true;
+                    }
+                });
+
+                if (!isCheck)
+                    $("#" + deafCheck).removeAttr('checked');
+
+            }
+        }
     }
 
     function selectTestCHK(chkid, val) {

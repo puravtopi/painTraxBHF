@@ -97,24 +97,30 @@ public class PrintDocumentHelper
                         Regex rx = new Regex(@"^\s*""?|""?\s*$");
                         id = rx.Replace(id, "");
                         classname = rx.Replace(classname, "");
-                        value = rx.Replace(value, "");
-                        if (value.Length > 0 && check)
+                        if (classname != "noprint")
                         {
-                            chkgrp += 1;
-                            if (classname == "nocomma")
-                                sb.Append(value+" ");
-                            else
-                                sb.Append(value + ", ");
+                            value = rx.Replace(value, "");
+                            if (value.Length > 0 && check)
+                            {
+                                chkgrp += 1;
+                                if (classname == "nocomma")
+                                    sb.Append(value + " ");
+                                else
+                                    sb.Append(value + ", ");
+                            }
                         }
                     }
                     else if (type == "text")
                     {
-                         Regex rx = new Regex(@"^\s*""?|""?\s*$");
+                        Regex rx = new Regex(@"^\s*""?|""?\s*$");
                         // value = rx.Replace(value, "");
                         // Response.Write(value);
                         classname = rx.Replace(classname, "");
-                        if (!string.IsNullOrEmpty(value) &&   classname != "txtTP")
-                            sb.Append(value + " ");
+                        if (classname != "noprint")
+                        {
+                            if (!string.IsNullOrEmpty(value) && classname != "txtTP")
+                                sb.Append(value + " ");
+                        }
                     }
                 }
                 else if (match.Groups[2].Value.Length == 0)
@@ -325,7 +331,7 @@ public class PrintDocumentHelper
                         String tagvalue = match.Groups[2].Value;
 
                         String[] attrib = tagvalue.Split(' ');
-                        string id = "", value = "", classname="";
+                        string id = "", value = "", classname = "";
                         bool check = false;
 
 
@@ -394,7 +400,7 @@ public class PrintDocumentHelper
                                     sb.Append(value + " ");
                                 else
                                     sb.Append(value + ", ");
-                               
+
                             }
                         }
                         else if (type == "text")
@@ -632,7 +638,7 @@ public class PrintDocumentHelper
         String strfile = html;
         String[] str = new String[3];
         StringBuilder sb = new StringBuilder();
-        int leftstart, leftend, rightstart, rightend,teststart,testend;
+        int leftstart, leftend, rightstart, rightend, teststart, testend;
         leftstart = strfile.IndexOf(@"<div id=""WrapLeftPE""");
         leftend = strfile.IndexOf(@"</div>", leftstart);
         str[0] = strfile.Substring(leftstart, leftend - leftstart);

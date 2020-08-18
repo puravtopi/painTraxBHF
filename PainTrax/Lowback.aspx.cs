@@ -132,16 +132,18 @@ public partial class Lowback : System.Web.UI.Page
             TblRow["PatientIE_ID"] = _ieID;
 
 
-            //TblRow["FreeForm"] = txtFreeForm.Text.ToString();
-            //TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
+         
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString().Trim().Replace("      ", string.Empty);
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
             TblRow["ISFirst"] = true;
             TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
 
 
 
             TblRow["PEvalue"] = hdPEvalue.Value;
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
+
             TblRow["PESides"] = hdPESides.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
 
@@ -980,6 +982,7 @@ public partial class Lowback : System.Web.UI.Page
         string body = File.ReadAllText(path);
 
         CF.InnerHtml = body;
+        hdorgCC.Value = body;
 
     }
 
@@ -1108,9 +1111,12 @@ public partial class Lowback : System.Web.UI.Page
 
 
         divPE.InnerHtml = body;
+        hdorgPE.Value = body;
 
-        int val = checkTP();
 
-        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",0)", true);
+        //int val = checkTP();
+
+
+        // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",0)", true);
     }
 }

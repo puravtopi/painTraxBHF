@@ -5,12 +5,9 @@
     <strong class="labelcolor">Gait:</strong>
     <p class="inline">
         <section class="dropdown" style="width:300px">
-            <input type="text" id="txtgait" value="has a normal gait pattern" onchange="txtMe(this)" />
+            <input type="text" id="txtgait" value="Normal" onchange="txtMe(this)" />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtgait', this.value)" id="ddlgait">
-                <!--<option selected="selected">has a normal gait pattern</option>
-                <option>ambulates with a cane</option>
-                <option>ambulates with a walker</option>
-                <option>ambulates with crutches</option>-->
+              
                 <option value=""></option>
                 <option value="Normal" selected="selected">Normal</option>
                 <option value="Guarded">Guarded</option>

@@ -62,7 +62,7 @@ public partial class AddFU : System.Web.UI.Page
             bindLocations();
             bindInsuranceCo();
             bindDropdown();
-            bindHTMLEdit();
+
             if (Request.QueryString["PID"] != null)
             {
 
@@ -75,6 +75,7 @@ public partial class AddFU : System.Web.UI.Page
                 AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
                 master.bindData(Session["PatientIE_Id2"].ToString());
                 bindPatientDetails(PatientIE_Id);
+
 
                 if (!string.IsNullOrEmpty(Convert.ToString(Session["patientFUId"])) && !redirectpage.Equals("PatientIntakeList.aspx"))
                 {
@@ -106,6 +107,9 @@ public partial class AddFU : System.Web.UI.Page
             }
             else
                 PatientIE_Id = 0;
+
+            bindHTMLEdit();
+
             if (Session["Location"] != null)
             {
                 ddlLoaction.SelectedValue = Convert.ToString(Session["Location"]);
@@ -215,10 +219,10 @@ public partial class AddFU : System.Web.UI.Page
                 hfPatientId.Value = sdr["Patient_ID"].ToString();
                 //bindRestrictions(PatientIE_Id);
                 // hfPatientFUId.Value = sdr["PatientFU_ID"].ToString();
-                PMH.Text = sdr["PMH"].ToString();
-                PSH.Text = sdr["PSH"].ToString();
-                Medication.Text = sdr["Medications"].ToString();
-                Allergies.Text = sdr["Allergies"].ToString();
+                //PMH.Text = sdr["PMH"].ToString();
+                //PSH.Text = sdr["PSH"].ToString();
+                //Medication.Text = sdr["Medications"].ToString();
+                //Allergies.Text = sdr["Allergies"].ToString();
                 FamilyHistory.Text = sdr["FamilyHistory"].ToString();
                 Session["FirstNameFU"] = txtFirstName.Text = sdr["FirstName"].ToString();
                 Session["LastNameFU"] = txtLastName.Text = sdr["LastName"].ToString();
@@ -332,7 +336,7 @@ public partial class AddFU : System.Web.UI.Page
                 string FreeForm = GetFreeForm();
                 SqlCommand cmd = new SqlCommand("nusp_SavePatientDetails", con);
                 cmd.Parameters.Add("@Patient_Id", hfPatientId.Value);
-                    cmd.Parameters.Add("@PatientIE_ID", hfPatientIEId.Value);
+                cmd.Parameters.Add("@PatientIE_ID", hfPatientIEId.Value);
                 cmd.Parameters.Add("@FreeForm", FreeForm);
                 if (!string.IsNullOrEmpty(hfPatientFUId.Value))
                 {
@@ -368,10 +372,14 @@ public partial class AddFU : System.Web.UI.Page
                 cmd.Parameters.Add("@Telephone", txtAttorneyPh.Text.Trim());
                 cmd.Parameters.Add("@MA_Providers", txtMAProviders.Text.Trim());
                 cmd.Parameters.Add("@FollowedUpOn", txtFollowedUpOn.Text.Trim());
-                cmd.Parameters.Add("@PMH", PMH.Text.Trim());
-                cmd.Parameters.Add("@PSH", PSH.Text.Trim());
-                cmd.Parameters.Add("@Medications", Medication.Text.Trim());
-                cmd.Parameters.Add("@Allergies", Allergies.Text.Trim());
+                //cmd.Parameters.Add("@PMH", PMH.Text.Trim());
+                //cmd.Parameters.Add("@PSH", PSH.Text.Trim());
+                //cmd.Parameters.Add("@Medications", Medication.Text.Trim());
+                //cmd.Parameters.Add("@Allergies", Allergies.Text.Trim());
+                cmd.Parameters.Add("@PMH", "");
+                cmd.Parameters.Add("@PSH", "");
+                cmd.Parameters.Add("@Medications", "");
+                cmd.Parameters.Add("@Allergies", "");
                 cmd.Parameters.Add("@FamilyHistory", FamilyHistory.Text.Trim());
                 cmd.Parameters.Add("@Neck", chk_Neck.Checked);
                 cmd.Parameters.Add("@MidBack", chk_Midback.Checked);
@@ -479,7 +487,7 @@ public partial class AddFU : System.Web.UI.Page
                     DataSet ds = db.selectData(query);
                     if (ds.Tables[0].Rows.Count == 0)
                     {
-                        query = "insert into tblPage1FUHTMLContent values(@degreeSectionHTML,@socialSectionHTML,@PatientIE_ID,@PatientFU_ID)";
+                        query = "insert into tblPage1FUHTMLContent values(@degreeSectionHTML,@socialSectionHTML,@PatientIE_ID,@PatientFU_ID,@topSectionHTML)";
                     }
                     else
                     {
@@ -493,6 +501,7 @@ public partial class AddFU : System.Web.UI.Page
                         command.Parameters.AddWithValue("@PatientFU_ID", Session["patientFUId"].ToString());
                         command.Parameters.AddWithValue("@degreeSectionHTML", hddegreeHTMLContent.Value);
                         command.Parameters.AddWithValue("@socialSectionHTML", hdsocialHTMLContent.Value);
+                        command.Parameters.AddWithValue("@topSectionHTML", hdtopHTMLContent.Value);
 
                         connection.Open();
                         var results = command.ExecuteNonQuery();
@@ -1723,10 +1732,10 @@ public partial class AddFU : System.Web.UI.Page
             cmd.Parameters.Add("@Telephone", txtAttorneyPh.Text.Trim());
             cmd.Parameters.Add("@MA_Providers", txtMAProviders.Text.Trim());
             cmd.Parameters.Add("@FollowedUpOn", txtFollowedUpOn.Text.Trim());
-            cmd.Parameters.Add("@PMH", PMH.Text.Trim());
-            cmd.Parameters.Add("@PSH", PSH.Text.Trim());
-            cmd.Parameters.Add("@Medications", Medication.Text.Trim());
-            cmd.Parameters.Add("@Allergies", Allergies.Text.Trim());
+            //cmd.Parameters.Add("@PMH", PMH.Text.Trim());
+            //cmd.Parameters.Add("@PSH", PSH.Text.Trim());
+            //cmd.Parameters.Add("@Medications", Medication.Text.Trim());
+            //cmd.Parameters.Add("@Allergies", Allergies.Text.Trim());
             cmd.Parameters.Add("@FamilyHistory", FamilyHistory.Text.Trim());
             cmd.Parameters.Add("@Neck", chk_Neck.Checked);
             cmd.Parameters.Add("@MidBack", chk_Midback.Checked);
@@ -2024,6 +2033,29 @@ public partial class AddFU : System.Web.UI.Page
         body = File.ReadAllText(path);
 
         divsocialHTML.InnerHtml = body;
+
+        Int64 _ieID = Convert.ToInt64(Session["PatientIE_ID"].ToString());
+        int _fuID = GetFUID(_ieID);
+
+        if (_fuID == 0)
+        {
+            DataSet ds = db.selectData("select * from tblPage1HTMLContent where PatientIE_ID=" + _ieID.ToString());
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                divHistory.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
+            }
+
+        }
+        else
+        {
+            string query = "select top 1 * from tblPage1FUHTMLContent where PateintFU_ID=" + _fuID;
+            DataSet ds = db.selectData(query);
+
+            if (ds.Tables[0].Rows.Count > 0)
+                divHistory.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
+        }
+
     }
 
     public void bindHTMLEdit()
@@ -2040,6 +2072,7 @@ public partial class AddFU : System.Web.UI.Page
             {
                 divdegreeHTML.InnerHtml = ds.Tables[0].Rows[0]["degreeSectionHTML"].ToString();
                 divsocialHTML.InnerHtml = ds.Tables[0].Rows[0]["socialSectionHTML"].ToString();
+                divHistory.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
             }
         }
         else

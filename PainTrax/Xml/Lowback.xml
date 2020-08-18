@@ -4,7 +4,7 @@
     <name>Rotation</name>
     <left></left>
     <right></right>
-    <normal>120</normal>
+    <normal>60</normal>
   </ROM>
   <!--<ROM>
     <name>Lateral flexion</name>
@@ -15,12 +15,12 @@
   <Cervical>
     <name>Forward flexion</name>
     <rom></rom>
-    <normal>50</normal>
+    <normal>90</normal>
   </Cervical>
   <Cervical>
     <name>Extension</name>
     <rom></rom>
-    <normal>60</normal>
+    <normal>40</normal>
   </Cervical>
 </ROMS>
 

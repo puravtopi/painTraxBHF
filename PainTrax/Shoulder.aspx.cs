@@ -298,124 +298,14 @@ public partial class Shoulder : System.Web.UI.Page
         if (_ieMode == "Update" || _ieMode == "New")
         {
             TblRow["PatientIE_ID"] = _ieID;
-            //TblRow["ConstantLeft"] = chkContentLeft.Checked;
-            //TblRow["ConstantRight"] = chkContentRight.Checked;
-            //TblRow["IntermittentLeft"] = chkIntermittentLeft.Checked;
-            //TblRow["IntermittentRight"] = chkIntermittentRight.Checked;
-            //TblRow["PainScaleLeft"] = txtPainScaleLeft.Text.ToString();
-            //TblRow["SharpLeft"] = chkSharpLeft.Checked;
-            //TblRow["ElectricLeft"] = chkSharpLeft.Checked;
-            //TblRow["ShootingLeft"] = chkShootingLeft.Checked;
-            //TblRow["ThrobblingLeft"] = chkThrobblingLeft.Checked;
-            //TblRow["PulsatingLeft"] = chkPulsatingLeft.Checked;
-            //TblRow["DullLeft"] = chkDullLeft.Checked;
-            //TblRow["AchyLeft"] = chkAchyLeft.Checked;
-            //TblRow["WorseLyingLeft"] = chkWorseLyingLeft.Checked;
-            //TblRow["WorseMovementLeft"] = chkWorseMovementLeft.Checked;
-            //TblRow["WorseRaisingLeft"] = false;//chkWorseRaisingLeft.Checked;
-            //TblRow["WorseLiftingLeft"] = chkWorseLiftingLeft.Checked;
-            //TblRow["WorseRotationLeft"] = chkWorseRotationLeft.Checked;
-            //TblRow["WorseWorkingLeft"] = chkWorseWorkingLeft.Checked;
-            //TblRow["WorseActivitiesLeft"] = chkWorseActivitiesLeft.Checked;
-            //TblRow["ImprovedRestingLeft"] = chkImprovedRestingLeft.Checked;
-            //TblRow["ImprovedMedicationLeft"] = chkImprovedMedicationLeft.Checked;
-            //TblRow["ImprovedTherapyLeft"] = chkImprovedTherapyLeft.Checked;
-            //TblRow["ImprovedSleepingLeft"] = chkImprovedSleepingLeft.Checked;
-            //TblRow["PainScaleRight"] = txtPainScaleRight.Text.ToString();
-            //TblRow["SharpRight"] = chkSharpRight.Checked;
-            //TblRow["ElectricRight"] = chkElectricRight.Checked;
-            //TblRow["ShootingRight"] = chkShootingRight.Checked;
-            //TblRow["ThrobblingRight"] = chkThrobblingRight.Checked;
-            //TblRow["PulsatingRight"] = chkPulsatingRight.Checked;
-            //TblRow["DullRight"] = chkDullRight.Checked;
-            //TblRow["AchyRight"] = chkAchyRight.Checked;
-            //TblRow["WorseLyingRight"] = chkWorseLyingRight.Checked;
-            //TblRow["WorseMovementRight"] = chkWorseMovementRight.Checked;
-            //TblRow["WorseRaisingRight"] = false;//chkWorseRaisingRight.Checked;
-            //TblRow["WorseLiftingRight"] = chkWorseLiftingRight.Checked;
-            //TblRow["WorseRotationRight"] = chkWorseRotationRight.Checked;
-            //TblRow["WorseWorkingRight"] = chkWorseWorkingRight.Checked;
-            //TblRow["WorseActivitiesRight"] = chkWorseActivitiesRight.Checked;
-            //TblRow["ImprovedRestingRight"] = chkImprovedRestingRight.Checked;
-            //TblRow["ImprovedMedicationRight"] = chkImprovedMedicationRight.Checked;
-            //TblRow["ImprovedTherapyRight"] = chkImprovedTherapyRight.Checked;
-            //TblRow["ImprovedSleepingRight"] = chkImprovedSleepingRight.Checked;
-
-            //Left values
-            //TblRow["AbductionLeft"] = txtAbductionLeftWas.Text.ToString();
-            //TblRow["FlexionLeft"] = txtFlexionLeftWas.Text.ToString();
-            //TblRow["ExtRotationLeft"] = txtExtRotationLeftWas.Text.ToString();
-            //TblRow["IntRotationLeft"] = txtIntRotationLeftWas.Text.ToString();
-            // Right values.
-            //TblRow["AbductionRight"] = txtAbductionLeft.Text.ToString();
-            //TblRow["FlexionRight"] = txtFlexionLeft.Text.ToString();
-            //TblRow["ExtRotationRight"] = txtExtRotationLeft.Text.ToString();
-            //TblRow["IntRotationRight"] = txtIntRotationLeft.Text.ToString();
-            // Normal Value.
-            //TblRow["AbductionNormal"] = txtAbductionRightWas.Text.ToString();
-            //TblRow["FlexionNormal"] = txtFlexionRightWas.Text.ToString();
-            //TblRow["ExtRotationNormal"] = txtExtRotationRightWas.Text.ToString();
-            //TblRow["IntRotationNormal"] = txtIntRotationRightWas.Text.ToString();
-
-            //TblRow["PalpationText1Left"] = txtPalpationText1Left.Text.ToString();
-            //// TblRow["PalpationText2Left"] = txtPalpationText2Left.Text.ToString();
-            //TblRow["ACJointLeft"] = chkACJointLeft.Checked;
-            //TblRow["GlenohumeralLeft"] = chkGlenohumeralLeft.Checked;
-            //TblRow["CorticoidLeft"] = chkCorticoidLeft.Checked;
-            //TblRow["SupraspinatusLeft"] = chkSupraspinatusLeft.Checked;
-            //TblRow["ScapularLeft"] = chkScapularLeft.Checked;
-            //TblRow["DeepLabralLeft"] = chkDeepLabralLeft.Checked;
-            //TblRow["DeltoidLeft"] = chkDeltoidLeft.Checked;
-            //TblRow["TrapeziusLeft"] = chkTrapeziusLeft.Checked;
-            //TblRow["EccymosisLeft"] = chkEccymosisLeft.Checked;
-            //TblRow["EdemaLeft"] = chkEdemaLeft.Checked;
-            //TblRow["RangeOfMotionLeft"] = chkRangeOfMotionLeft.Checked;
-            //TblRow["PalpationText1Right"] = txtPalpationText1Right.Text.ToString();
-            //// TblRow["PalpationText2Right"] = txtPalpationText2Right.Text.ToString();
-            //TblRow["ACJointRight"] = chkACJointRight.Checked;
-            //TblRow["GlenohumeralRight"] = chkGlenohumeralRight.Checked;
-            //TblRow["CorticoidRight"] = chkCorticoidRight.Checked;
-            //TblRow["SupraspinatusRight"] = chkSupraspinatusRight.Checked;
-            //TblRow["ScapularRight"] = chkScapularRight.Checked;
-            //TblRow["DeepLabralRight"] = chkDeepLabralRight.Checked;
-            //TblRow["DeltoidRight"] = chkDeltoidRight.Checked;
-            //TblRow["TrapeziusRight"] = chkTrapeziusRight.Checked;
-            //TblRow["EccymosisRight"] = chkEccymosisRight.Checked;
-            //TblRow["EdemaRight"] = chkEdemaRight.Checked;
-            //TblRow["RangeOfMotionRight"] = chkRangeOfMotionRight.Checked;
-            //TblRow["NeerLeft"] = chkNeerLeft.Checked;
-            //TblRow["HawkinLeft"] = chkHawkinLeft.Checked;
-            //TblRow["YergasonsLeft"] = chkYergasonsLeft.Checked;
-            //TblRow["DropArmLeft"] = chkDropArmLeft.Checked;
-            //TblRow["ReverseBeerLeft"] = chkReverseBeerLeft.Checked;
-            //TblRow["NeerRight"] = chkNeerRight.Checked;
-            //TblRow["HawkinRight"] = chkHawkinRight.Checked;
-            //TblRow["YergasonsRight"] = chkYergasonsRight.Checked;
-            //TblRow["DropArmRight"] = chkDropArmRight.Checked;
-            //TblRow["ReverseBeerRight"] = chkReverseBeerRight.Checked;
-            //TblRow["TPSide1"] = cboTPSide1.Text.ToString();
-            //TblRow["TPText1"] = txtTPText1.Text.ToString();
-            //TblRow["TPSide2"] = cboTPSide2.Text.ToString();
-            //TblRow["TPText2"] = txtTPText2.Text.ToString();
-            //TblRow["TPSide3"] = cboTPSide3.Text.ToString();
-            //TblRow["TPText3"] = txtTPText3.Text.ToString();
-            //TblRow["TPSide4"] = cboTPSide4.Text.ToString();
-            //TblRow["TPText4"] = txtTPText4.Text.ToString();
-            //TblRow["TPSide5"] = cboTPSide5.Text.ToString();
-            //TblRow["TPText5"] = txtTPText5.Text.ToString();
-            //TblRow["TPSide6"] = cboTPSide6.Text.ToString();
-            //TblRow["TPText6"] = txtTPText6.Text.ToString();
-            //TblRow["TPSide7"] = cboTPSide7.Text.ToString();
-            //TblRow["TPText7"] = txtTPText7.Text.ToString();
-            //TblRow["TPSide8"] = cboTPSide8.Text.ToString();
-            //TblRow["TPText8"] = txtTPText8.Text.ToString();
-            //TblRow["FreeForm"] = txtFreeForm.Text.ToString();
-            //TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
+           
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
             TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
 
             TblRow["PEvalue"] = hdPEvalue.Value;
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
 
             TblRow["PESides"] = hdPESides.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
@@ -1456,6 +1346,7 @@ public partial class Shoulder : System.Web.UI.Page
 
         body = body.Replace("#gender", gender);
 
+        hdorgCC.Value = body;
         CF.InnerHtml = body;
 
     }
@@ -1473,9 +1364,9 @@ public partial class Shoulder : System.Web.UI.Page
 
         divPE.InnerHtml = body;
 
-        int val = checkTP();
+        hdorgPE.Value = body;
 
-        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",'" + p + "',0)", true);
+        
     }
 
     protected void BindROM()

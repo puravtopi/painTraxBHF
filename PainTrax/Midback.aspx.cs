@@ -183,52 +183,7 @@ public partial class Midback : System.Web.UI.Page
         {
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
-            //txtPainScale.Text = TblRow["PainScale"].ToString().Trim();
-            //chkSharp.Checked = Convert.ToBoolean(TblRow["Sharp"]);
-
-            //chkContent.Checked = TblRow["constant"] != DBNull.Value ? Convert.ToBoolean(TblRow["constant"]) : false;
-            //chkIntermittent.Checked = TblRow["intermittent"] != DBNull.Value ? Convert.ToBoolean(TblRow["intermittent"]) : false;
-
-            //chkelectric.Checked = Convert.ToBoolean(TblRow["Electric"]);
-            //chkshooting.Checked = Convert.ToBoolean(TblRow["Shooting"]);
-            //chkthrobbing.Checked = Convert.ToBoolean(TblRow["Throbbling"]);
-            //chkpulsating.Checked = Convert.ToBoolean(TblRow["Pulsating"]);
-            //chkdull.Checked = Convert.ToBoolean(TblRow["Dull"]);
-            //chkachy.Checked = Convert.ToBoolean(TblRow["Achy"]);
-            //cboRadiates.Text = TblRow["Radiates"].ToString().Trim();
-            //chkWorseSitting.Checked = Convert.ToBoolean(TblRow["WorseSitting"]);
-            //chkWorseStanding.Checked = Convert.ToBoolean(TblRow["WorseStanding"]);
-            //chkWorseLyingDown.Checked = Convert.ToBoolean(TblRow["WorseLyingDown"]);
-            //chkWorseMovement.Checked = Convert.ToBoolean(TblRow["WorseMovement"]);
-            //chkWorseBending.Checked = Convert.ToBoolean(TblRow["WorseBending"]);
-            //chkWorseLifting.Checked = Convert.ToBoolean(TblRow["WorseLifting"]);
-            //chkWorseSeatingtoStandingUp.Checked = Convert.ToBoolean(TblRow["WorseSeatingtoStandingUp"]);
-            //chkWorseWalking.Checked = Convert.ToBoolean(TblRow["WorseWalking"]);
-            //chkWorseClimbingStairs.Checked = Convert.ToBoolean(TblRow["WorseClimbingStairs"]);
-            //chkWorseDescendingStairs.Checked = Convert.ToBoolean(TblRow["WorseDescendingStairs"]);
-            //chkWorseDriving.Checked = Convert.ToBoolean(TblRow["WorseDriving"]);
-            //chkWorseWorking.Checked = Convert.ToBoolean(TblRow["WorseWorking"]);
-            //txtWorseOtherText.Text = TblRow["WorseOtherText"].ToString().Trim();
-            //chkImprovedResting.Checked = Convert.ToBoolean(TblRow["ImprovedResting"]);
-            //chkImprovedMedication.Checked = Convert.ToBoolean(TblRow["ImprovedMedication"]);
-            //chkImprovedTherapy.Checked = Convert.ToBoolean(TblRow["ImprovedTherapy"]);
-            //chkImprovedSleeping.Checked = Convert.ToBoolean(TblRow["ImprovedSleeping"]);
-            //chkImprovedMovement.Checked = Convert.ToBoolean(TblRow["ImprovedMovement"]);
-            //txtPalpationAt.Text = TblRow["PalpationAt"].ToString().Trim();
-            //cboLevels.Text = TblRow["Levels"].ToString().Trim();
-            ////txtextratextforLevels.Text = TblRow["ExtraTextForLevels"].ToString().Trim();
-            //cboROM.Text = TblRow["ROM"].ToString().Trim();
-            ////txtextratextforROM.Text = TblRow["ExtraTextForROM"].ToString().Trim();
-            //cboTPSide1.Text = TblRow["TPSide1"].ToString().Trim();
-            //txtTPText1.Text = TblRow["TPText1"].ToString().Trim();
-            //cboTPSide2.Text = TblRow["TPSide2"].ToString().Trim();
-            //txtTPText2.Text = TblRow["TPText2"].ToString().Trim();
-            //cboTPSide3.Text = TblRow["TPSide3"].ToString().Trim();
-            //txtTPText3.Text = TblRow["TPText3"].ToString().Trim();
-            //cboTPSide4.Text = TblRow["TPSide4"].ToString().Trim();
-            //txtTPText4.Text = TblRow["TPText4"].ToString().Trim();
-            //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
-            //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
+          
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
             CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
@@ -236,11 +191,9 @@ public partial class Midback : System.Web.UI.Page
 
             divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
 
-            hdorgvalPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+            hdorgPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+            hdorgCC.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
-            int val = checkTP();
-
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",1);bindSidesVal('" + sqlTbl.Rows[0]["PESides"].ToString() + "','" + sqlTbl.Rows[0]["PESidesText"].ToString() + "')", true);
             _fldPop = false;
         }
         sqlTbl.Dispose();
@@ -262,48 +215,7 @@ public partial class Midback : System.Web.UI.Page
         {
             _fldPop = true;
 
-            //chkContent.Checked = node.SelectSingleNode("constant") == null ? chkSharp.Checked : Convert.ToBoolean(node.SelectSingleNode("constant").InnerText);
-            //chkIntermittent.Checked = node.SelectSingleNode("intermittent") == null ? chkSharp.Checked : Convert.ToBoolean(node.SelectSingleNode("intermittent").InnerText);
-            //txtPainScale.Text = node.SelectSingleNode("PainScale") == null ? txtPainScale.Text.ToString().Trim() : node.SelectSingleNode("PainScale").InnerText;
-            //chkSharp.Checked = node.SelectSingleNode("Sharp") == null ? chkSharp.Checked : Convert.ToBoolean(node.SelectSingleNode("Sharp").InnerText);
-            //chkelectric.Checked = node.SelectSingleNode("Electric") == null ? chkelectric.Checked : Convert.ToBoolean(node.SelectSingleNode("Electric").InnerText);
-            //chkshooting.Checked = node.SelectSingleNode("Shooting") == null ? chkshooting.Checked : Convert.ToBoolean(node.SelectSingleNode("Shooting").InnerText);
-            //chkthrobbing.Checked = node.SelectSingleNode("Throbbling") == null ? chkthrobbing.Checked : Convert.ToBoolean(node.SelectSingleNode("Throbbling").InnerText);
-            //chkpulsating.Checked = node.SelectSingleNode("Pulsating") == null ? chkpulsating.Checked : Convert.ToBoolean(node.SelectSingleNode("Pulsating").InnerText);
-            //chkdull.Checked = node.SelectSingleNode("Dull") == null ? chkdull.Checked : Convert.ToBoolean(node.SelectSingleNode("Dull").InnerText);
-            //chkachy.Checked = node.SelectSingleNode("Achy") == null ? chkachy.Checked : Convert.ToBoolean(node.SelectSingleNode("Achy").InnerText);
-            //cboRadiates.Text = node.SelectSingleNode("Radiates") == null ? cboRadiates.Text.ToString().Trim() : node.SelectSingleNode("Radiates").InnerText;
-            //chkWorseSitting.Checked = node.SelectSingleNode("WorseSitting") == null ? chkWorseSitting.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseSitting").InnerText);
-            //chkWorseStanding.Checked = node.SelectSingleNode("WorseStanding") == null ? chkWorseStanding.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseStanding").InnerText);
-            //chkWorseLyingDown.Checked = node.SelectSingleNode("WorseLyingDown") == null ? chkWorseLyingDown.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseLyingDown").InnerText);
-            //chkWorseMovement.Checked = node.SelectSingleNode("WorseMovement") == null ? chkWorseMovement.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseMovement").InnerText);
-            //chkWorseBending.Checked = node.SelectSingleNode("WorseBending") == null ? chkWorseBending.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseBending").InnerText);
-            //chkWorseLifting.Checked = node.SelectSingleNode("WorseLifting") == null ? chkWorseLifting.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseLifting").InnerText);
-            //chkWorseSeatingtoStandingUp.Checked = node.SelectSingleNode("WorseSeatingtoStandingUp") == null ? chkWorseSeatingtoStandingUp.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseSeatingtoStandingUp").InnerText);
-            //chkWorseWalking.Checked = node.SelectSingleNode("WorseWalking") == null ? chkWorseWalking.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseWalking").InnerText);
-            //chkWorseClimbingStairs.Checked = node.SelectSingleNode("WorseClimbingStairs") == null ? chkWorseClimbingStairs.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseClimbingStairs").InnerText);
-            //chkWorseDescendingStairs.Checked = node.SelectSingleNode("WorseDescendingStairs") == null ? chkWorseDescendingStairs.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseDescendingStairs").InnerText);
-            //chkWorseDriving.Checked = node.SelectSingleNode("WorseDriving") == null ? chkWorseDriving.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseDriving").InnerText);
-            //chkWorseWorking.Checked = node.SelectSingleNode("WorseWorking") == null ? chkWorseWorking.Checked : Convert.ToBoolean(node.SelectSingleNode("WorseWorking").InnerText);
-            //txtWorseOtherText.Text = node.SelectSingleNode("WorseOtherText") == null ? txtWorseOtherText.Text.ToString().Trim() : node.SelectSingleNode("WorseOtherText").InnerText;
-            //chkImprovedResting.Checked = node.SelectSingleNode("ImprovedResting") == null ? chkImprovedResting.Checked : Convert.ToBoolean(node.SelectSingleNode("ImprovedResting").InnerText);
-            //chkImprovedMedication.Checked = node.SelectSingleNode("ImprovedMedication") == null ? chkImprovedMedication.Checked : Convert.ToBoolean(node.SelectSingleNode("ImprovedMedication").InnerText);
-            //chkImprovedTherapy.Checked = node.SelectSingleNode("ImprovedTherapy") == null ? chkImprovedTherapy.Checked : Convert.ToBoolean(node.SelectSingleNode("ImprovedTherapy").InnerText);
-            //chkImprovedSleeping.Checked = node.SelectSingleNode("ImprovedSleeping") == null ? chkImprovedSleeping.Checked : Convert.ToBoolean(node.SelectSingleNode("ImprovedSleeping").InnerText);
-            //chkImprovedMovement.Checked = node.SelectSingleNode("ImprovedMovement") == null ? chkImprovedMovement.Checked : Convert.ToBoolean(node.SelectSingleNode("ImprovedMovement").InnerText);
-            //if (txtPalpationAt.Text == "") txtPalpationAt.Text = node.SelectSingleNode("PalpationAt") == null ? txtPalpationAt.Text.ToString().Trim() : node.SelectSingleNode("PalpationAt").InnerText;
-            //cboLevels.Text = node.SelectSingleNode("Levels") == null ? cboLevels.Text.ToString().Trim() : node.SelectSingleNode("Levels").InnerText;
-            //cboROM.Text = node.SelectSingleNode("ROM") == null ? cboROM.Text.ToString().Trim() : node.SelectSingleNode("ROM").InnerText;
-            //cboTPSide1.Text = node.SelectSingleNode("TPSide1") == null ? cboTPSide1.Text.ToString().Trim() : node.SelectSingleNode("TPSide1").InnerText;
-            //txtTPText1.Text = node.SelectSingleNode("TPText1") == null ? txtTPText1.Text.ToString().Trim() : node.SelectSingleNode("TPText1").InnerText;
-            //cboTPSide2.Text = node.SelectSingleNode("TPSide2") == null ? cboTPSide2.Text.ToString().Trim() : node.SelectSingleNode("TPSide2").InnerText;
-            //txtTPText2.Text = node.SelectSingleNode("TPText2") == null ? txtTPText2.Text.ToString().Trim() : node.SelectSingleNode("TPText2").InnerText;
-            //cboTPSide3.Text = node.SelectSingleNode("TPSide3") == null ? cboTPSide3.Text.ToString().Trim() : node.SelectSingleNode("TPSide3").InnerText;
-            //txtTPText3.Text = node.SelectSingleNode("TPText3") == null ? txtTPText3.Text.ToString().Trim() : node.SelectSingleNode("TPText3").InnerText;
-            //cboTPSide4.Text = node.SelectSingleNode("TPSide4") == null ? cboTPSide4.Text.ToString().Trim() : node.SelectSingleNode("TPSide4").InnerText;
-            //txtTPText4.Text = node.SelectSingleNode("TPText4") == null ? txtTPText4.Text.ToString().Trim() : node.SelectSingleNode("TPText4").InnerText;
-            //txtFreeForm.Text = node.SelectSingleNode("FreeForm") == null ? txtFreeForm.Text.ToString().Trim() : node.SelectSingleNode("FreeForm").InnerText;
-            //txtFreeFormCC.Text = node.SelectSingleNode("FreeFormCC") == null ? txtFreeFormCC.Text.ToString().Trim() : node.SelectSingleNode("FreeFormCC").InnerText;
+           
             txtFreeFormA.Text = node.SelectSingleNode("FreeFormA") == null ? txtFreeFormA.Text.ToString().Trim() : node.SelectSingleNode("FreeFormA").InnerText;
             txtFreeFormP.Text = node.SelectSingleNode("FreeFormP") == null ? txtFreeFormP.Text.ToString().Trim() : node.SelectSingleNode("FreeFormP").InnerText;
             _fldPop = false;
@@ -957,6 +869,7 @@ public partial class Midback : System.Web.UI.Page
         string body = File.ReadAllText(path);
 
         CF.InnerHtml = body;
+        hdorgCC.Value = body;
 
     }
 
@@ -968,10 +881,10 @@ public partial class Midback : System.Web.UI.Page
 
 
         divPE.InnerHtml = body;
-        hdorgvalPE.Value = body;
+        hdorgPE.Value = body;
 
-        int val = checkTP();
+        //int val = checkTP();
 
-        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",0)", true);
+        //ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",0)", true);
     }
 }

@@ -197,97 +197,15 @@ public partial class Knee : System.Web.UI.Page
         if (_ieMode == "Update" || _ieMode == "New")
         {
             TblRow["PatientIE_ID"] = _ieID;
-            //TblRow["PainScaleLeft"] = txtPainScaleLeft.Text.ToString().ToString();
-            //TblRow["ConstantRight"] = chkContentRight.Checked;
-            //TblRow["ConstantLeft"] = chkContentLeft.Checked;
-            //TblRow["IntermittentLeft"] = chkIntermittentLeft.Checked;
-            //TblRow["IntermittentRight"] = chkIntermittentRight.Checked;
-            //TblRow["SharpLeft"] = chkSharpLeft.Checked;
-            //TblRow["ElectricLeft"] = chkElectricLeft.Checked;
-            //TblRow["ShootingLeft"] = chkShootingLeft.Checked;
-            //TblRow["ThrobblingLeft"] = chkThrobblingLeft.Checked;
-            //TblRow["PulsatingLeft"] = chkPulsatingLeft.Checked;
-            //TblRow["DullLeft"] = chkDullLeft.Checked;
-            //TblRow["AchyLeft"] = chkAchyLeft.Checked;
-            //TblRow["WorseMovementLeft"] = chkWorseMovementLeft.Checked;
-            //TblRow["WorseWalkingLeft"] = chkWorseWalkingLeft.Checked;
-            //TblRow["WorseStairsLeft"] = chkWorseStairsLeft.Checked;
-            //TblRow["WorseSquattingLeft"] = chkWorseSquattingLeft.Checked;
-            //TblRow["WorseActivitiesLeft"] = chkWorseActivitiesLeft.Checked;
-            //TblRow["WorseOtherLeft"] = chkWorseOtherLeft.Checked;
-            //TblRow["WorseOtherTextLeft"] = txtWorseOtherTextLeft.Text.ToString().ToString();
-            //TblRow["ImprovedRestingLeft"] = chkImprovedRestingLeft.Checked;
-            //TblRow["ImprovedMedicationLeft"] = chkImprovedMedicationLeft.Checked;
-            //TblRow["ImprovedTherapyLeft"] = chkImprovedTherapyLeft.Checked;
-            //TblRow["ImprovedSleepingLeft"] = chkImprovedSleepingLeft.Checked;
-            //TblRow["PainScaleRight"] = txtPainScaleRight.Text.ToString().ToString();
-            //TblRow["SharpRight"] = chkSharpRight.Checked;
-            //TblRow["ElectricRight"] = chkElectricRight.Checked;
-            //TblRow["ShootingRight"] = chkShootingRight.Checked;
-            //TblRow["ThrobblingRight"] = chkThrobblingRight.Checked;
-            //TblRow["PulsatingRight"] = chkPulsatingRight.Checked;
-            //TblRow["DullRight"] = chkDullRight.Checked;
-            //TblRow["AchyRight"] = chkAchyRight.Checked;
-            //TblRow["WorseMovementRight"] = chkWorseMovementRight.Checked;
-            //TblRow["WorseWalkingRight"] = chkWorseWalkingRight.Checked;
-            //TblRow["WorseStairsRight"] = chkWorseStairsRight.Checked;
-            //TblRow["WorseSquattingRight"] = chkWorseSquattingRight.Checked;
-            //TblRow["WorseActivitiesRight"] = chkWorseActivitiesRight.Checked;
-            //TblRow["WorseOtherRight"] = chkWorseOtherRight.Checked;
-            //TblRow["WorseOtherTextRight"] = txtWorseOtherTextRight.Text.ToString().ToString();
-            //TblRow["ImprovedRestingRight"] = chkImprovedRestingRight.Checked;
-            //TblRow["ImprovedMedicationRight"] = chkImprovedMedicationRight.Checked;
-            //TblRow["ImprovedTherapyRight"] = chkImprovedTherapyRight.Checked;
-            //TblRow["ImprovedSleepingRight"] = chkImprovedSleepingRight.Checked;
-            //TblRow["LEExtensionRight"] = txtLEExtensionRight.Text.ToString().ToString();
-            //TblRow["LEFlexionRight"] = txtLEFlexionRight.Text.ToString().ToString();
-
-            //TblRow["FlexNormal"] = txtFwdFlexNormal.Text.ToString().ToString();
-            //TblRow["ExtensionNormal"] = txtExtensionNormal.Text.ToString().ToString();
-
-            //TblRow["LEExtensionLeft"] = txtLEExtensionLeft.Text.ToString().ToString();
-            //TblRow["LEFlexionLeft"] = txtLEFlexionLeft.Text.ToString().ToString();
-            //TblRow["PalpationText1Left"] = txtPalpationText1Left.Text.ToString().ToString();
-            //TblRow["PalpationText2Left"] = txtPalpationText2Left.Text.ToString().ToString();
-            //TblRow["MedialLeft"] = chkMedialLeft.Checked;
-            //TblRow["LateralLeft"] = chkLateralLeft.Checked;
-            //TblRow["SuperiorLeft"] = chkSuperiorLeft.Checked;
-            //TblRow["InferiorLeft"] = chkInferiorLeft.Checked;
-            //TblRow["SupermedialLeft"] = chkSupermedialLeft.Checked;
-            //TblRow["SuperoLateralLeft"] = chkSuperoLateralLeft.Checked;
-            //TblRow["InferomedialLeft"] = chkInferomedialLeft.Checked;
-            //TblRow["InferoLateralLeft"] = chkInferoLateralLeft.Checked;
-            //TblRow["PeripatellarLeft"] = chkPeripatellarLeft.Checked;
-            //TblRow["PalpationText1Right"] = txtPalpationText1Right.Text.ToString().ToString();
-            //TblRow["PalpationText2Right"] = txtPalpationText2Right.Text.ToString().ToString();
-            //TblRow["MedialRight"] = chkMedialRight.Checked;
-            //TblRow["LateralRight"] = chkLateralRight.Checked;
-            //TblRow["SuperiorRight"] = chkSuperiorRight.Checked;
-            //TblRow["InferiorRight"] = chkInferiorRight.Checked;
-            //TblRow["SupermedialRight"] = chkSupermedialRight.Checked;
-            //TblRow["SuperoLateralRight"] = chkSuperoLateralRight.Checked;
-            //TblRow["InferomedialRight"] = chkInferomedialRight.Checked;
-            //TblRow["InferoLateralRight"] = chkInferoLateralRight.Checked;
-            //TblRow["PeripatellarRight"] = chkPeripatellarRight.Checked;
-            //TblRow["McMurrayLeft"] = chkMcMurrayLeft.Checked;
-            //TblRow["LachmanLeft"] = chkLachmanLeft.Checked;
-            //TblRow["AnteriorLeft"] = chkAnteriorLeft.Checked;
-            //TblRow["PosteriorLeft"] = chkPosteriorLeft.Checked;
-            //TblRow["VarusLeft"] = chkVarusLeft.Checked;
-            //TblRow["ValgusLeft"] = chkValgusLeft.Checked;
-            //TblRow["McMurrayRight"] = chkMcMurrayRight.Checked;
-            //TblRow["LachmanRight"] = chkLachmanRight.Checked;
-            //TblRow["AnteriorRight"] = chkAnteriorRight.Checked;
-            //TblRow["PosteriorRight"] = chkPosteriorRight.Checked;
-            //TblRow["VarusRight"] = chkVarusRight.Checked;
-            //TblRow["ValgusRight"] = chkValgusRight.Checked;
-            //TblRow["FreeForm"] = txtFreeForm.Text.ToString().ToString();
-            //TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
+           
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
+
             TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
 
             TblRow["PEvalue"] = hdPEvalue.Value;
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
 
             string strname = "", strleft = "", strright = "", strnormal = "";
 
@@ -1193,6 +1111,7 @@ public partial class Knee : System.Web.UI.Page
         body = body.Replace("#gender", gender);
 
         CF.InnerHtml = body;
+        hdorgCC.Value = body;
 
     }
 
@@ -1215,11 +1134,12 @@ public partial class Knee : System.Web.UI.Page
         }
 
         divPE.InnerHtml = body;
+        hdorgPE.Value = body;
 
 
         //int val = checkTP();
 
-        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
+        // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
     }
 
     public int checkTP()

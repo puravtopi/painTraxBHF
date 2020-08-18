@@ -200,17 +200,28 @@ public partial class FuMidBack : System.Web.UI.Page
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
             //txtPalpationAt.Text = Convert.ToString(TblRow["PalpationAt"]);
 
-            CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
+
+            if (SessionManager.forwardCC)
+                CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
+            else
+                CF.InnerHtml = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+
+            if (SessionManager.forwardPE)
+                divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
+            else
+                divPE.InnerHtml = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+
+            hdorgPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+            hdorgCC.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
 
-            divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
-
-            hdorgvalPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
-
-            int val = checkTP();
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ");bindSidesVal('" + sqlTbl.Rows[0]["PESides"].ToString() + "','" + sqlTbl.Rows[0]["PESidesText"].ToString() + "');", true);
             _fldPop = false;
         }
+        //else
+        //{
+        //    ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
+
+        //}
         sqlTbl.Dispose();
         sqlCmdBuilder.Dispose();
         sqlAdapt.Dispose();

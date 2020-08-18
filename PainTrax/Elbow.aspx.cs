@@ -170,9 +170,11 @@ public partial class Elbow : System.Web.UI.Page
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
             TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
 
 
             TblRow["PEvalue"] = hdPEvalue.Value;
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
 
 
 
@@ -890,6 +892,7 @@ public partial class Elbow : System.Web.UI.Page
 
 
         CF.InnerHtml = body;
+        hdorgCC.Value = body;
 
     }
 
@@ -905,6 +908,6 @@ public partial class Elbow : System.Web.UI.Page
 
 
         divPE.InnerHtml = body;
-
+        hdorgPE.Value = body;
     }
 }

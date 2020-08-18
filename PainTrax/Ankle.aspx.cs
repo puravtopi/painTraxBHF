@@ -108,7 +108,7 @@ public partial class Ankle : System.Web.UI.Page
             bindgridPoup();
             BindDCDataGrid();
         }
-      
+
         Logger.Info(Session["uname"].ToString() + "- Visited in  Ankle for -" + Convert.ToString(Session["LastNameIE"]) + Convert.ToString(Session["FirstNameIE"]) + "-" + DateTime.Now);
     }
     public string SaveUI(string ieID, string ieMode, bool bpIsChecked)
@@ -153,6 +153,8 @@ public partial class Ankle : System.Web.UI.Page
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
             TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
 
 
             TblRow["PEvalue"] = hdPEvalue.Value;
@@ -229,155 +231,6 @@ public partial class Ankle : System.Web.UI.Page
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
 
-            //txtPainScaleRight.Text = TblRow["PainScaleRight"].ToString().Trim();
-            //txtPainScaleLeft.Text = TblRow["PainScaleLeft"].ToString().Trim();
-
-            //if (!string.IsNullOrEmpty(TblRow["ConstantRight"].ToString()))
-            //{ chkContentRight.Checked = Convert.ToBoolean(TblRow["ConstantRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["IntermittentRight"].ToString()))
-            //{ chkIntermittentRight.Checked = Convert.ToBoolean(TblRow["IntermittentRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["SharpRight"].ToString()))
-            //{ chksharpRight.Checked = Convert.ToBoolean(TblRow["SharpRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ElectricRight"].ToString()))
-            //{ chkelectricRight.Checked = Convert.ToBoolean(TblRow["ElectricRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ShootingRight"].ToString()))
-            //{ chkshootingRight.Checked = Convert.ToBoolean(TblRow["ShootingRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ThrobblingRight"].ToString()))
-            //{ chkthrobbingRight.Checked = Convert.ToBoolean(TblRow["ThrobblingRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PulsatingRight"].ToString()))
-            //{ chkpulsatingRight.Checked = Convert.ToBoolean(TblRow["PulsatingRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["DullRight"].ToString()))
-            //{ chkdullRight.Checked = Convert.ToBoolean(TblRow["DullRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["AchyRight"].ToString()))
-            //{ chkachyRight.Checked = Convert.ToBoolean(TblRow["AchyRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ConstantLeft"].ToString()))
-            //{ chkContentLeft.Checked = Convert.ToBoolean(TblRow["ConstantLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["IntermittentLeft"].ToString()))
-            //{ chkIntermittentLeft.Checked = Convert.ToBoolean(TblRow["IntermittentLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["SharpLeft"].ToString()))
-            //{ chksharpLeft.Checked = Convert.ToBoolean(TblRow["SharpLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ElectricLeft"].ToString()))
-            //{ chkelectricLeft.Checked = Convert.ToBoolean(TblRow["ElectricLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ShootingLeft"].ToString()))
-            //{ chkshootingLeft.Checked = Convert.ToBoolean(TblRow["ShootingLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ThrobblingLeft"].ToString()))
-            //{ chkthrobbingLeft.Checked = Convert.ToBoolean(TblRow["ThrobblingLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PulsatingLeft"].ToString()))
-            //{ chkpulsatingLeft.Checked = Convert.ToBoolean(TblRow["PulsatingLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["DullLeft"].ToString()))
-            //{ chkdullLeft.Checked = Convert.ToBoolean(TblRow["DullLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["AchyLeft"].ToString()))
-            //{ chkachyLeft.Checked = Convert.ToBoolean(TblRow["AchyLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["MedMalleolusLeft"].ToString()))
-            //{ chkMedMalleolusLeft.Checked = Convert.ToBoolean(TblRow["MedMalleolusLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["LatMalleolusLeft"].ToString()))
-            //{ chkLatMalleolusLeft.Checked = Convert.ToBoolean(TblRow["LatMalleolusLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["AchillesLeft"].ToString()))
-            //{ chkAchillesLeft.Checked = Convert.ToBoolean(TblRow["AchillesLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["MedMalleolusRight"].ToString()))
-            //{ chkMedMalleolusRight.Checked = Convert.ToBoolean(TblRow["MedMalleolusRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["LatMalleolusRight"].ToString()))
-            //{ chkLatMalleolusRight.Checked = Convert.ToBoolean(TblRow["LatMalleolusRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["AchillesRight"].ToString()))
-            //{ chkAchillesRight.Checked = Convert.ToBoolean(TblRow["AchillesRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationMedMalleolusLeft"].ToString()))
-            //{ chkPalpationMedMalleolusLeft.Checked = Convert.ToBoolean(TblRow["PalpationMedMalleolusLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationLatMalleolusLeft"].ToString()))
-            //{ chkPalpationLatMalleolusLeft.Checked = Convert.ToBoolean(TblRow["PalpationLatMalleolusLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationAchillesLeft"].ToString()))
-            //{ chkPalpationAchillesLeft.Checked = Convert.ToBoolean(TblRow["PalpationAchillesLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorsePlantarLeft"].ToString()))
-            //{ chkWorsePlantarLeft.Checked = Convert.ToBoolean(TblRow["WorsePlantarLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseDorsiLeft"].ToString()))
-            //{ chkWorseDorsiLeft.Checked = Convert.ToBoolean(TblRow["WorseDorsiLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseEversionLeft"].ToString()))
-            //{ chkWorseEversionLeft.Checked = Convert.ToBoolean(TblRow["WorseEversionLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseInversionLeft"].ToString()))
-            //{ chkWorseInversionLeft.Checked = Convert.ToBoolean(TblRow["WorseInversionLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseExtensionLeft"].ToString()))
-            //{ chkWorseExtensionLeft.Checked = Convert.ToBoolean(TblRow["WorseExtensionLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseAmbulationLeft"].ToString()))
-            //{ chkWorseAmbulationLeft.Checked = Convert.ToBoolean(TblRow["WorseAmbulationLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["EdemaLeft"].ToString()))
-            //{ chkEdemaLeft.Checked = Convert.ToBoolean(TblRow["EdemaLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["EcchymosisLeft"].ToString()))
-            //{ chkEcchymosisLeft.Checked = Convert.ToBoolean(TblRow["EcchymosisLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationMedMalleolusRight"].ToString()))
-            //{ chkPalpationMedMalleolusRight.Checked = Convert.ToBoolean(TblRow["PalpationMedMalleolusRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationLatMalleolusRight"].ToString()))
-            //{ chkPalpationLatMalleolusRight.Checked = Convert.ToBoolean(TblRow["PalpationLatMalleolusRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationAchillesRight"].ToString()))
-            //{ chkPalpationAchillesRight.Checked = Convert.ToBoolean(TblRow["PalpationAchillesRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorsePlantarRight"].ToString()))
-            //{ chkWorsePlantarRight.Checked = Convert.ToBoolean(TblRow["WorsePlantarRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseDorsiRight"].ToString()))
-            //{ chkWorseDorsiRight.Checked = Convert.ToBoolean(TblRow["WorseDorsiRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseEversionRight"].ToString()))
-            //{ chkWorseEversionRight.Checked = Convert.ToBoolean(TblRow["WorseEversionRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseInversionRight"].ToString()))
-            //{ chkWorseInversionRight.Checked = Convert.ToBoolean(TblRow["WorseInversionRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseExtensionRight"].ToString()))
-            //{ chkWorseExtensionRight.Checked = Convert.ToBoolean(TblRow["WorseExtensionRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseAmbulationRight"].ToString()))
-            //{ chkWorseAmbulationRight.Checked = Convert.ToBoolean(TblRow["WorseAmbulationRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["EdemaRight"].ToString()))
-            //{ chkEdemaRight.Checked = Convert.ToBoolean(TblRow["EdemaRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["EcchymosisRight"].ToString()))
-            //{ chkEcchymosisRight.Checked = Convert.ToBoolean(TblRow["EcchymosisRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["RangeOfMotionRight"].ToString()))
-            //{ cboRangeOfMotionRight.Text = TblRow["RangeOfMotionRight"].ToString(); }
-
-            //if (!string.IsNullOrEmpty(TblRow["RangeOfMotionLeft"].ToString()))
-            //{ cboRangeOfMotionLeft.Text = TblRow["RangeOfMotionLeft"].ToString(); }
-
-            //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
-            //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
             CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
@@ -386,37 +239,9 @@ public partial class Ankle : System.Web.UI.Page
             string orgval = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
             string editval = sqlTbl.Rows[0]["PEvalue"].ToString();
 
-
-            //Position = Request.QueryString["P"];
-
-
-            //if (Position == "L")
-            //{
-            //    orgval = orgval.Replace("#rigthtdiv", "style='display:none'");
-            //    editval = editval.Replace("#rigthtdiv", "style='display:none'");
-
-            //    orgval = orgval.Replace("#leftdiv", "style='display:block'");
-            //    editval = editval.Replace("#leftdiv", "style='display:block'");
-            //}
-            //else if (Position == "R")
-            //{
-            //    orgval = orgval.Replace("#leftdiv", "style='display:none'");
-            //    editval = editval.Replace("#leftdiv", "style='display:none'");
-
-            //    orgval = orgval.Replace("#rigthtdiv", "style='display:block'");
-            //    editval = editval.Replace("#rigthtdiv", "style='display:block'");
-            //}
-            //else
-            //{
-            //    orgval = orgval.Replace("#leftdiv", "style='display:block'");
-            //    editval = editval.Replace("#leftdiv", "style='display:block'");
-
-            //    orgval = orgval.Replace("#rigthtdiv", "style='display:block'");
-            //    editval = editval.Replace("#rigthtdiv", "style='display:block'");
-            //}
-
-
-
+            hdorgPE.Value = orgval;
+            hdorgCC.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+          
             divPE.InnerHtml = editval;
 
             // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "bindRadiobuttonValues('" + sqlTbl.Rows[0]["PERangeOfMotionRight"].ToString() + "','" + sqlTbl.Rows[0]["PERangeOfMotionLeft"].ToString() + "')", true);
@@ -1069,6 +894,7 @@ public partial class Ankle : System.Web.UI.Page
 
 
         CF.InnerHtml = body;
+        hdorgCC.Value = body;
 
     }
 
@@ -1084,6 +910,7 @@ public partial class Ankle : System.Web.UI.Page
 
 
         divPE.InnerHtml = body;
+        hdorgPE.Value = body;
 
     }
 }

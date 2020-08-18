@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defaults>
   <Ankle>
     <MedMalleolusLeft>False</MedMalleolusLeft>
@@ -110,8 +110,10 @@
     </FlexRight>
     <FlexionROMNormal>150</FlexionROMNormal>
     <ExtensionROMNormal>0</ExtensionROMNormal>
-    <SupinationROMNormal></SupinationROMNormal>
-    <PronationROMNormal></PronationROMNormal>
+    <SupinationROMNormal>
+    </SupinationROMNormal>
+    <PronationROMNormal>
+    </PronationROMNormal>
     <SupinationLeft>
     </SupinationLeft>
     <SupinationRight>
@@ -170,7 +172,8 @@
     <Scan>False</Scan>
     <ScanType>MRI</ScanType>
     <ScanSide>bilateral</ScanSide>
-    <PainScaleLeft></PainScaleLeft>
+    <PainScaleLeft>
+    </PainScaleLeft>
     <SharpLeft>False</SharpLeft>
     <ElectricLeft>False</ElectricLeft>
     <ShootingLeft>False</ShootingLeft>
@@ -178,7 +181,8 @@
     <PulsatingLeft>False</PulsatingLeft>
     <DullLeft>False</DullLeft>
     <AchyLeft>False</AchyLeft>
-    <PainScaleRight></PainScaleRight>
+    <PainScaleRight>
+    </PainScaleRight>
     <SharpRight>False</SharpRight>
     <ElectricRight>False</ElectricRight>
     <ShootingRight>False</ShootingRight>
@@ -461,7 +465,7 @@
   <MidBack>
     <PainScale>
     </PainScale>
-<constant>False</constant>
+    <constant>False</constant>
     <intermittent>False</intermittent>
     <Sharp>False</Sharp>
     <Electric>False</Electric>
@@ -494,7 +498,8 @@
     <ImprovedMovement>False</ImprovedMovement>
     <PalpationAt>T1-T12</PalpationAt>
     <Levels>bilaterally</Levels>
-    <ROM></ROM>
+    <ROM>
+    </ROM>
     <IsTP>True</IsTP>
     <TPSide1>bilateral</TPSide1>
     <TPText1>paraspinal</TPText1>
@@ -660,16 +665,22 @@
     <TPText2>rhomboids</TPText2>
     <TPSide3>bilateral</TPSide3>
     <TPText3>trapezius</TPText3>
-    <TPside4></TPside4>
-    <TPText4></TPText4>
-    <TPSide5></TPSide5>
-    <TPText5></TPText5>
+    <TPside4>
+    </TPside4>
+    <TPText4>
+    </TPText4>
+    <TPSide5>
+    </TPSide5>
+    <TPText5>
+    </TPText5>
     <TPSide6>
     </TPSide6>
-    <TPText6></TPText6>
+    <TPText6>
+    </TPText6>
     <TPSide7>
     </TPSide7>
-    <TPText7></TPText7>
+    <TPText7>
+    </TPText7>
     <FreeForm>
     </FreeForm>
     <FreeFormCC>
@@ -864,17 +875,22 @@
       <TPText1>deltoid</TPText1>
       <TPSide2>right</TPSide2>
       <TPText2>supraspinatus</TPText2>
-      <TPSide3></TPSide3>
+      <TPSide3>
+      </TPSide3>
       <TPText3>infraspinatus</TPText3>
-      <TPSide4></TPSide4>
+      <TPSide4>
+      </TPSide4>
       <TPText4>teres minor</TPText4>
-      <TPSide5></TPSide5>
+      <TPSide5>
+      </TPSide5>
       <TPText5>teres major</TPText5>
-      <TPSide6></TPSide6>
+      <TPSide6>
+      </TPSide6>
       <TPText6>pectoralis major</TPText6>
       <TPSide7>right</TPSide7>
       <TPText7>biceps</TPText7>
-      <TPSide8></TPSide8>
+      <TPSide8>
+      </TPSide8>
       <TPText8>triceps</TPText8>
     </right>
     <bilateral>
@@ -1275,19 +1291,24 @@
     <Other2Study>LE NCV/EMG</Other2Study>
     <Other2Text>
     </Other2Text>
-    <Other3Study></Other3Study>
+    <Other3Study>
+    </Other3Study>
     <Other3Text>
     </Other3Text>
-    <Other4Study></Other4Study>
+    <Other4Study>
+    </Other4Study>
     <Other4Text>
     </Other4Text>
-    <Other5Study></Other5Study>
+    <Other5Study>
+    </Other5Study>
     <Other5Text>
     </Other5Text>
-    <Other6Study></Other6Study>
+    <Other6Study>
+    </Other6Study>
     <Other6Text>
     </Other6Text>
-    <Other7Study></Other7Study>
+    <Other7Study>
+    </Other7Study>
     <Other7Text>
     </Other7Text>
     <OtherMedicine>
@@ -1337,6 +1358,7 @@
     <displayCCprint>true</displayCCprint>
     <displayTreatment>true</displayTreatment>
     <signtext>I have read and agreed to this form and signed electronically.</signtext>
+    <forwardCC>True</forwardCC>
+    <forwardPE>True</forwardPE>
   </Settings>
-  
 </Defaults>

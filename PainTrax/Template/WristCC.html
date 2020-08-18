@@ -5,31 +5,31 @@
     <div class="col-md-9" style="margin-top: 5px">
         <div id="WrapLeft" #leftdiv>
             <label class="control-label">The patient complains of left wrist pain that is </label>
-            <input type="text" id="txtPainScaleL" style="Width:40px" value="8" onchange="txtMe(this)" />
+            <input type="text" id="txtPainScaleL" style="Width:40px" class="paincls" value="8" onchange="txtMe(this)" />
             <label class="control-label">/10, with 10 being the worst, which is  </label>
             <input id="chkcontentL" type="checkbox" value="content" onclick="checkMe(this)" /> constant
             <input id="chkintermittentL" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent
-            <input id="chksharpL" type="checkbox" value="sharp" onclick="checkMe(this)" checked /> sharp
+            <input id="chksharpL" type="checkbox" value="sharp" onclick="checkMe(this)"  /> sharp
 
             <input id="chkelectricL" type="checkbox" value="electric" onclick="checkMe(this)" /> electric
             <input id="chkshootingL" type="checkbox" value="shooting" onclick="checkMe(this)" /> shooting
             <input id="chkthrobbingL" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing
             <input id="chkpulsatingL" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating
-            <input id="chkdullL" type="checkbox" value="dull" onclick="checkMe(this)" checked /> dull
-            <input id="chkachyL" type="checkbox" value="achy" onclick="checkMe(this)" checked /> achy
+            <input id="chkdullL" type="checkbox" value="dull" onclick="checkMe(this)"  /> dull
+            <input id="chkachyL" type="checkbox" value="achy" onclick="checkMe(this)"  /> achy
             <label> in nature.</label>
 
             <input type="checkbox" id="chkwirstpainincreaseL" class="nocomma" onclick="checkMe(this)" value="The patient complains of left wrist pain increases with specifically at the " /> The patient complains of left wrist pain increases with specifically at the
-            <input type="checkbox" id="chkulnarL" value="ulnar" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> ulnar
-            <input type="checkbox" id="chkradiusL" value="radial" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> radial
-            <input type="checkbox" id="chkDorsalL" value="dorsal" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> dorsal
-            <input type="checkbox" id="chkPalmarL" value="palmar side" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> palmar side
+            <input type="checkbox" id="chkulnarL" value="ulnar" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> ulnar
+            <input type="checkbox" id="chkradiusL" value="radial" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> radial
+            <input type="checkbox" id="chkDorsalL" value="dorsal" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> dorsal
+            <input type="checkbox" id="chkPalmarL" value="palmar side" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> palmar side
             <label> of the wrist.</label>
             <input type="checkbox" id="chkpainwrosL" value="The wirst pain is worsened with " class="nocomma" onclick="checkMe(this)" /> The wrist pain is worsened with
-            <input type="checkbox" id="chkLiftingObjectL" value="lifting objects" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" checked /> lifting objects
-            <input type="checkbox" id="chkRotationL" value="rotation" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> rotation
-            <input type="checkbox" id="chkMovementL" value="movement" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> movement
-            <input type="checkbox" id="chkWorkingL" value="working activities" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> working activities
+            <input type="checkbox" id="chkLiftingObjectL" class="chkworseL" value="lifting objects" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');"  /> lifting objects
+            <input type="checkbox" id="chkRotationL" class="chkworseL" value="rotation" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> rotation
+            <input type="checkbox" id="chkMovementL" class="chkworseL" value="movement" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> movement
+            <input type="checkbox" id="chkWorkingL" class="chkworseL" value="working activities" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> working activities
             <label>.</label>
 
 
@@ -49,31 +49,31 @@
         <br />
         <div id="WrapRight" #rigthtdiv>
             <label class="control-label">The patient complains of right wrist pain that is </label>
-            <input type="text" id="txtPainScaleR" style="Width:40px" value="8" onchange="txtMe(this)" />
+            <input type="text" id="txtPainScaleR" style="Width:40px" class="paincls" value="8" onchange="txtMe(this)" />
             <label class="control-label">/10, with 10 being the worst, which is  </label>
             <input id="chkcontentR" type="checkbox" value="content" onclick="checkMe(this)" /> constant
             <input id="chkintermittentR" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent
-            <input id="chksharpR" type="checkbox" value="sharp" onclick="checkMe(this)" checked /> sharp
+            <input id="chksharpR" type="checkbox" value="sharp" onclick="checkMe(this)"  /> sharp
 
             <input id="chkelectricR" type="checkbox" value="electric" onclick="checkMe(this)" /> electric
             <input id="chkshootingR" type="checkbox" value="shooting" onclick="checkMe(this)" /> shooting
             <input id="chkthrobbingR" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing
             <input id="chkpulsatingR" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating
-            <input id="chkdullR" type="checkbox" value="dull" onclick="checkMe(this)" checked /> dull
-            <input id="chkachyR" type="checkbox" value="achy" onclick="checkMe(this)" checked /> achy
+            <input id="chkdullR" type="checkbox" value="dull" onclick="checkMe(this)"  /> dull
+            <input id="chkachyR" type="checkbox" value="achy" onclick="checkMe(this)"  /> achy
             <label> in nature.</label>
 
             <input type="checkbox" id="chkwirstpainincreaseR" class="nocomma" onclick="checkMe(this)" value="The patient complains of rigth wrist pain increases with specifically at the " /> The patient complains of right wrist pain increases with specifically at the
-            <input type="checkbox" id="chkulnarR" value="ulnar" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> ulnar
-            <input type="checkbox" id="chkradiusR" value="radius" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> radius
-            <input type="checkbox" id="chkDorsalR" value="dorsal of the wrist" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> dorsal of the wrist
-            <input type="checkbox" id="chkPalmarR" value="palmar side" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> palmar side
+            <input type="checkbox" id="chkulnarR" value="ulnar" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> ulnar
+            <input type="checkbox" id="chkradiusR" value="radius" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> radius
+            <input type="checkbox" id="chkDorsalR" value="dorsal of the wrist" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> dorsal of the wrist
+            <input type="checkbox" id="chkPalmarR" value="palmar side" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> palmar side
             <label> of the wrist.</label>
             <input type="checkbox" id="chkpainwrosR" value="The wrist pain is worsened with " class="nocomma" onclick="checkMe(this)" /> The wrist pain is worsened with
-            <input type="checkbox" id="chkLiftingObjectR" value="lifting objects" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" checked /> lifting objects
-            <input type="checkbox" id="chkRotationR" value="rotation" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" /> rotation
-            <input type="checkbox" id="chkMovementR" value="movement" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" /> movement
-            <input type="checkbox" id="chkWorkingR" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" value="working activities" /> working activities
+            <input type="checkbox" id="chkLiftingObjectR" class="chkworseR" value="lifting objects" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');"  /> lifting objects
+            <input type="checkbox" id="chkRotationR" class="chkworseR" value="rotation" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" /> rotation
+            <input type="checkbox" id="chkMovementR" class="chkworseR" value="movement" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" /> movement
+            <input type="checkbox" id="chkWorkingR" class="chkworseR" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" value="working activities" /> working activities
             <label>.</label>
 
             <section class="col-md-3">
@@ -108,10 +108,53 @@
 
     function checkDefault(chk, deafCheck) {
 
+        debugger
+
+
+        var isCheck = false;
+        var className = "";
         if ($("#" + deafCheck).prop("checked") == false) {
 
             if ($(chk).prop("checked")) {
                 $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
+
+
+        if (deafCheck === "chkwirstpainincreaseL")
+            className = "chkpainL";
+        if (deafCheck === "chkwirstpainincreaseR")
+            className = "chkpainR";
+        else if (deafCheck === "chkpainwrosL")
+            className = "chkworseL";
+        else if (deafCheck === "chkpainwrosR")
+            className = "chkworseR";
+        else if (deafCheck === "chkrightrevel")
+            className = "chkrevelR";
+        else if (deafCheck === "chkleftrevel")
+            className = "chkrevelL";
+       
+
+
+
+
+
+        if ($("#" + deafCheck).prop("checked") == true) {
+
+
+
+
+            if ($(chk).prop("checked") == false) {
+
+                $("input:checkbox[class=" + className + "]").each(function () {
+                    if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                        isCheck = true;
+                    }
+                });
+
+                if (!isCheck)
+                    $("#" + deafCheck).removeAttr('checked');
 
             }
         }

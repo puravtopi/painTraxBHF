@@ -243,6 +243,30 @@ public partial class Page5 : System.Web.UI.Page
                     TblRow["FollowUpInDate"] = DBNull.Value;
                 TblRow["Precautions"] = txtPrecautions.Text.ToString();
                 TblRow["OtherMedicine"] = txtOtherMedicine.Text.ToString();
+
+                if (chkgoal.Checked)
+                {
+                    TblRow["IsGoal"] = true;
+                    TblRow["GoalText"] = chkgoal.Text;
+                }
+                else
+                {
+                    TblRow["IsGoal"] = false;
+                    TblRow["GoalText"] = "";
+                }
+
+                if (chkcare.Checked)
+                {
+                    TblRow["IsCare"] = true;
+                    TblRow["CareText"] = chkcare.Text;
+                }
+                else
+                {
+                    TblRow["IsCare"] = false;
+                    TblRow["CareText"] = "";
+                }
+
+
                 if (_ieMode == "New")
                 {
                     TblRow["CreatedBy"] = "Admin";

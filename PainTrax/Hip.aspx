@@ -150,6 +150,7 @@
 
 
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCC" />
 
                 <div class="row">
                     <div class="col-md-3">
@@ -284,6 +285,7 @@
 
 
                 <asp:HiddenField runat="server" ID="hdPEvalue" />
+                <asp:HiddenField runat="server" ID="hdorgPE" />
 
                 <asp:UpdatePanel runat="server" ID="upMedicine">
                     <ContentTemplate>

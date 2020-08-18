@@ -112,6 +112,12 @@
     </style>
 
     <script>
+          function clnVal() {
+     
+            $('.paincls').val('');
+        }
+
+
         function MenuHighlight() {
             var current = location.pathname;
             var curpage = current.substr(current.lastIndexOf('/') + 1);
@@ -232,9 +238,9 @@
                                 <li>
                                     <a onclick="Confirmbox(event,'document')" id="patientdocumentfu" runat="server" href="PatientDocumentFU.aspx">Document</a>
                                 </li>
-                                 <li>
+                                <li>
                                     <%--<i class="icon-edit"></i>--%>
-                                    <a id="pocSummeryfu" runat="server"  href="POCSummeryFU.aspx">PoC Summary</a>
+                                    <a id="pocSummeryfu" runat="server" href="POCSummeryFU.aspx">PoC Summary</a>
                                 </li>
                             </ul>
                             <div class="nav-no-collapse header-nav">
@@ -304,6 +310,8 @@
         <%--</div>--%>
     </form>
     <script>
+
+      
         $(function () {
             var current = location.pathname;
             var curpage = current.substr(current.lastIndexOf('/') + 1);

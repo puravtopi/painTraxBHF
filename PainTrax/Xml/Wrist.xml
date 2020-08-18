@@ -4,13 +4,19 @@
     <name>Palmar Flexion</name>
     <left></left>
     <right></right>
-    <normal>90</normal>
+    <normal>80</normal>
   </ROM>
   <ROM>
     <name>Dorsiflexion</name>
     <left></left>
     <right></right>
     <normal>70</normal>
+  </ROM>
+  <ROM>
+    <name>Pronation/Supination</name>
+    <left></left>
+    <right></right>
+    <normal>90</normal>
   </ROM>
   <ROM>
     <name>Ulnar deviation </name>

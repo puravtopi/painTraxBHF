@@ -345,15 +345,15 @@ public partial class FuWrist : System.Web.UI.Page
             //TblRow["PainUponDorsiFlexionBilaterally"] = chkPainUponDorsiFlexionLeft.Checked;
             //TblRow["RangeOfMotionRight"] = cboRangeOfMotionRight.Text.ToString();
             //TblRow["RangeOfMotionLeft"] = cboRangeOfMotionLeft.Text.ToString();
-           // TblRow["FreeForm"] = txtFreeForm.Text.ToString();
-           // TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
+            // TblRow["FreeForm"] = txtFreeForm.Text.ToString();
+            // TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
 
             TblRow["CCvalue"] = hdCCvalue.Value;
-          
+
             TblRow["PEvalue"] = hdPEvalue.Value;
-           
+
 
 
             string strname = "", strleft = "", strright = "", strnormal = "";
@@ -428,44 +428,7 @@ public partial class FuWrist : System.Web.UI.Page
             _fldPop = true;
             TblRow = sqlTbl1.Rows[0];
 
-            //txtPainScaleLeft.Text = TblRow["PainScaleLeft"].ToString();
-            //chkContentLeft.Checked = CommonConvert.ToBoolean(TblRow["ConstantLeft"].ToString());
-            //chkIntermittentLeft.Checked = CommonConvert.ToBoolean(TblRow["IntermittentLeft"].ToString());
-            //chkSharpLeft.Checked = CommonConvert.ToBoolean(TblRow["SharpLeft"].ToString());
-            //chkElectricLeft.Checked = CommonConvert.ToBoolean(TblRow["ElectricLeft"].ToString());
 
-            //chkShootingLeft.Checked = CommonConvert.ToBoolean(TblRow["ShootingLeft"].ToString());
-            //chkThrobblingLeft.Checked = CommonConvert.ToBoolean(TblRow["ThrobblingLeft"].ToString());
-            //chkPulsatingLeft.Checked = CommonConvert.ToBoolean(TblRow["PulsatingLeft"].ToString());
-            //chkDullLeft.Checked = CommonConvert.ToBoolean(TblRow["DullLeft"].ToString());
-            //chkAchyLeft.Checked = CommonConvert.ToBoolean(TblRow["AchyLeft"].ToString());
-            //chkulnarLeft.Checked = CommonConvert.ToBoolean(TblRow["UlnarLeft"].ToString());
-            //chkradiusLeft.Checked = CommonConvert.ToBoolean(TblRow["RadialLeft"].ToString());
-            //chkDorsalLeft.Checked = CommonConvert.ToBoolean(TblRow["DorsalLeft"].ToString());
-            //chkPalmarLeft.Checked = CommonConvert.ToBoolean(TblRow["PalmarLeft"].ToString());
-            //chkLiftingObjectLeft.Checked = CommonConvert.ToBoolean(TblRow["LiftingObjectLeft"].ToString());
-            //chkWorkingLeft.Checked = CommonConvert.ToBoolean(TblRow["WorkingLeft"].ToString());
-            //chkMovementLeft.Checked = CommonConvert.ToBoolean(TblRow["MovementLeft"].ToString());
-            //chkRotationLeft.Checked = CommonConvert.ToBoolean(TblRow["RotationLeft"].ToString());
-
-            //txtPainScaleRight.Text = TblRow["PainScaleRight"].ToString().Trim();
-            //chkContentRight.Checked = CommonConvert.ToBoolean(TblRow["ConstantRight"].ToString());
-            //chkIntermittentRight.Checked = CommonConvert.ToBoolean(TblRow["IntermittentRight"].ToString());
-            //chkSharpRight.Checked = CommonConvert.ToBoolean(TblRow["SharpRight"].ToString());
-            //chkElectricRight.Checked = CommonConvert.ToBoolean(TblRow["ElectricRight"].ToString());
-            //chkShootingRight.Checked = CommonConvert.ToBoolean(TblRow["ShootingRight"].ToString());
-            //chkThrobblingRight.Checked = CommonConvert.ToBoolean(TblRow["ThrobblingRight"].ToString());
-            //chkPulsatingRight.Checked = CommonConvert.ToBoolean(TblRow["PulsatingRight"].ToString());
-            //chkDullRight.Checked = CommonConvert.ToBoolean(TblRow["DullRight"].ToString());
-            //chkAchyRight.Checked = CommonConvert.ToBoolean(TblRow["AchyRight"].ToString());
-            //chkulnarRight.Checked = CommonConvert.ToBoolean(TblRow["UlnarRight"].ToString());
-            //chkradiusRight.Checked = CommonConvert.ToBoolean(TblRow["RadialRight"].ToString());
-            //chkDorsalRight.Checked = CommonConvert.ToBoolean(TblRow["DorsalRight"].ToString());
-            //chkPalmarRight.Checked = CommonConvert.ToBoolean(TblRow["PalmarRight"].ToString());
-            //chkLiftingObjectRight.Checked = CommonConvert.ToBoolean(TblRow["LiftingObjectRight"].ToString());
-            //chkRotationRight.Checked = CommonConvert.ToBoolean(TblRow["RotationRight"].ToString());
-            //chkWorkingRight.Checked = CommonConvert.ToBoolean(TblRow["WorkingRight"].ToString());
-            //chkMovementRight.Checked = CommonConvert.ToBoolean(TblRow["MovementRight"].ToString());
 
             txtFlexionLeft.Text = TblRow["FlexionROMLeft"].ToString();
             txtFlexionRight.Text = TblRow["FlexionROMRight"].ToString();
@@ -476,55 +439,38 @@ public partial class FuWrist : System.Web.UI.Page
             txtUlnarDeviationRight.Text = TblRow["UlnarDeviationROMRight"].ToString();
             txtUlnarDeviationLeft.Text = TblRow["UlnarDeviationROMLeft"].ToString();
 
-            //chkPalpationUlnarLeft.Checked = CommonConvert.ToBoolean(TblRow["PalpationUlnarLeft"].ToString());
-            //chkPalpationUlnarRight.Checked = CommonConvert.ToBoolean(TblRow["PalpationUlnarRight"].ToString());
-            //chkPalpationRadialLeft.Checked = CommonConvert.ToBoolean(TblRow["PalpationRadialLeft"].ToString());
-            //chkPalpationRadialRight.Checked = CommonConvert.ToBoolean(TblRow["PalpationRadialRight"].ToString());
-            //chkPalpationDorsalLeft.Checked = CommonConvert.ToBoolean(TblRow["PalpationDorsalLeft"].ToString());
-            //chkPalpationDorsalRight.Checked = CommonConvert.ToBoolean(TblRow["PalpationDorsalRight"].ToString());
-            //chkPalpationPalmarLeft.Checked = CommonConvert.ToBoolean(TblRow["PalpationPalmarLeft"].ToString());
-            //chkPalpationPalmarRight.Checked = CommonConvert.ToBoolean(TblRow["PalpationPalmarRight"].ToString());
-            //chkTinelLeft.Checked = CommonConvert.ToBoolean(TblRow["TinelLeft"].ToString());
-            //chkTinelRight.Checked = CommonConvert.ToBoolean(TblRow["TinelRight"].ToString());
-            //chkTinelBilaterally.Checked = CommonConvert.ToBoolean(TblRow["TinelBilaterally"].ToString());
-            //chkPhalenLeft.Checked = CommonConvert.ToBoolean(TblRow["PhalenLeft"].ToString());
-            //chkPhalenRight.Checked = CommonConvert.ToBoolean(TblRow["PhalenRight"].ToString());
-            //chkPhalenBilaterally.Checked = CommonConvert.ToBoolean(TblRow["PhalenBilaterally"].ToString());
-            //chkFinkelsteinleft.Checked = CommonConvert.ToBoolean(TblRow["FinkelsteinLeft"].ToString());
-            //chkFinkelsteinRight.Checked = CommonConvert.ToBoolean(TblRow["FinkelsteinRight"].ToString());
-            //chkFinkelsteinBilaterally.Checked = CommonConvert.ToBoolean(TblRow["FinkelsteinBilaterally"].ToString());
-            //chkPainUponUlnarDeviationLeft.Checked = CommonConvert.ToBoolean(TblRow["PainUponUlnarDeviationLeft"].ToString());
-            //chkPainUponUlnarDeviationRight.Checked = CommonConvert.ToBoolean(TblRow["PainUponUlnarDeviationRight"].ToString());
-            //chkPainUponUlnarDeviationBilaterally.Checked = CommonConvert.ToBoolean(TblRow["PainUponUlnarDeviationBilaterally"].ToString());
-            //chkPainUponRadialLeft.Checked = CommonConvert.ToBoolean(TblRow["PainUponRadialLeft"].ToString());
-            //chkPainUponRadialRight.Checked = CommonConvert.ToBoolean(TblRow["PainUponRadialRight"].ToString());
-            //chkPainUponRadialBilaterally.Checked = CommonConvert.ToBoolean(TblRow["PainUponRadialBilaterally"].ToString());
-            //chkPainUponDorsiFlexionLeft.Checked = CommonConvert.ToBoolean(TblRow["PainUponDorsiFlexionLeft"].ToString());
-            //chkPainUponDorsiFlexionRight.Checked = CommonConvert.ToBoolean(TblRow["PainUponDorsiFlexionRight"].ToString());
-            //chkPainUponDorsiFlexionBilaterally.Checked = CommonConvert.ToBoolean(TblRow["PainUponDorsiFlexionBilaterally"].ToString());
-            //if (!string.IsNullOrEmpty(TblRow["RangeOfMotionRight"].ToString()))
-            //{ cboRangeOfMotionRight.Text = TblRow["RangeOfMotionRight"].ToString(); }
 
-            //if (!string.IsNullOrEmpty(TblRow["RangeOfMotionLeft"].ToString()))
-            //{ cboRangeOfMotionLeft.Text = TblRow["RangeOfMotionLeft"].ToString(); }
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
-           // txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
-           // txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
+            // txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
+            // txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
-            CF.InnerHtml = TblRow["CCvalue"].ToString();
-         
+            if (SessionManager.forwardCC)
+                CF.InnerHtml = TblRow["CCvalue"].ToString();
+            else
+                CF.InnerHtml = TblRow["CCvalueoriginal"].ToString();
 
+            hdorgCC.Value = TblRow["CCvalueoriginal"].ToString();
 
             string orgval = TblRow["PEvalueoriginal"].ToString();
             string editval = TblRow["PEvalue"].ToString();
 
-            divPE.InnerHtml = editval;
-          
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + Request.QueryString["P"] + "');", true);
-            
+            if (SessionManager.forwardPE)
+                divPE.InnerHtml = editval;
+            else
+                divPE.InnerHtml = orgval;
+
+            hdorgPE.Value = TblRow["PEvalueoriginal"].ToString();
+
+
+           
+
             _fldPop = false;
+        }
+        else
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
         }
 
         sqlTbl1.Dispose();
@@ -633,8 +579,8 @@ public partial class FuWrist : System.Web.UI.Page
 
             //if (!string.IsNullOrEmpty(TblRow["RangeOfMotionLeft"].ToString()))
             //{ cboRangeOfMotionLeft.Text = TblRow["RangeOfMotionLeft"].ToString(); }
-         //   txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
-         //   txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
+            //   txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
+            //   txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
@@ -1002,7 +948,7 @@ public partial class FuWrist : System.Web.UI.Page
 
                     DiagCode_ID = row.Cells[0].Controls.OfType<HiddenField>().FirstOrDefault().Value;
                     //        DiagCodeDetail_ID = row.Cells[2].Controls.OfType<HiddenField>().FirstOrDefault().Value;
-                        
+
                     Description = row.Cells[1].Controls.OfType<TextBox>().FirstOrDefault().Text;
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 

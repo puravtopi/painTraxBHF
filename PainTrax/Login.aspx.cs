@@ -99,7 +99,11 @@ public partial class Login : System.Web.UI.Page
                         Session["UserId"] = _result;
                         Session["UserDesignation"] = ds.Tables[0].Rows[0]["Designation"].ToString();
                         Session["UserDesigId"] = ds.Tables[0].Rows[0]["desig_id"].ToString();
+                        GetSettings cls  = new GetSettings();
+                       
 
+                        SessionManager.forwardCC = cls.forwardCC;
+                        SessionManager.forwardPE = cls.forwardPE;
 
                         DataSet dbGroup = db.selectData("Select * from tblgroups where id=" + ds.Tables[0].Rows[0]["groupid"].ToString());
 

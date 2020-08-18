@@ -197,10 +197,10 @@ public partial class EditFU : System.Web.UI.Page
                 Session["LastNameFUEdit"] = txtLastName.Text = sdr["LastName"].ToString();
                 ddlLoaction.SelectedValue = sdr["Location_ID"].ToString() == "" ? Convert.ToString(Session["Location"]) : sdr["Location_ID"].ToString();
                 Session["LocLbl"] = ddlLoaction.SelectedItem.Text;
-                PMH.Text = sdr["PMH"].ToString();
-                PSH.Text = sdr["PSH"].ToString();
-                Medication.Text = sdr["Medications"].ToString();
-                Allergies.Text = sdr["Allergies"].ToString();
+                //PMH.Text = sdr["PMH"].ToString();
+                //PSH.Text = sdr["PSH"].ToString();
+                //Medication.Text = sdr["Medications"].ToString();
+                //Allergies.Text = sdr["Allergies"].ToString();
                 FamilyHistory.Text = sdr["FamilyHistory"].ToString();
                 txtDOA.Text = (sdr["DOA"] != DBNull.Value) ? Convert.ToDateTime(sdr["DOA"]).ToString("MM/dd/yyyy") : "";
                 txtDOB.Text = (sdr["DOB"] != DBNull.Value) ? Convert.ToDateTime(sdr["DOB"]).ToString("MM/dd/yyyy") : "";
@@ -436,10 +436,10 @@ public partial class EditFU : System.Web.UI.Page
             cmd.Parameters.Add("@Attorney", txtAttorneyName.Text.Trim());
             cmd.Parameters.Add("@Telephone", txtAttorneyPh.Text.Trim());
             cmd.Parameters.Add("@FollowedUpOn", txtFollowedUpOn.Text.Trim());
-            cmd.Parameters.Add("@PMH", PMH.Text.Trim());
-            cmd.Parameters.Add("@PSH", PSH.Text.Trim());
-            cmd.Parameters.Add("@Medications", Medication.Text.Trim());
-            cmd.Parameters.Add("@Allergies", Allergies.Text.Trim());
+            cmd.Parameters.Add("@PMH", "");
+            cmd.Parameters.Add("@PSH", "");
+            cmd.Parameters.Add("@Medications", "");
+            cmd.Parameters.Add("@Allergies", "");
             cmd.Parameters.Add("@FamilyHistory", FamilyHistory.Text.Trim());
             cmd.Parameters.Add("@Neck", chk_Neck.Checked);
             cmd.Parameters.Add("@MidBack", chk_Midback.Checked);
@@ -524,7 +524,7 @@ public partial class EditFU : System.Web.UI.Page
             {
 
 
-                string query = "update tblPage1FUHTMLContent set degreeSectionHTML=@degreeSectionHTML,socialSectionHTML=@socialSectionHTML where PateintFU_ID=@PatientFU_ID";
+                string query = "update tblPage1FUHTMLContent set degreeSectionHTML=@degreeSectionHTML,socialSectionHTML=@socialSectionHTML,topSectionHTML=@topSectionHTML where PateintFU_ID=@PatientFU_ID";
 
 
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
@@ -534,6 +534,7 @@ public partial class EditFU : System.Web.UI.Page
                     command.Parameters.AddWithValue("@PatientFU_ID", Session["patientFUId"].ToString());
                     command.Parameters.AddWithValue("@degreeSectionHTML", hddegreeHTMLContent.Value);
                     command.Parameters.AddWithValue("@socialSectionHTML", hdsocialHTMLContent.Value);
+                    command.Parameters.AddWithValue("@topSectionHTML", hdtopHTMLContent.Value);
 
                     connection.Open();
                     var results = command.ExecuteNonQuery();
@@ -1673,10 +1674,10 @@ public partial class EditFU : System.Web.UI.Page
             cmd.Parameters.Add("@Attorney", txtAttorneyName.Text.Trim());
             cmd.Parameters.Add("@Telephone", txtAttorneyPh.Text.Trim());
             cmd.Parameters.Add("@FollowedUpOn", txtFollowedUpOn.Text.Trim());
-            cmd.Parameters.Add("@PMH", PMH.Text.Trim());
-            cmd.Parameters.Add("@PSH", PSH.Text.Trim());
-            cmd.Parameters.Add("@Medications", Medication.Text.Trim()); //10
-            cmd.Parameters.Add("@Allergies", Allergies.Text.Trim());
+            cmd.Parameters.Add("@PMH", "");
+            cmd.Parameters.Add("@PSH","");
+            cmd.Parameters.Add("@Medications", ""); //10
+            cmd.Parameters.Add("@Allergies", "");
             cmd.Parameters.Add("@FamilyHistory", FamilyHistory.Text.Trim());
 
             cmd.Parameters.Add("@Neck", chk_Neck.Checked);
@@ -1770,6 +1771,7 @@ public partial class EditFU : System.Web.UI.Page
             {
                 divdegreeHTML.InnerHtml = ds.Tables[0].Rows[0]["degreeSectionHTML"].ToString();
                 divsocialHTML.InnerHtml = ds.Tables[0].Rows[0]["socialSectionHTML"].ToString();
+                divHistory.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
             }
         }
         else

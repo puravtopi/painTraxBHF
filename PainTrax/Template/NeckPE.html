@@ -1,17 +1,20 @@
-<!--<div class="row" style="display:none">
+<div class="row">
     <label>
-        The cervical spine exam reveals tenderness upon palpation at
+        Reveals tenderness upon palpation at
     </label>
-    <input id="txtspineexam" type="text" style="width:100px;text-align:left" value="" onchange="txtMe(this)" />
-    <label>levels</label>
+    <input id="txtspineexam" type="text" style="width:100px;text-align:left" value="C2-7" onchange="txtMe(this)" />
+    <label> levels </label>
     <section class="dropdown">
         <input type="text" id="txtWorse1" onchange="txtMe(this)" />
-        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtWorse1', this.value)" id="ddlWorse1"><option></option><option>, on the left</option><option>, on the right</option></select>
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtWorse1', this.value)" id="ddlWorse1">
+            <option></option>
+            <option> bilaterally</option>
+            <option> on the left</option>
+            <option> on the right</option>
+        </select>
     </section>
     <label>. </label>
-</div>-->
 
-<div class="row">
     <table>
         <tr>
             <td>
@@ -43,36 +46,36 @@
     </div>
     <div class="col-md-9" style="margin-top: 5px" id="div_TP">
         <!--<span>There are palpable taut bands/trigger points with referral patterns as depicted below. </span>-->
-        <span>On exam, patient has taut tender bands in the <input type="text" id="txtTP" style="width:400px" /> muscles.</span>
+        <span>On exam, patient has taut tender bands in the <input type="text" id="txtTP" class="noprint" style="width:400px" /> muscles.</span>
     </div>
     <table>
         <tr>
             <td>
-                <input type="checkbox" id="chktrapezius" value="trapezius" class="nocomma" onclick="checkMe(this); writeTPtxt()" /> Trapezius
+                <input type="checkbox" id="chktrapezius" value="trapezius" class="noprint" onclick="checkMe(this); writeTPtxt()" /> Trapezius
                 <!--<input type="text" ID="txtTrapezius" onchange="txtMe(this); selectTestCHK('chktrapezius', this.value);writeTPtxt()" class="txtTP" Style="margin-left: 10px;width:500px" value="" />-->
 
 
                 <section class="dropdown">
-                    <input type="text" id="txtTrapezius" onchange="txtMe(this); selectTestCHK('chktrapezius', this.value);writeTPtxt()" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTrapezius', this.value); selectTestCHK('chktrapezius', this.value); writeTPtxt();" id="ddldistraction"><option></option><option>Left</option><option>Right</option><option>Bilaterally</option></select>
+                    <input type="text" id="txtTrapezius" class="noprint" onchange="txtMe(this); selectTestCHK('chktrapezius', this.value);writeTPtxt()" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTrapezius', this.value); selectTestCHK('chktrapezius', this.value); writeTPtxt();" id="ddldistraction"><option></option><option>left</option><option>right</option><option>bilaterally</option></select>
                 </section>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="checkbox" id="chkscalenes" value="scalene" class="nocomma" onclick="checkMe(this);writeTPtxt()" /> Scalene
+                <input type="checkbox" id="chkscalenes" value="scalene" class="noprint" onclick="checkMe(this);writeTPtxt()" /> Scalene
                 <!--<input type="text" ID="txtScalenes" onchange="txtMe(this);selectTestCHK('chkscalenes', this.value);writeTPtxt()" class="txtTP" Style="margin-left: 10px;width:500px" value="scalenes" />-->
 
                 <section class="dropdown">
-                    <input type="text" id="txtScalenes" onchange="txtMe(this); selectTestCHK('chkscalenes', this.value);writeTPtxt()" />
-                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtScalenes', this.value); selectTestCHK('chkscalenes', this.value); writeTPtxt();" id="ddldistraction"><option></option><option>Left</option><option>Right</option><option>Bilaterally</option></select>
+                    <input type="text" id="txtScalenes" class="noprint" onchange="txtMe(this); selectTestCHK('chkscalenes', this.value);writeTPtxt()" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtScalenes', this.value); selectTestCHK('chkscalenes', this.value); writeTPtxt();" id="ddldistraction"><option></option><option>left</option><option>right</option><option>bilaterally</option></select>
                 </section>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="checkbox" id="chkothers" value="scalenes" class="nocomma" onclick="checkMe(this);writeTPtxt()" />
-                <input type="text" ID="txtOther" onchange="txtMe(this);selectTestCHK('chkothers', this.value);writeTPtxt()" class="txtTP" Style="margin-left: 10px;width:500px" />
+                <input type="checkbox" id="chkothers" value="scalenes" class="noprint" onclick="checkMe(this);writeTPtxt()" />
+                <input type="text" ID="txtOther" onchange="txtMe(this);selectTestCHK('chkothers', this.value);writeTPtxt()" class="noprint" Style="margin-left: 10px;width:500px" />
             </td>
         </tr>
     </table>
@@ -213,8 +216,8 @@
 
     function selectTestCHK(chkid, val) {
 
-        if (val !==  '')
-            $("#" + chkid).attr("checked","checked");
+        if (val !== '')
+            $("#" + chkid).attr("checked", "checked");
         else
             $("#" + chkid).removeAttr("checked");
     }
@@ -247,7 +250,7 @@
         var strspan = "On exam, patient has taut tender bands in the #txtmsg muscles.";
         strspan = strspan.replace('#txtmsg', str);
 
-    
+
 
         $('#ctl00_ContentPlaceHolder1_hdPETP').val(strspan);
 

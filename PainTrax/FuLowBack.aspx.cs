@@ -137,7 +137,7 @@ public partial class FuLowBack : System.Web.UI.Page
         {
             TblRow["PatientFU_ID"] = _FuID;
 
-           
+
 
             //TblRow["FreeForm"] = txtFreeForm.Text.ToString();
             //TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
@@ -146,8 +146,10 @@ public partial class FuLowBack : System.Web.UI.Page
 
             TblRow["ISFirst"] = true;
             TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
 
             TblRow["PEvalue"] = hdPEvalue.Value;
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
             TblRow["PEvalueoriginal"] = hdPEvalueoriginal.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
             TblRow["PESides"] = hdPESides.Value;
@@ -270,21 +272,26 @@ public partial class FuLowBack : System.Web.UI.Page
             TblRow = sqlTbl1.Rows[0];
 
 
-           
+
 
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("      ", string.Empty);
 
-            //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
-            //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
+
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("      ", string.Empty);
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
-            CF.InnerHtml = TblRow["CCvalue"].ToString();
+            if (SessionManager.forwardCC)
+                CF.InnerHtml = TblRow["CCvalue"].ToString();
+            else
+                CF.InnerHtml = TblRow["CCvalueoriginal"].ToString();
 
+            if (SessionManager.forwardPE)
+                divPE.InnerHtml = TblRow["PEvalue"].ToString();
+            else
+                divPE.InnerHtml = TblRow["PEvalueoriginal"].ToString();
 
-            divPE.InnerHtml = TblRow["PEvalue"].ToString();
-
-            hdorgvalPE.Value = TblRow["PEvalueoriginal"].ToString();
+            hdorgPE.Value = TblRow["PEvalueoriginal"].ToString();
+            hdorgCC.Value = TblRow["CCvalueoriginal"].ToString();
 
             int val = checkTP();
 
@@ -292,6 +299,10 @@ public partial class FuLowBack : System.Web.UI.Page
 
             _fldPop = false;
         }
+        //else
+        //{
+        //    ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
+        //}
 
         sqlTbl1.Dispose();
         sqlCmdBuilder1.Dispose();
@@ -320,7 +331,7 @@ public partial class FuLowBack : System.Web.UI.Page
             TblRow = sqlTbl1.Rows[0];
 
 
-         
+
 
             //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
             //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
@@ -355,9 +366,9 @@ public partial class FuLowBack : System.Web.UI.Page
             bool isTP = node.SelectSingleNode("IsTP") != null ? Convert.ToBoolean(node.SelectSingleNode("IsTP").InnerText) : true;
 
 
-           
+
             txtFreeFormA.Text = node.SelectSingleNode("FreeFormA") == null ? txtFreeFormA.Text.ToString().Trim().Replace("      ", string.Empty) : node.SelectSingleNode("FreeFormA").InnerText.Trim().Replace("      ", string.Empty);
-          
+
             _fldPop = false;
         }
     }

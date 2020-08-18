@@ -17,7 +17,7 @@
         <table>
             <tr>
                 <td>
-                    <input type="checkbox" id="chkelbowphalenleft" value="Tinel is " class="nocomma" onclick="checkMe(this)" />&nbsp;Phalen is&nbsp;
+                    <input type="checkbox" id="chkelbowphalenleft" value="Phalen is " class="nocomma" onclick="checkMe(this)" />&nbsp;Phalen is&nbsp;
 
 
                     <section class="dropdown">
@@ -90,7 +90,13 @@
 
                     <section class="dropdown">
                         <input type="text" id="txtPhalenright" onchange="txtMe(this);selectTestCHK('chkelbowphalenright', this.value)" />
-                        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtPhalenright', this.value);selectTestCHK('chkelbowphalenright', this.value)" id="ddlPhalenright"></select>
+                        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtPhalenright', this.value);selectTestCHK('chkelbowphalenright', this.value)" id="ddlPhalenright">
+                            <option></option>
+
+                            <option>positive on left.</option>
+                            <option>positive on right.</option>
+                            <option>positive bilaterally.</option>
+                        </select>
                     </section>
                     <span>.</span>
                 </td>
@@ -101,7 +107,13 @@
 
                     <section class="dropdown">
                         <input type="text" id="txtTinelRight" onchange="txtMe(this);selectTestCHK('chkelbowtinelright', this.value)" />
-                        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTinelRight', this.value); selectTestCHK('chkelbowtinelright', this.value)" id="ddlTinelRight"></select>
+                        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTinelRight', this.value); selectTestCHK('chkelbowtinelright', this.value)" id="ddlTinelRight">
+                            <option></option>
+
+                            <option>positive on left.</option>
+                            <option>positive on right.</option>
+                            <option>positive bilaterally.</option>
+                        </select>
                     </section>
                     <span>.</span>
                 </td>

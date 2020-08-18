@@ -190,28 +190,7 @@ public partial class Hip : System.Web.UI.Page
             TblRow["PatientIE_ID"] = _ieID;
 
 
-            //TblRow["ConstantLeft"] = chkContentLeft.Checked;
-            //TblRow["IntermittentLeft"] = chkIntermittentLeft.Checked;
-            //TblRow["ConstantRight"] = chkContentRight.Checked;
-            //TblRow["IntermittentRight"] = chkIntermittentRight.Checked;
-
-            //TblRow["WorseSittingLeft"] = chkWorseSittingLeft.Checked;
-            //TblRow["WorseStandingLeft"] = chkWorseStandingLeft.Checked;
-            //TblRow["WorseMovementLeft"] = chkWorseMovementLeft.Checked;
-            //TblRow["WorseActivitiesLeft"] = chkWorseActivitiesLeft.Checked;
-            //TblRow["WorseOtherLeft"] = txtWorseOtherLeft.Text.ToString();
-            //TblRow["WorseSittingRight"] = chkWorseSittingRight.Checked;
-            //TblRow["WorseStandingRight"] = chkWorseStandingRight.Checked;
-            //TblRow["WorseMovementRight"] = chkWorseMovementRight.Checked;
-            //TblRow["WorseActivitiesRight"] = chkWorseActivitiesRight.Checked;
-            //TblRow["WorseOtherRight"] = txtWorseOtherRight.Text.ToString();
-
-            //TblRow["GreaterTrochanterLeft"] = chkGreaterTrochanterLeft.Checked;
-            //TblRow["PosteriorLeft"] = chkPosteriorLeft.Checked;
-            //TblRow["IliotibialLeft"] = chkIliotibialLeft.Checked;
-            //TblRow["GreaterTrochanterRight"] = chkGreaterTrochanterRight.Checked;
-            //TblRow["PosteriorRight"] = chkPosteriorRight.Checked;
-            //TblRow["IliotibialRight"] = chkIliotibialRight.Checked;
+          
 
             TblRow["FlexRight"] = txtFlexRight.Text.ToString();
             TblRow["IntRotationRight"] = txtIntRotationRight.Text.ToString();
@@ -230,6 +209,7 @@ public partial class Hip : System.Web.UI.Page
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
 
             TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
          
 
 
@@ -253,6 +233,7 @@ public partial class Hip : System.Web.UI.Page
             TblRow["NormalROM"] = strnormal.Substring(1);
             TblRow["NameROM"] = strname.Substring(1);
             TblRow["PEvalue"] = hdPEvalue.Value;
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
            
 
             if (_ieMode == "New")
@@ -326,7 +307,11 @@ public partial class Hip : System.Web.UI.Page
 
             divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
 
-          
+         
+
+
+
+
             string pos = Request.QueryString["P"];
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + pos + "');", true);
@@ -991,6 +976,7 @@ public partial class Hip : System.Web.UI.Page
 
 
         CF.InnerHtml = body;
+        hdorgCC.Value = body;
      
     }
 
@@ -1015,11 +1001,11 @@ public partial class Hip : System.Web.UI.Page
             p = "B";
 
         divPE.InnerHtml = body;
-      
+        hdorgPE.Value = body;
 
         //int val = checkTP();
 
-        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
+        //ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
     }
 
 

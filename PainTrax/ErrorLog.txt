@@ -8047,3 +8047,51 @@ Source: .Net SqlClient Data Provider
 TargetSite: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
 -----------------------------------------------------------
 
+Time: 14/08/2020 01:16:19 PM
+-----------------------------------------------------------
+Message: Thread was being aborted.
+StackTrace:    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at FUPage1.btnSave_Click(Object sender, EventArgs e) in f:\Elance\Arumg\Git\BHF_V\PainTrax\FUPage1.aspx.cs:line 765
+Source: mscorlib
+TargetSite: Void AbortInternal()
+-----------------------------------------------------------
+
+Time: 14/08/2020 01:18:06 PM
+-----------------------------------------------------------
+Message: Thread was being aborted.
+StackTrace:    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at FUPage1.btnSave_Click(Object sender, EventArgs e) in f:\Elance\Arumg\Git\BHF_V\PainTrax\FUPage1.aspx.cs:line 765
+Source: mscorlib
+TargetSite: Void AbortInternal()
+-----------------------------------------------------------
+
+Time: 15/08/2020 10:35:57 AM
+-----------------------------------------------------------
+Message: Thread was being aborted.
+StackTrace:    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at FUPage1.btnSave_Click(Object sender, EventArgs e) in f:\Elance\Arumg\Git\BHF_V\PainTrax\FUPage1.aspx.cs:line 765
+Source: mscorlib
+TargetSite: Void AbortInternal()
+-----------------------------------------------------------
+
+Time: 15/08/2020 10:36:38 AM
+-----------------------------------------------------------
+Message: Thread was being aborted.
+StackTrace:    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at FUPage1.btnSave_Click(Object sender, EventArgs e) in f:\Elance\Arumg\Git\BHF_V\PainTrax\FUPage1.aspx.cs:line 765
+Source: mscorlib
+TargetSite: Void AbortInternal()
+-----------------------------------------------------------
+

@@ -5,26 +5,26 @@
     <div class="col-md-9" style="margin-top: 5px">
         <div id="WrapLeft" #leftdiv>
             <label class="control-label">The patient complains of left ankle pain that is </label>
-            <input type="text" id="txtPainScaleL" style="Width:40px" value="8" onchange="txtMe(this)" />
+            <input type="text" id="txtPainScaleL" style="Width:40px" class="paincls" value="8" onchange="txtMe(this)" />
             <label class="control-label">/10 with 10 being the worst, which is </label>
             <input type="checkbox" id="chkcontentL" value="constant" onclick="checkMe(this)" />constant,
             <input type="checkbox" id="chkintermittentL" value="intermittent" onclick="checkMe(this)" />intermittent,
-            <input type="checkbox" id="chksharpL" value="sharp" onclick="checkMe(this)" checked />sharp,
-            <input type="checkbox" id="chkelectricL" value="electric" onclick="checkMe(this)" checked />electric,
+            <input type="checkbox" id="chksharpL" value="sharp" onclick="checkMe(this)" />sharp,
+            <input type="checkbox" id="chkelectricL" value="electric" onclick="checkMe(this)" />electric,
             <input type="checkbox" id="chkshootingL" value="shooting" onclick="checkMe(this)" />shooting,
 
             <input type="checkbox" id="chkthrobbingL" value="throbbing" onclick="checkMe(this)" />throbbing,
             <input type="checkbox" id="chkpulsatingL" value="pulsating" onclick="checkMe(this)" />pulsating,
 
-            <input type="checkbox" id="chkdullL" value="dull" onclick="checkMe(this)" checked />dull,
+            <input type="checkbox" id="chkdullL" value="dull" onclick="checkMe(this)" />dull,
             <input type="checkbox" id="chkachyL" value="achy" onclick="checkMe(this)" />achy
             <label> in nature.</label>
 
             <input type="checkbox" id="chkleftspecifically" class="nocomma" onclick="checkMe(this)" value="The patient complains of pain specifically at the " />The patient complains of pain specifically at the
 
-            <input type="checkbox" id="chkMedMalleolusL" value="medial malleolus" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />medial malleolus,
-            <input type="checkbox" id="chkLatMalleolusL" value="lateral malleolus" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />lateral malleolus,
-            <input type="checkbox" id="chkAchillesL" value="achilles tendon" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />achilles tendon
+            <input type="checkbox" id="chkMedMalleolusL" class="chkcompL" value="medial malleolus" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />medial malleolus,
+            <input type="checkbox" id="chkLatMalleolusL" class="chkcompL" value="lateral malleolus" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />lateral malleolus,
+            <input type="checkbox" id="chkAchillesL" class="chkcompL" value="achilles tendon" onclick="checkMe(this);checkDefault(this, 'chkleftspecifically');" />achilles tendon
             <label>.</label>
 
 
@@ -33,7 +33,7 @@
             </section>
             <section class="col-md-9" style="margin-top: 5px">
                 <textarea id="txtFreeFormCCL" Style="width:700px;height:100px" onchange="txtAreaMe(this)"></textarea>
-                <button type="button" id="start_button1" onclick="startButton1(event)">
+                <button type="button" id="start_button" onclick="startButton1(event)">
                     <img src="images/mic.gif" alt="start" />
                 </button>
                 <section style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></section>
@@ -43,25 +43,25 @@
         </div>
         <div id="WrapRight" #rigthtdiv>
             <label class="control-label">The patient complains of right ankle pain that is </label>
-            <input type="text" id="txtPainScaleR" style="Width:40px" value="8" onchange="txtMe(this)" />
+            <input type="text" id="txtPainScaleR" style="Width:40px" class="paincls" value="8" onchange="txtMe(this)" />
             <label class="control-label">/10, with 10 being the worst, which is </label>
             <input type="checkbox" id="chkcontentR" value="constant" onclick="checkMe(this)" />constant,
             <input type="checkbox" id="chkintermittentR" value="intermittent" onclick="checkMe(this)" />intermittent,
-            <input type="checkbox" id="chksharpR" value="sharp" onclick="checkMe(this)" checked />sharp,
-            <input type="checkbox" id="chkelectricR" value="electric" onclick="checkMe(this)" checked />electric,
+            <input type="checkbox" id="chksharpR" value="sharp" onclick="checkMe(this)" />sharp,
+            <input type="checkbox" id="chkelectricR" value="electric" onclick="checkMe(this)" />electric,
             <input type="checkbox" id="chkshootingR" value="shooting" onclick="checkMe(this)" />shooting,
 
             <input type="checkbox" id="chkthrobbingR" value="throbbing" onclick="checkMe(this)" />throbbing,
             <input type="checkbox" id="chkpulsatingR" value="pulsating" onclick="checkMe(this)" />pulsating,
 
-            <input type="checkbox" id="chkdullR" value="dull" onclick="checkMe(this)" checked />dull,
+            <input type="checkbox" id="chkdullR" value="dull" onclick="checkMe(this)" />dull,
             <input type="checkbox" id="chkachyR" value="achy" onclick="checkMe(this)" />achy
             <label> in nature.</label>
             <input type="checkbox" id="chkrightspecifically" class="nocomma" onclick="checkMe(this)" value="The patient complains of pain specifically at the " />The patient complains of pain specifically at the
 
-            <input type="checkbox" id="chkMedMalleolusR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="medial malleolus" />medial malleolus,
-            <input type="checkbox" id="chkLatMalleolusR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="lateral malleolus" />lateral malleolus,
-            <input type="checkbox" id="chkAchillesR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="achilles tendon" />achilles tendon
+            <input type="checkbox" id="chkMedMalleolusR" class="chkcompR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="medial malleolus" />medial malleolus,
+            <input type="checkbox" id="chkLatMalleolusR" class="chkcompR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="lateral malleolus" />lateral malleolus,
+            <input type="checkbox" id="chkAchillesR" class="chkcompR" onclick="checkMe(this);checkDefault(this, 'chkrightspecifically');" value="achilles tendon" />achilles tendon
             <label>.</label>
 
 
@@ -70,7 +70,7 @@
             </section>
             <section class="col-md-9" style="margin-top: 5px">
                 <textarea id="txtFreeFormCCR" Style="width:700px;height:100px" onchange="txtAreaMe(this)"></textarea>
-                <button type="button" id="start_button1" onclick="startButton1(event)">
+                <button type="button" id="start_button" onclick="startButton1(event)">
                     <img src="images/mic.gif" alt="start" />
                 </button>
                 <section style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></section>
@@ -97,10 +97,51 @@
 
     function checkDefault(chk, deafCheck) {
 
+        debugger
+
+
+        var isCheck = false;
+        var className = "";
         if ($("#" + deafCheck).prop("checked") == false) {
 
             if ($(chk).prop("checked")) {
                 $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
+
+
+        if (deafCheck === "chkleftspecifically")
+            className = "chkcompL";
+        else if (deafCheck === "chkrightspecifically")
+            className = "chkcompR";
+        else if (deafCheck === "chkleftwrost")
+            className = "chkpainL";
+        else if (deafCheck === "chkrightwrost")
+            className = "chkpainR";
+        else if (deafCheck === "chkleftthere")
+            className = "chkedemL";
+        else if (deafCheck === "chkrightthere")
+            className = "chkedemR";
+
+
+
+
+        if ($("#" + deafCheck).prop("checked") == true) {
+
+
+
+
+            if ($(chk).prop("checked") == false) {
+
+                $("input:checkbox[class=" + className + "]").each(function () {
+                    if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                        isCheck = true;
+                    }
+                });
+
+                if (!isCheck)
+                    $("#" + deafCheck).removeAttr('checked');
 
             }
         }

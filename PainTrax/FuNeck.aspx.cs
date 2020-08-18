@@ -22,6 +22,8 @@ public partial class FuNeck : System.Web.UI.Page
     public string _CurBP = "Neck";
     ILog log = log4net.LogManager.GetLogger(typeof(FuNeck));
 
+ 
+
     DBHelperClass gDbhelperobj = new DBHelperClass();
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -65,11 +67,15 @@ public partial class FuNeck : System.Web.UI.Page
                     BindDCDataGrid();
                     BindDataGrid();
 
+
+
                 }
                 else if (IErw == null)
                 {
+
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
+
                     //  BindDataGrid();
                 }
                 else
@@ -294,6 +300,7 @@ public partial class FuNeck : System.Web.UI.Page
                 sqlTbl.Rows.Add(TblRow);
             }
             sqlAdapt.Update(sqlTbl);
+            ViewState["isupdate"] = "1";
         }
         else if (_fuMode == "Delete")
         {
@@ -360,10 +367,17 @@ public partial class FuNeck : System.Web.UI.Page
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("      ", string.Empty);
             hdPETP.Value = TblRow["TPDesc"].ToString();
 
-            CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
+            if (SessionManager.forwardCC == true)
+                CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
+            else
+                CF.InnerHtml = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
+            hdorgvalCC.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
-            divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
+            if (SessionManager.forwardCC == true)
+                divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
+            else
+                divPE.InnerHtml = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
 
             hdorgvalPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
 
@@ -376,6 +390,7 @@ public partial class FuNeck : System.Web.UI.Page
             DBHelperClass db = new DBHelperClass();
             string query = ("select PatientFU_ID FROM tblFUbpNeck WHERE PatientFU_ID = " + _FuId + "");
             SqlCommand cm = new SqlCommand(query, cn1);
+
             SqlDataAdapter Fuda = new SqlDataAdapter(cm);
             cn1.Open();
             DataSet FUds = new DataSet();
@@ -391,6 +406,10 @@ public partial class FuNeck : System.Web.UI.Page
             _fldPop = false;
             cn1.Close();
         }
+        //if (ViewState["isupdate"] == null)
+        //{
+        //    ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
+        //}
         sqlTbl.Dispose();
         sqlCmdBuilder.Dispose();
         sqlAdapt.Dispose();

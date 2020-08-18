@@ -550,8 +550,8 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
 
-                <div >
-                    <div class="row" style="display:none">
+                <div>
+                    <div class="row" style="display: none">
                         <div class="col-md-3">
                             <label class="control-label labelcolor">PROCEDURE:</label>
                         </div>
@@ -565,7 +565,11 @@
                         <div class="col-md-3">
                             <label class="control-label labelcolor">CARE:</label>
                         </div>
-                        <div class="col-md-9" style="margin-top: 5px">
+                        <div class="col-md-9">
+                            <asp:CheckBox runat="server" ID="chkcare" Text="Chiropractic and physical therapy. Avoid heavy lifting, carrying, excessive bending and prolonged sitting and standing." Checked="true" />
+                        </div>
+                        <div class="col-md-9" style="margin-top: 5px; display: none">
+
                             <asp:CheckBox ID="chkAcupuncture" runat="server" Checked="true" Text="Acupuncture " />
                             <asp:CheckBox ID="chkChiropratic" runat="server" Checked="true" Text="chiropractic " />
                             <asp:CheckBox ID="chkPhysicalTherapy" runat="server" Checked="true" Text="physical therapy " />
@@ -582,7 +586,8 @@
                             <label class="control-label labelcolor">GOALS:</label>
                         </div>
                         <div class="col-md-9" style="margin-top: 5px">
-                            <label class="control-label">To increase range of motion, strength, flexibility, to decrease pain and to improve body biomechanics and activities of daily living and improve the functional status.</label>
+                            <asp:CheckBox ID="chkgoal" runat="server" Text="To increase range of motion, strength, flexibility, to decrease pain and to improve body biomechanics and activities of daily living and improve the functional status." Checked="true" />
+                           
                         </div>
                     </div>
                     <div class="row">
@@ -597,7 +602,7 @@
                             <asp:TextBox ID="txtPrecautions" runat="server" TextMode="MultiLine" Width="700px" Height="100px"
                                 Text="All the treatment options have been discussed with the patient in detail. Pain management compliance was discussed with patient.Patient may need urine toxicology for the possibility of prescribing controlled medicine because pain still complains of pain affecting activities of daily living. Pain contract signed in chart. Patient understood and agrees with the plan."></asp:TextBox>
                         </div>
-                        <div class="col-md-9" style="margin-top: 5px">
+                        <div class="col-md-9" style="margin-top: 5px;display:none">
                             <asp:CheckBox ID="chkEducationProvided" Text="Patient education provided via  " runat="server" />
                             <asp:CheckBox ID="chkViaPhysician" Text="physician  " runat="server" />
                             <asp:CheckBox ID="chkViaPrintedMaterial" Text="printed material  " runat="server" />
@@ -606,7 +611,7 @@
                             <asp:TextBox ID="txtViaVideo" runat="server" />
                         </div>
                     </div>
-                    <div class="row" style="display:none">
+                    <div class="row" style="display: none">
                         <div class="col-md-3">
                             <label class="control-label labelcolor">CONSULTATION :</label>
                         </div>
@@ -620,7 +625,7 @@
                     </div>
                 </div>
 
-                <div class="row" style="display:none">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label class="control-label labelcolor">FOLLOW UP:</label><asp:TextBox ID="txtFollowUpIn" runat="server" />
                         &nbsp;

@@ -271,23 +271,14 @@ width:100%;
 
                
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCC" />
                 
 
-               <%-- <div class="row">
-                    <div class="col-md-3">
-                        <label class="control-label">Notes:</label>
-                    </div>
-                    <div class="col-md-9" style="margin-top: 5px">
-                        <asp:TextBox runat="server" ID="txtFreeFormCC" TextMode="MultiLine" Width="700px" Height="100px"></asp:TextBox>
-                        <button type="button" id="start_button1" onclick="startButton1(event)">
-                            <img src="images/mic.gif" alt="start" /></button>
-                        <div style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></div>
-                    </div>
-                </div>--%>
+             
                 <div runat="server" id="divPE">
                 </div>
 
-                <asp:HiddenField runat="server" ID="hdorgvalPE" />
+                <asp:HiddenField runat="server" ID="hdorgPE" />
                 <asp:HiddenField runat="server" ID="hdPEvalue" />
                 <asp:HiddenField runat="server" ID="hdPEvalueoriginal" />
                 <asp:HiddenField runat="server" ID="hdPESides" />

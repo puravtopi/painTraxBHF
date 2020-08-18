@@ -9,7 +9,7 @@
 
     <script src="Scripts/jquery-1.8.2.min.js"></script>
     <script src="js/images/bootstrap.min.js"></script>
-
+   
     <style>
         /*.table{
     display:table;
@@ -160,6 +160,7 @@
 
 
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCC" />
 
                 <div class="row">
                     <div class="col-md-3">
@@ -226,6 +227,7 @@
 
 
                 <asp:HiddenField runat="server" ID="hdPEvalue" />
+                <asp:HiddenField runat="server" ID="hdorgPE" />
 
 
                 <asp:UpdatePanel runat="server" ID="upMedicine">
@@ -244,7 +246,7 @@
                             <div class="col-md-9" style="margin-top: 5px">
                                 <asp:TextBox runat="server" ID="txtFreeFormA" TextMode="MultiLine" Width="700px" Height="100px"></asp:TextBox>
                                 <asp:ImageButton ID="AddDiag" Style="text-align: left;" ImageUrl="~/img/a1.png" Height="50px" Width="50px" runat="server" OnClientClick="openModelPopup();" OnClick="AddDiag_Click" />
-                                    <input type="button" value="Default" style="float: right left; align-self: baseline; text-align: start;" onclick="saveDefault()" />
+                                <input type="button" value="Default" style="float: right left; align-self: baseline; text-align: start;" onclick="saveDefault()" />
                             </div>
                         </div>
 
@@ -424,7 +426,7 @@
                                             <asp:TemplateField HeaderText="Select">
 
                                                 <ItemTemplate>
-                                                    <asp:CheckBox ID="CheckBox2" runat="server" Checked='<%# Convert.ToBoolean(Eval("IsChkd")) %>' value='<%# Eval("IsChkd") %>'  AutoPostBack="true"/>
+                                                    <asp:CheckBox ID="CheckBox2" runat="server" Checked='<%# Convert.ToBoolean(Eval("IsChkd")) %>' value='<%# Eval("IsChkd") %>' AutoPostBack="true" />
                                                 </ItemTemplate>
                                                 <ItemStyle Width="50px" />
                                             </asp:TemplateField>
@@ -501,7 +503,7 @@
             document.forms[0].target = "_blank";
         };
 
-          function saveDefault() {
+        function saveDefault() {
             document.getElementById('<%= btnDaigSave.ClientID %>').click();
         }
     </script>

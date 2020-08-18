@@ -1,11 +1,11 @@
 <div class="col-md-9 row" style="margin-top: 5px">
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Wrist Examination:</b> </span><label style="visibility:hidden">#leftwristtitle</label>
-        <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the
-        <input type="checkbox" ID="chkPalpationUlnarLeft" onclick="checkMe(this)" value="ulnar" /> ulnar
-        <input type="checkbox" ID="chkPalpationRadialLeft" onclick="checkMe(this)" value="radius" /> radius
-        <input type="checkbox" ID="chkPalpationDorsalLeft" onclick="checkMe(this)" value="dorsal" /> dorsal
-        <input type="checkbox" ID="chkPalpationPalmarLeft" onclick="checkMe(this)" value="palmar" /> palmar
+        <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="Reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the
+        <input type="checkbox" ID="chkPalpationUlnarLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="ulnar" /> ulnar
+        <input type="checkbox" ID="chkPalpationRadialLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="radius" /> radius
+        <input type="checkbox" ID="chkPalpationDorsalLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="dorsal" /> dorsal
+        <input type="checkbox" ID="chkPalpationPalmarLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="palmar" /> palmar
         <label> aspect of the wrist.</label>
 
 
@@ -46,10 +46,11 @@
     <br />
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Wrist Examination:</b> </span><label style="visibility:hidden">#rightwristtitle</label>
-        <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the        <input type="checkbox" ID="chkPalpationUlnarRight" onclick="checkMe(this)" value="ulnar" />ulnar
-        <input type="checkbox" ID="chkPalpationRadialRight" onclick="checkMe(this)" value="radius" /> radius
-        <input type="checkbox" ID="chkPalpationDorsalRight" onclick="checkMe(this)" value="dorsal" /> dorsal
-        <input type="checkbox" ID="chkPalpationPalmarRight" onclick="checkMe(this)" value="palmar" /> palmar
+        <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="Reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the        
+        <input type="checkbox" ID="chkPalpationUlnarRight" onclick="checkMe(this);checkDefault(this,'chkrightrevel')" class="chkrevelR" value="ulnar" />ulnar
+        <input type="checkbox" ID="chkPalpationRadialRight" onclick="checkMe(this); checkDefault(this,'chkrightrevel')" class="chkrevelR" value="radius" /> radius
+        <input type="checkbox" ID="chkPalpationDorsalRight" onclick="checkMe(this); checkDefault(this,'chkrightrevel')" class="chkrevelR" value="dorsal" /> dorsal
+        <input type="checkbox" ID="chkPalpationPalmarRight" onclick="checkMe(this); checkDefault(this,'chkrightrevel')" class="chkrevelR" value="palmar" /> palmar
         <label> aspect of the wrist.</label>
 
 
@@ -88,21 +89,21 @@
     </div>
     <br />
     <div id="TestPE">
-        <input type="checkbox" id="chkTinnels" value="The Tinnels test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Tinels test is&nbsp;
+        <input type="checkbox" id="chkTinnels" value="Tinnels test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Tinels test is&nbsp;
 
         <section class="dropdown">
             <input type="text" id="txtTinnels" onchange="txtMe(this);selectTestCHK('chkTinnels', this.value)" />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTinnels', this.value);selectTestCHK('chkTinnels', this.value)" id="ddlTinnels"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
         </section>
         <br />
-        <input type="checkbox" id="chkPhalens" value="The Phalens test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Phalens test is&nbsp;
+        <input type="checkbox" id="chkPhalens" value="Phalens test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Phalens test is&nbsp;
 
         <section class="dropdown">
             <input type="text" id="txtPhalens" onchange="txtMe(this);selectTestCHK('chkPhalens', this.value)" />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtPhalens', this.value);selectTestCHK('chkPhalens', this.value)" id="ddlPhalens"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
         </section>
         <br />
-        <input type="checkbox" id="chkFinkelsteins" value="The Finkelsteins test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Finkelsteins test is&nbsp;
+        <input type="checkbox" id="chkFinkelsteins" value="Finkelsteins test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Finkelsteins test is&nbsp;
 
         <section class="dropdown">
             <input type="text" id="txtFinkelsteins" onchange="txtMe(this);selectTestCHK('chkFinkelsteins', this.value)" />

@@ -210,6 +210,7 @@
 
 
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCC" />
 
 
                 <%--<div class="row">
@@ -272,7 +273,7 @@
                 <div runat="server" id="divPE">
                 </div>
 
-                <asp:HiddenField runat="server" ID="hdorgvalPE" />
+                <asp:HiddenField runat="server" ID="hdorgPE" />
                 <asp:HiddenField runat="server" ID="hdPEvalue" />
                 <asp:HiddenField runat="server" ID="hdPEvalueoriginal" />
                 <asp:HiddenField runat="server" ID="hdPESides" />

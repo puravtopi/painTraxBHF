@@ -254,6 +254,7 @@
 
 
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCC" />
                 <asp:HiddenField runat="server" ID="hdNameTest" />
                 <asp:HiddenField runat="server" ID="hdLeftTest" />
                 <asp:HiddenField runat="server" ID="hdRightTest" />
@@ -368,6 +369,8 @@
 
 
                 <asp:HiddenField runat="server" ID="hdPEvalue" />
+                <asp:HiddenField runat="server" ID="hdorgPE" />
+
                 <asp:HiddenField runat="server" ID="hdPESides" />
                 <asp:HiddenField runat="server" ID="hdPESidesText" />
                    <asp:HiddenField runat="server" ID="hdPETP" />

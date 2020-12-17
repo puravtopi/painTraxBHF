@@ -1,23 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site.master" AutoEventWireup="true" CodeFile="TimeSheet.aspx.cs" Inherits="TimeSheet" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-  <%--  <link href="Style/bootstrap.min.css" rel="stylesheet" />
-    <link href="Style/bootstrap-theme.min.css" rel="stylesheet" />--%>
+<%--    <link href="Style/bootstrap.min.css" rel="stylesheet" />
+    <link href="Style/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Style/jquery-ui.min.css" rel="stylesheet" />
-    <%--    <script src="Scripts/jquery.js"></script>
+    <script src="Scripts/jquery.js"></script>
     <script src="Scripts/jquery-ui.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>--%>
-    <script src="Scripts/jquery-ui.min.js"></script>
+     <script src="Scripts/jquery-ui.min.js"></script>
     <style>
         .modal-backdrop {
-            z-index: -1;
-        }
-        /*#ProcedureDetailModal, #SignModal {
+  z-index: -1;
+}
+         /*#ProcedureDetailModal, #SignModal {
             background-color: black;
             opacity: 5.5;
         }*/
+
     </style>
-    <style>
+   <style>
         #ddDate {
         }
 
@@ -144,17 +145,15 @@
         #content {
             padding: 0;
         }
-
         .leafNode {
             border-width: 0 0 0 1px;
             border-style: dotted;
             width: 150px;
             overflow: hidden;
         }
-
-            .leafNode img {
-                display: none;
-            }
+        .leafNode img{
+            display:none;
+        }
     </style>
 
 </asp:Content>
@@ -168,20 +167,11 @@
     <asp:Panel ID="pnlSearch" runat="server">
         <div class="row bottomborder">
             <!--TopBar-->
-            <div class="col-lg-5" style="display: none">
+            <div class="col-lg-3">
                 <asp:Label ID="lblDate" runat="server" Text="Date" CssClass="align boldertext"></asp:Label>
                 <asp:DropDownList ID="ddDate" runat="server" CssClass="align" DataTextFormatString="{0:d}" Width="180px"></asp:DropDownList>
             </div>
-            <div class="col-lg-6">
-                <label class="align boldertext">From</label>
-                <asp:TextBox ID="txt_From" CssClass="align dateonly" placeholder="From Date" runat="server"></asp:TextBox>
-                <label class="align boldertext">&nbsp;To&nbsp;</label>
-                <asp:TextBox ID="txtTo" CssClass="align dateonly" placeholder="To Date" runat="server"></asp:TextBox>
-
-
-
-            </div>
-            <div class="col-lg-6">
+            <div class="col-lg-9">
                 <asp:Label ID="lblLocation" runat="server" Text="Location" CssClass="boldertext"></asp:Label>
                 <asp:DropDownList ID="ddLocation" runat="server" CssClass="align">
                     <asp:ListItem>All</asp:ListItem>
@@ -196,11 +186,11 @@
             </div>
         </div>
         <!--End TopBar-->
-
+        
     </asp:Panel>
-    <!--Start Top Quick links. -->
-    <%-- <asp:LinkButton ID="lbtnPatientDetails" Style="margin-right:1%" CssClass="procDetail" runat="server" OnClick="lbtnPatientDetails_Click" >Patient Details</asp:LinkButton>--%>
-    <!--End Top Quick links. -->
+            <!--Start Top Quick links. -->
+           <%-- <asp:LinkButton ID="lbtnPatientDetails" Style="margin-right:1%" CssClass="procDetail" runat="server" OnClick="lbtnPatientDetails_Click" >Patient Details</asp:LinkButton>--%>
+            <!--End Top Quick links. -->
     <div class="row">
         <!--Content-->
 
@@ -279,14 +269,15 @@
                     </div>
                 </div>
                 <br />--%>
-            <div class="row" style="overflow-x: scroll; min-width: 400px;">
+            <div class="row" style="overflow-x: scroll;
+    min-width: 400px; ">
                 <!--Grid Container-->
                 <div class="col-lg-12">
                     <b>Procedures :</b>
                     <asp:Literal ID="ltNew" runat="server"></asp:Literal>
                     <br />
                     <br />
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                    <asp:UpdatePanel ID="UpdatePanel2"  runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <asp:Panel ID="pnlProcedures" runat="server"></asp:Panel>
                         </ContentTemplate>
@@ -330,49 +321,50 @@
     </div>
     <asp:HiddenField runat="server" ID="DOEhdn" />
     <!-- New Proceduredetail Modal -->
-
-    <!-- Modal content-->
-
+   
+            <!-- Modal content-->
+            
     <asp:HiddenField ID="hfPatientIE_ID" runat="server" />
     <asp:HiddenField ID="hfPatientFU_ID" runat="server" />
     <asp:HiddenField ID="hfUserID" runat="server" />
 
 
     <script type="text/javascript">
-        function save() {
+        function save()
+        {
             var datacol = $('#HDN_Attribute').val().split('_');
             var pdesc = 'test';
             var ajaxdata = "{  procedureId:'" + datacol[2] +
-                "',patientIEId:'" + $("#<%=hfPatientIE_ID.ClientID%>").val() +
-                "',patientFUId:'" + datacol[4] +
-                "',createdBy:'" + $("#<%=hfUserID.ClientID%>").val() +
-                "',mcode:'" + datacol[5] + $('#Pos_val').val() + '_' + datacol[6] + '_' + datacol[7] +
-                "',bodypart:'" + datacol[8] +
-                "',date:'" + $('#HDN_Selecteddate').val() +
-                "',pDesc:'" + pdesc +
-                "',ProcedureDetail_ID:'" + datacol[9] +
-                "'}";
+                             "',patientIEId:'" + $("#<%=hfPatientIE_ID.ClientID%>").val() +
+                                            "',patientFUId:'" + datacol[4] +
+                                            "',createdBy:'" + $("#<%=hfUserID.ClientID%>").val() +
+                                            "',mcode:'" + datacol[5] +$('#Pos_val').val()+ '_' + datacol[6] + '_' + datacol[7] +
+                                            "',bodypart:'" + datacol[8] +
+                                            "',date:'" + $('#HDN_Selecteddate').val() +
+                                            "',pDesc:'" + pdesc +
+                                             "',ProcedureDetail_ID:'" + datacol[9] +
+                                            "'}";
 
-            $.ajax({
-                type: "POST",
-                url: "SaveProcedure.aspx/Save",
-                data: ajaxdata,
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function () {
-                    $('.reload').click();
-                    $('#LocSelectPopup').modal('hide');
-                    //console.log('reached');
-                },
-                failure: function (response) {
-                    alert("Invalid Details...")
-                }
-            });
+                           $.ajax({
+                               type: "POST",
+                               url: "SaveProcedure.aspx/Save",
+                               data: ajaxdata,
+                               contentType: "application/json;charset=utf-8",
+                               dataType: "json",
+                               success: function () {
+                                   $('.reload').click();
+                                   $('#LocSelectPopup').modal('hide');
+                                   //console.log('reached');
+                               },
+                               failure: function (response) {
+                                   alert("Invalid Details...")
+                               }
+                           });
 
 
         }
         $(document).ready(function () {
-
+            
             setdatepicker();
             loadPanel();
             if ($('#lblName').val() != "") {
@@ -384,26 +376,20 @@
 
             $('#txtDate').text($('#DOEhdn').val());
         });
-        function saveClick() {
-            // $.blockUI({ message: "<h1>Remote call in progress...</h1>" }); 
-
-
-            // unblock when remote call returns 
-
-
-
-        }
+        function saveClick()
+        {
+            $.blockUI({ message: "<h1>Remote call in progress...</h1>" }); 
+ 
+            
+                    // unblock when remote call returns 
+                   
+               
+            
+            }
         function setdatepicker() {
             $('.dateonly').datepicker({
                 dateFormat: "mm/dd/yy"
             });
-
-            $('#').datepicker({
-                dateFormat: "mm/dd/yy"
-            });
-
-
-
             $('.date').datepicker({
                 dateFormat: "mm/dd/yy",
                 onSelect: function () {
@@ -413,11 +399,11 @@
                         $('#HDN_Attribute').val($(this).attr('id'));
                         var pdesc = 'test';
                         $('#HDN_Selecteddate').val('');
-                        // alert(datacol[5]);
+                       // alert(datacol[5]);
                         switch (datacol[5]) {
                             case 'CTPI':
                                 $('#HDN_Selecteddate').val($(this).val());
-                                $('#LocSelectPopup').modal('show');
+                                    $('#LocSelectPopup').modal('show');                                  
                                 break;
                             case 'LTPI':
                                 $('#HDN_Selecteddate').val($(this).val());
@@ -429,15 +415,15 @@
                                 break;
                             default:
                                 var ajaxdata = "{  procedureId:'" + datacol[2] +
-                                    "',patientIEId:'" + $("#<%=hfPatientIE_ID.ClientID%>").val() +
-                                    "',patientFUId:'" + datacol[4] +
-                                    "',createdBy:'" + $("#<%=hfUserID.ClientID%>").val() +
-                                    "',mcode:'" + datacol[5] + '_' + datacol[6] + '_' + datacol[7] +
-                                    "',bodypart:'" + datacol[8] +
-                                    "',date:'" + $(this).val() +
-                                    "',pDesc:'" + pdesc +
-                                    "',ProcedureDetail_ID:'" + datacol[9] +
-                                    "'}";
+                                            "',patientIEId:'" + $("#<%=hfPatientIE_ID.ClientID%>").val() +
+                                            "',patientFUId:'" + datacol[4] +
+                                            "',createdBy:'" + $("#<%=hfUserID.ClientID%>").val() +
+                                            "',mcode:'" + datacol[5] + '_' + datacol[6] + '_' + datacol[7] +
+                                            "',bodypart:'" + datacol[8] +
+                                            "',date:'" + $(this).val() +
+                                            "',pDesc:'" + pdesc +
+                                              "',ProcedureDetail_ID:'" + datacol[9] +
+                                            "'}";
 
                                 $.ajax({
                                     type: "POST",
@@ -473,15 +459,15 @@
                         var datacol = $(this).attr('id').split('_');
                         var pdesc = 'test';
                         //debugger;
-                        // alert(datacol[5])
+                       // alert(datacol[5])
                         var ajaxdata = "{  procedureId:'" + datacol[2] +
-                            "',patientIEId:'" + $("#<%=hfPatientIE_ID.ClientID%>").val() +
-                            "',patientFUId:'" + datacol[4] +
+                                        "',patientIEId:'" + $("#<%=hfPatientIE_ID.ClientID%>").val() +
+                                        "',patientFUId:'" + datacol[4] +
                                         <%--"',createdBy:'" + $("#<%=hfUserID.ClientID%>").val() +--%>
-                            "',mcode:'" + datacol[5] + '_' + datacol[6] + '_' + datacol[7] +
-                            "',bodypart:'" + datacol[8] +
-                            "',ProcedureDetail_ID:'" + datacol[9] +
-                            "'}";
+                                        "',mcode:'" + datacol[5] + '_' + datacol[6] + '_' + datacol[7] +
+                                        "',bodypart:'" + datacol[8] +
+                                        "',ProcedureDetail_ID:'" + datacol[9]+
+                                        "'}";
                         $.ajax({
                             type: "POST",
                             url: "SaveProcedure.aspx/Delete",
@@ -521,28 +507,25 @@
 
     </script>
 
-
-
-    <div class="modal fade" id="ProcedureDetailModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+                        
+                                 <div class="modal fade" id="ProcedureDetailModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <asp:Label ID="lblAlert" runat="server"></asp:Label>
-                </div>
+                                <div class="modal-content">
+                                    <div class="modal-header">                                         
+                                    <asp:Label ID="lblAlert" runat="server"></asp:Label>                               
+                                    </div>
                 <div class="modal-body">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
-                            <div class="row">
-                                <div class="col-sm-10">
+                            <ContentTemplate>
+                    <div class="row">
+                        <div class="col-sm-10">
                                     <div class="row">
+                                        <div class="col-sm-5"><label class="control-label">BodyPart :</label></div>
                                         <div class="col-sm-5">
-                                            <label class="control-label">BodyPart :</label>
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <asp:DropDownList ID="ddBodyPart" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddBodyPart_SelectedIndexChanged"></asp:DropDownList>
-                                        </div>
+                                            <asp:DropDownList ID="ddBodyPart" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddBodyPart_SelectedIndexChanged"></asp:DropDownList></div>
                                     </div>
-                                    <div class="space"></div>
+                            <div class="space"> </div>
                                     <div class="row">
                                         <div class="col-sm-5">Type :</div>
                                         <div class="col-sm-5">
@@ -553,85 +536,83 @@
                                             </asp:RadioButtonList>
                                         </div>
                                     </div>
-                                    <div class="space"></div>
-                                    <div class="row">
+                            <div class="space"> </div> 
+                                   <div class="row">
                                         <div class="col-sm-5">Procedure :</div>
                                         <div class="col-sm-5">
-                                            <asp:DropDownList ID="ddProcedure" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddProcedure_SelectedIndexChanged"></asp:DropDownList>
-                                        </div>
+                                            <asp:DropDownList ID="ddProcedure" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddProcedure_SelectedIndexChanged"></asp:DropDownList></div>
                                     </div>
-                                    <div class="space"></div>
+                             <div class="space"> </div>
                                     <div class="row">
                                         <div class="col-sm-5">Sub Procedure :</div>
                                         <div class="col-sm-5">
                                             <asp:DropDownList ID="ddSubProcedure" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddSubProcedure_SelectedIndexChanged"></asp:DropDownList>
-                                            <asp:TextBox ID="txtNumber" Width="30px" Height="19px" runat="server"></asp:TextBox>
-                                        </div>
+                                            <asp:TextBox ID="txtNumber" Width="30px" Height="19px" runat="server"></asp:TextBox></div>
                                     </div>
-                                    <div class="space"></div>
+                             <div class="space"> </div>
                                     <div class="row">
                                         <div class="col-sm-5">Date</div>
                                         <div class="col-sm-5">
-                                            <asp:TextBox ID="txtDate" CssClass="dateonly" runat="server"></asp:TextBox>
-                                        </div>
+                                            <asp:TextBox ID="txtDate" CssClass="dateonly" runat="server"></asp:TextBox></div>
+                                    </div> 
+                              <div class="space"> </div>
+                                <div class="row">
+                                     <div class="col-sm-5"></div>
+                                    <div class="col-sm-5">
+                                          <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" OnClientClick="saveClick()" OnClick="btnSave_Click" />
+                                    <%--  <button id="closeandload">Close</button>  --%>
+                                    <button type="button" id="modalclose" class="btn btn-primary" data-dismiss="modal" style="display: none" aria-hidden="true">&times;</button>
+                                    <asp:Button ID="btnReload" runat="server" Text="Close" CssClass="reload btn btn-primary" OnClick="btnReload_Click" />
+                             
+
                                     </div>
-                                    <div class="space"></div>
-                                    <div class="row">
-                                        <div class="col-sm-5"></div>
-                                        <div class="col-sm-5">
-                                            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" OnClientClick="saveClick()" OnClick="btnSave_Click" />
-                                            <%--  <button id="closeandload">Close</button>  --%>
-                                            <button type="button" id="modalclose" class="btn btn-primary" data-dismiss="modal" style="display: none" aria-hidden="true">&times;</button>
-                                            <asp:Button ID="btnReload" runat="server" Text="Close" CssClass="reload btn btn-primary" OnClick="btnReload_Click" />
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
+                                     </div>                               
                             </div>
-                        </ContentTemplate>
+                             
+                          </div>
+                                </ContentTemplate>
 
-                    </asp:UpdatePanel>
+                        </asp:UpdatePanel>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
+                            
 
-
-
-    <!--End Content-->
-
+                  
+            <!--End Content-->
+        
     <div class="modal fade" id="LocSelectPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <%--<h4 class="modal-title" id="myModalLabel">Modal title</h4>--%>
-                </div>
-                <div class="modal-body">
-                    <div class="col-lg-3">
-                        <label class="align boldertext">Position</label>
-                        <select id="Pos_val">
-                            <option value="">--Select--</option>
-                            <option value="L">Left</option>
-                            <option value="R">Right</option>
-                            <option value="B">Bilateral</option>
-                            <option value="B12B">B12B</option>
-                            <option value="B12L">B12L</option>
-                            <option value="B12R">B12R</option>
-                        </select>
-                        <input type="hidden" id="HDN_Selecteddate" />
-                        <input type="hidden" id="HDN_Attribute" />
-                    </div>
-                </div>
-                <div class="modal-footer" style="margin-right: 18px">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="save()" class="btn btn-primary">Save</button>
-                </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <%--<h4 class="modal-title" id="myModalLabel">Modal title</h4>--%>
+               
+            </div>
+            <div class="modal-body">
+                  <div class="col-lg-3">
+                <label class="align boldertext">Position</label>
+               <select id="Pos_val">
+                   <option value="">--Select--</option>
+                   <option value="L">Left</option>
+                   <option value="R">Right</option>
+                   <option value="B">Bilateral</option>
+                   <option value="B12B">B12B</option>
+                   <option value="B12L">B12L</option>
+                   <option value="B12R">B12R</option>
+               </select>
+                      <input type="hidden" id="HDN_Selecteddate" />
+                      <input type="hidden" id="HDN_Attribute" />
+            </div>
+            </div>
+            <div class="modal-footer" style="margin-right:18px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" onclick="save()" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
+</div>
 
 </asp:Content>
 

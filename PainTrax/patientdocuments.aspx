@@ -65,7 +65,7 @@
                                 <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Document_ID") %>' CssClass="btn btn-danger" OnClientClick="return confirm('Are you sure you want to delete this document ?')" Text="Delete" CausesValidation="false" OnClick="btnDelete_Click" />
                                   <asp:Button runat="server" ID="Button1" CommandArgument='<%# Eval("path")+"#"+Eval("DocName") %>' CssClass="btn btn-warning" Text="Download" CausesValidation="false" OnClick="btnDownload_Click" />
                                 <%--  <asp:Button runat="server" ID="btnPreview" CommandArgument='<%# Eval("Document_ID") %>' CssClass="btn btn-info" Text="Preview" CausesValidation="false" OnClick="btnPreview_Click" />--%>
-                                <a href='<%# "https://docs.google.com/viewer?url=https://www.paintrax.com/AKS"+Eval("path").ToString().Replace("~","")+"&embedded=true" %>' target="_new" class="btn btn-info">Preview </a>
+                                <a href='<%# "https://docs.google.com/viewer?url=https://www.paintrax.com/BHF"+Eval("path").ToString().Replace("~","")+"&embedded=true" %>' target="_new" class="btn btn-info">Preview </a>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

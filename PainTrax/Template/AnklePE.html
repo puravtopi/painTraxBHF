@@ -4,28 +4,29 @@
 
         <span><b>Left Ankle Examination:</b> </span><label style="visibility:hidden">#leftankletitle</label>
 
-        <input type="checkbox" id="chkleftrom" class="nocomma" onclick="checkMe(this)" value="ROM is "  />ROM is&nbsp;
+        <input type="checkbox" id="chkleftrom" class="nocomma" onclick="checkMe(this)" value="ROM is " checked="checked" />ROM is&nbsp;
         <section class="dropdown">
-            <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this);selectTestCHK('chkleftrom', this.value)" value="" />
+            <input type="text" id="txtRangeOfMotionLeft" onchange="txtMe(this);selectTestCHK('chkleftrom', this.value)" value="mildly decreased." />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtRangeOfMotionLeft', this.value);selectTestCHK('chkleftrom', this.value)" id="ddlRangeOfMotionLeft"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
         </section>
-        <input type="checkbox" ID="chkWithLocalLeft" onclick="checkMe(this)" value=" with local tenderness upon palpation of the " class="nocomma"  />&nbsp;with local tenderness upon palpation of the
-        <input type="checkbox" ID="chkPalpationMedMalleolusLeft" onclick="checkMe(this)" value="medial malleolus" />&nbsp;medial malleolus
-        <input type="checkbox" ID="chkPalpationLatMalleolusLeft" onclick="checkMe(this)" value="lateral malleolus" />&nbsp;lateral malleolus
-        <input type="checkbox" ID="chkPalpationAchillesLeft" onclick="checkMe(this)" value="achilles tendon" />&nbsp;achilles tendon
+        <span>.</span>
+        <input type="checkbox" ID="chkWithLocalLeft" onclick="checkMe(this)" value="There is local tenderness upon palpation of the " class="nocomma" />&nbsp;There is local tenderness upon palpation of the
+        <input type="checkbox" ID="chkPalpationMedMalleolusLeft" class="chklocalL" onclick="checkMe(this);checkDefault(this, 'chkWithLocalLeft');" value="medial malleolus" checked="checked" />&nbsp;medial malleolus
+        <input type="checkbox" ID="chkPalpationLatMalleolusLeft" class="chklocalL" onclick="checkMe(this);checkDefault(this, 'chkWithLocalLeft');" value="lateral malleolus" />&nbsp;lateral malleolus
+        <input type="checkbox" ID="chkPalpationAchillesLeft" class="chklocalL" onclick="checkMe(this);checkDefault(this, 'chkWithLocalLeft');" value="achilles tendon" />&nbsp;achilles tendon
         <label>.</label>
-        <input type="checkbox" id="chkleftwrost" class="nocomma" onclick="checkMe(this)" value="The ankle pain is worsened with "  />The ankle pain is worsened with&nbsp;
+        <input type="checkbox" id="chkleftwrost" class="nocomma" onclick="checkMe(this)" value="The ankle pain is worsened with " />The ankle pain is worsened with&nbsp;
 
         <input type="checkbox" ID="chkWorsePlantarLeft" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="plantar flexion" />&nbsp;plantar flexion
-        <input type="checkbox" ID="chkWorseDorsiLeft"  class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="dorsiflexion" />&nbsp;dorsiflexion
-        <input type="checkbox" ID="chkWorseEversionLeft"  class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="eversion" />&nbsp;eversion
-        <input type="checkbox" ID="chkWorseInversionLeft"  class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="inversion" />&nbsp;inversion
-        <input type="checkbox" ID="chkWorseExtensionLeft"  class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="extension" />&nbsp;extension
-        <input type="checkbox" ID="chkWorseAmbulationLeft"  class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="ambulation" />&nbsp;ambulation
+        <input type="checkbox" ID="chkWorseDorsiLeft" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="dorsiflexion" />&nbsp;dorsiflexion
+        <input type="checkbox" ID="chkWorseEversionLeft" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="eversion" />&nbsp;eversion
+        <input type="checkbox" ID="chkWorseInversionLeft" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="inversion" />&nbsp;inversion
+        <input type="checkbox" ID="chkWorseExtensionLeft" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="extension" />&nbsp;extension
+        <input type="checkbox" ID="chkWorseAmbulationLeft" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkleftwrost');" value="ambulation" />&nbsp;ambulation
         <label>.</label>
-        <input type="checkbox" id="chkleftthere" class="nocomma" onclick="checkMe(this)" value="There is "  />There is&nbsp;
-        <input type="checkbox" ID="chkEdemaLeft"   class="chkedemL" onclick="checkMe(this);checkDefault(this, 'chkleftthere');" value="edema" />&nbsp;edema
-        <input type="checkbox" ID="chkEcchymosisLeft"  class="chkedemL" onclick="checkMe(this);checkDefault(this, 'chkleftthere');" value="ecchymosis over the left ankle" />&nbsp;ecchymosis over the left ankle
+        <input type="checkbox" id="chkleftthere" class="nocomma" onclick="checkMe(this)" value="There is " />There is&nbsp;
+        <input type="checkbox" ID="chkEdemaLeft" class="chkedemL" onclick="checkMe(this);checkDefault(this, 'chkleftthere');" value="edema" />&nbsp;edema
+        <input type="checkbox" ID="chkEcchymosisLeft" class="chkedemL" onclick="checkMe(this);checkDefault(this, 'chkleftthere');" value="ecchymosis over the left ankle" />&nbsp;ecchymosis over the left ankle
         <label>.</label>
 
 
@@ -41,6 +42,8 @@
             <button type="button" id="start_button" onclick="startButton(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#ankleleftrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
 
@@ -49,19 +52,20 @@
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Ankle Examination:</b> </span><label style="visibility:hidden">#rigthankletitle</label>
 
-        <input type="checkbox" id="chkrightrom" class="nocomma" onclick="checkMe(this)" value="ROM is"  />ROM is&nbsp;
+        <input type="checkbox" id="chkrightrom" class="nocomma" onclick="checkMe(this)" value="ROM is" checked="checked" />ROM is&nbsp;
         <section class="dropdown">
-            <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this);selectTestCHK('chkrightrom', this.value)" value="" />
+            <input type="text" id="txtRangeOfMotionRight" onchange="txtMe(this);selectTestCHK('chkrightrom', this.value)" value="mildly decreased." />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtRangeOfMotionRight', this.value);selectTestCHK('chkrightrom', this.value)" id="ddlRangeOfMotionRight"><option></option><option>mildly decreased. </option><option>moderately decreased. </option><option>severely decreased. </option></select>
         </section>
-        <input type="checkbox" ID="chkPalpationMedMalleolusRight" onclick="checkMe(this)" value=" with local tenderness upon palpation of the " class="nocomma" />&nbsp;with local tenderness upon palpation of the
-        <input type="checkbox" ID="chkPalpationMedMalleolusRight" onclick="checkMe(this)" value="medial malleolus" />&nbsp;medial malleolus
-        <input type="checkbox" ID="chkPalpationLatMalleolusRight" onclick="checkMe(this)" value="lateral malleolus" />&nbsp;lateral malleolus
-        <input type="checkbox" ID="chkPalpationAchillesRight" onclick="checkMe(this)" value="achilles tendon" />&nbsp;achilles tendon
+        <span>.</span>
+        <input type="checkbox" ID="chkWithLocalRight" class="nocomma" onclick="checkMe(this);" value="There is local tenderness upon palpation of the " class="nocomma" />&nbsp;There is local tenderness upon palpation of the
+        <input type="checkbox" ID="chkPalpationMedMalleolusRight" class="chklocalR" onclick="checkMe(this);checkDefault(this, 'chkWithLocalRight');" value="medial malleolus" checked="checked" />&nbsp;medial malleolus
+        <input type="checkbox" ID="chkPalpationLatMalleolusRight" class="chklocalR" onclick="checkMe(this);checkDefault(this, 'chkWithLocalRight');" value="lateral malleolus" />&nbsp;lateral malleolus
+        <input type="checkbox" ID="chkPalpationAchillesRight" class="chklocalR" onclick="checkMe(this);checkDefault(this, 'chkWithLocalRight');" value="achilles tendon" />&nbsp;achilles tendon
         <label>.</label>
-        <input type="checkbox" id="chkrightwrost" class="nocomma" onclick="checkMe(this)" value="The ankle pain is worsened with "  />The ankle pain is worsened with&nbsp;
+        <input type="checkbox" id="chkrightwrost" class="nocomma" onclick="checkMe(this)" value="The ankle pain is worsened with " />The ankle pain is worsened with&nbsp;
 
-        <input type="checkbox" ID="chkWorsePlantarRight"class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkrightwrost');" value="plantar flexion" />&nbsp;plantar flexion
+        <input type="checkbox" ID="chkWorsePlantarRight" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkrightwrost');" value="plantar flexion" />&nbsp;plantar flexion
         <input type="checkbox" ID="chkWorseDorsiRight" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkrightwrost');" value="dorsiflexion" />&nbsp;dorsiflexion
         <input type="checkbox" ID="chkWorseEversionRight" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkrightwrost');" value="eversion" />&nbsp;eversion
         <input type="checkbox" ID="chkWorseInversionRight" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkrightwrost');" value="inversion" />&nbsp;inversion
@@ -70,10 +74,10 @@
         <label>.</label>
 
 
-        <input type="checkbox" id="chkrightthere" class="nocomma" onclick="checkMe(this)" value="There is"  />There is&nbsp;
+        <input type="checkbox" id="chkrightthere" class="nocomma" onclick="checkMe(this)" value="There is" />There is&nbsp;
 
         <input type="checkbox" ID="chkEdemaRight" class="chkedemR" onclick="checkMe(this);checkDefault(this, 'chkrightthere');" value="edema" />&nbsp;edema
-        <input type="checkbox" ID="chkEcchymosisRight"class="chkedemR" onclick="checkMe(this);checkDefault(this, 'chkrightthere');" value="ecchymosis over the right ankle" />&nbsp;ecchymosis over the right ankle.
+        <input type="checkbox" ID="chkEcchymosisRight" class="chkedemR" onclick="checkMe(this);checkDefault(this, 'chkrightthere');" value="ecchymosis over the right ankle" />&nbsp;ecchymosis over the right ankle.
 
 
         <br />
@@ -88,6 +92,8 @@
             <button type="button" id="start_button" onclick="startButton(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#anklerightrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
 

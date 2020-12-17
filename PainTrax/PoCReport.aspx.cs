@@ -108,7 +108,7 @@ public partial class PoCReport : System.Web.UI.Page
             else
                 condition1 = " ie.Location_ID=" + ddl_location.SelectedValue;
         }
-        
+
 
         query += condition;
         if (!string.IsNullOrEmpty(condition1))
@@ -117,7 +117,7 @@ public partial class PoCReport : System.Web.UI.Page
             query += condition1;
         }
 
-        query = query + " order by " + ViewState["o_column"] + " "  + ViewState["c_order"];
+        query = query + " order by " + ViewState["o_column"] + " " + ViewState["c_order"];
 
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
         {
@@ -199,25 +199,55 @@ public partial class PoCReport : System.Web.UI.Page
     {
         DataTable dt = (DataTable)Session["Datatableprocedure"];
 
-        dt.Columns.Remove("ProcedureDetail_ID");
-        dt.Columns.Remove("ProcedureDetail_ID1");
-        using (XLWorkbook wb = new XLWorkbook())
-        {
-            wb.Worksheets.Add(dt, "POCReport");
-            Response.Clear();
-            Response.Buffer = true;
-            Response.Charset = "";
-            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            Response.AddHeader("content-disposition", "attachment;filename=POCReport.xlsx");
-            using (MemoryStream MyMemoryStream = new MemoryStream())
-            {
-                wb.SaveAs(MyMemoryStream);
-                MyMemoryStream.WriteTo(Response.OutputStream);
-                Response.Flush();
-                Response.End();
-            }
+        DataColumnCollection columns = dt.Columns;
 
+        if (columns.Contains("ProcedureDetail_ID"))
+            dt.Columns.Remove("ProcedureDetail_ID");
+        if (columns.Contains("ProcedureDetail_ID1"))
+            dt.Columns.Remove("ProcedureDetail_ID1");
+
+
+        string attachment = "attachment; filename=POCReport.xls";
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", attachment);
+        Response.ContentType = "application/vnd.ms-excel";
+        string tab = "";
+        foreach (DataColumn dc in dt.Columns)
+        {
+            Response.Write(tab + dc.ColumnName);
+            tab = "\t";
         }
+        Response.Write("\n");
+        int i;
+        foreach (DataRow dr in dt.Rows)
+        {
+            tab = "";
+            for (i = 0; i < dt.Columns.Count; i++)
+            {
+                Response.Write(tab + dr[i].ToString());
+                tab = "\t";
+            }
+            Response.Write("\n");
+        }
+        Response.End();
+
+        //using (XLWorkbook wb = new XLWorkbook())
+        //{
+        //    wb.Worksheets.Add(dt, "POCReport");
+        //    Response.Clear();
+        //    Response.Buffer = true;
+        //    Response.Charset = "";
+        //    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        //    Response.AddHeader("content-disposition", "attachment;filename=POCReport.xlsx");
+        //    using (MemoryStream MyMemoryStream = new MemoryStream())
+        //    {
+        //        wb.SaveAs(MyMemoryStream);
+        //        MyMemoryStream.WriteTo(Response.OutputStream);
+        //        Response.Flush();
+        //        Response.End();
+        //    }
+
+        //}
 
     }
 
@@ -367,7 +397,7 @@ public partial class PoCReport : System.Web.UI.Page
         Button btn = sender as Button;
         Reschedules(btn.CommandArgument);
     }
-       
+
     protected void lnkRescheduled_Click(object sender, EventArgs e)
     {
         foreach (GridViewRow grow in gvProcedureTbl.Rows)
@@ -405,7 +435,7 @@ public partial class PoCReport : System.Web.UI.Page
     {
         try
         {
-         
+
             if (ViewState["c_order"].ToString().ToUpper() == "ASC")
                 ViewState["c_order"] = "DESC";
             else if (ViewState["c_order"].ToString().ToUpper() == "DESC")
@@ -417,7 +447,7 @@ public partial class PoCReport : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-          
+
         }
     }
 

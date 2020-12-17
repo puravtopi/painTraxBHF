@@ -1,10 +1,10 @@
 <div class="col-md-9 row" style="margin-top: 5px">
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Wrist Examination:</b> </span><label style="visibility:hidden">#leftwristtitle</label>
-        <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="Reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the
-        <input type="checkbox" ID="chkPalpationUlnarLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="ulnar" /> ulnar
+        <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="Reveals tenderness upon palpation of the" checked="checked"/> reveals tenderness upon palpation of the
+        <input type="checkbox" ID="chkPalpationUlnarLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="ulnar" checked="checked"/> ulnar
         <input type="checkbox" ID="chkPalpationRadialLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="radius" /> radius
-        <input type="checkbox" ID="chkPalpationDorsalLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="dorsal" /> dorsal
+        <input type="checkbox" ID="chkPalpationDorsalLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="dorsal" checked="checked"/> dorsal
         <input type="checkbox" ID="chkPalpationPalmarLeft" class="chkrevelL" onclick="checkMe(this); checkDefault(this,'chkleftrevel')" value="palmar" /> palmar
         <label> aspect of the wrist.</label>
 
@@ -38,6 +38,8 @@
             <button type="button" id="start_button" onclick="startButton(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#wristleftrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
 
@@ -46,10 +48,10 @@
     <br />
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Wrist Examination:</b> </span><label style="visibility:hidden">#rightwristtitle</label>
-        <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="Reveals tenderness upon palpation of the" /> reveals tenderness upon palpation of the        
-        <input type="checkbox" ID="chkPalpationUlnarRight" onclick="checkMe(this);checkDefault(this,'chkrightrevel')" class="chkrevelR" value="ulnar" />ulnar
+        <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="Reveals tenderness upon palpation of the" checked="checked"/> reveals tenderness upon palpation of the        
+        <input type="checkbox" ID="chkPalpationUlnarRight" onclick="checkMe(this);checkDefault(this,'chkrightrevel')" class="chkrevelR" value="ulnar" checked="checked"/>ulnar
         <input type="checkbox" ID="chkPalpationRadialRight" onclick="checkMe(this); checkDefault(this,'chkrightrevel')" class="chkrevelR" value="radius" /> radius
-        <input type="checkbox" ID="chkPalpationDorsalRight" onclick="checkMe(this); checkDefault(this,'chkrightrevel')" class="chkrevelR" value="dorsal" /> dorsal
+        <input type="checkbox" ID="chkPalpationDorsalRight" onclick="checkMe(this); checkDefault(this,'chkrightrevel')" class="chkrevelR" value="dorsal" checked="checked"/> dorsal
         <input type="checkbox" ID="chkPalpationPalmarRight" onclick="checkMe(this); checkDefault(this,'chkrightrevel')" class="chkrevelR" value="palmar" /> palmar
         <label> aspect of the wrist.</label>
 
@@ -83,20 +85,22 @@
             <button type="button" id="start_button" onclick="startButton(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#wristrightrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
 
     </div>
     <br />
     <div id="TestPE">
-        <input type="checkbox" id="chkTinnels" value="Tinnels test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Tinels test is&nbsp;
+        <input type="checkbox" id="chkTinnels" value="Tinel's test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Tinel's test is&nbsp;
 
         <section class="dropdown">
             <input type="text" id="txtTinnels" onchange="txtMe(this);selectTestCHK('chkTinnels', this.value)" />
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTinnels', this.value);selectTestCHK('chkTinnels', this.value)" id="ddlTinnels"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
         </section>
         <br />
-        <input type="checkbox" id="chkPhalens" value="Phalens test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Phalens test is&nbsp;
+        <input type="checkbox" id="chkPhalens" value="Phalen's test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Phalen's test is&nbsp;
 
         <section class="dropdown">
             <input type="text" id="txtPhalens" onchange="txtMe(this);selectTestCHK('chkPhalens', this.value)" />
@@ -110,26 +114,26 @@
             <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtFinkelsteins', this.value);selectTestCHK('chkFinkelsteins', this.value)" id="ddlFinkelsteins"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
         </section>
         <!--<br />
-        <input type="checkbox" id="chkPUUD" value="The Pain upon ulnar deviation test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Pain upon ulnar deviation test is&nbsp;
+    <input type="checkbox" id="chkPUUD" value="The Pain upon ulnar deviation test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Pain upon ulnar deviation test is&nbsp;
 
-        <section class="dropdown">
-            <input type="text" id="txtPUUD" onchange="txtMe(this)" />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPUUD', this.value)" id="ddlPUUD"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
-        </section>
-        <br />
-        <input type="checkbox" id="chkPURD" value="The Pain upon radial deviation test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Pain upon radial deviation test is&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtPUUD" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPUUD', this.value)" id="ddlPUUD"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <input type="checkbox" id="chkPURD" value="The Pain upon radial deviation test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Pain upon radial deviation test is&nbsp;
 
-        <section class="dropdown">
-            <input type="text" id="txtPURD" onchange="txtMe(this)" />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPURD', this.value)" id="ddlPURD"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
-        </section>
-        <br />
-        <input type="checkbox" id="chkPUDF" value="The Pain upon dorsi flexion test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The  Pain upon dorsi flexion test is&nbsp;
+    <section class="dropdown">
+        <input type="text" id="txtPURD" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPURD', this.value)" id="ddlPURD"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>
+    <br />
+    <input type="checkbox" id="chkPUDF" value="The Pain upon dorsi flexion test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The  Pain upon dorsi flexion test is&nbsp;
 
-        <section class="dropdown">
-            <input type="text" id="txtPUDF" onchange="txtMe(this)" />
-            <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPUDF', this.value)" id="ddlPUDF"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
-        </section>-->
+    <section class="dropdown">
+        <input type="text" id="txtPUDF" onchange="txtMe(this)" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtPUDF', this.value)" id="ddlPUDF"><option></option><option>normal.</option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+    </section>-->
     </div>
     <br />
 

@@ -246,8 +246,8 @@ public partial class AddFUPage1 : System.Web.UI.Page
             TblRow["ExcessiveBend"] = chkExcessiveBend.Checked;
             TblRow["ProlongedSitStand"] = chkProlongedSitStand.Checked;
             TblRow["CareOther"] = txtCareOther.Text.ToString();
-            TblRow["Cardiac"] = chkCardiac.Checked;
-            TblRow["WeightBearing"] = chkWeightBearing.Checked;
+            TblRow["Cardiac"] = false;
+            TblRow["WeightBearing"] = false;
             TblRow["EducationProvided"] = chkEducationProvided.Checked;
             TblRow["ViaPhysician"] = chkViaPhysician.Checked;
             TblRow["ViaPrintedMaterial"] = chkViaPrintedMaterial.Checked;
@@ -385,8 +385,8 @@ public partial class AddFUPage1 : System.Web.UI.Page
             chkExcessiveBend.Checked = CommonConvert.ToBoolean(TblRow["ExcessiveBend"].ToString());
             chkProlongedSitStand.Checked = CommonConvert.ToBoolean(TblRow["ProlongedSitStand"].ToString());
             txtCareOther.Text = TblRow["CareOther"].ToString().Trim();
-            chkCardiac.Checked = CommonConvert.ToBoolean(TblRow["Cardiac"].ToString());
-            chkWeightBearing.Checked = CommonConvert.ToBoolean(TblRow["WeightBearing"].ToString());
+            //chkCardiac.Checked = CommonConvert.ToBoolean(TblRow["Cardiac"].ToString());
+            //chkWeightBearing.Checked = CommonConvert.ToBoolean(TblRow["WeightBearing"].ToString());
             chkEducationProvided.Checked = CommonConvert.ToBoolean(TblRow["EducationProvided"].ToString());
             chkViaPhysician.Checked = CommonConvert.ToBoolean(TblRow["ViaPhysician"].ToString());
             chkViaPrintedMaterial.Checked = CommonConvert.ToBoolean(TblRow["ViaPrintedMaterial"].ToString());
@@ -513,8 +513,8 @@ public partial class AddFUPage1 : System.Web.UI.Page
             chkExcessiveBend.Checked = CommonConvert.ToBoolean(TblRow["ExcessiveBend"].ToString());
             chkProlongedSitStand.Checked = CommonConvert.ToBoolean(TblRow["ProlongedSitStand"].ToString());
             txtCareOther.Text = TblRow["CareOther"].ToString().Trim();
-            chkCardiac.Checked = CommonConvert.ToBoolean(TblRow["Cardiac"].ToString());
-            chkWeightBearing.Checked = CommonConvert.ToBoolean(TblRow["WeightBearing"].ToString());
+            //chkCardiac.Checked = CommonConvert.ToBoolean(TblRow["Cardiac"].ToString());
+            //chkWeightBearing.Checked = CommonConvert.ToBoolean(TblRow["WeightBearing"].ToString());
             chkEducationProvided.Checked = CommonConvert.ToBoolean(TblRow["EducationProvided"].ToString());
             chkViaPhysician.Checked = CommonConvert.ToBoolean(TblRow["ViaPhysician"].ToString());
             chkViaPrintedMaterial.Checked = CommonConvert.ToBoolean(TblRow["ViaPrintedMaterial"].ToString());
@@ -630,8 +630,8 @@ public partial class AddFUPage1 : System.Web.UI.Page
             chkExcessiveBend.Checked = node.SelectSingleNode("ExcessiveBend") == null ? chkExcessiveBend.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ExcessiveBend").InnerText);
             chkProlongedSitStand.Checked = node.SelectSingleNode("ProlongedSitStand") == null ? chkProlongedSitStand.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ProlongedSitStand").InnerText);
             if (txtCareOther.Text == "") txtCareOther.Text = node.SelectSingleNode("CareOther") == null ? txtCareOther.Text.ToString().Trim() : node.SelectSingleNode("CareOther").InnerText;
-            chkCardiac.Checked = node.SelectSingleNode("Cardiac") == null ? chkCardiac.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("Cardiac").InnerText);
-            chkWeightBearing.Checked = node.SelectSingleNode("WeightBearing") == null ? chkWeightBearing.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("WeightBearing").InnerText);
+            //chkCardiac.Checked = node.SelectSingleNode("Cardiac") == null ? chkCardiac.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("Cardiac").InnerText);
+            //chkWeightBearing.Checked = node.SelectSingleNode("WeightBearing") == null ? chkWeightBearing.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("WeightBearing").InnerText);
             chkEducationProvided.Checked = node.SelectSingleNode("EducationProvided") == null ? chkEducationProvided.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("EducationProvided").InnerText);
             chkViaPhysician.Checked = node.SelectSingleNode("ViaPhysician") == null ? chkViaPhysician.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ViaPhysician").InnerText);
             chkViaPrintedMaterial.Checked = node.SelectSingleNode("ViaPrintedMaterial") == null ? chkViaPrintedMaterial.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ViaPrintedMaterial").InnerText);

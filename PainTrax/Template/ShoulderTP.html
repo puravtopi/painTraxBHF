@@ -1,0 +1,52 @@
+﻿<div class="col-md-9 row" style="margin-top: 5px">
+    <div class="col-md-3">
+        <span class="control-label"><b><u>Trigger Point:</u></b></span>
+    </div>
+    <div class="col-md-9" style="margin-top: 5px" id="div_TP">
+        <!--<span>There are palpable taut bands/trigger points with referral patterns as depicted below. </span>-->
+        <span>On exam, patient has taut tender bands in the <input type="text" id="txtTP" class="noprint" style="width:400px" /> muscles.</span>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <input type="checkbox" id="chktrapezius" value="trapezius" class="noprint" onclick="checkMe(this); writeTPtxt()" /> Trapezius
+                <!--<input type="text" ID="txtTrapezius" onchange="txtMe(this); selectTestCHK('chktrapezius', this.value);writeTPtxt()" class="txtTP" Style="margin-left: 10px;width:500px" value="" />-->
+
+
+                <section class="dropdown">
+                    <input type="text" id="txtTrapezius" class="noprint" onchange="txtMe(this); selectTestCHK('chktrapezius', this.value);writeTPtxt()" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtTrapezius', this.value); selectTestCHK('chktrapezius', this.value); writeTPtxt();" id="ddldistraction"><option></option><option>left</option><option>right</option><option>bilaterally</option></select>
+                </section>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="chkdeltoid" value="deltoid" class="noprint" onclick="checkMe(this); writeTPtxt()" /> Deltoid
+                <!--<input type="text" ID="txtTrapezius" onchange="txtMe(this); selectTestCHK('chktrapezius', this.value);writeTPtxt()" class="txtTP" Style="margin-left: 10px;width:500px" value="" />-->
+
+
+                <section class="dropdown">
+                    <input type="text" id="txtdeltoid" class="noprint" onchange="txtMe(this); selectTestCHK('chkdeltoid', this.value);writeTPtxt()" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtdeltoid', this.value); selectTestCHK('chkdeltoid', this.value); writeTPtxt();" id="ddldeltoid"><option></option><option>left</option><option>right</option><option>bilaterally</option></select>
+                </section>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="chkscalenes" value="scalene" class="noprint" onclick="checkMe(this);writeTPtxt()" /> Scalene
+                <!--<input type="text" ID="txtScalenes" onchange="txtMe(this);selectTestCHK('chkscalenes', this.value);writeTPtxt()" class="txtTP" Style="margin-left: 10px;width:500px" value="scalenes" />-->
+
+                <section class="dropdown">
+                    <input type="text" id="txtScalenes" class="noprint" onchange="txtMe(this); selectTestCHK('chkscalenes', this.value);writeTPtxt()" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtScalenes', this.value); selectTestCHK('chkscalenes', this.value); writeTPtxt();" id="ddldistraction"><option></option><option>left</option><option>right</option><option>bilaterally</option></select>
+                </section>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="chkothers" value="scalenes" class="noprint" onclick="checkMe(this);writeTPtxt()" />
+                <input type="text" ID="txtOther" onchange="txtMe(this);selectTestCHK('chkothers', this.value);writeTPtxt()" class="noprint" Style="margin-left: 10px;width:500px" />
+            </td>
+        </tr>
+    </table>
+</div>

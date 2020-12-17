@@ -4,29 +4,32 @@
     </div>
     <div class="col-md-9" style="margin-top: 5px">
         <div id="WrapLeft" #leftdiv>
-            <label class="control-label">The patient complains of left wrist pain that is </label>
-            <input type="text" id="txtPainScaleL" style="Width:40px" class="paincls" value="8" onchange="txtMe(this)" />
-            <label class="control-label">/10, with 10 being the worst, which is  </label>
-            <input id="chkcontentL" type="checkbox" value="content" onclick="checkMe(this)" /> constant
-            <input id="chkintermittentL" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent
-            <input id="chksharpL" type="checkbox" value="sharp" onclick="checkMe(this)"  /> sharp
+            <span id="lblpain1L" class="control-label">The patient complains of left wrist pain that is </span>
+            <input type="text" id="txtPainScaleL" style="Width:40px" class="paincls" value="" onchange="txtMe(this); removePainClass(this, 'L');" />
+            <span id="lblpain2L" class="control-label">/10, with 10 being the worst</span>
+            <span class="noprint" id="lblwhichL">, which is </span>
+            <input type="checkbox" id="chkcontentL" class="painL" value="constant" onclick="checkMe(this);removeClass(this,'L');" />constant,
+            <input type="checkbox" id="chkintermittentL" class="painL" value="intermittent" onclick="checkMe(this);removeClass(this,'L');" />intermittent,
+            <input type="checkbox" id="chksharpL" class="painL" value="sharp" onclick="checkMe(this);removeClass(this,'L');" />sharp,
+            <input type="checkbox" id="chkelectricL" class="painL" value="electric" onclick="checkMe(this);removeClass(this,'L');" />electric,
+            <input type="checkbox" id="chkshootingL" value="shooting" class="painL" onclick="checkMe(this);removeClass(this,'L');" />shooting,
 
-            <input id="chkelectricL" type="checkbox" value="electric" onclick="checkMe(this)" /> electric
-            <input id="chkshootingL" type="checkbox" value="shooting" onclick="checkMe(this)" /> shooting
-            <input id="chkthrobbingL" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing
-            <input id="chkpulsatingL" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating
-            <input id="chkdullL" type="checkbox" value="dull" onclick="checkMe(this)"  /> dull
-            <input id="chkachyL" type="checkbox" value="achy" onclick="checkMe(this)"  /> achy
-            <label> in nature.</label>
+            <input type="checkbox" id="chkthrobbingL" value="throbbing" class="painL" onclick="checkMe(this);removeClass(this,'L');" />throbbing,
+            <input type="checkbox" id="chkpulsatingL" value="pulsating" class="painL" onclick="checkMe(this);removeClass(this,'L');" />pulsating,
 
-            <input type="checkbox" id="chkwirstpainincreaseL" class="nocomma" onclick="checkMe(this)" value="The patient complains of left wrist pain increases with specifically at the " /> The patient complains of left wrist pain increases with specifically at the
-            <input type="checkbox" id="chkulnarL" value="ulnar" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> ulnar
-            <input type="checkbox" id="chkradiusL" value="radial" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> radial
-            <input type="checkbox" id="chkDorsalL" value="dorsal" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> dorsal
-            <input type="checkbox" id="chkPalmarL" value="palmar side" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');" /> palmar side
-            <label> of the wrist.</label>
-            <input type="checkbox" id="chkpainwrosL" value="The wirst pain is worsened with " class="nocomma" onclick="checkMe(this)" /> The wrist pain is worsened with
-            <input type="checkbox" id="chkLiftingObjectL" class="chkworseL" value="lifting objects" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');"  /> lifting objects
+            <input type="checkbox" id="chkdullL" value="dull" class="painL" onclick="checkMe(this);removeClass(this,'L');" />dull,
+            <input type="checkbox" id="chkachyL" value="achy" class="painL" onclick="checkMe(this);removeClass(this,'L');" />achy
+            <span class="noprint" id="lblnatureL"> in nature</span>
+            <span id="lblpain3L">.</span>
+
+            <input type="checkbox" id="chkwirstpainincreaseL" class="nocomma" onclick="checkMe(this);removeWorstClass('chkwirstpainincreaseL', 'L');" value="The patient complains of left wrist pain increases specifically at the " /> The patient complains of left wrist pain increases specifically at the
+            <input type="checkbox" id="chkulnarL" value="ulnar" class="chkpainL" onclick="checkMe(this); checkDefault(this, 'chkwirstpainincreaseL'); removeWorstClass('chkwirstpainincreaseL', 'L');" /> ulnar
+            <input type="checkbox" id="chkradiusL" value="radius" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');removeWorstClass('chkwirstpainincreaseL', 'L');" /> radius
+            <input type="checkbox" id="chkDorsalL" value="dorsal" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');removeWorstClass('chkwirstpainincreaseL', 'L');" /> dorsal
+            <input type="checkbox" id="chkPalmarL" value="palmar side" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseL');removeWorstClass('chkwirstpainincreaseL', 'L');" /> palmar side
+            <span id="lbloftheL"> of the wrist.</span>
+            <input type="checkbox" id="chkpainwrosL" value="The wrist pain is worsened with " class="nocomma" onclick="checkMe(this)" /> The wrist pain is worsened with
+            <input type="checkbox" id="chkLiftingObjectL" class="chkworseL" value="lifting objects" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> lifting objects
             <input type="checkbox" id="chkRotationL" class="chkworseL" value="rotation" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> rotation
             <input type="checkbox" id="chkMovementL" class="chkworseL" value="movement" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> movement
             <input type="checkbox" id="chkWorkingL" class="chkworseL" value="working activities" onclick="checkMe(this);checkDefault(this, 'chkpainwrosL');" /> working activities
@@ -42,35 +45,40 @@
                 <button type="button" id="start_button1" onclick="startButton1(event)">
                     <img src="images/mic.gif" alt="start" />
                 </button>
+
                 <section style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></section>
             </section>
 
         </div>
         <br />
         <div id="WrapRight" #rigthtdiv>
-            <label class="control-label">The patient complains of right wrist pain that is </label>
-            <input type="text" id="txtPainScaleR" style="Width:40px" class="paincls" value="8" onchange="txtMe(this)" />
-            <label class="control-label">/10, with 10 being the worst, which is  </label>
-            <input id="chkcontentR" type="checkbox" value="content" onclick="checkMe(this)" /> constant
-            <input id="chkintermittentR" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent
-            <input id="chksharpR" type="checkbox" value="sharp" onclick="checkMe(this)"  /> sharp
+            <span id="lblpain1R" class="control-label">The patient complains of right wrist pain that is </span>
+            <input type="text" id="txtPainScaleR" style="Width:40px" class="paincls" value="" onchange="txtMe(this); removePainClass(this, 'R');" />
+            <span id="lblpain2R" class="control-label">/10, with 10 being the worst</span>
+            <span class="noprint" id="lblwhichR">, which is </span>
+            <input type="checkbox" id="chkcontentR" class="painR" value="constant" onclick="checkMe(this);removeClass(this,'R');" />constant,
+            <input type="checkbox" id="chkintermittentR" class="painR" value="intermittent" onclick="checkMe(this);removeClass(this,'R');" />intermittent,
+            <input type="checkbox" id="chksharpR" value="sharp" class="painR" onclick="checkMe(this);removeClass(this,'R');" />sharp,
+            <input type="checkbox" id="chkelectricR" value="electric" class="painR" onclick="checkMe(this);removeClass(this,'R');" />electric,
+            <input type="checkbox" id="chkshootingR" value="shooting" class="painR" onclick="checkMe(this);removeClass(this,'R');" />shooting,
 
-            <input id="chkelectricR" type="checkbox" value="electric" onclick="checkMe(this)" /> electric
-            <input id="chkshootingR" type="checkbox" value="shooting" onclick="checkMe(this)" /> shooting
-            <input id="chkthrobbingR" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing
-            <input id="chkpulsatingR" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating
-            <input id="chkdullR" type="checkbox" value="dull" onclick="checkMe(this)"  /> dull
-            <input id="chkachyR" type="checkbox" value="achy" onclick="checkMe(this)"  /> achy
-            <label> in nature.</label>
+            <input type="checkbox" id="chkthrobbingR" value="throbbing" class="painR" onclick="checkMe(this);removeClass(this,'R');" />throbbing,
+            <input type="checkbox" id="chkpulsatingR" value="pulsating" class="painR" onclick="checkMe(this);removeClass(this,'R');" />pulsating,
 
-            <input type="checkbox" id="chkwirstpainincreaseR" class="nocomma" onclick="checkMe(this)" value="The patient complains of rigth wrist pain increases with specifically at the " /> The patient complains of right wrist pain increases with specifically at the
-            <input type="checkbox" id="chkulnarR" value="ulnar" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> ulnar
-            <input type="checkbox" id="chkradiusR" value="radius" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> radius
-            <input type="checkbox" id="chkDorsalR" value="dorsal of the wrist" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> dorsal of the wrist
-            <input type="checkbox" id="chkPalmarR" value="palmar side" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');" /> palmar side
-            <label> of the wrist.</label>
+            <input type="checkbox" id="chkdullR" value="dull" class="painR" onclick="checkMe(this);removeClass(this,'R');" />dull,
+            <input type="checkbox" id="chkachyR" value="achy" class="painR" onclick="checkMe(this);removeClass(this,'R');" />achy
+            <span class="noprint" id="lblnatureR"> in nature</span>
+            <span id="lblpain3R">.</span>
+
+            <input type="checkbox" id="chkwirstpainincreaseR" class="nocomma" onclick="checkMe(this);removeWorstClass('chkwirstpainincreaseR', 'R');" value="The patient complains of right wrist pain increases with specifically at the " /> The patient complains of right wrist pain increases with specifically at the
+            <input type="checkbox" id="chkulnarR" value="ulnar" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');removeWorstClass('chkwirstpainincreaseR', 'R');" /> ulnar
+            <input type="checkbox" id="chkradiusR" value="radius" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');removeWorstClass('chkwirstpainincreaseR', 'R');" /> radius
+            <input type="checkbox" id="chkDorsalR" value="dorsal" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');removeWorstClass('chkwirstpainincreaseR', 'R');" /> dorsal
+            <input type="checkbox" id="chkPalmarR" value="palmar side" class="chkpainR" onclick="checkMe(this);checkDefault(this, 'chkwirstpainincreaseR');removeWorstClass('chkwirstpainincreaseR', 'R');" /> palmar side
+            <span id="lbloftheR"> of the wrist.</span>
+
             <input type="checkbox" id="chkpainwrosR" value="The wrist pain is worsened with " class="nocomma" onclick="checkMe(this)" /> The wrist pain is worsened with
-            <input type="checkbox" id="chkLiftingObjectR" class="chkworseR" value="lifting objects" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');"  /> lifting objects
+            <input type="checkbox" id="chkLiftingObjectR" class="chkworseR" value="lifting objects" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" /> lifting objects
             <input type="checkbox" id="chkRotationR" class="chkworseR" value="rotation" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" /> rotation
             <input type="checkbox" id="chkMovementR" class="chkworseR" value="movement" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" /> movement
             <input type="checkbox" id="chkWorkingR" class="chkworseR" onclick="checkMe(this);checkDefault(this, 'chkpainwrosR');" value="working activities" /> working activities
@@ -84,6 +92,7 @@
                 <button type="button" id="start_button1" onclick="startButton1(event)">
                     <img src="images/mic.gif" alt="start" />
                 </button>
+
                 <section style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></section>
             </section>
 
@@ -92,7 +101,106 @@
 </div>
 
 
+
 <script>
+
+    function removePainClass(txtId, side) {
+
+        var $span1 = $("#lblpain1" + side);
+        var $span2 = $("#lblpain2" + side);
+        var $span3 = $("#lblpain3" + side);
+
+
+
+        if ($(txtId).val() !== '') {
+
+
+
+            $span1.replaceWith(function () {
+                return $('<label/>', {
+                    Id: 'lblpain1' + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<label/>', {
+
+                    Id: 'lblpain2' + side,
+                    html: this.innerHTML
+                });
+            });
+
+            $span3.replaceWith(function () {
+                return $('<label/>', {
+
+                    Id: 'lblpain3' + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            //$('#lblnature').removeClass("noprint");
+            //$('#lblwhich').removeClass("noprint");
+        }
+        else {
+
+
+
+            $span1.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain1' + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain2' + side,
+                    html: this.innerHTML
+                });
+            });
+            $span3.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain3' + side,
+                    html: this.innerHTML
+                });
+            });
+
+        }
+
+    }
+
+    function displaySide(side) {
+
+
+
+        if (side === 'l') {
+            $('#WrapLeft').show();
+            $('#WrapRight').hide();
+            $('#WrapLeftPE').show();
+            $('#WrapRightPE').hide();
+        }
+        else if (side === 'r') {
+            $('#WrapLeft').hide();
+            $('#WrapRight').show();
+            $('#WrapLeftPE').hide();
+            $('#WrapRightPE').show();
+        }
+        else {
+            $('#WrapLeft').show();
+            $('#WrapRight').show();
+            $('#WrapLeftPE').show();
+            $('#WrapRightPE').show();
+        }
+
+    }
+
     function checkMe(chk) {
 
         if ($(chk).prop("checked")) {
@@ -108,7 +216,7 @@
 
     function checkDefault(chk, deafCheck) {
 
-        debugger
+
 
 
         var isCheck = false;
@@ -134,7 +242,7 @@
             className = "chkrevelR";
         else if (deafCheck === "chkleftrevel")
             className = "chkrevelL";
-       
+
 
 
 
@@ -160,6 +268,131 @@
         }
     }
 
+    function removeClass(chkid, side) {
+
+        var $span1 = $("#lblnature" + side);
+        var $span2 = $("#lblwhich" + side);
+
+        if ($(chkid).prop("checked") == true) {
+
+
+
+
+
+            $span1.replaceWith(function () {
+                return $('<label/>', {
+                    class: 'noprint',
+                    id: "lblnature" + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<label/>', {
+                    class: 'noprint',
+                    id: "lblwhich" + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            //$('#lblnature').removeClass("noprint");
+            //$('#lblwhich').removeClass("noprint");
+        }
+        else {
+
+
+            var className = 'pain' + side;
+            var isCheck = false;
+
+
+
+            $("input:checkbox[class=" + className + "]").each(function () {
+                if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                    isCheck = true;
+                }
+            });
+
+            if (!isCheck) {
+
+
+                $span1.replaceWith(function () {
+                    return $('<span/>', {
+                        class: 'noprint',
+                        id: "lblnature" + side,
+                        html: this.innerHTML
+                    });
+                });
+
+
+                $span2.replaceWith(function () {
+                    return $('<span/>', {
+                        class: 'noprint',
+                        id: "lblwhich" + side,
+                        html: this.innerHTML
+                    });
+                });
+
+            }
+
+
+        }
+
+    }
+
+
+    function removeWorstClass(chkid, side) {
+
+        var $span1 = $("#lblofthe" + side);
+
+
+        debugger
+
+        if ($('#' + chkid).prop("checked") == true) {
+
+
+
+
+
+            $span1.replaceWith(function () {
+                return $('<label/>', {
+                    class: 'noprint',
+                    id: "lblofthe" + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+
+
+
+            //$('#lblnature').removeClass("noprint");
+            //$('#lblwhich').removeClass("noprint");
+        }
+        else {
+
+
+
+
+            $span1.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    id: "lblofthe" + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+
+
+
+
+
+        }
+
+    }
+
     function txtMe(txt) {
         var val = $(txt).val();
         $(txt).attr('value', val);
@@ -172,21 +405,21 @@
         $(txt).text(val);
     }
 
-    function startButton1(event) {
-        controlname = "#txtFreeFormCC";
-        if (recognizing) {
-            recognition.stop();
-            return;
-        }
-        final_transcript = '';
-        recognition.lang = 'en';
-        recognition.start();
-        ignore_onend = false;
-        final_span1.innerHTML = '';
-        interim_span1.innerHTML = '';
+    //function startButton1(event) {
+    //    controlname = "#txtFreeFormCC";
+    //    if (recognizing) {
+    //        recognition.stop();
+    //        return;
+    //    }
+    //    final_transcript = '';
+    //    recognition.lang = 'en';
+    //    recognition.start();
+    //    ignore_onend = false;
+    //    final_span1.innerHTML = '';
+    //    interim_span1.innerHTML = '';
 
-        start_timestamp = event.timeStamp;
-    }
+    //    start_timestamp = event.timeStamp;
+    //}
 </script>
 
 

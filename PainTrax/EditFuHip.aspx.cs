@@ -34,6 +34,7 @@ public partial class EditFuHip : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             BindROM();
             if (Session["PatientIE_ID"] != null && Session["patientFUId"] != null)
             {
@@ -72,6 +73,8 @@ public partial class EditFuHip : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
                     BindDataGrid();
+                    bindCC();
+                    bindPE();
                 }
                 else
                 {
@@ -80,9 +83,8 @@ public partial class EditFuHip : System.Web.UI.Page
                     //patientID.Value = Session["PatientIE_ID"].ToString();
                     PopulateUIDefaults();
                     BindDataGrid();
-                    //PopulateUI(_CurIEid);
-                    //BindDCDataGrid();
-                    //BindDataGrid();
+                    bindCC();
+                    bindPE();
                 }
                 if (Position != "")
                 {
@@ -169,7 +171,7 @@ public partial class EditFuHip : System.Web.UI.Page
                 Response.Redirect("EditFU.aspx");
             }
         }
-       
+
         Logger.Info(Session["uname"].ToString() + "- Visited in  EditFuHip for -" + Convert.ToString(Session["LastNameFUEdit"]) + Convert.ToString(Session["FirstNameFUEdit"]) + "-" + DateTime.Now);
     }
 
@@ -254,10 +256,13 @@ public partial class EditFuHip : System.Web.UI.Page
             TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
+
             TblRow["CCvalue"] = hdCCvalue.Value;
-           
+            TblRow["CCvalueoriginal"] = hdorgCCv.Value;
+
             TblRow["PEvalue"] = hdPEvalue.Value;
-            
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
+
 
 
             //TblRow["PainScaleLeft"] = txtPainScaleLeft.Text.ToString().ToString();
@@ -360,38 +365,14 @@ public partial class EditFuHip : System.Web.UI.Page
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
 
-            //chkContentLeft.Checked = CommonConvert.ToBoolean(TblRow["ConstantLeft"].ToString());
-            //chkIntermittentLeft.Checked = CommonConvert.ToBoolean(TblRow["IntermittentLeft"].ToString());
-            //chkContentRight.Checked = CommonConvert.ToBoolean(TblRow["ConstantRight"].ToString());
-            //chkIntermittentRight.Checked = CommonConvert.ToBoolean(TblRow["IntermittentRight"].ToString());
-            //chkWorseSittingLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseSittingLeft"].ToString());
-            //chkWorseStandingLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseStandingLeft"].ToString());
-            //chkWorseMovementLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseMovementLeft"].ToString());
-            //chkWorseActivitiesLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseActivitiesLeft"].ToString());
-            //txtWorseOtherLeft.Text = TblRow["WorseOtherLeft"].ToString().Trim();
-            //chkWorseSittingRight.Checked = CommonConvert.ToBoolean(TblRow["WorseSittingRight"].ToString());
-            //chkWorseStandingRight.Checked = CommonConvert.ToBoolean(TblRow["WorseStandingRight"].ToString());
-            //chkWorseMovementRight.Checked = CommonConvert.ToBoolean(TblRow["WorseMovementRight"].ToString());
-            //chkWorseActivitiesRight.Checked = CommonConvert.ToBoolean(TblRow["WorseActivitiesRight"].ToString());
-            //txtWorseOtherRight.Text = TblRow["WorseOtherRight"].ToString().Trim();
-            //chkGreaterTrochanterLeft.Checked = CommonConvert.ToBoolean(TblRow["GreaterTrochanterLeft"].ToString());
-            //chkPosteriorLeft.Checked = CommonConvert.ToBoolean(TblRow["PosteriorLeft"].ToString());
-            //chkIliotibialLeft.Checked = CommonConvert.ToBoolean(TblRow["IliotibialLeft"].ToString());
-            //chkGreaterTrochanterRight.Checked = CommonConvert.ToBoolean(TblRow["GreaterTrochanterRight"].ToString());
-            //chkPosteriorRight.Checked = CommonConvert.ToBoolean(TblRow["PosteriorRight"].ToString());
-            //chkIliotibialRight.Checked = CommonConvert.ToBoolean(TblRow["IliotibialRight"].ToString());
+
             txtFlexRight.Text = TblRow["FlexRight"].ToString().Trim();
             txtIntRotationRight.Text = TblRow["IntRotationRight"].ToString().Trim();
             txtExtRotationRight.Text = TblRow["ExtRotationRight"].ToString().Trim();
             txtFlexLeft.Text = TblRow["FlexLeft"].ToString().Trim();
             txtIntRotationLeft.Text = TblRow["IntRotationLeft"].ToString().Trim();
             txtExtRotationLeft.Text = TblRow["ExtRotationLeft"].ToString().Trim();
-            //txtFlexRightWas.Text = TblRow["FlexRight"].ToString().Trim();
-            //txtIntRotationRightWas.Text = TblRow["IntRotationRight"].ToString().Trim();
-            //txtExtRotationRightWas.Text = TblRow["ExtRotationRight"].ToString().Trim();
-            //txtFlexLeftWas.Text = TblRow["FlexLeft"].ToString().Trim();
-            //txtIntRotationLeftWas.Text = TblRow["IntRotationLeft"].ToString().Trim();
-            //txtExtRotationLeftWas.Text = TblRow["ExtRotationLeft"].ToString().Trim();
+
 
             chkOberRight.Checked = CommonConvert.ToBoolean(TblRow["OberRight"].ToString());
             chkFaberRight.Checked = CommonConvert.ToBoolean(TblRow["FaberRight"].ToString());
@@ -403,48 +384,41 @@ public partial class EditFuHip : System.Web.UI.Page
             txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
-            CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
-           
-            divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string orgval = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+            string editval = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string cc = sqlTbl.Rows[0]["CCvalue"].ToString();
+            string ccOrg = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
-       
+            string p = Request.QueryString["P"];
+
+
+
+
+            string pe = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string peOrg = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+
+            hdorgPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+            hdorgCCv.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+
+
+
+            CF.InnerHtml = cc;
+            divPE.InnerHtml = pe;
+
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
 
             string pos = Request.QueryString["P"];
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + pos + "');", true);
 
-            //txtPainScaleLeft.Text = TblRow["PainScaleLeft"].ToString().Trim();
-            //chkSharpLeft.Checked = CommonConvert.ToBoolean(TblRow["SharpLeft"].ToString());
-            //chkElectricLeft.Checked = CommonConvert.ToBoolean(TblRow["ElectricLeft"].ToString());
-            //chkShootingLeft.Checked = CommonConvert.ToBoolean(TblRow["ShootingLeft"].ToString());
-            //chkThrobblingLeft.Checked = CommonConvert.ToBoolean(TblRow["ThrobblingLeft"].ToString());
-            //chkPulsatingLeft.Checked = CommonConvert.ToBoolean(TblRow["PulsatingLeft"].ToString());
-            //chkDullLeft.Checked = CommonConvert.ToBoolean(TblRow["DullLeft"].ToString());
-            //chkAchyLeft.Checked = CommonConvert.ToBoolean(TblRow["AchyLeft"].ToString());
-            //chkWorseMovementLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseMovementLeft"].ToString());
-            //chkWorseActivitiesLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseActivitiesLeft"].ToString());
-            //txtPainScaleRight.Text = TblRow["PainScaleRight"].ToString().Trim();
-            //chkSharpRight.Checked = CommonConvert.ToBoolean(TblRow["SharpRight"].ToString());
-            //chkElectricRight.Checked = CommonConvert.ToBoolean(TblRow["ElectricRight"].ToString());
-            //chkShootingRight.Checked = CommonConvert.ToBoolean(TblRow["ShootingRight"].ToString());
-            //chkThrobblingRight.Checked = CommonConvert.ToBoolean(TblRow["ThrobblingRight"].ToString());
-            //chkPulsatingRight.Checked = CommonConvert.ToBoolean(TblRow["PulsatingRight"].ToString());
-            //chkDullRight.Checked = CommonConvert.ToBoolean(TblRow["DullRight"].ToString());
-            //chkAchyRight.Checked = CommonConvert.ToBoolean(TblRow["AchyRight"].ToString());
-            //chkWorseMovementRight.Checked = CommonConvert.ToBoolean(TblRow["WorseMovementRight"].ToString());
-            //chkWorseActivitiesRight.Checked = CommonConvert.ToBoolean(TblRow["WorseActivitiesRight"].ToString());
-            //if (TblRow["SprainStrainSide"] != null)
-            //    cboSprainStrainSide.Text = TblRow["SprainStrainSide"].ToString().Trim();
-            //chkSprainStrain.Checked = CommonConvert.ToBoolean(TblRow["SprainStrain"];
-            //if (TblRow["IntDerangementSide"] != null)
-            //    cboIntDerangementSide.Text = TblRow["IntDerangementSide"].ToString().Trim();
-            //chkIntDerangement.Checked = CommonConvert.ToBoolean(TblRow["IntDerangement"];
-            //chkScan.Checked = CommonConvert.ToBoolean(TblRow["Scan"];
-            //if (TblRow["ScanType"] != null)
-            //    cboScanType.Text = TblRow["ScanType"].ToString().Trim();
-            //if (TblRow["ScanSide"] != null)
-            //    cboScanSide.Text = TblRow["ScanSide"].ToString().Trim();
+
             _fldPop = false;
+        }
+        else
+        {
+            bindCC();
+            bindPE();
         }
 
         sqlTbl.Dispose();
@@ -456,6 +430,7 @@ public partial class EditFuHip : System.Web.UI.Page
     public void PopulateIEUI(string ieID)
     {
 
+        if (oSQLConn.State == ConnectionState.Open) oSQLConn.Close();
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
         oSQLConn.ConnectionString = sProvider;
@@ -869,6 +844,7 @@ public partial class EditFuHip : System.Web.UI.Page
         {
             ieID = Session["PatientIE_ID"].ToString();
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -882,14 +858,22 @@ public partial class EditFuHip : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
-                        ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        //ids += DiagCode_ID + ",";
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
 
                 }
             }
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
 
         }
         catch (Exception ex)
@@ -1020,7 +1004,9 @@ public partial class EditFuHip : System.Web.UI.Page
         SaveUI(Session["PatientFUID"].ToString(), ieMode, true);
         _FuId = Session["patientFUId"].ToString();
         _CurIEid = Session["PatientIE_ID"].ToString();
-        SaveDiagnosis(_CurIEid);
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(_CurIEid);
         // SaveStandards(Session["PatientIE_ID"].ToString());
         PopulateUI(Session["PatientFUID"].ToString());
         if (pageHDN.Value != null && pageHDN.Value != "")
@@ -1136,10 +1122,11 @@ public partial class EditFuHip : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
-        ScriptManager.RegisterStartupScript(Page, this.GetType(), "TestFU", "closeModelPopup()", true);
+        ScriptManager.RegisterStartupScript(Page, this.GetType(), "TestFU", "closeModelPopup();", true);
     }
 
     public string SaveStandardsPopup(string ieID)
@@ -1188,15 +1175,24 @@ public partial class EditFuHip : System.Web.UI.Page
         {
             _FuId = Session["patientFUId"].ToString();
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_FuId != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_FuId != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -1225,6 +1221,43 @@ public partial class EditFuHip : System.Web.UI.Page
         catch (Exception ex)
         {
         }
+    }
+
+    public void bindCC()
+    {
+        string path = Server.MapPath("~/Template/HipCC.html");
+        string body = File.ReadAllText(path);
+
+
+
+        CF.InnerHtml = body;
+        hdorgCCv.Value = body;
+
+    }
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/HipPE.html");
+        string body = File.ReadAllText(path);
+
+        string p = Request.QueryString["P"];
+
+
+
+        divPE.InnerHtml = body;
+        hdorgPE.Value = body;
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
+
+        //int val = checkTP();
+
+        //ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 
 }

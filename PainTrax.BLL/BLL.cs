@@ -191,6 +191,7 @@ namespace IntakeSheet.BLL
 
             param.Add(new SqlParameter("@LocationId", locationId));
             param.Add(new SqlParameter("@Date", date));
+          
             SqlParameter oparam = new SqlParameter();
             oparam.DbType = DbType.String;
             oparam.Size = 500;
@@ -378,7 +379,10 @@ namespace IntakeSheet.BLL
                 {
                     if (Convert.ToBoolean(dr[dc]))
                     {
-                        _injuredParts.Add(dc.ColumnName);
+                        if (dc.ColumnName.Equals("Others"))
+                        { _injuredParts.Add("Other"); }
+                        else
+                        { _injuredParts.Add(dc.ColumnName); }
                     }
                 }
             }

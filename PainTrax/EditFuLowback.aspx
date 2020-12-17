@@ -86,10 +86,15 @@
         function funSavePE() {
             var htmlval = $("#ctl00_ContentPlaceHolder1_divPE").html();
 
+            var tpText = $("#hidTPText").val();
+
+            $('#<%= hdPETP.ClientID %>').val(tpText);
+            //writeTPtxt();
+
             txtTPText1 = $("#txtTPText1").val();
             ddlTPSide1 = $("#ddlTPSide1").val();
 
-             var selectedLeft = '', selectedRight = '';
+            var selectedLeft = '', selectedRight = '';
             var selectedHeader = '';
             $('#trLeft input[type=checkbox]').each(function () {
                 if ($(this).is(":checked")) {
@@ -98,7 +103,7 @@
                     selectedLeft = selectedLeft + "," + 0;
             });
 
-             $('#trRight input[type=checkbox]').each(function () {
+            $('#trRight input[type=checkbox]').each(function () {
                 if ($(this).is(":checked")) {
                     selectedRight = selectedRight + "," + 1;
                 } else
@@ -112,7 +117,7 @@
 
             var txtVal = $('#txtLegRaisedExamLeft').val() + ',' + $('#txtLegRaisedExamRight').val();
 
-         
+
             var sidestr = ddlTPSide1;
             var sidestrText = txtTPText1;
 
@@ -167,16 +172,16 @@
         }
 
 
-    
+
         function funSave() {
 
-      
+
             var htmlval = $("#ctl00_ContentPlaceHolder1_CF").html();
 
 
             $('#<%= hdCCvalue.ClientID %>').val(htmlval);
 
-             funSavePE();
+            funSavePE();
 
             document.getElementById('<%= btnSave.ClientID %>').click();
 
@@ -213,13 +218,15 @@
                 <div runat="server" id="CF">
                 </div>
 
-               
-             <asp:HiddenField runat="server" ID="hdCCvalue" />
+
+                <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCC" />
+                <asp:HiddenField runat="server" ID="hdorgPE" />
                 <asp:HiddenField runat="server" ID="hdNameTest" />
                 <asp:HiddenField runat="server" ID="hdLeftTest" />
                 <asp:HiddenField runat="server" ID="hdRightTest" />
                 <asp:HiddenField runat="server" ID="hdTextVal" />
-                
+
 
                 <%--    <ul class="breadcrumb">
                                 <li>
@@ -524,7 +531,7 @@
                         </table>
                     </div>
                 </div>--%>
-             <%--   <div class="row">
+                <%--   <div class="row">
                     <div class="col-md-3">
                         <label class="control-label">Notes:</label>
                     </div>
@@ -568,7 +575,7 @@
                         <label class="control-label"><b><u>PHYSICAL EXAM:</u></b></label>
                     </div>
                     <div class="col-md-9" style="margin-top: 5px">
-                      <table style="width: 100%">
+                        <table style="width: 100%">
                             <tr>
                                 <td>
                                     <asp:Repeater runat="server" ID="repROMCervical">
@@ -576,13 +583,13 @@
                                             <table style="width: 100%;">
 
                                                 <tr>
-                                                
+
                                                     <td style="">lumber spine exam
                                                     </td>
-                                                
+
                                                     <td style="">ROM
                                                     </td>
-                                               
+
                                                     <td style="">Normal
                                                     </td>
                                                 </tr>
@@ -597,7 +604,7 @@
                                                     <asp:TextBox ID="txtrom" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("rom") %>'></asp:TextBox></td>
                                                 <%-- <td>
                                                 <asp:TextBox ID="txtLEFlexionRightWas" Width="50px" runat="server"></asp:TextBox></td>--%>
-                                               
+
                                                 <td>
                                                     <asp:TextBox ID="txtnormal" ReadOnly="true" Text='<%# Eval("normal") %>' Width="50px" runat="server"></asp:TextBox></td>
                                             </tr>
@@ -608,11 +615,11 @@
                                     </asp:Repeater>
                                 </td>
                                 <td>
-                                    <asp:Repeater runat="server" ID="repROM" >
+                                    <asp:Repeater runat="server" ID="repROM">
                                         <HeaderTemplate>
                                             <table style="width: 100%;">
 
-                                               
+
                                                 <tr>
                                                     <td></td>
                                                     <td style="">Left
@@ -661,9 +668,9 @@
                 <asp:HiddenField runat="server" ID="hdPEvalueoriginal" />
                 <asp:HiddenField runat="server" ID="hdPESides" />
                 <asp:HiddenField runat="server" ID="hdPESidesText" />
-                   <asp:HiddenField runat="server" ID="hdPETP" />
+                <asp:HiddenField runat="server" ID="hdPETP" />
 
-               <%-- <div class="row">
+                <%-- <div class="row">
                     <div class="col-md-3">
                         <label class="control-label">Notes:</label>
                     </div>
@@ -723,7 +730,7 @@
                                         <asp:TemplateField HeaderText="Action" ItemStyle-Width="50">
                                             <ItemTemplate>
                                                 <%--    <asp:HiddenField runat="server" ID="hidDiagCodeDetailID" Value='<%# Eval("DiagCodeDetail_ID") %>' />--%>
-                                                <asp:CheckBox runat="server" ID="chkRemove" Checked="true" />
+                                                <asp:CheckBox runat="server" ID="chkRemove" Checked="true" AutoPostBack="true" OnCheckedChanged="chkRemove_CheckedChanged"/>
 
                                             </ItemTemplate>
                                         </asp:TemplateField>

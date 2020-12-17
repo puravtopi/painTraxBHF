@@ -100,12 +100,53 @@
             htmlval = $("#ctl00_ContentPlaceHolder1_divaccidentHTML").html();
             $('#<%= hdaccidentHTMLContent.ClientID %>').val(htmlval);
 
+            htmlval = $("#ctl00_ContentPlaceHolder1_divaccident1HTML").html();
+            $('#<%= hdaccident1HTMLContent.ClientID %>').val(htmlval);
+
+            htmlval = $("#ctl00_ContentPlaceHolder1_divdegreeHTML").html();
+            $('#<%= hddegreeHTMLContent.ClientID %>').val(htmlval);
+
             htmlval = $("#ctl00_ContentPlaceHolder1_divhistoryHTML").html();
             $('#<%= hdhistoryHTMLContent.ClientID %>').val(htmlval);
 
-            
+
+
+
 
             document.getElementById('<%= btnSave.ClientID %>').click();
+        }
+
+        function bindCCPE(side) {
+
+
+            if (side === 'l') {
+                $('#WrapLeft').show();
+                $('#WrapRight').hide();
+                $('#WrapLeftPE').show();
+                $('#WrapRightPE').hide();
+            }
+            else if (side === 'r') {
+                $('#WrapLeft').hide();
+                $('#WrapRight').show();
+                $('#WrapLeftPE').hide();
+                $('#WrapRightPE').show();
+            }
+            else {
+                $('#WrapLeft').show();
+                $('#WrapRight').show();
+                $('#WrapLeftPE').show();
+                $('#WrapRightPE').show();
+            }
+
+
+
+            var htmlval = $("#ctl00_ContentPlaceHolder1_divCC").html();
+            $('#<%= hdCC.ClientID %>').val(htmlval);
+
+            htmlval = $("#ctl00_ContentPlaceHolder1_divPE").html();
+            $('#<%= hdPE.ClientID %>').val(htmlval);
+
+            document.getElementById('<%= btnSaveCCPE.ClientID %>').click()
         }
 
 
@@ -522,32 +563,48 @@
         <asp:HiddenField runat="server" ID="hdtopHTMLContent" />
         <asp:HiddenField runat="server" ID="hdsocialHTMLContent" />
         <asp:HiddenField runat="server" ID="hdaccidentHTMLContent" />
+        <asp:HiddenField runat="server" ID="hdaccident1HTMLContent" />
+        <asp:HiddenField runat="server" ID="hddegreeHTMLContent" />
+
+
         <asp:HiddenField runat="server" ID="hdhistoryHTMLContent" />
         <asp:HiddenField runat="server" ID="hdhistoryHTMLValue" />
 
         <div id="divtopHTML" runat="server"></div>
         <div id="divsocialHTML" runat="server"></div>
         <div id="divaccidentHTML" runat="server"></div>
-        <div id="divhistoryHTML" runat="server"  style="display:none"></div>
-           
+        <div id="divdegreeHTML" runat="server"></div>
+        <div id="divaccident1HTML" runat="server"></div>
+        <div id="divhistoryHTML" runat="server" style="display: none"></div>
+
+
+
+
+
+        <asp:HiddenField runat="server" ID="hdCC" />
+        <asp:HiddenField runat="server" ID="hdPE" />
         <br />
 
         <asp:UpdatePanel runat="server" ID="upmenu">
             <ContentTemplate>
+
+                <div id="divCC" runat="server" style="display: none"></div>
+                <div id="divPE" runat="server" style="display: none"></div>
+
                 <p>
                     During the accident injuries are reported to the following body parts:
                 </p>
                 <p>
                     &nbsp;
-                            <asp:CheckBox runat="server" ID="chk_Neck" Text=" Neck" AutoPostBack="true" OnCheckedChanged="chk_Neck_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_Neck" Text=" Neck" AutoPostBack="true" OnCheckedChanged="chk_Neck_CheckedChanged" Checked="false" />
                     <asp:Button runat="server" ID="btnDel" Text="Delete" CommandArgument="tblbpNeck" CausesValidation="false" OnClick="btnDel_Click" />
                     <%--<asp:CheckBox runat="server" ID="chk_Neck" Text=" Neck" AutoPostBack="true" />--%>
                                     &nbsp;
-                            <asp:CheckBox runat="server" ID="chk_Midback" Text=" Mid-back" AutoPostBack="true" OnCheckedChanged="chk_Midback_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_Midback" Text=" Mid-back" AutoPostBack="true" OnCheckedChanged="chk_Midback_CheckedChanged" Checked="false"/>
                     <asp:Button runat="server" ID="Button2" Text="Delete" CommandArgument="tblbpMidback" CausesValidation="false" OnClick="btnDel_Click" />
                     <%--<asp:CheckBox runat="server" ID="chk_Midback" Text=" Mid-back"  AutoPostBack="true" />--%>
                                     &nbsp;
-                            <asp:CheckBox runat="server" ID="chk_lowback" Text=" Low-back" AutoPostBack="true" OnCheckedChanged="chk_lowback_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_lowback" Text=" Low-back" AutoPostBack="true" OnCheckedChanged="chk_lowback_CheckedChanged" Checked="false"/>
                     <asp:Button runat="server" ID="Button3" Text="Delete" CommandArgument="tblbpLowback" CausesValidation="false" OnClick="btnDel_Click" />
                     <%--<asp:CheckBox runat="server" ID="chk_lowback" Text=" Low-back" AutoPostBack="true" />--%>
                 </p>
@@ -558,11 +615,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Shoulder" Text=" Shoulder" AutoPostBack="true" OnCheckedChanged="chk_r_Shoulder_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_r_Shoulder" Text=" Shoulder" AutoPostBack="true" OnCheckedChanged="chk_r_Shoulder_CheckedChanged" Checked="false"/>
                             <%--<asp:CheckBox runat="server" ID="chk_r_Shoulder" Text=" Shoulder" AutoPostBack="true" />--%>
                         </td>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_L_Shoulder" Text=" Shoulder" AutoPostBack="true" OnCheckedChanged="chk_L_Shoulder_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_L_Shoulder" Text=" Shoulder" AutoPostBack="true" OnCheckedChanged="chk_L_Shoulder_CheckedChanged" Checked="false"/>
                             <asp:Button runat="server" ID="Button4" Text="Delete" CommandArgument="tblbpShoulder" CausesValidation="false" OnClick="btnDel_Click" />
                         </td>
 
@@ -570,47 +627,47 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Keen" Text=" Knee" AutoPostBack="true" OnCheckedChanged="chk_r_Keen_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_r_Keen" Text=" Knee" AutoPostBack="true" OnCheckedChanged="chk_r_Keen_CheckedChanged" Checked="false"/>
                         </td>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_L_Keen" Text=" Knee" AutoPostBack="true" OnCheckedChanged="chk_L_Keen_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_L_Keen" Text=" Knee" AutoPostBack="true" OnCheckedChanged="chk_L_Keen_CheckedChanged" Checked="false"/>
                             <asp:Button runat="server" ID="Button5" Text="Delete" CommandArgument="tblbpKnee" CausesValidation="false" OnClick="btnDel_Click" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Elbow" Text=" Elbow" AutoPostBack="true" OnCheckedChanged="chk_r_Elbow_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_r_Elbow" Text=" Elbow" AutoPostBack="true" OnCheckedChanged="chk_r_Elbow_CheckedChanged" Checked="false"/>
                         </td>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_l_Elbow" Text=" Elbow" AutoPostBack="true" OnCheckedChanged="chk_l_Elbow_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_l_Elbow" Text=" Elbow" AutoPostBack="true" OnCheckedChanged="chk_l_Elbow_CheckedChanged" Checked="false"/>
                             <asp:Button runat="server" ID="Button6" Text="Delete" CommandArgument="tblbpElbow" CausesValidation="false" OnClick="btnDel_Click" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Wrist" Text=" Wrist" AutoPostBack="true" OnCheckedChanged="chk_r_Wrist_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_r_Wrist" Text=" Wrist" AutoPostBack="true" OnCheckedChanged="chk_r_Wrist_CheckedChanged" Checked="false"/>
                         </td>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_l_Wrist" Text=" Wrist" AutoPostBack="true" OnCheckedChanged="chk_l_Wrist_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_l_Wrist" Text=" Wrist" AutoPostBack="true" OnCheckedChanged="chk_l_Wrist_CheckedChanged" Checked="false"/>
                             <asp:Button runat="server" ID="Button7" Text="Delete" CommandArgument="tblbpWrist" CausesValidation="false" OnClick="btnDel_Click" />
                         </td>
                     </tr>
                     <tr>
 
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Hip" Text=" Hip" AutoPostBack="true" OnCheckedChanged="chk_r_Hip_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_r_Hip" Text=" Hip" AutoPostBack="true" OnCheckedChanged="chk_r_Hip_CheckedChanged" Checked="false"/>
                         </td>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_l_Hip" Text=" Hip" AutoPostBack="true" OnCheckedChanged="chk_l_Hip_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_l_Hip" Text=" Hip" AutoPostBack="true" OnCheckedChanged="chk_l_Hip_CheckedChanged" Checked="false"/>
                             <asp:Button runat="server" ID="Button8" Text="Delete" CommandArgument="tblbpHip" CausesValidation="false" OnClick="btnDel_Click" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_r_ankle" Text=" Ankle" AutoPostBack="true" OnCheckedChanged="chk_r_ankle_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_r_ankle" Text=" Ankle" AutoPostBack="true" OnCheckedChanged="chk_r_ankle_CheckedChanged" Checked="false"/>
                         </td>
                         <td>
-                            <asp:CheckBox runat="server" ID="chk_l_ankle" Text=" Ankle" AutoPostBack="true" OnCheckedChanged="chk_l_ankle_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_l_ankle" Text=" Ankle" AutoPostBack="true" OnCheckedChanged="chk_l_ankle_CheckedChanged" Checked="false"/>
                             <asp:Button runat="server" ID="Button9" Text="Delete" CommandArgument="tblbpAnkle" CausesValidation="false" OnClick="btnDel_Click" />
                         </td>
                     </tr>
@@ -630,6 +687,7 @@
     </div>--%>
         <div style="display: none">
             <asp:Button runat="server" Text="Save" CssClass="btn btn-primary" OnClick="btnSave_Click" ID="btnSave" />
+            <asp:Button runat="server" Text="Save" CssClass="btn btn-primary" OnClick="btnSaveCCPE_Click" ID="btnSaveCCPE" />
         </div>
         <asp:Button runat="server" ID="Button1" PostBackUrl="~/PatientIntakeList.aspx" Text="Back to List" CssClass="btn btn-default" UseSubmitBehavior="False" />
     </div>
@@ -732,7 +790,7 @@
             start_timestamp = event.timeStamp;
         }
 
-      
+
 
     </script>
 </asp:Content>

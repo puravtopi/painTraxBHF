@@ -183,7 +183,7 @@ public class DBHelperClass
         cn.Close();
         return ds;
     }
-    public DataTable GetAllProcDetails(string bodyPart, int id,string Position)
+    public DataTable GetAllProcDetails(string bodyPart, int id, string Position)
     {
         SqlCommand cm = new SqlCommand("GetAllProceduressnew", cn);
         SqlDataAdapter da = new SqlDataAdapter(cm);
@@ -279,7 +279,7 @@ public class DBHelperClass
             cn.Open();
             SqlDataAdapter da = new SqlDataAdapter(cm);
             da.Fill(val);
-          
+
             cn.Close();
             return val;
         }
@@ -434,6 +434,33 @@ public class DBHelperClass
 
         }
         return ds;
+    }
+
+
+    public void SaveDiagUI(string ieID,string fuID, string iDiagID, bool DiagChecked, string bp, string dcd, string dc)
+    {
+
+
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "nusp_save_bulk_daignosis";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@PatientIEId", ieID);
+                cmd.Parameters.AddWithValue("@PatientFuId", fuID);
+                cmd.Parameters.AddWithValue("@DiagCode_IDs", iDiagID.TrimStart('@'));
+                cmd.Parameters.AddWithValue("@_CurBP", bp);
+                cmd.Parameters.AddWithValue("@Description", dcd.TrimStart('@'));
+                cmd.Parameters.AddWithValue("@DiagCode", dc.TrimStart('@'));
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+
+        }
     }
 }
 

@@ -59,6 +59,9 @@
             htmlval = $("#ctl00_ContentPlaceHolder1_divHistory").html();
             $('#<%= hdtopHTMLContent.ClientID %>').val(htmlval);
 
+            htmlval = $("#ctl00_ContentPlaceHolder1_divactivityeffected").html();
+            $('#<%= hdactivityeffectedHTMLContent.ClientID %>').val(htmlval);
+
 
 
             document.getElementById('<%= btnSave.ClientID %>').click();
@@ -254,13 +257,14 @@
             <td colspan="5" style="width: 100%">
                 <div id="divHistory" runat="server" style="width: 100%">
                 </div>
+
             </td>
 
         </tr>
         <tr>
             <td>Note</td>
-            <td>
-                <asp:TextBox runat="server" ID="txtNote" TextMode="MultiLine"></asp:TextBox>
+            <td colspan="4" style="width: 100%">
+                <asp:TextBox runat="server" ID="txtNote" Width="100%" Rows="5" TextMode="MultiLine"></asp:TextBox>
             </td>
         </tr>
     </table>
@@ -269,7 +273,7 @@
         <tr>
             <td>
                 <p>
-                    <strong>Work Condition:</strong><br />
+                    <strong>Note:</strong><br />
                     <%--<asp:DropDownList ID="cboReturnToWork" runat="server"  Width="450px"></asp:DropDownList><br />
                     <asp:DropDownList ID="cboRecevingPhyTherapy" runat="server"  Width="450px"></asp:DropDownList><br />
                     <asp:DropDownList ID="cboFeelPainRelief" runat="server"  Width="450px"></asp:DropDownList><br />--%>
@@ -280,83 +284,95 @@
                     </editable:EditableDropDownList><br />
                     <editable:EditableDropDownList runat="server" ID="cboFeelPainRelief" Width="450px" CssClass="inline">
                     </editable:EditableDropDownList><br />
+                    <editable:EditableDropDownList runat="server" ID="cbonote4" Width="450px" CssClass="inline">
+                    </editable:EditableDropDownList><br />
+                    <editable:EditableDropDownList runat="server" ID="cbonote5" Width="450px" CssClass="inline">
+                    </editable:EditableDropDownList><br />
                 </p>
                 <strong>Body Parts Affected:   </strong>
                 <br />
                 <%--  <asp:CheckBox ID="cbNeck" Text="Neck" runat="server" />
                 <asp:CheckBox ID="cbMidBack" Text="Mid-Back" runat="server" />
                 <asp:CheckBox ID="cbLowBack" Text="Low-Back" runat="server" />--%>
-                <asp:CheckBox runat="server" ID="chk_Neck" Text=" Neck" AutoPostBack="true" OnCheckedChanged="chk_Neck_CheckedChanged" />
+                <asp:CheckBox runat="server" ID="chk_Neck" Text=" Neck" AutoPostBack="true" OnCheckedChanged="chk_Neck_CheckedChanged" Checked="false"/>
                 <%--<asp:CheckBox runat="server" ID="chk_Neck" Text=" Neck" AutoPostBack="true" />--%>
                                     &nbsp;
-                            <asp:CheckBox runat="server" ID="chk_Midback" Text=" Mid-back" AutoPostBack="true" OnCheckedChanged="chk_Midback_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_Midback" Text=" Mid-back" AutoPostBack="true" OnCheckedChanged="chk_Midback_CheckedChanged" Checked="false"/>
                 <%--<asp:CheckBox runat="server" ID="chk_Midback" Text=" Mid-back"  AutoPostBack="true" />--%>
                                     &nbsp;
-                            <asp:CheckBox runat="server" ID="chk_lowback" Text=" Low-back" AutoPostBack="true" OnCheckedChanged="chk_lowback_CheckedChanged" />
+                            <asp:CheckBox runat="server" ID="chk_lowback" Text=" Low-back" AutoPostBack="true" OnCheckedChanged="chk_lowback_CheckedChanged" Checked="false"/>
 
                 <br />
                 <br />
-                <table>
-                    <tr>
-                        <td width="200px">Right </td>
-                        <td width="200px">Left</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Shoulder" Text=" Shoulder" AutoPostBack="true" OnCheckedChanged="chk_r_Shoulder_CheckedChanged" />
-                            <%--<asp:CheckBox runat="server" ID="chk_r_Shoulder" Text=" Shoulder" AutoPostBack="true" />--%>
-                        </td>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_L_Shoulder" Text=" Shoulder" AutoPostBack="true" OnCheckedChanged="chk_L_Shoulder_CheckedChanged" /></td>
-                        <%--<asp:CheckBox runat="server" ID="chk_L_Shoulder" Text=" Shoulder" AutoPostBack="true" /></td>--%>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Keen" Text=" Knee" AutoPostBack="true" OnCheckedChanged="chk_r_Keen_CheckedChanged" />
-                        </td>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_L_Keen" Text=" Knee" AutoPostBack="true" OnCheckedChanged="chk_L_Keen_CheckedChanged" /></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Elbow" Text=" Elbow" AutoPostBack="true" OnCheckedChanged="chk_r_Elbow_CheckedChanged" />
-                        </td>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_l_Elbow" Text=" Elbow" AutoPostBack="true" OnCheckedChanged="chk_l_Elbow_CheckedChanged" /></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Wrist" Text=" Wrist" AutoPostBack="true" OnCheckedChanged="chk_r_Wrist_CheckedChanged" />
-                        </td>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_l_Wrist" Text=" Wrist" AutoPostBack="true" OnCheckedChanged="chk_l_Wrist_CheckedChanged" /></td>
-                    </tr>
-                    <tr>
+                <asp:UpdatePanel runat="server" ID="upmenuFU">
+                    <ContentTemplate>
+                        <table>
+                            <tr>
+                                <td width="200px">Right </td>
+                                <td width="200px">Left</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_r_Shoulder" Text=" Shoulder" AutoPostBack="true" OnCheckedChanged="chk_r_Shoulder_CheckedChanged" Checked="false" />
+                                    <%--<asp:CheckBox runat="server" ID="chk_r_Shoulder" Text=" Shoulder" AutoPostBack="true" />--%>
+                                </td>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_L_Shoulder" Text=" Shoulder" AutoPostBack="true" OnCheckedChanged="chk_L_Shoulder_CheckedChanged" Checked="false"/></td>
+                                <%--<asp:CheckBox runat="server" ID="chk_L_Shoulder" Text=" Shoulder" AutoPostBack="true" /></td>--%>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_r_Keen" Text=" Knee" AutoPostBack="true" OnCheckedChanged="chk_r_Keen_CheckedChanged" Checked="false"/>
+                                </td>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_L_Keen" Text=" Knee" AutoPostBack="true" OnCheckedChanged="chk_L_Keen_CheckedChanged" Checked="false"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_r_Elbow" Text=" Elbow" AutoPostBack="true" OnCheckedChanged="chk_r_Elbow_CheckedChanged" Checked="false"/>
+                                </td>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_l_Elbow" Text=" Elbow" AutoPostBack="true" OnCheckedChanged="chk_l_Elbow_CheckedChanged" Checked="false"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_r_Wrist" Text=" Wrist" AutoPostBack="true" OnCheckedChanged="chk_r_Wrist_CheckedChanged" Checked="false"/>
+                                </td>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_l_Wrist" Text=" Wrist" AutoPostBack="true" OnCheckedChanged="chk_l_Wrist_CheckedChanged" Checked="false"/></td>
+                            </tr>
+                            <tr>
 
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_r_Hip" Text=" Hip" AutoPostBack="true" OnCheckedChanged="chk_r_Hip_CheckedChanged" />
-                        </td>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_l_Hip" Text=" Hip" AutoPostBack="true" OnCheckedChanged="chk_l_Hip_CheckedChanged" /></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_r_ankle" Text=" Ankle" AutoPostBack="true" OnCheckedChanged="chk_r_ankle_CheckedChanged" />
-                        </td>
-                        <td>
-                            <asp:CheckBox runat="server" ID="chk_l_ankle" Text=" Ankle" AutoPostBack="true" OnCheckedChanged="chk_l_ankle_CheckedChanged" /></td>
-                    </tr>
-                </table>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_r_Hip" Text=" Hip" AutoPostBack="true" OnCheckedChanged="chk_r_Hip_CheckedChanged" Checked="false"/>
+                                </td>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_l_Hip" Text=" Hip" AutoPostBack="true" OnCheckedChanged="chk_l_Hip_CheckedChanged" Checked="false"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_r_ankle" Text=" Ankle" AutoPostBack="true" OnCheckedChanged="chk_r_ankle_CheckedChanged" Checked="false"/>
+                                </td>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="chk_l_ankle" Text=" Ankle" AutoPostBack="true" OnCheckedChanged="chk_l_ankle_CheckedChanged" Checked="false"/></td>
+                            </tr>
+                        </table>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </td>
             <td style="padding-left: 30px">
 
                 <asp:HiddenField runat="server" ID="hddegreeHTMLContent" />
                 <asp:HiddenField runat="server" ID="hdsocialHTMLContent" />
                 <asp:HiddenField runat="server" ID="hdtopHTMLContent" />
+                <asp:HiddenField runat="server" ID="hdactivityeffectedHTMLContent" />
 
 
                 <div id="divdegreeHTML" runat="server"></div>
                 <div id="divsocialHTML" runat="server"></div>
+                <br />
+                <div id="divactivityeffected" runat="server" style="width: 100%">
+                </div>
 
 
                 <div style="display: none">
@@ -498,6 +514,8 @@
                 timeFormat: 'hh:mm tt'
             });
         });
+
+
     </script>
     <script>
 
@@ -597,6 +615,12 @@
             start_timestamp = event.timeStamp;
         }
 
+        function hideWorkStatus() {
+
+            document.getElementById('secWorkStatus').style.display = "none";
+            document.getElementById('txtMissed').style.display = "none";
+
+        }
     </script>
 </asp:Content>
 

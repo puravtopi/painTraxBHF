@@ -33,6 +33,7 @@ public partial class FuOthersParts : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            bindDropdown();
             ViewState["PONPrint"] = "";
             if (Session["PatientIE_ID2"] != null && Session["patientFUId"] != null)
             {
@@ -144,6 +145,13 @@ public partial class FuOthersParts : System.Web.UI.Page
             TblRow["PONDetails"] = Request.Form[txtPONDetails.UniqueID];
             TblRow["PONDelimit"] = bindPONPrintValue();
             TblRow["PONPrint"] = ViewState["PONPrint"].ToString();
+            TblRow["FollowUpIn"] = cboFollowUpIn.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(txtFollowUpInDate.Text))
+                TblRow["FollowUpInDate"] = DateTime.ParseExact(txtFollowUpInDate.Text, "MM/dd/yyyy", null);
+            else
+                TblRow["FollowUpInDate"] = DBNull.Value;
+
+
 
 
             if (_fuMode == "New")
@@ -197,8 +205,11 @@ public partial class FuOthersParts : System.Web.UI.Page
             txtOthersPE.Text = TblRow["OthersPE"].ToString().Trim();
             txtOthersA.Text = TblRow["OthersA"].ToString().Trim();
             txtOthersP.Text = TblRow["OthersP"].ToString().Trim();
+            cboFollowUpIn.Text = TblRow["FollowUpIn"].ToString();
             if (!string.IsNullOrEmpty(TblRow["RecommandationDetails"].ToString()))
                 txtTreatmentParagraph.Text = TblRow["RecommandationDetails"].ToString().Trim();
+
+            txtFollowUpInDate.Text = TblRow["FollowUpInDate"].ToString();
             BindTreatmentEditValues(TblRow["RecommandationDelimit"].ToString().Trim());
             _fldPop = false;
         }
@@ -589,8 +600,13 @@ public partial class FuOthersParts : System.Web.UI.Page
 
             for (int i = 0; i < str.Length; i++)
             {
-                //dt.Rows.Add(string.IsNullOrEmpty(str[i]) ? "False" : str[i].Substring(0, 1) == "@" ? "False" : "True", str[i].TrimStart('@'));
-                dt.Rows.Add(str[i].Substring(0, 1) == "@" ? "False" : "True", str[i].TrimStart('@'));
+                if (i == 0 && string.IsNullOrEmpty(str[0]))
+                { }
+                else
+                {
+                    //dt.Rows.Add(string.IsNullOrEmpty(str[i]) ? "False" : str[i].Substring(0, 1) == "@" ? "False" : "True", str[i].TrimStart('@'));
+                    dt.Rows.Add(str[i].Substring(0, 1) == "@" ? "False" : "True", str[i].TrimStart('@'));
+                }
             }
 
             repTreatMent.DataSource = dt;
@@ -634,7 +650,7 @@ public partial class FuOthersParts : System.Web.UI.Page
             }
 
         }
-        strDelimit = strDelimit.TrimStart('`');
+       // strDelimit = strDelimit.TrimStart('`');
         txtTreatmentParagraph.Text = str;
 
         return strDelimit;
@@ -680,5 +696,18 @@ public partial class FuOthersParts : System.Web.UI.Page
     protected void txtPON_TextChanged(object sender, EventArgs e)
     {
         bindPONPrintValue();
+    }
+
+    public void bindDropdown()
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.Load(Server.MapPath("~/xml/HSMData.xml"));
+
+        foreach (XmlNode node in doc.SelectNodes("//HSM/Followups/Followup"))
+        {
+            cboFollowUpIn.Items.Add(new ListItem(node.Attributes["name"].InnerText, node.Attributes["name"].InnerText));
+        }
+
+        cboFollowUpIn.Text = "2-4 weeks.";
     }
 }

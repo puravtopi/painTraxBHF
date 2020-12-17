@@ -75,7 +75,7 @@ public partial class EditFUPoc : System.Web.UI.Page
         //ltNew.Text = "<button type='button' class='btn btn-default top-right' data-toggle='modal' id='New' data-target='#ProcedureDetailModal'>New</button>";
 
 
-        List<string> _injured = _bl.getInjuredParts(patientIEID).Distinct<string>().ToList<string>();
+        List<string> _injured = _bl.getFUInjuredParts(patientFUId).Distinct<string>().ToList<string>();
         DataTable BodypartList = db.GetallBodyparts();
 
         dtconsider = db.GetAllConsider(Convert.ToInt32(Session["PatientIE_ID"]));

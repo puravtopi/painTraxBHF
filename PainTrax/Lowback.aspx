@@ -101,7 +101,7 @@
                         $("#ddlTPSide3 option:contains(" + sides[0].getElementsByTagName('TPSide3')[0].textContent.trim().toLowerCase() + ")").attr("selected", true);
 
                     $('#txtTPText3').val(sides[0].getElementsByTagName('TPText3')[0].innerHTML);
-                                 
+
 
                     if (sides[0].getElementsByTagName('TPSide4')[0].textContent.trim() !== '')
                         $("#ddlTPSide4 option:contains(" + sides[0].getElementsByTagName('TPSide4')[0].textContent.trim().toLowerCase() + ")").attr("selected", true);
@@ -125,6 +125,16 @@
 
         function funSavePE() {
             var htmlval = $("#ctl00_ContentPlaceHolder1_divPE").html();
+
+
+            var tpText = $("#hidTPText").val();
+
+       
+
+            $('#<%= hdPETP.ClientID %>').val(tpText);
+
+            //writeTPtxt();
+
 
             txtTPText1 = $("#txtTPText1").val();
             ddlTPSide1 = $("#ddlTPSide1").val();
@@ -318,7 +328,7 @@
                                         </FooterTemplate>
                                     </asp:Repeater>
                                 </td>
-                                <td style="vertical-align:top">
+                                <td style="vertical-align: top">
                                     <asp:Repeater runat="server" ID="repROM">
                                         <HeaderTemplate>
                                             <table style="width: 100%;">
@@ -373,7 +383,7 @@
 
                 <asp:HiddenField runat="server" ID="hdPESides" />
                 <asp:HiddenField runat="server" ID="hdPESidesText" />
-                   <asp:HiddenField runat="server" ID="hdPETP" />
+                <asp:HiddenField runat="server" ID="hdPETP" />
 
                 <%--  <div class="table-responsive">
                             <table class="table table-bordered">
@@ -536,7 +546,7 @@
                                         <asp:TemplateField HeaderText="Action" ItemStyle-Width="50">
                                             <ItemTemplate>
                                                 <%--    <asp:HiddenField runat="server" ID="hidDiagCodeDetailID" Value='<%# Eval("DiagCodeDetail_ID") %>' />--%>
-                                                <asp:CheckBox runat="server" ID="chkRemove" Checked="true" />
+                                                <asp:CheckBox runat="server" ID="chkRemove" Checked="true" AutoPostBack="true" OnCheckedChanged="chkRemove_CheckedChanged"/>
 
                                             </ItemTemplate>
                                         </asp:TemplateField>

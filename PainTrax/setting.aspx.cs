@@ -25,6 +25,7 @@ public partial class setting : System.Web.UI.Page
 
             node.SelectSingleNode("forwardCC").InnerText = chkCC.Checked.ToString();
             node.SelectSingleNode("forwardPE").InnerText = chkPE.Checked.ToString();
+            node.SelectSingleNode("forwardROM").InnerText = chkROM.Checked.ToString();
 
             xmlDoc.Save(fileName);
             divSuccess.Attributes.Add("style", "display:block");
@@ -48,6 +49,7 @@ public partial class setting : System.Web.UI.Page
             {
                 chkCC.Checked = node.SelectSingleNode("forwardCC") == null ? chkCC.Checked : Convert.ToBoolean(node.SelectSingleNode("forwardCC").InnerText);
                 chkPE.Checked = node.SelectSingleNode("forwardPE") == null ? chkPE.Checked : Convert.ToBoolean(node.SelectSingleNode("forwardPE").InnerText);
+                chkROM.Checked = node.SelectSingleNode("forwardROM") == null ? chkPE.Checked : Convert.ToBoolean(node.SelectSingleNode("forwardROM").InnerText);
             }
         }
         catch (Exception ex)

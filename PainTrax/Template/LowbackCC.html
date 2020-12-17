@@ -3,25 +3,27 @@
         <span class="control-label"><b><u>CHIEF COMPLAINT</u></b></span>
     </div>
     <div class="col-md-9" style="margin-top: 5px">
-        <label>The patient complains of low back pain that is </label>
-        <input type="text" id="txtPainScale" style="width:40px;text-align:left" class="paincls" value="8" onchange="txtMe(this)" />
-        <label>/10, with 10 being the worst, which is </label>
-        <input id="chkcontent" type="checkbox" value="constant" onclick="checkMe(this)" /> constant
-        <input id="chkintermittent" type="checkbox" value="intermittent" onclick="checkMe(this)" /> intermittent
-        <input id="chksharp" type="checkbox" value="sharp" onclick="checkMe(this)" /> sharp
+        <span id="lblpain1">The patient complains of low back pain that is </span>
+        <input type="text" id="txtPainScale" style="width:40px;text-align:left" class="paincls" value="" onchange="txtMe(this); removePainClass(this)" />
+        <span id="lblpain2">/10, with 10 being the worst</span>
+        <span class="noprint" id="lblwhich">, which is </span>
+        <input id="chkcontent" type="checkbox" value="constant" class="painclass" onclick="checkMe(this); removeClass(this);" /> constant
+        <input id="chkintermittent" type="checkbox" class="painclass" value="intermittent" onclick="checkMe(this); removeClass(this);" /> intermittent
+        <input id="chksharp" type="checkbox" value="sharp" class="painclass" onclick="checkMe(this); removeClass(this);" /> sharp
 
-        <input id="chkelectric" type="checkbox" value="electric" onclick="checkMe(this)" /> electric
-        <input id="chkshooting" type="checkbox" value="shooting" onclick="checkMe(this)" /> shooting
-        <input id="chkthrobbling" type="checkbox" value="throbbing" onclick="checkMe(this)" /> throbbing
+        <input id="chkelectric" type="checkbox" value="electric" class="painclass" onclick="checkMe(this); removeClass(this);" /> electric
+        <input id="chkshooting" type="checkbox" value="shooting" class="painclass" onclick="checkMe(this); removeClass(this);" /> shooting
+        <input id="chkthrobbling" type="checkbox" value="throbbing" class="painclass" onclick="checkMe(this); removeClass(this);" /> throbbing
 
-        <input id="chkpulsating" type="checkbox" value="pulsating" onclick="checkMe(this)" /> pulsating
-        <input id="chkdull" type="checkbox" value="dull" onclick="checkMe(this)" /> dull
-        <input id="chkachy" type="checkbox" value="achy" onclick="checkMe(this)" /> achy
-        <label> in nature. </label>
+        <input id="chkpulsating" type="checkbox" value="pulsating" class="painclass" onclick="checkMe(this); removeClass(this);" /> pulsating
+        <input id="chkdull" type="checkbox" value="dull" class="painclass" onclick="checkMe(this); removeClass(this);" /> dull
+        <input id="chkachy" type="checkbox" value="achy" class="painclass" onclick="checkMe(this); removeClass(this);" /> achy
+        <span class="noprint" id="lblnature"> in nature</span>
+        <span id="lblpain3">.</span>
         <br />
         <input id="txtradiates" style="visibility:hidden" />
         <input id="txtburningTo" style="visibility:hidden" /><br />
-        <input type="checkbox" id="chkLowbackpain2" value="The low back pain radiates to  " class="nocomma" onclick="checkMe(this)" /> The low back pain radiates to
+        <input type="checkbox" id="chkLowbackpain2" value="Low back pain radiates to  " class="nocomma" onclick="checkMe(this); disableTable(this, 'tblLB1');" /> Low back pain radiates to
 
         <input id="txtRadiant" type="text" style="width:700px;text-align:left" value="" onchange="txtMe(this); " />
 
@@ -91,7 +93,7 @@
                         <input type='radio' ID="chkAnkleLeft1" name="R2D" value="left ankle" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type='radio' ID="chkFeetLeft1" name="R3D" value="left feet" onclick="checkMe(this)" />
+                        <input type='radio' ID="chkFeetLeft1" name="R3D" value="left foot" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type='radio' ID="chkToeLeft1" name="R4D" value="left toe" onclick="checkMe(this)" />
@@ -124,7 +126,7 @@
                         <input type='radio' ID="chkAnkleRight1" name="R2D" value="right ankle" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type='radio' ID="chkFeetRight1" name="R3D" value="right feet" onclick="checkMe(this)" />
+                        <input type='radio' ID="chkFeetRight1" name="R3D" value="right foot" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type='radio' ID="chkToeRight1" name="R4D" value="right toe" onclick="checkMe(this)" />
@@ -157,7 +159,7 @@
                         <input type='radio' ID="chkAnkleBilateral1" name="R2D" value="bilateral ankles" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type='radio' ID="chkFeetBilateral1" name="R3D" value="bilateral feets" onclick="checkMe(this)" />
+                        <input type='radio' ID="chkFeetBilateral1" name="R3D" value="bilateral feet" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type='radio' ID="chkToeBilateral1" name="R4D" value="bilateral toes" onclick="checkMe(this)" />
@@ -198,10 +200,10 @@
                 </tr>
             </tbody>
         </table>
-        <!--<label>.</label>-->
+        <label style="visibility:hidden">.</label>
 
-        <input type="checkbox" id="chkLowbackpain4" value="The low back pain is associated with " class="nocomma" onclick="checkMe(this)" />
-        &nbsp;The low back pain is associated with
+        <input type="checkbox" id="chkLowbackpain4" value="Low back pain is associated with " class="nocomma" onclick="checkMe(this);disableTable(this, 'tblLB2');" />
+        &nbsp;Low back pain is associated with
         <input type="checkbox" id="chknumbness" class="chkbackpain" onclick="checkMe(this); checkDefault(this,'chkLowbackpain4')" value="numbness" /> numbness
         <input type="checkbox" id="chktingling" class="chkbackpain" onclick="checkMe(this); checkDefault(this,'chkLowbackpain4')" value="tingling" /> tingling
         <input type="checkbox" id="chkburning" class="chkbackpain" onclick="checkMe(this); checkDefault(this,'chkLowbackpain4')" value="burning sensation" /> burning sensation
@@ -209,7 +211,7 @@
             <input type="checkbox" id="chkelectric1" onclick="checkMe(this)" value="electric" />electric
             <input type="checkbox" id="chkpinsneedles" onclick="checkMe(this)" value="pins and needles" />pins & needles
         </div>
-        <label> to </label>
+        <span id="spanTo"> to </span>
         <input id="txtRadiant2" type="text" style="width:370px;text-align:left" value="" onchange="txtMe(this); " />
 
         <br />
@@ -274,16 +276,16 @@
                         <input type="radio" id="chkLegLeft2" name="AWR" value="left leg" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chkKneeLeft2" name="A1D" value="left Knee" onclick="checkMe(this)" />
+                        <input type="radio" id="chkKneeLeft2" name="A1D" value="left knee" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chkAnkleLeft2" name="A2D" value="left Ankle" onclick="checkMe(this)" />
+                        <input type="radio" id="chkAnkleLeft2" name="A2D" value="left ankle" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chkFeetLeft2" name="A3D" value="left Feet" onclick="checkMe(this)" />
+                        <input type="radio" id="chkFeetLeft2" name="A3D" value="left foot" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chkToeLeft2" name="A4D" value="left Toe" onclick="checkMe(this)" />
+                        <input type="radio" id="chkToeLeft2" name="A4D" value="left toe" onclick="checkMe(this)" />
                     </td>
                 </tr>
                 <tr>
@@ -313,7 +315,7 @@
                         <input type="radio" id="chk2ndDigitRight2" name="A2D" value="right ankle" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chk3rdDigitRight2" name="A3D" value="right feet" onclick="checkMe(this)" />
+                        <input type="radio" id="chk3rdDigitRight2" name="A3D" value="right foot" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type="radio" id="chk4thDigitRight2" name="A4D" value="right toe" onclick="checkMe(this)" />
@@ -346,7 +348,7 @@
                         <input type="radio" id="chkAnkleBilateral2" name="A2D" value="bilateral ankles" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
-                        <input type="radio" id="chkFeetBilateral2" name="A3D" value="bilateral feets" onclick="checkMe(this)" />
+                        <input type="radio" id="chkFeetBilateral2" name="A3D" value="bilateral feet" onclick="checkMe(this)" />
                     </td>
                     <td class="table_cell">
                         <input type="radio" id="chkToeBilateral2" name="A4D" value="bilateral toes" onclick="checkMe(this)" />
@@ -387,6 +389,7 @@
                 </tr>
             </tbody>
         </table>
+        <label style="visibility:hidden">.</label>
 
     </div>
 </div>
@@ -394,17 +397,17 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="col-md-9" style="margin-top: 5px">
-            <input type="checkbox" id="chkLowbackpain21" value="Lower back pain is associated with weakness in " class="nocomma" onclick="checkMe(this)"  />&nbsp;Lower back pain is associated with weakness in
+            <input type="checkbox" id="chkLowbackpain21" value="Low back pain is associated with weakness in " class="nocomma" onclick="checkMe(this)" />&nbsp;Low back pain is associated with weakness in
 
             <input type="text" id="txtPainWeaknesIn" style="width:240px;" onchange="txtMe(this);" />
             <label>.</label>
-            <input type="checkbox" id="chklbackpainwors" value="The Lower back pain is worsened with " class="nocomma" onclick="checkMe(this)" /> The Lower back pain is worsened with
+            <input type="checkbox" id="chklbackpainwors" value="Low back pain is worsened with " class="nocomma" onclick="checkMe(this)" /> Low back pain is worsened with
 
             <input type="checkbox" id="chkworsesitting" value="sitting" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> sitting,&nbsp;
             <input type="checkbox" id="chkworsestanding" value="standing" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> standing,&nbsp;
             <input type="checkbox" id="chkWorsebendingforward" class="chkpainL" value="bending forward" onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> bending forward,&nbsp;
             <input type="checkbox" id="chkWorsebendingbackwards" value="bending backwards" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> bending backwards,&nbsp;
-            <input type="checkbox" id="chkworsesleeping" value="sleeping" class="chkpainL"  onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> sleeping,&nbsp;
+            <input type="checkbox" id="chkworsesleeping" value="sleeping" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> sleeping,&nbsp;
             <input type="checkbox" id="chkworsetwistingright" value="twisting right" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> twisting right,&nbsp;
             <input type="checkbox" id="chkworsetwistingleft" value="twisting left" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> twisting left,&nbsp;
             <input type="checkbox" id="chkworselifting" value="lifting" class="chkpainL" onclick="checkMe(this);checkDefault(this, 'chklbackpainwors');" /> lifting&nbsp;
@@ -412,7 +415,7 @@
 
             <input type="text" id="txtworsend2" style="width:240px;" onchange="txtMe(this);" />
             <label>.</label>
-            <input type="checkbox" id="chkLowbackpain22" value="The lower back pain is improved with " class="nocomma" onclick="checkMe(this)"  /> The lower back pain is improved with
+            <input type="checkbox" id="chkLowbackpain22" value="The lower back pain is improved with " class="nocomma" onclick="checkMe(this)" /> The lower back pain is improved with
 
             <input type="checkbox" id="chkImprovedResting" value="resting" class="chkimproveL" onclick="checkMe(this);checkDefault(this, 'chkLowbackpain22');" /> resting,&nbsp;
             <input type="checkbox" id="chkImprovedMedication" value="medication" class="chkimproveL" onclick="checkMe(this);checkDefault(this, 'chkLowbackpain22');" /> medication,&nbsp;
@@ -438,26 +441,200 @@
 </div>
 <script>
 
-    function removeClass(txt, chkid) {
-        var val = $(txt).val();
+
+
+    function removePainClass(txtId) {
+
+        var $span1 = $("#lblpain1");
+        var $span2 = $("#lblpain2");
+        var $span3 = $("#lblpain3");
 
 
 
-        if (val === '')
-            $('#' + chkid).addClass("nocomma");
-        else
-            $('#' + chkid).removeClass("nocomma");
+        if ($(txtId).val() !== '') {
+
+
+
+            $span1.replaceWith(function () {
+                return $('<label/>', {
+                    Id: 'lblpain1',
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<label/>', {
+
+                    Id: 'lblpain2',
+                    html: this.innerHTML
+                });
+            });
+
+            $span3.replaceWith(function () {
+                return $('<label/>', {
+
+                    Id: 'lblpain3',
+                    html: this.innerHTML
+                });
+            });
+
+
+            //$('#lblnature').removeClass("noprint");
+            //$('#lblwhich').removeClass("noprint");
+        }
+        else {
+
+
+
+            $span1.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain1',
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain2',
+                    html: this.innerHTML
+                });
+            });
+            $span3.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain3',
+                    html: this.innerHTML
+                });
+            });
+
+        }
+
     }
 
-    function disableTable(txt, chkid) {
-        var val = $(txt).val();
+    window.load = disableTableDefault();
 
+    function disableTableDefault() {
+        if ($('#chkLowbackpain2').prop("checked")) {
+            $('#tblLB1').find("*").removeAttr("disabled");
 
+        }
+        else {
+            $('#tblLB1').find("*").attr("disabled", "disabled");
 
-        if (val === '')
-            $('#' + chkid).find("*").removeAttr("disabled");
+        }
+
+        if ($('#chkLowbackpain4').prop("checked")) {
+            $('#tblLB2').find("*").removeAttr("disabled");
+        }
         else
+            $('#tblLB2').find("*").attr("disabled", "disabled");
+    }
+
+    function removeClass(chkid) {
+        var $span1 = $("#lblnature");
+        var $span2 = $("#lblwhich");
+
+        if ($(chkid).prop("checked") == true) {
+
+
+            $span1.replaceWith(function () {
+                return $('<label/>', {
+                    class: 'noprint',
+                    id: 'lblnature',
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<label/>', {
+                    class: 'noprint',
+                    id: 'lblwhich',
+                    html: this.innerHTML
+                });
+            });
+
+
+        }
+        else {
+
+
+            var className = 'painclass';
+            var isCheck = false;
+
+
+
+            $("input:checkbox[class=" + className + "]").each(function () {
+                if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                    isCheck = true;
+                }
+            });
+
+            if (!isCheck) {
+
+
+                $span1.replaceWith(function () {
+                    return $('<span/>', {
+                        class: 'noprint',
+                        id: "lblnature",
+                        html: this.innerHTML
+                    });
+                });
+
+
+                $span2.replaceWith(function () {
+                    return $('<span/>', {
+                        class: 'noprint',
+                        id: "lblwhich",
+                        html: this.innerHTML
+                    });
+                });
+
+
+            }
+
+        }
+    }
+
+
+    function disableTable(txt, chkid) {
+        //var val = $(txt).val();
+
+
+
+        //if (val === '')
+        //    $('#' + chkid).find("*").removeAttr("disabled");
+        //else
+        //    $('#' + chkid).find("*").attr("disabled", "disabled");
+
+
+
+        if ($(txt).prop("checked") == true) {
+            $('#' + chkid).find("*").removeAttr("disabled");
+            var $span = $("#spanTo");
+            $span.replaceWith(function () {
+                return $('<label/>', {
+
+                    html: this.innerHTML
+                });
+            });
+
+          
+        }
+        else {
             $('#' + chkid).find("*").attr("disabled", "disabled");
+
+            if (chkid === 'tblLB1') {
+                referce1();
+                $('#txtFreeFormCC').attr('value', "");
+            }
+            if (chkid === 'tblLB2')
+                referce2();
+        }
     }
 
     function checkDefault(chk, deafCheck) {
@@ -509,16 +686,16 @@
     function referce1() {
 
 
-        $("input[name*='RSH']").prop('checked', false);
-        $("input[name*='RSC']").prop('checked', false);
-        $("input[name*='RAR']").prop('checked', false);
-        $("input[name*='RFA']").prop('checked', false);
-        $("input[name*='RHA']").prop('checked', false);
-        $("input[name*='RWR']").prop('checked', false);
-        $("input[name*='R1D']").prop('checked', false);
-        $("input[name*='R2D']").prop('checked', false);
-        $("input[name*='R3D']").prop('checked', false);
-        $("input[name*='R4D']").prop('checked', false);
+        $("input[name*='RSH']").removeAttr("checked");
+        $("input[name*='RSC']").removeAttr("checked");
+        $("input[name*='RAR']").removeAttr("checked");
+        $("input[name*='RFA']").removeAttr("checked");
+        $("input[name*='RHA']").removeAttr("checked");
+        $("input[name*='RWR']").removeAttr("checked");
+        $("input[name*='R1D']").removeAttr("checked");
+        $("input[name*='R2D']").removeAttr("checked");
+        $("input[name*='R3D']").removeAttr("checked");
+        $("input[name*='R4D']").removeAttr("checked");
         //$("input[name*='R5D']").prop('checked', false);
         //$("input[name='RSH']").prop('checked', false);
     }
@@ -526,16 +703,16 @@
     function referce2() {
 
 
-        $("input[name*='ASH']").prop('checked', false);
-        $("input[name*='ASC']").prop('checked', false);
-        $("input[name*='AAR']").prop('checked', false);
-        $("input[name*='AFA']").prop('checked', false);
-        $("input[name*='AHA']").prop('checked', false);
-        $("input[name*='AWR']").prop('checked', false);
-        $("input[name*='A1D']").prop('checked', false);
-        $("input[name*='A2D']").prop('checked', false);
-        $("input[name*='A3D']").prop('checked', false);
-        $("input[name*='A4D']").prop('checked', false);
+        $("input[name*='ASH']").removeAttr("checked");
+        $("input[name*='ASC']").removeAttr("checked");
+        $("input[name*='AAR']").removeAttr("checked");
+        $("input[name*='AFA']").removeAttr("checked");
+        $("input[name*='AHA']").removeAttr("checked");
+        $("input[name*='AWR']").removeAttr("checked");
+        $("input[name*='A1D']").removeAttr("checked");
+        $("input[name*='A2D']").removeAttr("checked");
+        $("input[name*='A3D']").removeAttr("checked");
+        $("input[name*='A4D']").removeAttr("checked");
         //$("input[name*='A5D']").prop('checked', false);
         //$("input[name='RSH']").prop('checked', false);
     }

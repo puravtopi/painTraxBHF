@@ -305,7 +305,7 @@
 
                                         </tr>
                                         <tr>
-                                            <td>Medial left foot (L4)</td>
+                                            <td>Medial foot (L4)</td>
                                             <td>
                                                 <asp:TextBox ID="TextBox5" onkeyup="RefreshUpdatePanel5();MenuHighlight();" TabIndex="52" OnTextChanged="TextBox5_TextChanged" Width="100" runat="server"></asp:TextBox></td>
                                             <td>

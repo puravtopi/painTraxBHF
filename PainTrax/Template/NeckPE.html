@@ -5,15 +5,15 @@
     <input id="txtspineexam" type="text" style="width:100px;text-align:left" value="C2-7" onchange="txtMe(this)" />
     <label> levels </label>
     <section class="dropdown">
-        <input type="text" id="txtWorse1" onchange="txtMe(this)" />
+        <input type="text" id="txtWorse1" onchange="txtMe(this)" value="bilaterally" />
         <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtWorse1', this.value)" id="ddlWorse1">
             <option></option>
-            <option> bilaterally</option>
+            <option selected="selected"> bilaterally</option>
             <option> on the left</option>
             <option> on the right</option>
         </select>
     </section>
-    <label>. </label>
+    <label> with muscle spasms present. </label>
 
     <table>
         <tr>
@@ -40,7 +40,7 @@
 </div>
 <label style="display:none">#romneck</label>
 
-<section id="divTP" class="row">
+<section id="divTP" class="row" >
     <div class="col-md-3">
         <span class="control-label"><b><u>Trigger Point:</u></b></span>
     </div>

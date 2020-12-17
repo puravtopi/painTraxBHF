@@ -39,7 +39,6 @@
             var current = location.pathname;
             var curpage = current.substr(current.lastIndexOf('/') + 1);
 
-               alert(curpage);
 
             $('#nav li a').each(function () {
                 var $this = $(this);

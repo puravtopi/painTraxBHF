@@ -10,10 +10,14 @@ using System.Xml;
 using System.IO;
 using System.Configuration;
 using IntakeSheet.BLL;
+using log4net;
+using System.Text.RegularExpressions;
 
 public partial class Page2 : System.Web.UI.Page
 {
     DBHelperClass gDbhelperobj = new DBHelperClass();
+
+    ILog log = log4net.LogManager.GetLogger(typeof(Page2));
     #region DataMembers
     string patientId;
     int count = 0;
@@ -157,7 +161,7 @@ public partial class Page2 : System.Web.UI.Page
         //starting the insertion in database
 
         string LOC = "", workat = "", DrSeen = "";
-            
+
         if (chk_loc.Checked)
             LOC = txt_howlong.Value + "|" + ddl_howlong.SelectedItem.Text;
         else
@@ -280,19 +284,19 @@ public partial class Page2 : System.Web.UI.Page
         int val = db.executeSP(SP, param);
 
 
-           
 
-      
+
+
 
         string query = "select top 1 * from tblPage1HTMLContent where PatientIE_ID=" + Session["PatientIE_ID"].ToString();
         DataSet ds = db.selectData(query);
         if (ds.Tables[0].Rows.Count == 0)
         {
-            query = "insert into tblPage1HTMLContent values(@topSectionHTML,@socialSectionHTML,@accidentHTML,@PatientIE_ID,0,@historyHTML,@historyHTMLValue)";
+            query = "insert into tblPage1HTMLContent values(@topSectionHTML,@socialSectionHTML,@accidentHTML,@PatientIE_ID,0,@historyHTML,@historyHTMLValue,@accident_1_HTML,@degreeHTML)";
         }
         else
         {
-            query = "update tblPage1HTMLContent set topSectionHTML=@topSectionHTML,accidentHTML=@accidentHTML,socialSectionHTML=@socialSectionHTML,historyHTML=@historyHTML,historyHTMLValue=@historyHTMLValue where PatientIE_ID=@PatientIE_ID";
+            query = "update tblPage1HTMLContent set topSectionHTML=@topSectionHTML,accidentHTML=@accidentHTML,socialSectionHTML=@socialSectionHTML,historyHTML=@historyHTML,historyHTMLValue=@historyHTMLValue,accident_1_HTML=@accident_1_HTML,degreeHTML=@degreeHTML where PatientIE_ID=@PatientIE_ID";
         }
 
         using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
@@ -304,6 +308,8 @@ public partial class Page2 : System.Web.UI.Page
             command.Parameters.AddWithValue("@accidentHTML", hdaccidentHTMLContent.Value);
             command.Parameters.AddWithValue("@historyHTML", hdhistoryHTMLContent.Value);
             command.Parameters.AddWithValue("@historyHTMLValue", hdhistoryHTMLValue.Value);
+            command.Parameters.AddWithValue("@accident_1_HTML", hdaccident1HTMLContent.Value);
+            command.Parameters.AddWithValue("@degreeHTML", hddegreeHTMLContent.Value);
 
             connection.Open();
             var results = command.ExecuteNonQuery();
@@ -600,6 +606,8 @@ public partial class Page2 : System.Web.UI.Page
             divsocialHTML.InnerHtml = ds.Tables[0].Rows[0]["socialSectionHTML"].ToString();
             divtopHTML.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
             divhistoryHTML.InnerHtml = ds.Tables[0].Rows[0]["historyHTML"].ToString();
+            divaccident1HTML.InnerHtml = ds.Tables[0].Rows[0]["accident_1_HTML"].ToString();
+            divdegreeHTML.InnerHtml = ds.Tables[0].Rows[0]["degreeHTML"].ToString();
         }
         else
             bindHtml();
@@ -852,7 +860,7 @@ public partial class Page2 : System.Web.UI.Page
             }
             else
             {
-
+                this.removeROM("rightROM", Session["PatientIE_ID"].ToString(), "tblbpShoulder");
 
                 if (count > 0)
                 {
@@ -897,6 +905,17 @@ public partial class Page2 : System.Web.UI.Page
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
 
         }
+
+        if (chk_r_Shoulder.Checked == false && chk_L_Shoulder.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpshoulder");
+        else
+            saveSideIE("shoulder", chk_L_Shoulder.Checked, chk_r_Shoulder.Checked, false);
+
+        if (chk_r_Shoulder.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "shoulder", "right");
+
+
+
     }
     /// <summary>
     /// Event fires if check box chk_L_Shoulder checked or unchecked in the form.
@@ -924,7 +943,7 @@ public partial class Page2 : System.Web.UI.Page
             }
             else
             {
-
+                this.removeROM("leftROM", Session["PatientIE_ID"].ToString(), "tblbpShoulder");
 
                 if (count > 0)
                 {
@@ -969,6 +988,14 @@ public partial class Page2 : System.Web.UI.Page
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
 
         }
+
+        if (chk_r_Shoulder.Checked == false && chk_L_Shoulder.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpshoulder");
+        else
+            saveSideIE("shoulder", chk_L_Shoulder.Checked, chk_r_Shoulder.Checked, false);
+
+        if (chk_L_Shoulder.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "shoulder", "left");
     }
     /// <summary>
     /// Event fires if check box chk_Neck checked or unchecked in the form.
@@ -1038,6 +1065,15 @@ public partial class Page2 : System.Web.UI.Page
             Session["bodyPartsList"] = s1;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
         }
+        if (Chk_Neck == false)
+        {
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "neck");
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpneck");
+        }
+        else
+        {
+            this.saveIE("neck", !Chk_Neck);
+        }
     }
     /// <summary>
     /// Event fires if check box chk_Midback checked or unchecked in the form.
@@ -1105,6 +1141,16 @@ public partial class Page2 : System.Web.UI.Page
             Session["bodyPartsList"] = s1;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
         }
+        if (Chk_Midback == false)
+        {
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "midback");
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpmidback");
+        }
+        else
+        {
+            this.saveIE("midback", !Chk_Midback);
+        }
+
     }
     /// <summary>
     /// Event fires if check box chk_lowback checked or unchecked in the form.
@@ -1168,6 +1214,15 @@ public partial class Page2 : System.Web.UI.Page
             Session["bodyPartsList"] = s1;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
         }
+        if (Chk_lowback == false)
+        {
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "lowback");
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbplowback");
+        }
+        else
+        {
+            this.saveIE("lowback", !Chk_lowback);
+        }
     }
     /// <summary>
     /// Event fires if check box chk_r_Keen checked or unchecked in the form.
@@ -1204,6 +1259,8 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_Keen = false;
+
+                this.removeROM("rightROM", Session["PatientIE_ID"].ToString(), "tblbpKnee");
             }
             Session["bodyPartsList"] = s;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
@@ -1233,8 +1290,14 @@ public partial class Page2 : System.Web.UI.Page
             }
             Session["bodyPartsList"] = s1;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
-
         }
+        if (chk_r_Keen.Checked == false && chk_L_Keen.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpknee");
+        else
+            saveSideIE("knee", chk_L_Keen.Checked, chk_r_Keen.Checked, false);
+
+        if (chk_r_Keen.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "knee", "right");
     }
     /// <summary>
     /// Event fires if check box chk_L_Keen checked or unchecked in the form.
@@ -1270,6 +1333,8 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_L_Keen = true;
+
+                this.removeROM("leftROM", Session["PatientIE_ID"].ToString(), "tblbpKnee");
             }
 
             Session["bodyPartsList"] = s;
@@ -1303,6 +1368,14 @@ public partial class Page2 : System.Web.UI.Page
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
 
         }
+
+        if (chk_r_Keen.Checked == false && chk_L_Keen.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpknee");
+        else
+            saveSideIE("knee", chk_L_Keen.Checked, chk_r_Keen.Checked, false);
+
+        if (chk_L_Keen.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "knee", "left");
     }
     /// <summary>
     /// Event fires if check box chk_r_Elbow checked or unchecked in the form.
@@ -1339,6 +1412,7 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_Elbow = false;
+                this.removeROM("rightROM", Session["PatientIE_ID"].ToString(), "tblbpElbow");
             }
 
             Session["bodyPartsList"] = s;
@@ -1374,7 +1448,10 @@ public partial class Page2 : System.Web.UI.Page
             Session["bodyPartsList"] = s1;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
         }
-
+        if (chk_r_Elbow.Checked == false && chk_l_Elbow.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpElbow");
+        if (chk_r_Elbow.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "elbow", "right");
     }
     /// <summary>
     /// Event fires if check box chk_l_Elbow checked or unchecked in the form.
@@ -1411,6 +1488,7 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_l_Elbow = true;
+                this.removeROM("leftROM", Session["PatientIE_ID"].ToString(), "tblbpElbow");
             }
 
             Session["bodyPartsList"] = s;
@@ -1443,6 +1521,14 @@ public partial class Page2 : System.Web.UI.Page
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
 
         }
+
+        if (chk_r_Elbow.Checked == false && chk_l_Elbow.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpElbow");
+        else
+            saveSideIE("elbow", chk_l_Elbow.Checked, chk_r_Elbow.Checked, false);
+
+        if (chk_l_Elbow.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "elbow", "left");
     }
     /// <summary>
     /// Event fires if check box chk_r_Wrist checked or unchecked in the form.
@@ -1480,6 +1566,8 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_Wrist = false;
+
+                this.removeROM("rightROM", Session["PatientIE_ID"].ToString(), "tblbpWrist");
             }
 
             Session["bodyPartsList"] = s;
@@ -1510,6 +1598,14 @@ public partial class Page2 : System.Web.UI.Page
             Session["bodyPartsList"] = s1;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
         }
+
+        if (chk_r_Wrist.Checked == false && chk_l_Wrist.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpWrist");
+        else
+            saveSideIE("wrist", chk_l_Wrist.Checked, chk_r_Wrist.Checked, false);
+
+        if (chk_r_Wrist.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "wrist", "right");
     }
     /// <summary>
     /// Event fires if check box chk_l_Wrist checked or unchecked in the form.
@@ -1546,6 +1642,7 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_l_Wrist = true;
+                this.removeROM("leftROM", Session["PatientIE_ID"].ToString(), "tblbpWrist");
             }
             Session["bodyPartsList"] = s;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
@@ -1576,6 +1673,15 @@ public partial class Page2 : System.Web.UI.Page
             Session["bodyPartsList"] = s1;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
         }
+
+        if (chk_r_Wrist.Checked == false && chk_l_Wrist.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpWrist");
+        else
+            saveSideIE("wrist", chk_l_Wrist.Checked, chk_r_Wrist.Checked, false);
+
+
+        if (chk_l_Wrist.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "wrist", "left");
     }
     /// <summary>
     /// Event fires if check box chk_r_Hip checked or unchecked in the form.
@@ -1612,6 +1718,7 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_Hip = false;
+                this.removeROM("rightROM", Session["PatientIE_ID"].ToString(), "tblbpHip");
             }
 
             Session["bodyPartsList"] = s;
@@ -1645,6 +1752,14 @@ public partial class Page2 : System.Web.UI.Page
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
 
         }
+
+        if (chk_r_Hip.Checked == false && chk_l_Hip.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbphip");
+        else
+            saveSideIE("hip", chk_l_Hip.Checked, chk_r_Hip.Checked, false);
+
+        if (chk_r_Hip.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "hip", "right");
     }
     /// <summary>
     /// Event fires if check box chk_l_Hip checked or unchecked in the form.
@@ -1681,6 +1796,7 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_l_Hip = false;
+                this.removeROM("leftROM", Session["PatientIE_ID"].ToString(), "tblbpHip");
             }
             Session["bodyPartsList"] = s;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
@@ -1709,6 +1825,14 @@ public partial class Page2 : System.Web.UI.Page
             Session["bodyPartsList"] = s1;
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
         }
+
+        if (chk_r_Hip.Checked == false && chk_l_Hip.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbphip");
+        else
+            saveSideIE("hip", chk_l_Hip.Checked, chk_r_Hip.Checked, false);
+
+        if (chk_l_Hip.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "hip", "left");
     }
     /// <summary>
     /// Event fires if check box chk_r_ankle checked or unchecked in the form.
@@ -1744,6 +1868,7 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_ankle = false;
+                this.removeROM("rightROM", Session["PatientIE_ID"].ToString(), "tblbpAnkle");
             }
             Session["bodyPartsList"] = s;
 
@@ -1776,6 +1901,14 @@ public partial class Page2 : System.Web.UI.Page
             PageMainMaster master = (PageMainMaster)this.Master; master.bindData(Session["PatientIE_ID"].ToString());
 
         }
+
+        if (chk_r_ankle.Checked == false && chk_l_ankle.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpankle");
+        else
+            saveSideIE("ankle", chk_l_ankle.Checked, chk_r_ankle.Checked, false);
+
+        if (chk_r_ankle.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "ankle", "right");
     }
     /// <summary>
     /// Event fires if check box chk_l_ankle checked or unchecked in the form.
@@ -1815,6 +1948,7 @@ public partial class Page2 : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_l_ankle = false;
+                this.removeROM("leftROM", Session["PatientIE_ID"].ToString(), "tblbpAnkle");
             }
             Session["bodyPartsList"] = s;
             PageMainMaster master = (PageMainMaster)this.Master;
@@ -1846,6 +1980,14 @@ public partial class Page2 : System.Web.UI.Page
             master.bindData(Session["PatientIE_ID"].ToString());
 
         }
+
+        if (chk_r_ankle.Checked == false && chk_l_ankle.Checked == false)
+            removeBodyParts(Session["PatientIE_ID"].ToString(), "tblbpankle");
+        else
+            saveSideIE("ankle", chk_l_ankle.Checked, chk_r_ankle.Checked, false);
+
+        if (chk_l_ankle.Checked == false)
+            removeDaignosis(Session["PatientIE_ID"].ToString(), "ankle", "left");
     }
 
     public void SaveData()
@@ -2002,6 +2144,18 @@ public partial class Page2 : System.Web.UI.Page
 
         divaccidentHTML.InnerHtml = body;
 
+        path = Server.MapPath("~/Template/Page1_accident_2.html");
+        body = File.ReadAllText(path);
+
+        divaccident1HTML.InnerHtml = body;
+
+        path = Server.MapPath("~/Template/Page1_degree.html");
+        body = File.ReadAllText(path);
+
+        divdegreeHTML.InnerHtml = body;
+
+
+
         path = Server.MapPath("~/Template/Page1_history.html");
         body = File.ReadAllText(path);
 
@@ -2022,5 +2176,329 @@ public partial class Page2 : System.Web.UI.Page
         divhistoryHTML.InnerHtml = body;
     }
 
-    
+    private void removeROM(string colName, string id, string tblName)
+    {
+        try
+        {
+            DBHelperClass db = new DBHelperClass();
+            string query = "select * from " + tblName + " where PatientIE_ID=" + id;
+
+            DataSet ds = db.selectData(query);
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                string[] strname = ds.Tables[0].Rows[0]["NameROM"].ToString().Split(',');
+                string str = "";
+                for (int i = 0; i < strname.Length; i++)
+                    str = ", " + str;
+
+
+                query = "update " + tblName + " set " + colName + "='" + str.TrimStart(',') + "' where PatientIE_ID=" + id;
+
+                new DBHelperClass().executeQuery(query);
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    private void saveIE(string bodyPart, bool isDelete = false)
+    {
+        try
+        {
+            string query = "", tblName = "", ccHTML = "", peHTML = "";
+            if (bodyPart == "neck")
+            {
+                tblName = "tblbpNeck";
+                ccHTML = "NeckCC.html";
+                peHTML = "NeckPE.html";
+            }
+            else if (bodyPart == "midback")
+            {
+                tblName = "tblbpMidback";
+                ccHTML = "MidbackCC.html";
+                peHTML = "MidbackPE.html";
+            }
+            else if (bodyPart == "lowback")
+            {
+                tblName = "tblbplowback";
+                ccHTML = "LowbackCC.html";
+                peHTML = "LowbackPE.html";
+            }
+
+
+            if (!isDelete)
+            {
+
+
+                string ccpath = Server.MapPath("~/Template/" + ccHTML);
+                string ccbody = File.ReadAllText(ccpath);
+
+                string pepath = Server.MapPath("~/Template/" + peHTML);
+                string pebody = File.ReadAllText(pepath);
+
+                query = "insert into " + tblName + " (PatientIE_ID,CCvalue,CCvalueoriginal,PEvalue,PEvalueoriginal)";
+                query += "values(@PatientIE_ID,@CCvalue,@CCvalueoriginal,@PEvalue,@PEvalueoriginal)";
+
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@CCvalue", ccbody);
+                    command.Parameters.AddWithValue("@CCvalueoriginal", ccbody);
+                    command.Parameters.AddWithValue("@PEvalue", pebody);
+                    command.Parameters.AddWithValue("@PEvalueoriginal", pebody);
+
+                    command.Parameters.AddWithValue("@PatientIE_ID", Session["PatientIE_ID"].ToString());
+
+                    connection.Open();
+                    var results = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            else
+            {
+                //  query = "delete from  " + tblName + " where PatientIE_ID=" + Session["PatientIE_ID"].ToString();
+                // new DBHelperClass().executeQuery(query);
+            }
+
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+    private void saveSideIE(string bodyPart, bool left, bool right, bool isDelete)
+    //    private void saveSideIE(string bodyPart, string side, bool isDelete, bool otherBody)
+    {
+        try
+        {
+            string query = "", tblName = "", ccHTML = "", peHTML = "";
+
+            if (bodyPart == "shoulder")
+            {
+                tblName = "tblbpShoulder";
+                ccHTML = "ShoulderCC.html";
+                peHTML = "ShoulderPE.html";
+            }
+            else if (bodyPart == "wrist")
+            {
+                tblName = "tblbpWrist";
+                ccHTML = "WristCC.html";
+                peHTML = "WristPE.html";
+            }
+            else if (bodyPart == "ankle")
+            {
+                tblName = "tblbpAnkle";
+                ccHTML = "AnkleCC.html";
+                peHTML = "AnklePE.html";
+            }
+            else if (bodyPart == "elbow")
+            {
+                tblName = "tblbpEblow";
+                ccHTML = "ElbowCC.html";
+                peHTML = "ElbowPE.html";
+            }
+            else if (bodyPart == "hip")
+            {
+                tblName = "tblbpHip";
+                ccHTML = "HipCC.html";
+                peHTML = "HipPE.html";
+            }
+            else if (bodyPart == "knee")
+            {
+                tblName = "tblbpKnee";
+                ccHTML = "KneeCC.html";
+                peHTML = "KneePE.html";
+            }
+
+
+            if (!isDelete)
+            {
+                bool isExist = false;
+
+
+                string ccpath = Server.MapPath("~/Template/" + ccHTML);
+                string ccbody = File.ReadAllText(ccpath);
+                string ccOrg = ccbody;
+
+
+
+
+                string pepath = Server.MapPath("~/Template/" + peHTML);
+                string pebody = File.ReadAllText(pepath);
+                string peOrg = pebody;
+
+
+                string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+                SqlConnection oSQLConn = new SqlConnection(sProvider);
+                string SqlStr = "Select * from  " + tblName + " where PatientIE_ID=" + Session["PatientIE_ID"].ToString();
+                SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
+                DataTable sqlTbl = new DataTable();
+                sqlAdapt.Fill(sqlTbl);
+                if (sqlTbl.Rows.Count > 0)
+                    isExist = true;
+                else
+                    isExist = false;
+
+                if (!isExist)
+                {
+                    if (left)
+                    {
+                        ccbody = ccbody.Replace("#rigthtdiv", "style='display:none' ");
+                        pebody = pebody.Replace("#rigthtdiv", "style='display:none' ");
+
+                        ccbody = ccbody.Replace("#leftdiv", "style='display:block' ");
+                        pebody = pebody.Replace("#leftdiv", "style='display:block' ");
+                    }
+                    else if (right)
+                    {
+                        ccbody = ccbody.Replace("#leftdiv", "style='display:none' ");
+                        pebody = pebody.Replace("#leftdiv", "style='display:none' ");
+
+                        ccbody = ccbody.Replace("#rigthtdiv", "style='display:block' ");
+                        pebody = pebody.Replace("#rigthtdiv", "style='display:block' ");
+
+                    }
+                    query = "insert into " + tblName + " (PatientIE_ID,CCvalue,CCvalueoriginal,PEvalue,PEvalueoriginal)";
+                    query += "values(@PatientIE_ID,@CCvalue,@CCvalueoriginal,@PEvalue,@PEvalueoriginal)";
+
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@CCvalue", ccbody);
+                        command.Parameters.AddWithValue("@CCvalueoriginal", ccOrg);
+                        command.Parameters.AddWithValue("@PEvalue", pebody);
+                        command.Parameters.AddWithValue("@PEvalueoriginal", peOrg);
+
+                        command.Parameters.AddWithValue("@PatientIE_ID", Session["PatientIE_ID"].ToString());
+
+                        connection.Open();
+                        var results = command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+
+                }
+                else
+                {
+                    pebody = sqlTbl.Rows[0]["pevalue"].ToString();
+                    ccbody = sqlTbl.Rows[0]["ccvalue"].ToString();
+                    if (right)
+                    {
+                        pebody = Regex.Replace(pebody, @"<div id=""WrapRightPE"" .*style='display:none'.*>", @"<div id=""WrapRightPE"" style='display:block'>");
+                        ccbody = Regex.Replace(ccbody, @"<div id=""WrapRight"" .*style='display:none'.*>", @"<div id=""WrapRight"" style='display:block'>");
+
+                    }
+                    else
+                    {
+                        ccbody = ReplacePart(@"<div id=""WrapRight""", @"</div>", ccOrg, ccbody);
+                        pebody = ReplacePart(@"<div id=""WrapRightPE""", @"</div>", peOrg, pebody);
+                        ccbody = ccbody.Replace("#rigthtdiv", "style='display:none' ");
+                        pebody = pebody.Replace("#rigthtdiv", "style='display:none' ");
+                    }
+                    if (left)
+                    {
+                        pebody = Regex.Replace(pebody, @"<div id=""WrapLeftPE"" .*style='display:none'.*>", @"<div id=""WrapLeftPE"" style='display:block'>");
+                        ccbody = Regex.Replace(ccbody, @"<div id=""WrapLeft"" .*style='display:none'.*>", @"<div id=""WrapLeft"" style='display:block'>");
+
+                    }
+                    else
+                    {
+                        ccbody = ReplacePart(@"<div id=""WrapLeft""", @"</div>", ccOrg, ccbody);
+                        pebody = ReplacePart(@"<div id=""WrapLeftPE""", @"</div>", peOrg, pebody);
+                        ccbody = ccbody.Replace("#leftdiv", "style='display:none' ");
+                        pebody = pebody.Replace("#leftdiv", "style='display:none' ");
+                    }
+                    //ccbody = ReplacePart ( ccbody.Replace("#leftdiv", "style='display:none'");
+                    //pebody = pebody.Replace("#leftdiv", "style='display:none'");
+                    //ccbody = ReplacePart(@"<div id=""WrapRight""", @"</div>", ccOrg, ccbody);
+                    //pebody = ReplacePart(@"<div id=""WrapRightPE""", @"</div>", ccOrg, ccbody);
+
+                    //ccbody = ccbody.Replace("#rigthtdiv", "style='display:none'");
+                    //pebody = pebody.Replace("#rigthtdiv", "style='display:none'");
+
+                    query = "update " + tblName + " set  CCvalue=@CCvalue,PEvalue=@PEvalue where ";
+                    query += "  PatientIE_ID=@PatientIE_ID ";
+
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@CCvalue", ccbody);
+                        command.Parameters.AddWithValue("@PEvalue", pebody);
+                        command.Parameters.AddWithValue("@PatientIE_ID", Session["PatientIE_ID"].ToString());
+
+                        connection.Open();
+                        var results = command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+
+                }
+
+
+
+            }
+            else
+            {
+                // if (isDelete == true && otherBody == false)
+                //{
+                //   query = "delete from  " + tblName + " where PatientIE_ID=" + Session["PatientIE_ID"].ToString();
+                // new DBHelperClass().executeQuery(query);
+                // }
+            }
+
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    private void removeDaignosis(string id, string bodypart, string side = "")
+    {
+        try
+        {
+            DBHelperClass db = new DBHelperClass();
+            string query = "delete from tblDiagCodesDetail where PatientIE_ID=" + id + "  AND BodyPart LIKE '%" + bodypart + "%'";
+
+            if (!string.IsNullOrEmpty(side))
+                query = query + " and Description Like '%" + side + "%'";
+
+            db.executeQuery(query);
+        }
+        catch (Exception ex)
+        {
+            gDbhelperobj.LogError(ex);
+        }
+    }
+
+    private void removeBodyParts(string id, string tblName)
+    {
+        try
+        {
+            DBHelperClass db = new DBHelperClass();
+            string query = "delete from " + tblName + " where PatientIE_ID=" + id;
+            db.executeQuery(query);
+        }
+        catch (Exception ex)
+        {
+            gDbhelperobj.LogError(ex);
+        }
+    }
+    protected string ReplacePart(string start, string end, string tHtml, string Html)
+    {
+
+        //string tHtml = File.ReadAllText(Server.MapPath(TemplateFile));
+        int righttstart = tHtml.IndexOf(start);
+        int righttend = tHtml.IndexOf(end, righttstart);
+        //string template = tHtml.Substring(righttstart, righttend - righttstart) + "\n </div>";
+        string template = tHtml.Substring(righttstart, righttend - righttstart) + "\n </div>";
+        int rightstart = Html.IndexOf(start);
+        int rightend = Html.IndexOf(end, rightstart);
+        Html = Html.Remove(rightstart, rightend - rightstart);
+        Html = Html.Insert(rightstart, template);
+        return Html;
+
+    }
+
+    protected void btnSaveCCPE_Click(object sender, EventArgs e)
+    { }
 }

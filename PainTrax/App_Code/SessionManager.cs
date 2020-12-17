@@ -24,5 +24,11 @@ public static class SessionManager
         set { session["forwardPE"] = value; }
     }
 
+    public static bool forwardROM
+    {
+        get { return Convert.ToBoolean(session["forwardPE"]); }
+        set { session["forwardPE"] = value; }
+    }
+
 
 }

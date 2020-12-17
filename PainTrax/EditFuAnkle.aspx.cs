@@ -30,6 +30,7 @@ public partial class EditFuAnkle : System.Web.UI.Page
         Position = Request.QueryString["P"];
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             if (Session["PatientIE_ID"] != null && Session["patientFUId"] != null)
             {
 
@@ -71,6 +72,8 @@ public partial class EditFuAnkle : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
                     BindDataGrid();
+                    bindCC();
+                    bindPE();
                 }
                 else
                 {
@@ -82,6 +85,10 @@ public partial class EditFuAnkle : System.Web.UI.Page
                     //PopulateUI(_CurIEid);
                     //BindDCDataGrid();
                     //BindDataGrid();
+                    bindCC();
+                    bindPE();
+
+
                 }
                 if (Position != "")
                 {
@@ -218,10 +225,13 @@ public partial class EditFuAnkle : System.Web.UI.Page
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
             TblRow["CCvalue"] = hdCCvalue.Value;
-          
 
             TblRow["PEvalue"] = hdPEvalue.Value;
-          
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
+
+
+            TblRow["PEvalue"] = hdPEvalue.Value;
+
             string strname = "", strleft = "", strright = "", strnormal = "";
 
             for (int i = 0; i < repROM.Items.Count; i++)
@@ -290,196 +300,42 @@ public partial class EditFuAnkle : System.Web.UI.Page
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
 
-            CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
-       
+
+
             string orgval = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
             string editval = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string cc = sqlTbl.Rows[0]["CCvalue"].ToString();
+            string ccOrg = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
-
-            //Position = Request.QueryString["P"];
-
-
-            //if (Position == "L")
-            //{
-            //    orgval = orgval.Replace("#rigthtdiv", "style='display:none'");
-            //    editval = editval.Replace("#rigthtdiv", "style='display:none'");
-
-            //    orgval = orgval.Replace("#leftdiv", "style='display:block'");
-            //    editval = editval.Replace("#leftdiv", "style='display:block'");
-            //}
-            //else if (Position == "R")
-            //{
-            //    orgval = orgval.Replace("#leftdiv", "style='display:none'");
-            //    editval = editval.Replace("#leftdiv", "style='display:none'");
-
-            //    orgval = orgval.Replace("#rigthtdiv", "style='display:block'");
-            //    editval = editval.Replace("#rigthtdiv", "style='display:block'");
-            //}
-            //else
-            //{
-            //    orgval = orgval.Replace("#leftdiv", "style='display:block'");
-            //    editval = editval.Replace("#leftdiv", "style='display:block'");
-
-            //    orgval = orgval.Replace("#rigthtdiv", "style='display:block'");
-            //    editval = editval.Replace("#rigthtdiv", "style='display:block'");
-            //}
+            string p = Request.QueryString["P"].ToLower();
 
 
 
-            divPE.InnerHtml = editval;
-          
 
-            //txtPainScaleRight.Text = TblRow["PainScaleRight"].ToString().Trim();
-            //txtPainScaleLeft.Text = TblRow["PainScaleLeft"].ToString().Trim();
 
-            //if (!string.IsNullOrEmpty(TblRow["ConstantRight"].ToString()))
-            //{ chkContentRight.Checked = Convert.ToBoolean(TblRow["ConstantRight"]); }
+            string pe = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string peOrg = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
 
-            //if (!string.IsNullOrEmpty(TblRow["IntermittentRight"].ToString()))
-            //{ chkIntermittentRight.Checked = Convert.ToBoolean(TblRow["IntermittentRight"]); }
 
-            //if (!string.IsNullOrEmpty(TblRow["SharpRight"].ToString()))
-            //{ chksharpRight.Checked = Convert.ToBoolean(TblRow["SharpRight"]); }
 
-            //if (!string.IsNullOrEmpty(TblRow["ElectricRight"].ToString()))
-            //{ chkelectricRight.Checked = Convert.ToBoolean(TblRow["ElectricRight"]); }
 
-            //if (!string.IsNullOrEmpty(TblRow["ShootingRight"].ToString()))
-            //{ chkshootingRight.Checked = Convert.ToBoolean(TblRow["ShootingRight"]); }
+            CF.InnerHtml = cc;
+            divPE.InnerHtml = pe;
 
-            //if (!string.IsNullOrEmpty(TblRow["ThrobblingRight"].ToString()))
-            //{ chkthrobbingRight.Checked = Convert.ToBoolean(TblRow["ThrobblingRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PulsatingRight"].ToString()))
-            //{ chkpulsatingRight.Checked = Convert.ToBoolean(TblRow["PulsatingRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["DullRight"].ToString()))
-            //{ chkdullRight.Checked = Convert.ToBoolean(TblRow["DullRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["AchyRight"].ToString()))
-            //{ chkachyRight.Checked = Convert.ToBoolean(TblRow["AchyRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ConstantLeft"].ToString()))
-            //{ chkContentLeft.Checked = Convert.ToBoolean(TblRow["ConstantLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["IntermittentLeft"].ToString()))
-            //{ chkIntermittentLeft.Checked = Convert.ToBoolean(TblRow["IntermittentLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["SharpLeft"].ToString()))
-            //{ chksharpLeft.Checked = Convert.ToBoolean(TblRow["SharpLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ElectricLeft"].ToString()))
-            //{ chkelectricLeft.Checked = Convert.ToBoolean(TblRow["ElectricLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ShootingLeft"].ToString()))
-            //{ chkshootingLeft.Checked = Convert.ToBoolean(TblRow["ShootingLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["ThrobblingLeft"].ToString()))
-            //{ chkthrobbingLeft.Checked = Convert.ToBoolean(TblRow["ThrobblingLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PulsatingLeft"].ToString()))
-            //{ chkpulsatingLeft.Checked = Convert.ToBoolean(TblRow["PulsatingLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["DullLeft"].ToString()))
-            //{ chkdullLeft.Checked = Convert.ToBoolean(TblRow["DullLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["AchyLeft"].ToString()))
-            //{ chkachyLeft.Checked = Convert.ToBoolean(TblRow["AchyLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["MedMalleolusLeft"].ToString()))
-            //{ chkMedMalleolusLeft.Checked = Convert.ToBoolean(TblRow["MedMalleolusLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["LatMalleolusLeft"].ToString()))
-            //{ chkLatMalleolusLeft.Checked = Convert.ToBoolean(TblRow["LatMalleolusLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["AchillesLeft"].ToString()))
-            //{ chkAchillesLeft.Checked = Convert.ToBoolean(TblRow["AchillesLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["MedMalleolusRight"].ToString()))
-            //{ chkMedMalleolusRight.Checked = Convert.ToBoolean(TblRow["MedMalleolusRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["LatMalleolusRight"].ToString()))
-            //{ chkLatMalleolusRight.Checked = Convert.ToBoolean(TblRow["LatMalleolusRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["AchillesRight"].ToString()))
-            //{ chkAchillesRight.Checked = Convert.ToBoolean(TblRow["AchillesRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationMedMalleolusLeft"].ToString()))
-            //{ chkPalpationMedMalleolusLeft.Checked = Convert.ToBoolean(TblRow["PalpationMedMalleolusLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationLatMalleolusLeft"].ToString()))
-            //{ chkPalpationLatMalleolusLeft.Checked = Convert.ToBoolean(TblRow["PalpationLatMalleolusLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationAchillesLeft"].ToString()))
-            //{ chkPalpationAchillesLeft.Checked = Convert.ToBoolean(TblRow["PalpationAchillesLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorsePlantarLeft"].ToString()))
-            //{ chkWorsePlantarLeft.Checked = Convert.ToBoolean(TblRow["WorsePlantarLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseDorsiLeft"].ToString()))
-            //{ chkWorseDorsiLeft.Checked = Convert.ToBoolean(TblRow["WorseDorsiLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseEversionLeft"].ToString()))
-            //{ chkWorseEversionLeft.Checked = Convert.ToBoolean(TblRow["WorseEversionLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseInversionLeft"].ToString()))
-            //{ chkWorseInversionLeft.Checked = Convert.ToBoolean(TblRow["WorseInversionLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseExtensionLeft"].ToString()))
-            //{ chkWorseExtensionLeft.Checked = Convert.ToBoolean(TblRow["WorseExtensionLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseAmbulationLeft"].ToString()))
-            //{ chkWorseAmbulationLeft.Checked = Convert.ToBoolean(TblRow["WorseAmbulationLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["EdemaLeft"].ToString()))
-            //{ chkEdemaLeft.Checked = Convert.ToBoolean(TblRow["EdemaLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["EcchymosisLeft"].ToString()))
-            //{ chkEcchymosisLeft.Checked = Convert.ToBoolean(TblRow["EcchymosisLeft"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationMedMalleolusRight"].ToString()))
-            //{ chkPalpationMedMalleolusRight.Checked = Convert.ToBoolean(TblRow["PalpationMedMalleolusRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationLatMalleolusRight"].ToString()))
-            //{ chkPalpationLatMalleolusRight.Checked = Convert.ToBoolean(TblRow["PalpationLatMalleolusRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["PalpationAchillesRight"].ToString()))
-            //{ chkPalpationAchillesRight.Checked = Convert.ToBoolean(TblRow["PalpationAchillesRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorsePlantarRight"].ToString()))
-            //{ chkWorsePlantarRight.Checked = Convert.ToBoolean(TblRow["WorsePlantarRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseDorsiRight"].ToString()))
-            //{ chkWorseDorsiRight.Checked = Convert.ToBoolean(TblRow["WorseDorsiRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseEversionRight"].ToString()))
-            //{ chkWorseEversionRight.Checked = Convert.ToBoolean(TblRow["WorseEversionRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseInversionRight"].ToString()))
-            //{ chkWorseInversionRight.Checked = Convert.ToBoolean(TblRow["WorseInversionRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseExtensionRight"].ToString()))
-            //{ chkWorseExtensionRight.Checked = Convert.ToBoolean(TblRow["WorseExtensionRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["WorseAmbulationRight"].ToString()))
-            //{ chkWorseAmbulationRight.Checked = Convert.ToBoolean(TblRow["WorseAmbulationRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["EdemaRight"].ToString()))
-            //{ chkEdemaRight.Checked = Convert.ToBoolean(TblRow["EdemaRight"]); }
-
-            //if (!string.IsNullOrEmpty(TblRow["EcchymosisRight"].ToString()))
-            //{ chkEcchymosisRight.Checked = Convert.ToBoolean(TblRow["EcchymosisRight"]); }
-
-            //cboRangeOfMotionRight.Text = TblRow["RangeOfMotionRight"].ToString();
-
-            //cboRangeOfMotionLeft.Text = TblRow["RangeOfMotionLeft"].ToString();
 
             txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
             txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
+
             _fldPop = false;
+        }
+        else
+        {
+            bindCC();
+            bindPE();
         }
 
         sqlTbl.Dispose();
@@ -491,6 +347,8 @@ public partial class EditFuAnkle : System.Web.UI.Page
 
     public void PopulateIEUI(string ieID)
     {
+
+        if (oSQLConn.State == ConnectionState.Open) oSQLConn.Close();
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
         oSQLConn.ConnectionString = sProvider;
@@ -917,6 +775,7 @@ public partial class EditFuAnkle : System.Web.UI.Page
         {
             ieID = Session["PatientIE_ID"].ToString();
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -930,14 +789,22 @@ public partial class EditFuAnkle : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
-                        ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        //ids += DiagCode_ID + ",";
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
 
                 }
             }
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
 
         }
         catch (Exception ex)
@@ -1067,7 +934,10 @@ public partial class EditFuAnkle : System.Web.UI.Page
         string ieMode = "New";
         _CurIEid = Session["PatientIE_ID"].ToString();
         _FuId = Session["patientFUId"].ToString();
-        SaveDiagnosis(_CurIEid);
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(_CurIEid);
+
         SaveUI(Session["patientFUId"].ToString(), ieMode, true);
         //SaveStandards(Session["PatientIE_ID"].ToString());
         PopulateUI(Session["patientFUId"].ToString());
@@ -1080,10 +950,11 @@ public partial class EditFuAnkle : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
-        ScriptManager.RegisterStartupScript(Page, this.GetType(), "TestFU", "closeModelPopup()", true);
+        ScriptManager.RegisterStartupScript(Page, this.GetType(), "TestFU", "closeModelPopup();", true);
     }
 
     public string SaveStandardsPopup(string ieID)
@@ -1125,22 +996,31 @@ public partial class EditFuAnkle : System.Web.UI.Page
         }
         return "";
     }
-    
+
     private void bindgridPoup()
     {
         try
         {
             _FuId = Session["patientFUId"].ToString();
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_FuId != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_FuId != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -1289,5 +1169,40 @@ public partial class EditFuAnkle : System.Web.UI.Page
                 }
             }
         }
+    }
+
+    public void bindCC()
+    {
+        string path = Server.MapPath("~/Template/AnkleCC.html");
+        string body = File.ReadAllText(path);
+
+
+
+        CF.InnerHtml = body;
+        hdorgCC.Value = body;
+
+    }
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/AnklePE.html");
+        string body = File.ReadAllText(path);
+
+        string p = Request.QueryString["P"];
+
+
+
+
+        divPE.InnerHtml = body;
+        hdorgPE.Value = body;
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
+
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 }

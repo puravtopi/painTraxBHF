@@ -51,6 +51,7 @@ public partial class FuShoulder : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             checkTP();
             BindROM();
             if (Session["PatientIE_ID2"] != null && Session["patientFUId"] != null)
@@ -88,6 +89,9 @@ public partial class FuShoulder : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
                     BindDataGrid();
+
+                    bindCC();
+                    bindPE();
                 }
                 else
                 {
@@ -99,6 +103,8 @@ public partial class FuShoulder : System.Web.UI.Page
                     //PopulateUI(_CurIEid);
                     //BindDCDataGrid();
                     //BindDataGrid();
+                    bindCC();
+                    bindPE();
                 }
                 if (Position != "")
                 {
@@ -327,11 +333,11 @@ public partial class FuShoulder : System.Web.UI.Page
         if (_ieMode == "Update" || _ieMode == "New")
         {
             TblRow["PatientFU_ID"] = _FuId;
-          
+
             TblRow["WorseRaisingLeft"] = false;// chkWorseRaisingLeft.Checked;
-           
+
             TblRow["WorseRaisingRight"] = false;// chkWorseRaisingRight.Checked;
-           
+
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
             TblRow["CCvalue"] = hdCCvalue.Value;
@@ -340,8 +346,9 @@ public partial class FuShoulder : System.Web.UI.Page
             TblRow["PEvalueoriginal"] = hdorgPE.Value;
             TblRow["PESides"] = hdPESides.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
+            TblRow["TPText"] = hdTPText.Value;
 
-            
+
 
             string strname = "", strleft = "", strright = "", strnormal = "";
 
@@ -498,28 +505,45 @@ public partial class FuShoulder : System.Web.UI.Page
 
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
+
+
+
+            string cc = sqlTbl.Rows[0]["CCvalue"].ToString();
+            string ccOrg = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+
+            string p = Request.QueryString["P"].ToLower();
+
+
+            string pe = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string peOrg = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+
+
+
+
             if (SessionManager.forwardCC)
-                CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
+                CF.InnerHtml = cc;
             else
-                CF.InnerHtml = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+                CF.InnerHtml = ccOrg;
 
             hdorgCC.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
             if (SessionManager.forwardPE)
-                divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
+                divPE.InnerHtml = pe;
             else
-                divPE.InnerHtml = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+                divPE.InnerHtml = peOrg;
 
 
             hdorgPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
 
-        
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p + "');", true);
 
             _fldPop = false;
         }
         else
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
+            bindCC();
+            bindPE();
+            // ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
         }
 
         sqlTbl.Dispose();
@@ -531,7 +555,7 @@ public partial class FuShoulder : System.Web.UI.Page
 
     public void PopulateIEUI(string ieID)
     {
-
+        if (oSQLConn.State == ConnectionState.Open) oSQLConn.Close();
 
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
@@ -548,134 +572,10 @@ public partial class FuShoulder : System.Web.UI.Page
         {
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
-            //txtPainScaleLeft.Text = TblRow["PainScaleLeft"].ToString().Trim();
-            //chkContentLeft.Checked = CommonConvert.ToBoolean(TblRow["ConstantLeft"].ToString());
-            //chkContentRight.Checked = CommonConvert.ToBoolean(TblRow["ConstantRight"].ToString());
-
-            //chkIntermittentLeft.Checked = CommonConvert.ToBoolean(TblRow["IntermittentLeft"].ToString());
-            //chkIntermittentRight.Checked = CommonConvert.ToBoolean(TblRow["IntermittentRight"].ToString());
-
-            //chkSharpLeft.Checked = CommonConvert.ToBoolean(TblRow["SharpLeft"].ToString());
-            //chkElectricLeft.Checked = CommonConvert.ToBoolean(TblRow["ElectricLeft"].ToString());
-            //chkShootingLeft.Checked = CommonConvert.ToBoolean(TblRow["ShootingLeft"].ToString());
-            //chkThrobblingLeft.Checked = CommonConvert.ToBoolean(TblRow["ThrobblingLeft"].ToString());
-            //chkPulsatingLeft.Checked = CommonConvert.ToBoolean(TblRow["PulsatingLeft"].ToString());
-            //chkDullLeft.Checked = CommonConvert.ToBoolean(TblRow["DullLeft"].ToString());
-            //chkAchyLeft.Checked = CommonConvert.ToBoolean(TblRow["AchyLeft"].ToString());
-            //chkWorseLyingLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseLyingLeft"].ToString());
-            //chkWorseMovementLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseMovementLeft"].ToString());
-            //// chkWorseRaisingLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseRaisingLeft"].ToString());
-            //chkWorseLiftingLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseLiftingLeft"].ToString());
-            //chkWorseRotationLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseRotationLeft"].ToString());
-            //chkWorseWorkingLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseWorkingLeft"].ToString());
-            //chkWorseActivitiesLeft.Checked = CommonConvert.ToBoolean(TblRow["WorseActivitiesLeft"].ToString());
-            //chkImprovedRestingLeft.Checked = CommonConvert.ToBoolean(TblRow["ImprovedRestingLeft"].ToString());
-            //chkImprovedMedicationLeft.Checked = CommonConvert.ToBoolean(TblRow["ImprovedMedicationLeft"].ToString());
-            //chkImprovedTherapyLeft.Checked = CommonConvert.ToBoolean(TblRow["ImprovedTherapyLeft"].ToString());
-            //chkImprovedSleepingLeft.Checked = CommonConvert.ToBoolean(TblRow["ImprovedSleepingLeft"].ToString());
-            //txtPainScaleRight.Text = TblRow["PainScaleRight"].ToString().Trim();
-            //chkSharpRight.Checked = CommonConvert.ToBoolean(TblRow["SharpRight"].ToString());
-            //chkElectricRight.Checked = CommonConvert.ToBoolean(TblRow["ElectricRight"].ToString());
-            //chkShootingRight.Checked = CommonConvert.ToBoolean(TblRow["ShootingRight"].ToString());
-            //chkThrobblingRight.Checked = CommonConvert.ToBoolean(TblRow["ThrobblingRight"].ToString());
-            //chkPulsatingRight.Checked = CommonConvert.ToBoolean(TblRow["PulsatingRight"].ToString());
-            //chkDullRight.Checked = CommonConvert.ToBoolean(TblRow["DullRight"].ToString());
-            //chkAchyRight.Checked = CommonConvert.ToBoolean(TblRow["AchyRight"].ToString());
-            //chkWorseLyingRight.Checked = CommonConvert.ToBoolean(TblRow["WorseLyingRight"].ToString());
-            //chkWorseMovementRight.Checked = CommonConvert.ToBoolean(TblRow["WorseMovementRight"].ToString());
-            ////chkWorseRaisingRight.Checked = CommonConvert.ToBoolean(TblRow["WorseRaisingRight"].ToString());
-            //chkWorseLiftingRight.Checked = CommonConvert.ToBoolean(TblRow["WorseLiftingRight"].ToString());
-            //chkWorseRotationRight.Checked = CommonConvert.ToBoolean(TblRow["WorseRotationRight"].ToString());
-            //chkWorseWorkingRight.Checked = CommonConvert.ToBoolean(TblRow["WorseWorkingRight"].ToString());
-            //chkWorseActivitiesRight.Checked = CommonConvert.ToBoolean(TblRow["WorseActivitiesRight"].ToString());
-            //chkImprovedRestingRight.Checked = CommonConvert.ToBoolean(TblRow["ImprovedRestingRight"].ToString());
-            //chkImprovedMedicationRight.Checked = CommonConvert.ToBoolean(TblRow["ImprovedMedicationRight"].ToString());
-            //chkImprovedTherapyRight.Checked = CommonConvert.ToBoolean(TblRow["ImprovedTherapyRight"].ToString());
-            //chkImprovedSleepingRight.Checked = CommonConvert.ToBoolean(TblRow["ImprovedSleepingRight"].ToString());
-
-            //txtAbductionLeftWas.Text = TblRow["AbductionLeft"].ToString().Trim();
-            //txtFlexionLeftWas.Text = TblRow["FlexionLeft"].ToString().Trim();
-            //txtExtRotationLeftWas.Text = TblRow["ExtRotationLeft"].ToString().Trim();
-            //txtIntRotationLeftWas.Text = TblRow["IntRotationLeft"].ToString().Trim();
-
-            //txtAbductionLeft.Text = TblRow["AbductionRight"].ToString().Trim();
-            //txtFlexionLeft.Text = TblRow["FlexionRight"].ToString().Trim();
-            //txtExtRotationLeft.Text = TblRow["ExtRotationRight"].ToString().Trim();
-            //txtIntRotationLeft.Text = TblRow["IntRotationRight"].ToString().Trim();
-
-            //txtAbductionRightWas.Text = TblRow["AbductionNormal"].ToString().Trim();
-            //txtFlexionRightWas.Text = TblRow["FlexionNormal"].ToString().Trim();
-            //txtExtRotationRightWas.Text = TblRow["ExtRotationNormal"].ToString().Trim();
-            //txtIntRotationRightWas.Text = TblRow["IntRotationNormal"].ToString().Trim();
-
-            //txtPalpationText1Left.Text = TblRow["PalpationText1Left"].ToString().Trim();
-            //// txtPalpationText2Left.Text = TblRow["PalpationText2Left"].ToString().Trim();
-            //chkACJointLeft.Checked = CommonConvert.ToBoolean(TblRow["ACJointLeft"].ToString());
-            //chkGlenohumeralLeft.Checked = CommonConvert.ToBoolean(TblRow["GlenohumeralLeft"].ToString());
-            //chkCorticoidLeft.Checked = CommonConvert.ToBoolean(TblRow["CorticoidLeft"].ToString());
-            //chkSupraspinatusLeft.Checked = CommonConvert.ToBoolean(TblRow["SupraspinatusLeft"].ToString());
-            //chkScapularLeft.Checked = CommonConvert.ToBoolean(TblRow["ScapularLeft"].ToString());
-            //chkDeepLabralLeft.Checked = CommonConvert.ToBoolean(TblRow["DeepLabralLeft"].ToString());
-            //chkDeltoidLeft.Checked = CommonConvert.ToBoolean(TblRow["DeltoidLeft"].ToString());
-            //chkTrapeziusLeft.Checked = CommonConvert.ToBoolean(TblRow["TrapeziusLeft"].ToString());
-            //chkEccymosisLeft.Checked = CommonConvert.ToBoolean(TblRow["EccymosisLeft"].ToString());
-            //chkEdemaLeft.Checked = CommonConvert.ToBoolean(TblRow["EdemaLeft"].ToString());
-            //chkRangeOfMotionLeft.Checked = CommonConvert.ToBoolean(TblRow["RangeOfMotionLeft"].ToString());
-            //txtPalpationText1Right.Text = TblRow["PalpationText1Right"].ToString().Trim();
-            ////txtPalpationText2Right.Text = TblRow["PalpationText2Right"].ToString().Trim();
-            //chkACJointRight.Checked = CommonConvert.ToBoolean(TblRow["ACJointRight"].ToString());
-            //chkGlenohumeralRight.Checked = CommonConvert.ToBoolean(TblRow["GlenohumeralRight"].ToString());
-            //chkCorticoidRight.Checked = CommonConvert.ToBoolean(TblRow["CorticoidRight"].ToString());
-            //chkSupraspinatusRight.Checked = CommonConvert.ToBoolean(TblRow["SupraspinatusRight"].ToString());
-            //chkScapularRight.Checked = CommonConvert.ToBoolean(TblRow["ScapularRight"].ToString());
-            //chkDeepLabralRight.Checked = CommonConvert.ToBoolean(TblRow["DeepLabralRight"].ToString());
-            //chkDeltoidRight.Checked = CommonConvert.ToBoolean(TblRow["DeltoidRight"].ToString());
-            //chkTrapeziusRight.Checked = CommonConvert.ToBoolean(TblRow["TrapeziusRight"].ToString());
-            //chkEccymosisRight.Checked = CommonConvert.ToBoolean(TblRow["EccymosisRight"].ToString());
-            //chkEdemaRight.Checked = CommonConvert.ToBoolean(TblRow["EdemaRight"].ToString());
-            //chkRangeOfMotionRight.Checked = CommonConvert.ToBoolean(TblRow["RangeOfMotionRight"].ToString());
-            //chkNeerLeft.Checked = CommonConvert.ToBoolean(TblRow["NeerLeft"].ToString());
-            //chkHawkinLeft.Checked = CommonConvert.ToBoolean(TblRow["HawkinLeft"].ToString());
-            //chkYergasonsLeft.Checked = CommonConvert.ToBoolean(TblRow["YergasonsLeft"].ToString());
-            //chkDropArmLeft.Checked = CommonConvert.ToBoolean(TblRow["DropArmLeft"].ToString());
-            //chkReverseBeerLeft.Checked = CommonConvert.ToBoolean(TblRow["ReverseBeerLeft"].ToString());
-            //chkNeerRight.Checked = CommonConvert.ToBoolean(TblRow["NeerRight"].ToString());
-            //chkHawkinRight.Checked = CommonConvert.ToBoolean(TblRow["HawkinRight"].ToString());
-            //chkYergasonsRight.Checked = CommonConvert.ToBoolean(TblRow["YergasonsRight"].ToString());
-            //chkDropArmRight.Checked = CommonConvert.ToBoolean(TblRow["DropArmRight"].ToString());
-            //chkReverseBeerRight.Checked = CommonConvert.ToBoolean(TblRow["ReverseBeerRight"].ToString());
-            //cboTPSide1.Text = TblRow["TPSide1"].ToString().Trim();
-            //txtTPText1.Text = TblRow["TPText1"].ToString().Trim();
-            //cboTPSide2.Text = TblRow["TPSide2"].ToString().Trim();
-            //txtTPText2.Text = TblRow["TPText2"].ToString().Trim();
-            //cboTPSide3.Text = TblRow["TPSide3"].ToString().Trim();
-            //txtTPText3.Text = TblRow["TPText3"].ToString().Trim();
-            //cboTPSide4.Text = TblRow["TPSide4"].ToString().Trim();
-            //txtTPText4.Text = TblRow["TPText4"].ToString().Trim();
-            //cboTPSide5.Text = TblRow["TPSide5"].ToString().Trim();
-            //txtTPText5.Text = TblRow["TPText5"].ToString().Trim();
-            //cboTPSide6.Text = TblRow["TPSide6"].ToString().Trim();
-            //txtTPText6.Text = TblRow["TPText6"].ToString().Trim();
-            //cboTPSide7.Text = TblRow["TPSide7"].ToString().Trim();
-            //txtTPText7.Text = TblRow["TPText7"].ToString().Trim();
-            //cboTPSide8.Text = TblRow["TPSide8"].ToString().Trim();
-            //txtTPText8.Text = TblRow["TPText8"].ToString().Trim();
-
-            //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
-            //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
+            hdTPText.Value = TblRow["TPText"].ToString();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
-            //cboSprainStrainSide.Text = TblRow["SprainStrainSide"].ToString().Trim();
-            //chkSprainStrain.Checked = Convert.ToBoolean(TblRow["SprainStrain"]);
-            //cboDerangmentSide.Text = TblRow["DerangmentSide"].ToString().Trim();
-            //chkDerangment.Checked = Convert.ToBoolean(TblRow["Derangment"]);
-            //cboSyndromeSide.Text = TblRow["SyndromeSide"].ToString().Trim();
-            //chkSyndrome.Checked = Convert.ToBoolean(TblRow["Syndrome"]);
-            //chkPlan.Checked = Convert.ToBoolean(TblRow["Plan"]);
-            //cboScanType.Text = TblRow["ScanType"].ToString().Trim();
-            //cboScanSide.Text = TblRow["ScanSide"].ToString().Trim();
-            //  chkElectricLeft.Checked = CommonConvert.ToBoolean(TblRow["ElectricLeft"].ToString());
             _fldPop = false;
         }
 
@@ -1036,6 +936,7 @@ public partial class FuShoulder : System.Web.UI.Page
         try
         {
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -1049,13 +950,21 @@ public partial class FuShoulder : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    //ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
                         //ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
                 }
             }
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
             BindDCDataGrid();
         }
         catch (Exception ex)
@@ -1183,7 +1092,9 @@ public partial class FuShoulder : System.Web.UI.Page
         string ieMode = "New";
         _CurIEid = Session["PatientIE_ID2"].ToString();
         _FuId = Session["patientFUId"].ToString();
-        SaveDiagnosis(_CurIEid);
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(_CurIEid);
         SaveUI(_CurIEid, _FuId, ieMode, true);
         SaveStandards(Session["PatientIE_ID2"].ToString());
         PopulateUI(Session["patientFUId"].ToString());
@@ -1239,15 +1150,25 @@ public partial class FuShoulder : System.Web.UI.Page
         try
         {
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_CurIEid != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_CurIEid != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            _FuId = Session["patientFUId"].ToString();
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -1261,6 +1182,7 @@ public partial class FuShoulder : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -1318,71 +1240,76 @@ public partial class FuShoulder : System.Web.UI.Page
     protected void BindROM()
     {
 
-        long _ieID = Convert.ToInt64(Session["PatientIE_ID"]);
-        string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
-        string SqlStr = "";
-        oSQLConn.ConnectionString = sProvider;
-        oSQLConn.Open();
-        SqlStr = "nusp_GetFUROM";
-        _FuId = Session["patientFUId"].ToString();
-
-        SqlCommand sqlCmdBuilder = new SqlCommand(SqlStr, oSQLConn);
-
-        sqlCmdBuilder.CommandType = CommandType.StoredProcedure;
-
-        sqlCmdBuilder.Parameters.AddWithValue("@PatientFUId", _FuId);
-        sqlCmdBuilder.Parameters.AddWithValue("@bodypart", _CurBP);
-
-        SqlDataAdapter sqlAdapt = new SqlDataAdapter(sqlCmdBuilder);
-
-        DataTable sqlTbl = new DataTable();
-        sqlAdapt.Fill(sqlTbl);
-        oSQLConn.Close();
-        if (sqlTbl.Rows.Count > 0)
+        if (SessionManager.forwardROM)
         {
-            string[] strname, strleft, strright, strnormal;
-            if (string.IsNullOrEmpty(sqlTbl.Rows[0]["NameROM"].ToString()) == false)
+            long _ieID = Convert.ToInt64(Session["PatientIE_ID"]);
+            string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+            string SqlStr = "";
+            oSQLConn.ConnectionString = sProvider;
+            oSQLConn.Open();
+            SqlStr = "nusp_GetFUROM";
+            _FuId = Session["patientFUId"].ToString();
+
+            SqlCommand sqlCmdBuilder = new SqlCommand(SqlStr, oSQLConn);
+
+            sqlCmdBuilder.CommandType = CommandType.StoredProcedure;
+
+            sqlCmdBuilder.Parameters.AddWithValue("@PatientFUId", _FuId);
+            sqlCmdBuilder.Parameters.AddWithValue("@bodypart", _CurBP);
+
+            SqlDataAdapter sqlAdapt = new SqlDataAdapter(sqlCmdBuilder);
+
+            DataTable sqlTbl = new DataTable();
+            sqlAdapt.Fill(sqlTbl);
+            oSQLConn.Close();
+            if (sqlTbl.Rows.Count > 0)
             {
-                strname = sqlTbl.Rows[0]["NameROM"].ToString().Split(',');
-                strleft = sqlTbl.Rows[0]["LeftROM"].ToString().Split(',');
-                strright = sqlTbl.Rows[0]["RightROM"].ToString().Split(',');
-                strnormal = sqlTbl.Rows[0]["NormalROM"].ToString().Split(',');
-
-
-                // Create the Table
-                DataTable OrdersTable = new DataTable("ROM");
-                // Build the Orders schema
-                OrdersTable.Columns.Add("name", Type.GetType("System.String"));
-                OrdersTable.Columns.Add("left", Type.GetType("System.String"));
-                OrdersTable.Columns.Add("right", Type.GetType("System.String"));
-                OrdersTable.Columns.Add("normal", Type.GetType("System.String"));
-
-                DataRow workRow;
-
-                for (int i = 0; i < strname.Length; i++)
+                string[] strname, strleft, strright, strnormal;
+                if (string.IsNullOrEmpty(sqlTbl.Rows[0]["NameROM"].ToString()) == false)
                 {
+                    strname = sqlTbl.Rows[0]["NameROM"].ToString().Split(',');
+                    strleft = sqlTbl.Rows[0]["LeftROM"].ToString().Split(',');
+                    strright = sqlTbl.Rows[0]["RightROM"].ToString().Split(',');
+                    strnormal = sqlTbl.Rows[0]["NormalROM"].ToString().Split(',');
 
-                    workRow = OrdersTable.NewRow();
-                    workRow[0] = strname[i];
-                    workRow[1] = strleft[i];
-                    workRow[2] = strright[i];
-                    workRow[3] = strnormal[i];
-                    OrdersTable.Rows.Add(workRow);
-                }
 
-                if (OrdersTable.Rows.Count != 0)
-                {
-                    repROM.DataSource = OrdersTable;
-                    repROM.DataBind();
+                    // Create the Table
+                    DataTable OrdersTable = new DataTable("ROM");
+                    // Build the Orders schema
+                    OrdersTable.Columns.Add("name", Type.GetType("System.String"));
+                    OrdersTable.Columns.Add("left", Type.GetType("System.String"));
+                    OrdersTable.Columns.Add("right", Type.GetType("System.String"));
+                    OrdersTable.Columns.Add("normal", Type.GetType("System.String"));
+
+                    DataRow workRow;
+
+                    for (int i = 0; i < strname.Length; i++)
+                    {
+
+                        workRow = OrdersTable.NewRow();
+                        workRow[0] = strname[i];
+                        workRow[1] = strleft[i];
+                        workRow[2] = strright[i];
+                        workRow[3] = strnormal[i];
+                        OrdersTable.Rows.Add(workRow);
+                    }
+
+                    if (OrdersTable.Rows.Count != 0)
+                    {
+                        repROM.DataSource = OrdersTable;
+                        repROM.DataBind();
+                    }
                 }
+                else
+                    getXMLROMvalue();
             }
             else
+            {
                 getXMLROMvalue();
+            }
         }
         else
-        {
             getXMLROMvalue();
-        }
     }
 
     private void getXMLROMvalue()
@@ -1419,5 +1346,44 @@ public partial class FuShoulder : System.Web.UI.Page
                 }
             }
         }
+    }
+
+    public void bindCC()
+    {
+        string path = Server.MapPath("~/Template/ShoulderCC.html");
+        string body = File.ReadAllText(path);
+
+
+
+        var gender = Session["Gender"].ToString().ToLower() == "mr." ? "He" : "She";
+
+        body = body.Replace("#gender", gender);
+
+        hdorgCC.Value = body;
+        CF.InnerHtml = body;
+
+    }
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/ShoulderPE.html");
+        string body = File.ReadAllText(path);
+
+        string p = Request.QueryString["P"].ToLower();
+
+
+        divPE.InnerHtml = body;
+
+        hdorgPE.Value = body;
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p + "');", true);
+
+
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 }

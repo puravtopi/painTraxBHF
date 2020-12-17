@@ -33,6 +33,7 @@ public partial class Hip : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             BindROM();
             if (Session["PatientIE_ID"] != null)
             {
@@ -147,7 +148,7 @@ public partial class Hip : System.Web.UI.Page
             bindgridPoup();
             BindDCDataGrid();
         }
-      
+
         Logger.Info(Session["uname"].ToString() + "- Visited in  Hip for -" + Convert.ToString(Session["LastNameIE"]) + Convert.ToString(Session["FirstNameIE"]) + "-" + DateTime.Now);
     }
 
@@ -190,7 +191,7 @@ public partial class Hip : System.Web.UI.Page
             TblRow["PatientIE_ID"] = _ieID;
 
 
-          
+
 
             TblRow["FlexRight"] = txtFlexRight.Text.ToString();
             TblRow["IntRotationRight"] = txtIntRotationRight.Text.ToString();
@@ -204,13 +205,13 @@ public partial class Hip : System.Web.UI.Page
             TblRow["IntRotationNormal"] = txtIntRotationNormal.Text.ToString();
             TblRow["ExtRotationNormal"] = txtExtRotationNormal.Text.ToString();
 
-           
+
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
 
             TblRow["CCvalue"] = hdCCvalue.Value;
             TblRow["CCvalueoriginal"] = hdorgCC.Value;
-         
+
 
 
             string strname = "", strleft = "", strright = "", strnormal = "";
@@ -234,7 +235,7 @@ public partial class Hip : System.Web.UI.Page
             TblRow["NameROM"] = strname.Substring(1);
             TblRow["PEvalue"] = hdPEvalue.Value;
             TblRow["PEvalueoriginal"] = hdorgPE.Value;
-           
+
 
             if (_ieMode == "New")
             {
@@ -287,7 +288,7 @@ public partial class Hip : System.Web.UI.Page
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
 
-           
+
             txtFlexRight.Text = TblRow["FlexRight"].ToString().Trim();
             txtIntRotationRight.Text = TblRow["IntRotationRight"].ToString().Trim();
             txtExtRotationRight.Text = TblRow["ExtRotationRight"].ToString().Trim();
@@ -302,13 +303,24 @@ public partial class Hip : System.Web.UI.Page
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
-            CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
-         
 
-            divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string cc = sqlTbl.Rows[0]["CCvalue"].ToString();
 
-         
+            string p = Request.QueryString["P"];
 
+
+
+            CF.InnerHtml = cc;
+
+            string pe = sqlTbl.Rows[0]["PEvalue"].ToString();
+
+
+
+
+            divPE.InnerHtml = pe;
+
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
 
 
 
@@ -337,7 +349,7 @@ public partial class Hip : System.Web.UI.Page
         foreach (XmlNode node in nodeList)
         {
             _fldPop = true;
-          
+
             txtFlexNormal.Text = node.SelectSingleNode("HipFlexNormal") == null ? txtFlexNormal.Text.ToString().Trim() : node.SelectSingleNode("HipFlexNormal").InnerText;
             txtIntRotationNormal.Text = node.SelectSingleNode("HipIRNormal") == null ? txtIntRotationNormal.Text.ToString().Trim() : node.SelectSingleNode("HipIRNormal").InnerText;
             txtExtRotationNormal.Text = node.SelectSingleNode("HipERNormal") == null ? txtExtRotationNormal.Text.ToString().Trim() : node.SelectSingleNode("HipERNormal").InnerText;
@@ -348,10 +360,10 @@ public partial class Hip : System.Web.UI.Page
             txtFlexLeft.Text = node.SelectSingleNode("FlexLeft") == null ? txtFlexLeft.Text.ToString().Trim() : node.SelectSingleNode("FlexLeft").InnerText;
             txtIntRotationLeft.Text = node.SelectSingleNode("IntRotationLeft") == null ? txtIntRotationLeft.Text.ToString().Trim() : node.SelectSingleNode("IntRotationLeft").InnerText;
             txtExtRotationLeft.Text = node.SelectSingleNode("ExtRotationLeft") == null ? txtExtRotationLeft.Text.ToString().Trim() : node.SelectSingleNode("ExtRotationLeft").InnerText;
-           
+
             txtFreeFormA.Text = node.SelectSingleNode("FreeFormA") == null ? txtFreeFormA.Text.ToString().Trim() : node.SelectSingleNode("FreeFormA").InnerText;
             txtFreeFormP.Text = node.SelectSingleNode("FreeFormP") == null ? txtFreeFormP.Text.ToString().Trim() : node.SelectSingleNode("FreeFormP").InnerText;
-           
+
             _fldPop = false;
         }
     }
@@ -456,7 +468,7 @@ public partial class Hip : System.Web.UI.Page
                         				THEN p.E_PDesc
                               END  END END as PDesc
                         	 -- ,p.Requested,p.Heading RequestedHeading,p.Scheduled,p.S_Heading ScheduledHeading,p.Executed,p.E_Heading ExecutedHeading
-                         from tblProceduresDetail p WHERE PatientIE_ID = " + _CurIEid + " AND BodyPart = '" + _CurBP + "'  and IsConsidered=0 Order By BodyPart,Heading";
+                         from tblProceduresDetail p WHERE PatientIE_ID = " + _CurIEid + " and PatientFU_ID is null  AND BodyPart = '" + _CurBP + "'  and IsConsidered=0 Order By BodyPart,Heading";
             oSQLCmd.Connection = oSQLConn;
             oSQLCmd.CommandText = SqlStr;
             oSQLAdpr = new SqlDataAdapter(SqlStr, oSQLConn);
@@ -597,6 +609,7 @@ public partial class Hip : System.Web.UI.Page
         try
         {
             RemoveDiagCodesDetail(ieID);
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -610,13 +623,22 @@ public partial class Hip : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    //ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
                         //ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
+                        // SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
                     }
                 }
             }
+            gDbhelperobj.SaveDiagUI(ieID, null, codeId, true, _CurBP, desc, codes);
             BindDCDataGrid();
         }
         catch (Exception ex)
@@ -741,7 +763,8 @@ public partial class Hip : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         string ieMode = "New";
-        SaveDiagnosis(Session["PatientIE_ID"].ToString());
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(Session["PatientIE_ID"].ToString());
         SaveUI(Session["PatientIE_ID"].ToString(), ieMode, true);
         SaveStandards(Session["PatientIE_ID"].ToString());
         PopulateUI(Session["PatientIE_ID"].ToString());
@@ -799,7 +822,7 @@ public partial class Hip : System.Web.UI.Page
                     repROM.DataSource = OrdersTable;
                     repROM.DataBind();
                 }
-                
+
             }
             else
                 getXMLROMvalue();
@@ -856,15 +879,24 @@ public partial class Hip : System.Web.UI.Page
         try
         {
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_CurIEid != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_CurIEid != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", _CurIEid);
+            param[2] = new SqlParameter("@PatientFU_ID", 0);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             DataTable newTable = new DataTable();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -898,6 +930,7 @@ public partial class Hip : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -977,7 +1010,7 @@ public partial class Hip : System.Web.UI.Page
 
         CF.InnerHtml = body;
         hdorgCC.Value = body;
-     
+
     }
 
     public void bindPE()
@@ -1003,9 +1036,17 @@ public partial class Hip : System.Web.UI.Page
         divPE.InnerHtml = body;
         hdorgPE.Value = body;
 
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "')", true);
+
         //int val = checkTP();
 
         //ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 
 

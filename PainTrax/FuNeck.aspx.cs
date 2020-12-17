@@ -22,7 +22,7 @@ public partial class FuNeck : System.Web.UI.Page
     public string _CurBP = "Neck";
     ILog log = log4net.LogManager.GetLogger(typeof(FuNeck));
 
- 
+
 
     DBHelperClass gDbhelperobj = new DBHelperClass();
     protected void Page_Load(object sender, EventArgs e)
@@ -36,6 +36,7 @@ public partial class FuNeck : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             BindROM();
             if (Session["PatientIE_ID2"] != null && Session["patientFUId"] != null)
             {
@@ -76,6 +77,9 @@ public partial class FuNeck : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
 
+                    bindPE();
+                    bindCF();
+
                     //  BindDataGrid();
                 }
                 else
@@ -84,6 +88,8 @@ public partial class FuNeck : System.Web.UI.Page
                     //_CurIEid = Session["PatientIE_ID"].ToString();
                     //patientID.Value = Session["PatientIE_ID"].ToString();
                     PopulateUIDefaults();
+                    bindPE();
+                    bindCF();
                     //BindDataGrid();
                     //PopulateUI(_CurIEid);
                     //BindDCDataGrid();
@@ -242,6 +248,8 @@ public partial class FuNeck : System.Web.UI.Page
             TblRow["SPTPMBB"] = false;//txtPainScale;
 
             TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["PEvalueoriginal"] = hdorgvalPE.Value;
+            TblRow["CCvalueoriginal"] = hdorgvalCC.Value;
 
 
             TblRow["PEvalue"] = hdPEvalue.Value;
@@ -406,6 +414,11 @@ public partial class FuNeck : System.Web.UI.Page
             _fldPop = false;
             cn1.Close();
         }
+        else
+        {
+            bindCF();
+            bindPE();
+        }
         //if (ViewState["isupdate"] == null)
         //{
         //    ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
@@ -419,6 +432,7 @@ public partial class FuNeck : System.Web.UI.Page
     public void PopulateIEUI(string ieid)
     {
 
+        if (oSQLConn.State == ConnectionState.Open) oSQLConn.Close();
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
         oSQLConn.ConnectionString = sProvider;
@@ -760,6 +774,7 @@ public partial class FuNeck : System.Web.UI.Page
         try
         {
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -776,10 +791,14 @@ public partial class FuNeck : System.Web.UI.Page
                     if (isChecked)
                     {
                         //ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
                 }
             }
+            // SaveDiagUI(Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
             BindDCDataGrid();
         }
         catch (Exception ex)
@@ -791,69 +810,28 @@ public partial class FuNeck : System.Web.UI.Page
         else
             return "";
     }
-    public void SaveDiagUI(string ieID, string iDiagID, bool DiagChecked, string bp, string dcd, string dc)
+    public void SaveDiagUI(string fuID, string iDiagID, bool DiagChecked, string bp, string dcd, string dc)
     {
-        string _ieMode = "";
-        long _ieID = Convert.ToInt64(ieID);
-        long _DiagID = Convert.ToInt64(iDiagID);
-        string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
-        string SqlStr = "";
-        oSQLConn.ConnectionString = sProvider;
-        oSQLConn.Open();
-        SqlStr = "Select * FROM tblDiagCodesDetail WHERE PatientIE_ID = " + ieID + " AND Diag_Master_ID = " + _DiagID + " AND PatientFu_ID=" + Session["patientFUId"].ToString() + " and BodyPart like '%" + _CurBP + "%' ";
-        SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
-        SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder(sqlAdapt);
-        DataTable sqlTbl = new DataTable();
-        sqlAdapt.Fill(sqlTbl);
-        DataRow TblRow;
-
-        if (sqlTbl.Rows.Count == 0 && DiagChecked == true)
-            _ieMode = "New";
-        else if (sqlTbl.Rows.Count == 0 && DiagChecked == false)
-            _ieMode = "None";
-        else if (sqlTbl.Rows.Count > 0 && DiagChecked == false)
-            _ieMode = "Delete";
-        else
-            _ieMode = "Update";
-
-        if (_ieMode == "New")
-            TblRow = sqlTbl.NewRow();
-        else if (_ieMode == "Update" || _ieMode == "Delete")
+        using (SqlConnection conn = new SqlConnection())
         {
-            TblRow = sqlTbl.Rows[0];
-            TblRow.AcceptChanges();
-        }
-        else
-            TblRow = null;
-
-        if (_ieMode == "Update" || _ieMode == "New")
-        {
-            TblRow["Diag_Master_ID"] = _DiagID;
-            TblRow["PatientIE_ID"] = _ieID;
-            TblRow["PatientFu_ID"] = Session["patientFUId"].ToString();
-            TblRow["BodyPart"] = bp.ToString().Trim();
-            TblRow["DiagCode"] = dc.ToString().Trim();
-            TblRow["Description"] = dcd.ToString().Trim();
-
-            if (_ieMode == "New")
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
             {
-                TblRow["CreatedBy"] = "Admin";
-                TblRow["CreatedDate"] = DateTime.Now;
-                sqlTbl.Rows.Add(TblRow);
+                cmd.CommandText = "nusp_save_bulk_daignosis";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@PatientIEId", _CurIEid);
+                cmd.Parameters.AddWithValue("@PatientFuId", fuID);
+                cmd.Parameters.AddWithValue("@DiagCode_IDs", iDiagID.TrimStart(','));
+                cmd.Parameters.AddWithValue("@_CurBP", bp);
+                cmd.Parameters.AddWithValue("@Description", dcd.TrimStart(','));
+                cmd.Parameters.AddWithValue("@DiagCode", dc.TrimStart(','));
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
             }
-            sqlAdapt.Update(sqlTbl);
+
         }
-        else if (_ieMode == "Delete")
-        {
-            TblRow.Delete();
-            sqlAdapt.Update(sqlTbl);
-        }
-        if (TblRow != null)
-            TblRow.Table.Dispose();
-        sqlTbl.Dispose();
-        sqlCmdBuilder.Dispose();
-        sqlAdapt.Dispose();
-        oSQLConn.Close();
     }
     public void BindDCDataGrid()
     {
@@ -908,7 +886,9 @@ public partial class FuNeck : System.Web.UI.Page
         _CurIEid = Session["PatientIE_ID2"].ToString();
         _FuId = Session["patientFUId"].ToString();
         SaveUI(_CurIEid, _FuId, ieMode, true);
-        SaveDiagnosis(_CurIEid);
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(_CurIEid);
         SaveStandards(Session["PatientIE_ID2"].ToString());
         PopulateUI(Session["patientFUId"].ToString());
 
@@ -1009,15 +989,18 @@ public partial class FuNeck : System.Web.UI.Page
         try
         {
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_CurIEid != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            _FuId = Session["patientFUId"].ToString();
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
+
+            dgvDiagCodesPopup.DataSource = ds;
+            dgvDiagCodesPopup.DataBind();
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -1031,6 +1014,7 @@ public partial class FuNeck : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -1089,89 +1073,95 @@ public partial class FuNeck : System.Web.UI.Page
     protected void BindROM()
     {
 
-
-        _FuId = Session["patientFUId"].ToString();
-        string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
-        string SqlStr = "";
-        oSQLConn.ConnectionString = sProvider;
-        oSQLConn.Open();
-        SqlStr = "Select * from tblFUbpNeck WHERE PatientFU_ID = " + _FuId;
-        SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
-        SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder(sqlAdapt);
-        DataTable sqlTbl = new DataTable();
-        sqlAdapt.Fill(sqlTbl);
-        oSQLConn.Close();
-        if (sqlTbl.Rows.Count > 0)
+        if (SessionManager.forwardROM)
         {
-            string[] strname, strrom, strnormal, strleftrom, strrightrom;
-            // Create the Table
-            DataTable ROMTable = new DataTable("ROM");
-            // Build the Orders schema
-            ROMTable.Columns.Add("name", Type.GetType("System.String"));
-            ROMTable.Columns.Add("rom", Type.GetType("System.String"));
-            ROMTable.Columns.Add("normal", Type.GetType("System.String"));
-            ROMTable.Columns.Add("left", Type.GetType("System.String"));
-            ROMTable.Columns.Add("right", Type.GetType("System.String"));
-
-            if (string.IsNullOrEmpty(sqlTbl.Rows[0]["CNameROM"].ToString()) == false)
+            _FuId = Session["patientFUId"].ToString();
+            string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+            string SqlStr = "";
+            oSQLConn.ConnectionString = sProvider;
+            oSQLConn.Open();
+            SqlStr = "Select * from tblFUbpNeck WHERE PatientFU_ID = " + _FuId;
+            SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
+            SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder(sqlAdapt);
+            DataTable sqlTbl = new DataTable();
+            sqlAdapt.Fill(sqlTbl);
+            oSQLConn.Close();
+            if (sqlTbl.Rows.Count > 0)
             {
-                strname = sqlTbl.Rows[0]["CNameROM"].ToString().Split(',');
-                strrom = sqlTbl.Rows[0]["CROM"].ToString().Split(',');
-                strnormal = sqlTbl.Rows[0]["CNormalROM"].ToString().Split(',');
+                string[] strname, strrom, strnormal, strleftrom, strrightrom;
+                // Create the Table
+                DataTable ROMTable = new DataTable("ROM");
+                // Build the Orders schema
+                ROMTable.Columns.Add("name", Type.GetType("System.String"));
+                ROMTable.Columns.Add("rom", Type.GetType("System.String"));
+                ROMTable.Columns.Add("normal", Type.GetType("System.String"));
+                ROMTable.Columns.Add("left", Type.GetType("System.String"));
+                ROMTable.Columns.Add("right", Type.GetType("System.String"));
 
-
-                DataRow workRow;
-
-                for (int i = 0; i < strname.Length; i++)
+                if (string.IsNullOrEmpty(sqlTbl.Rows[0]["CNameROM"].ToString()) == false)
                 {
-                    workRow = ROMTable.NewRow();
-                    workRow[0] = strname[i];
-                    workRow[1] = strrom[i];
-                    workRow[2] = strnormal[i];
-                    ROMTable.Rows.Add(workRow);
-                }
+                    strname = sqlTbl.Rows[0]["CNameROM"].ToString().Split(',');
+                    strrom = sqlTbl.Rows[0]["CROM"].ToString().Split(',');
+                    strnormal = sqlTbl.Rows[0]["CNormalROM"].ToString().Split(',');
 
-                if (ROMTable.Rows.Count != 0)
+
+                    DataRow workRow;
+
+                    for (int i = 0; i < strname.Length; i++)
+                    {
+                        workRow = ROMTable.NewRow();
+                        workRow[0] = strname[i];
+                        workRow[1] = strrom[i];
+                        workRow[2] = strnormal[i];
+                        ROMTable.Rows.Add(workRow);
+                    }
+
+                    if (ROMTable.Rows.Count != 0)
+                    {
+                        repROMCervical.DataSource = ROMTable;
+                        repROMCervical.DataBind();
+                    }
+
+                    ROMTable.Rows.Clear();
+                }
+                else
+                    getXMLROMvalue(true, false);
+
+                if (string.IsNullOrEmpty(sqlTbl.Rows[0]["NameROM"].ToString()) == false)
                 {
-                    repROMCervical.DataSource = ROMTable;
-                    repROMCervical.DataBind();
-                }
+                    strname = sqlTbl.Rows[0]["NameROM"].ToString().Split(',');
+                    strleftrom = sqlTbl.Rows[0]["LeftROM"].ToString().Split(',');
+                    strrightrom = sqlTbl.Rows[0]["RightROM"].ToString().Split(',');
+                    strnormal = sqlTbl.Rows[0]["NormalROM"].ToString().Split(',');
 
-                ROMTable.Rows.Clear();
+
+                    DataRow workRow;
+
+                    for (int i = 0; i < strname.Length; i++)
+                    {
+                        workRow = ROMTable.NewRow();
+                        workRow[0] = strname[i];
+                        workRow[2] = strnormal[i];
+                        workRow[3] = strleftrom[i];
+                        workRow[4] = strrightrom[i];
+                        ROMTable.Rows.Add(workRow);
+                    }
+
+                    if (ROMTable.Rows.Count != 0)
+                    {
+                        repROM.DataSource = ROMTable;
+                        repROM.DataBind();
+                    }
+
+                    ROMTable.Rows.Clear();
+                }
+                else
+                    getXMLROMvalue(false, true);
             }
             else
-                getXMLROMvalue(true, false);
-
-            if (string.IsNullOrEmpty(sqlTbl.Rows[0]["NameROM"].ToString()) == false)
             {
-                strname = sqlTbl.Rows[0]["NameROM"].ToString().Split(',');
-                strleftrom = sqlTbl.Rows[0]["LeftROM"].ToString().Split(',');
-                strrightrom = sqlTbl.Rows[0]["RightROM"].ToString().Split(',');
-                strnormal = sqlTbl.Rows[0]["NormalROM"].ToString().Split(',');
-
-
-                DataRow workRow;
-
-                for (int i = 0; i < strname.Length; i++)
-                {
-                    workRow = ROMTable.NewRow();
-                    workRow[0] = strname[i];
-                    workRow[2] = strnormal[i];
-                    workRow[3] = strleftrom[i];
-                    workRow[4] = strrightrom[i];
-                    ROMTable.Rows.Add(workRow);
-                }
-
-                if (ROMTable.Rows.Count != 0)
-                {
-                    repROM.DataSource = ROMTable;
-                    repROM.DataBind();
-                }
-
-                ROMTable.Rows.Clear();
+                getXMLROMvalue(true, true);
             }
-            else
-                getXMLROMvalue(false, true);
         }
         else
         {
@@ -1202,6 +1192,37 @@ public partial class FuNeck : System.Web.UI.Page
                 repROMCervical.DataBind();
             }
         }
+    }
+
+
+    public void bindCF()
+    {
+        string path = Server.MapPath("~/Template/NeckCC.html");
+        string body = File.ReadAllText(path);
+
+        CF.InnerHtml = body;
+        hdorgvalCC.Value = body;
+    }
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/NeckPE.html");
+        string body = File.ReadAllText(path);
+
+        divPE.InnerHtml = body;
+        hdorgvalPE.Value = body;
+
+        int val = checkTP();
+
+
+
+        //   ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",0)", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 
 }

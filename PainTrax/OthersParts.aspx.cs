@@ -29,7 +29,7 @@ public partial class OthersParts : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         if (!IsPostBack)
         {
-
+            bindDropdown();
             if (Session["PatientIE_ID"] != null)
             {
                 bindRecording();
@@ -44,11 +44,12 @@ public partial class OthersParts : System.Web.UI.Page
                 da.Fill(ds);
                 cn.Close();
                 DataRow rw = ds.Tables[0].AsEnumerable().FirstOrDefault(tt => tt.Field<int>("count1") == 0);
-                BindTreatmentDeafultValues();
+
                 if (rw != null)
                 {
                     // row exists
                     PopulateUIDefaults();
+                    BindTreatmentDeafultValues();
 
                 }
                 else
@@ -115,7 +116,7 @@ public partial class OthersParts : System.Web.UI.Page
             TblRow["OthersP"] = txtOthersP.Text.ToString();
             TblRow["TreatMentDetails"] = Request.Form[txtTreatmentParagraph.UniqueID];
             TblRow["TreatMentDelimit"] = bindTeratMentPrintvalue();
-            TblRow["FollowUpIn"] = txtFollowUpIn.Text.ToString();
+            TblRow["FollowUpIn"] = cboFollowUpIn.Text.ToString();
             if (!string.IsNullOrWhiteSpace(txtFollowUpInDate.Text))
                 TblRow["FollowUpInDate"] = DateTime.ParseExact(txtFollowUpInDate.Text, "MM/dd/yyyy", null);
             else
@@ -176,9 +177,11 @@ public partial class OthersParts : System.Web.UI.Page
             txtOthersPE.Text = TblRow["OthersPE"].ToString().Trim();
             txtOthersA.Text = TblRow["OthersA"].ToString().Trim();
             txtOthersP.Text = TblRow["OthersP"].ToString().Trim();
-            txtFollowUpIn.Text = TblRow["FollowUpIn"].ToString();
+            cboFollowUpIn.Text = TblRow["FollowUpIn"].ToString();
             txtTreatmentParagraph.Text = !string.IsNullOrEmpty(TblRow["TreatMentDetails"].ToString().Trim()) ? TblRow["TreatMentDetails"].ToString().Trim() : "";
             BindTreatmentEditValues(TblRow["TreatMentDelimit"].ToString().Trim());
+
+            txtFollowUpInDate.Text = TblRow["FollowUpInDate"].ToString();
 
             _fldPop = false;
         }
@@ -556,7 +559,12 @@ public partial class OthersParts : System.Web.UI.Page
 
             for (int i = 0; i < str.Length; i++)
             {
-                dt.Rows.Add(string.IsNullOrEmpty(str[i]) ? "False" : str[i].Substring(0, 1) == "@" ? "False" : "True", str[i].TrimStart('@'));
+                if (i == 0 && string.IsNullOrEmpty(str[0]))
+                { }
+                else
+                {
+                    dt.Rows.Add(string.IsNullOrEmpty(str[i]) ? "False" : str[i].Substring(0, 1) == "@" ? "False" : "True", str[i].TrimStart('@'));
+                }
                 // dt.Rows.Add(str[i].Substring(0, 1) == "@" ? "False" : "True", string.IsNullOrEmpty(str[i]) ? str[i] : str[i].TrimStart('@'));
             }
 
@@ -601,7 +609,7 @@ public partial class OthersParts : System.Web.UI.Page
             }
 
         }
-        strDelimit = strDelimit.TrimStart('`');
+        // strDelimit = strDelimit.TrimStart('`');
         txtTreatmentParagraph.Text = str;
 
         return strDelimit;
@@ -739,5 +747,19 @@ public partial class OthersParts : System.Web.UI.Page
 
             throw;
         }
+    }
+
+    public void bindDropdown()
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.Load(Server.MapPath("~/xml/HSMData.xml"));
+
+        foreach (XmlNode node in doc.SelectNodes("//HSM/Followups/Followup"))
+        {
+            cboFollowUpIn.Items.Add(new ListItem(node.Attributes["name"].InnerText, node.Attributes["name"].InnerText));
+        }
+
+        cboFollowUpIn.Text = "2-4 weeks.";
+
     }
 }

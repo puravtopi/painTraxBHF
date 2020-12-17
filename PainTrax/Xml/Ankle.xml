@@ -4,20 +4,27 @@
     <name>Plantar Flexion</name>
     <left></left>
     <right></right>
-    <normal>30</normal>
+    <normal>40</normal>
   </ROM>
   <ROM>
     <name>Dorsiflexion</name>
     <left></left>
     <right></right>
-    <normal>30</normal>
+    <normal>20</normal>
   </ROM>
 
   <ROM>
-    <name>Eversion/Inversion</name>
+    <name>Inversion</name>
     <left></left>
     <right></right>
-    <normal>10</normal>
+    <normal>30</normal>
   </ROM>
-  
+  <ROM>
+    <name>Eversion</name>
+    <left></left>
+    <right></right>
+    <normal>20</normal>
+  </ROM>
+
+
 </ROMS>

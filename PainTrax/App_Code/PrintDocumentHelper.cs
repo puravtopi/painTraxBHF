@@ -21,8 +21,9 @@ public class PrintDocumentHelper
     public string getDocumentString(string html)
     {
         String str = html;
-        //String pattern = @"(<input\s*(.+?)\s*/>|<label>\s*(.+?)\s*</label>)";
+        //  String pattern = @"(<input\s*(.+?)\s*/>|<label>\s*(.+?)\s*</label>)";
         String pattern = @"(<input\s*(.+?)\s*>|<label.*>\s*(.+?)\s*</label>|<textarea.*>\s*(.+?)\s*</textarea>)";
+        //String pattern = @"(<input\s*(.+?)\s*>|<label.*>\s*(.+?)\s*</label>|<textarea.*>((.|\n)*?)</textarea>)";
         //String pattern = @"<input\s*(.+?)\s*/>";
         //String pattern = @"<label>\s*(.+?)\s*</label>";
         RegexOptions regexOptions = RegexOptions.Multiline;
@@ -90,7 +91,6 @@ public class PrintDocumentHelper
                         // d.ToString();
                     }
 
-                    //Response.Write(prevtype);
                     if (type == "checkbox" || type == "radio")
                     {
 
@@ -102,11 +102,15 @@ public class PrintDocumentHelper
                             value = rx.Replace(value, "");
                             if (value.Length > 0 && check)
                             {
-                                chkgrp += 1;
+
                                 if (classname == "nocomma")
                                     sb.Append(value + " ");
                                 else
+                                {
+                                    chkgrp += 1;
                                     sb.Append(value + ", ");
+                                }
+
                             }
                         }
                     }
@@ -128,7 +132,7 @@ public class PrintDocumentHelper
                     if ((prevtype == "checkbox" || prevtype == "radio") && chkgrp > 0)
                     {
                         sb.Remove(sb.Length - 2, 2).Append(" ");
-                        if (chkgrp > 0)
+                        if (chkgrp > 1)
                         {
                             if (sb.ToString().LastIndexOf(",") >= 0)
                                 sb.Replace(",", " and ", sb.ToString().LastIndexOf(","), 1);
@@ -145,7 +149,7 @@ public class PrintDocumentHelper
         if ((prevtype == "checkbox" || prevtype == "radio") && chkgrp > 0)
         {
             sb.Remove(sb.Length - 2, 2).Append(" ");
-            if (chkgrp > 0)
+            if (chkgrp > 1)
             {
                 if (sb.ToString().LastIndexOf(",") >= 0)
                     sb.Replace(",", " and", sb.ToString().LastIndexOf(","), 1);
@@ -154,6 +158,7 @@ public class PrintDocumentHelper
         }
         str = sb.Replace(" .", ". ").Replace(".", ". ").ToString();
         return str.Replace(". .", ". ").ToString();
+
     }
 
     public string getDocumentStringDenies(string html)
@@ -234,8 +239,6 @@ public class PrintDocumentHelper
                             sb.Append(value + ", ");
                         }
                     }
-
-
 
                 }
                 else if (match.Groups[2].Value.Length == 0)
@@ -395,11 +398,14 @@ public class PrintDocumentHelper
                             }
                             else if (value.Length > 0 && check)
                             {
-                                chkgrp += 1;
+
                                 if (classname == "nocomma")
                                     sb.Append(value + " ");
                                 else
+                                {
+                                    chkgrp += 1;
                                     sb.Append(value + ", ");
+                                }
 
                             }
                         }
@@ -758,11 +764,14 @@ public class PrintDocumentHelper
                             }
                             else if (value.Length > 0 && check)
                             {
-                                chkgrp += 1;
+
                                 if (classname == "nocomma")
                                     sb.Append(value + " ");
                                 else
+                                {
+                                    chkgrp += 1;
                                     sb.Append(value + ", ");
+                                }
                             }
                         }
                         else if (type == "text")
@@ -818,41 +827,46 @@ public class PrintDocumentHelper
 
 
         NameTest = NameTest.TrimStart(',');
-        string[] NameTestVal = NameTest.TrimStart(',').Split(',');
+        string[] NameTestVal = null;
+      
+            NameTestVal = NameTest.TrimStart(',').Split(',');
         string[] LeftTestVal = LeftTest.TrimStart(',').Split(',');
         string[] RightTestVal = RightTest.TrimStart(',').Split(',');
         string[] TextValVal = TextVal.Split(',');
 
         string str = "", leftval = "", rightval = "";
-        for (int i = 0; i < NameTestVal.Length; i++)
+        if (!string.IsNullOrEmpty(NameTest))
         {
+            for (int i = 0; i < NameTestVal.Length; i++)
+            {
 
-            if (i == 0)
-            {
-                if (!string.IsNullOrEmpty(TextValVal[0]))
+                if (i == 0)
                 {
-                    leftval = " at " + TextValVal[0] + " degrees ";
+                    if (!string.IsNullOrEmpty(TextValVal[0]))
+                    {
+                        leftval = " at " + TextValVal[0] + " degrees ";
+                    }
+                    if (!string.IsNullOrEmpty(TextValVal[1]))
+                    {
+                        rightval = " at " + TextValVal[1] + " degrees ";
+                    }
                 }
-                if (!string.IsNullOrEmpty(TextValVal[1]))
-                {
-                    rightval = " at " + TextValVal[1] + " degrees ";
-                }
-            }
-            else
-            {
-                leftval = ""; rightval = "";
-            }
-
-            if (LeftTestVal[i] == "1")
-            {
-                str = str + "," + NameTestVal[i] + " is positive on left " + leftval;
-            }
-            if (RightTestVal[i] == "1")
-            {
-                if (LeftTestVal[i] == "1")
-                    str = str + " and on the right" + rightval;
                 else
-                    str = str + "," + NameTestVal[i] + " is positive on right" + rightval;
+                {
+                    leftval = ""; rightval = "";
+                }
+
+                if (LeftTestVal[i] == "1")
+                {
+                    str = str + "," + NameTestVal[i] + " is positive on left " + leftval;
+                }
+                if (RightTestVal[i] == "1")
+                {
+                    if (LeftTestVal[i] == "1")
+                        str = str + " and on the right" + rightval;
+                    else
+                        str = str + "," + NameTestVal[i] + " is positive on right" + rightval;
+                }
             }
         }
         return str;
@@ -863,7 +877,9 @@ public class PrintDocumentHelper
     {
         String strfile = strcontent;
         String[] str = new String[2];
-        String pattern = @"(<input\s*(.+?)\s*>|<textarea.*>\s*(.*?)\s*</textarea>)";
+        // String pattern = @"(<input\s*(.+?)\s*>|<textarea.*>\s*(.*?)\s*</textarea>)";
+        //  String pattern = @"(<input\s*(.+?)\s*>|<textarea.*?>((.|\n)*?)</textarea>)";
+        String pattern = @"(<input\s*(.+?)\s*>|<textarea.*?>((.|\n)*?)</textarea>)";
         RegexOptions regexOptions = RegexOptions.Multiline;
         Regex regex = new Regex(pattern, regexOptions);
         StringBuilder sb = new StringBuilder();
@@ -902,10 +918,13 @@ public class PrintDocumentHelper
                         if (att.ToLower().StartsWith("type"))
                         {
                             String[] test = att.Split('=');
-                            type = test[1].ToLower();
-                            Regex rx = new Regex(@"^\s*""?|""?\s*$");
+                            if (test.Length > 1)
+                            {
+                                type = test[1].ToLower();
+                                Regex rx = new Regex(@"^\s*""?|""?\s*$");
 
-                            type = rx.Replace(type, "");
+                                type = rx.Replace(type, "");
+                            }
                             //      Response.Write("type="+type+"<br>");
                         }
                         if (type == "checkbox" || type == "radio")
@@ -928,15 +947,13 @@ public class PrintDocumentHelper
                     }
 
                 }
-                if (match.Groups[1].Value.StartsWith("<textarea"))
+                if (match.Groups[3].Value.Length != 0)
                 {
                     //               Response.Write(Server.HtmlEncode( match.Groups[1].Value + "") + "<br>");
                     String tagvalue = match.Groups[1].Value;
                     String[] attrib = tagvalue.Split(' ');
                     string id = "", value = "";
-                    int startpos = match.Groups[1].Value.IndexOf(">");
-                    int endpos = match.Groups[1].Value.IndexOf("</textarea>");
-                    value = match.Groups[1].Value.Substring(startpos + 1, endpos - startpos - 1);
+                    value = match.Groups[3].Value;
 
                     // String pattern2 = @"<textarea.*>\s*(.+?)\s*</textarea>";
                     //String pattern2 = @"<textarea.*>(.|[\r\n])*</textarea>";

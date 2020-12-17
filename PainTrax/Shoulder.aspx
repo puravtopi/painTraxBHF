@@ -132,7 +132,15 @@
             var htmlval = $("#ctl00_ContentPlaceHolder1_divPE").html();
             $('#<%= hdPEvalue.ClientID %>').val(htmlval);
 
-            txtTPText1 = $("#txtTPText1").val();
+
+
+            var tpText = $("#hidTPText").val();
+
+        
+
+            $('#<%= hdTPText.ClientID %>').val(tpText);
+
+           <%-- txtTPText1 = $("#txtTPText1").val();
             txtTPText2 = $("#txtTPText2").val();
             txtTPText3 = $("#txtTPText3").val();
             txtTPText4 = $("#txtTPText4").val();
@@ -156,7 +164,7 @@
 
 
             $('#<%= hdPESides.ClientID %>').val(sidestr);
-            $('#<%= hdPESidesText.ClientID %>').val(sidestrText);
+            $('#<%= hdPESidesText.ClientID %>').val(sidestrText);--%>
 
         }
 
@@ -303,7 +311,14 @@
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
                 <asp:HiddenField runat="server" ID="hdorgCC" />
 
-                  <div class="col-md-9" style="margin-top: 5px; ">
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="control-label bold"><b><u>PHYSICAL EXAM:</u></b></label>
+                    </div>
+
+                    <div class="col-md-9" style="margin-top: 5px;">
 
                         <asp:Repeater runat="server" ID="repROM" OnItemDataBound="repROM_ItemDataBound">
                             <HeaderTemplate>
@@ -354,19 +369,13 @@
 
                     </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        <label class="control-label bold"><b><u>PHYSICAL EXAM:</u></b></label>
-                    </div>
-
-                  
-
 
 
                     <asp:HiddenField runat="server" ID="hdPEvalue" />
                     <asp:HiddenField runat="server" ID="hdorgPE" />
                     <asp:HiddenField runat="server" ID="hdPESides" />
                     <asp:HiddenField runat="server" ID="hdPESidesText" />
+                    <asp:HiddenField runat="server" ID="hdTPText" />
 
 
 
@@ -422,7 +431,7 @@
                                         <asp:TemplateField HeaderText="Action" ItemStyle-Width="50">
                                             <ItemTemplate>
                                                 <%--    <asp:HiddenField runat="server" ID="hidDiagCodeDetailID" Value='<%# Eval("DiagCodeDetail_ID") %>' />--%>
-                                                <asp:CheckBox runat="server" ID="chkRemove" Checked="true" />
+                                                <asp:CheckBox runat="server" ID="chkRemove" Checked="true" AutoPostBack="true" OnCheckedChanged="chkRemove_CheckedChanged"/>
 
                                             </ItemTemplate>
                                         </asp:TemplateField>

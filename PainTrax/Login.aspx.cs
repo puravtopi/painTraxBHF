@@ -104,6 +104,7 @@ public partial class Login : System.Web.UI.Page
 
                         SessionManager.forwardCC = cls.forwardCC;
                         SessionManager.forwardPE = cls.forwardPE;
+                        SessionManager.forwardROM = cls.forwardROM;
 
                         DataSet dbGroup = db.selectData("Select * from tblgroups where id=" + ds.Tables[0].Rows[0]["groupid"].ToString());
 

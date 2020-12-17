@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+
 <HSM>
   <StandardColors>
     <StandardColor text="Procedure:" color="Green"/>
@@ -21,6 +22,15 @@
     <Handedness name="ambidextrous"/>
     <Handedness name=""/>
   </Handednesses>
+
+
+  <Followups>
+    <Followup name=""/>
+    <Followup name="2-4 weeks."/>
+    <Followup name="4 weeks."/>
+    <Followup name="6 weeks."/>
+   
+  </Followups>
 
   <Sustaineds>
     <Sustained name="" CaseType=""/>
@@ -51,6 +61,8 @@
     <Scan name="MRI"/>
     <Scan name="CT Scan"/>
     <Scan name="X-rays"/>
+    <Scan name="TM Flow"/>
+  
   </Scans>
 
   <ScanOthers>
@@ -60,6 +72,7 @@
     <ScanOther name="X-rays"/>
     <ScanOther name="UE NCV/EMG"/>
     <ScanOther name="LE NCV/EMG"/>
+   <ScanOther name="TM Flow"/>
   </ScanOthers>
 
   <Levels>
@@ -141,14 +154,12 @@
 
   <Ambulatess>
     <Ambulates name=""/>
-    <Ambulates name="Ambulates with a cane"/>
-    <Ambulates name="Ambulates with a straight access cane"/>
-    <Ambulates name="Ambulates with a quad cane"/>
-    <Ambulates name="Ambulates with a walker"/>
-    <Ambulates name="Ambulates with a rolling walker"/>
-    <Ambulates name="Ambulates with a crutch"/>
-    <Ambulates name="Ambulates with crutches"/>
-    <Ambulates name="Ambulates with a wheelchair"/>
+    <Ambulates name="Ambulates with a cane."/>
+    <Ambulates name="Ambulates with crutches."/>
+    <Ambulates name="Ambulates with wheelchair."/>
+    <Ambulates name="Unable to toe walk."/>
+    <Ambulates name="Unable to heel walk."/>
+    
   </Ambulatess>
 
   <ROMs>
@@ -199,39 +210,56 @@
   <NeurologicalExams>
     <NeurologicalExam name="allodynia" ikey="4"></NeurologicalExam>
   </NeurologicalExams>
-  <ShoulderAbdNormal><Data>180</Data>
+  <ShoulderAbdNormal>
+    <Data>180</Data>
   </ShoulderAbdNormal>
-  <ShoulderFlexNormal><Data>180</Data>
+  <ShoulderFlexNormal>
+    <Data>180</Data>
   </ShoulderFlexNormal>
-  <ShoulderExtRotNormal><Data>90</Data>
+  <ShoulderExtRotNormal>
+    <Data>90</Data>
   </ShoulderExtRotNormal>
-  <ShoulderIntRot><Data>90</Data>
+  <ShoulderIntRot>
+    <Data>90</Data>
   </ShoulderIntRot>
-  <NeckFwdFlexNormal><Data>50</Data>
+  <NeckFwdFlexNormal>
+    <Data>50</Data>
   </NeckFwdFlexNormal>
-  <NeckExtNormal><Data>60</Data>
+  <NeckExtNormal>
+    <Data>60</Data>
   </NeckExtNormal>
-  <NeckRotNormal><Data>80</Data>
+  <NeckRotNormal>
+    <Data>80</Data>
   </NeckRotNormal>
-  <NeckLatFlex><Data>45</Data>
+  <NeckLatFlex>
+    <Data>45</Data>
   </NeckLatFlex>
-  <LowBackFwdFlexNormal><Data>90</Data>
+  <LowBackFwdFlexNormal>
+    <Data>90</Data>
   </LowBackFwdFlexNormal>
-  <LowBackExt><Data>25</Data>
+  <LowBackExt>
+    <Data>25</Data>
   </LowBackExt>
-  <LowBackRotNormal><Data>30</Data>
+  <LowBackRotNormal>
+    <Data>30</Data>
   </LowBackRotNormal>
-  <LowBackLatFlex><Data>25</Data>
+  <LowBackLatFlex>
+    <Data>25</Data>
   </LowBackLatFlex>
-  <KneeExtNormal><Data>0</Data>
+  <KneeExtNormal>
+    <Data>0</Data>
   </KneeExtNormal>
-  <KneeFlexNormal><Data>130</Data>
+  <KneeFlexNormal>
+    <Data>130</Data>
   </KneeFlexNormal>
-  <HipFlexNormal><Data>120</Data>
+  <HipFlexNormal>
+    <Data>120</Data>
   </HipFlexNormal>
-  <HipIRNormal><Data>35</Data>
+  <HipIRNormal>
+    <Data>35</Data>
   </HipIRNormal>
-  <HipERNormal><Data>45</Data>
+  <HipERNormal>
+    <Data>45</Data>
   </HipERNormal>
 
   <USStates>
@@ -291,22 +319,37 @@
 
   <RTNWORKS>
     <RTNWORK name=""/>
-    <RTNWORK name="patient returns to work on "/>
-    <RTNWORK name="Patient continues to work despite the pain. "/>
-    <RTNWORK name="patient has not returned to work since the accident."/>
+    <RTNWORK name="The patient is status post _____.  Patient reports _____% symptom improvement for _____.  Patient symptoms have / have not returned to baseline.  Patient reports radicular symptoms have improved/are unchanged. "/>
+    <RTNWORK name="The patient is status post _____.  Patient reports _____% symptom improvement for _____. "/>
   </RTNWORKS>
 
   <RECTPYS>
     <RECTPY name=""/>
-    <RECTPY name="Patient continues physical therapy and finds it beneficial."/>
-    <RECTPY name="Patient continues physical therapy and finds it beneficial, however pain returns between sessions."/>
-    <RECTPY name="The patient came in for a follow-up orthopedic treatment."/>
+    <RECTPY name="The patient reports decreased usage of analgesic both in frequency and dosage.  The patient reports functional improvement in ROM.  The patient reports better sleep pattern and duration. "/>
   </RECTPYS>
 
   <FEELPAINRLFS>
     <FEELPAINRLF name=""/>
-    <FEELPAINRLF name="Patient states that there is pain relief following physical therapy."/>
+    <FEELPAINRLF name="Patient reports radiating neck pain and lower back pain with radicular symptoms to _____."/>
   </FEELPAINRLFS>
+
+  <Note4S>
+    <Note4 name=""/>
+    <Note4 name="Patient reports radiating ____ pain with radicular symptoms to ____."/>
+
+  </Note4S>
+
+  <Note5S>
+    <Note5 name=""/>
+
+
+    <Note5 name="The patient is doing PT/Chiro. "/>
+    <Note5 name="The patient is doing PT/Chiro __________x a week. "/>
+    <Note5 name="The patient is doing acupuncture __________x a week. "/>
+    <Note5 name="The patient is doing HEP __________x a week. "/>
+    <Note5 name="The patient is doing HEP."/>
+
+  </Note5S>
 
   <Users>
     <Desig name=""/>

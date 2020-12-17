@@ -31,6 +31,7 @@ public partial class EditFuLowback : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             checkTP();
             if (Session["PatientIE_ID"] != null && Session["patientFUId"] != null)
             {
@@ -71,17 +72,18 @@ public partial class EditFuLowback : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
                     BindDataGrid();
+
+                    bindCF();
+                    bindPE();
                 }
                 else
                 {
 
-                    //_CurIEid = Session["PatientIE_ID"].ToString();
-                    //patientID.Value = Session["PatientIE_ID"].ToString();
+
                     PopulateUIDefaults();
                     BindDataGrid();
-                    //PopulateUI(_CurIEid);
-                    //BindDCDataGrid();
-                    //BindDataGrid();
+                    bindPE();
+                    bindCF();
                 }
 
             }
@@ -131,17 +133,18 @@ public partial class EditFuLowback : System.Web.UI.Page
         {
             TblRow["PatientFU_ID"] = _FuID;
 
-           
+
             //TblRow["FreeForm"] = txtFreeForm.Text.ToString();
             //TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString().Trim().Replace("      ", string.Empty);
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
 
             TblRow["CCvalue"] = hdCCvalue.Value;
-            
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
+
 
             TblRow["PEvalue"] = hdPEvalue.Value;
-            TblRow["PEvalueoriginal"] = hdPEvalueoriginal.Value;
+            TblRow["PEvalueoriginal"] = hdorgvalPE.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
             TblRow["PESides"] = hdPESides.Value;
             TblRow["TPDesc"] = hdPETP.Value;
@@ -265,8 +268,8 @@ public partial class EditFuLowback : System.Web.UI.Page
             TblRow = sqlTbl1.Rows[0];
 
 
-          
-          
+
+
             //txtFreeForm.Text = TblRow["freeform"].ToString().Trim();
             //txtFreeFormCC.Text = TblRow["freeformcc"].ToString().Trim();
             txtFreeFormA.Text = TblRow["freeforma"].ToString().Trim().Replace("      ", string.Empty);
@@ -278,16 +281,24 @@ public partial class EditFuLowback : System.Web.UI.Page
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
             CF.InnerHtml = TblRow["CCvalue"].ToString();
-   
+
             divPE.InnerHtml = TblRow["PEvalue"].ToString();
 
             hdorgvalPE.Value = TblRow["PEvalueoriginal"].ToString();
+
+            hdorgPE.Value = TblRow["PEvalueoriginal"].ToString();
+            hdorgCC.Value = TblRow["CCvalueoriginal"].ToString();
 
             int val = checkTP();
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ");bindSideval('" + TblRow["PESides"].ToString() + "','" + TblRow["PESidesText"].ToString() + "')", true);
 
             _fldPop = false;
+        }
+        else
+        {
+            bindCF();
+            bindPE();
         }
 
         sqlTbl1.Dispose();
@@ -299,7 +310,7 @@ public partial class EditFuLowback : System.Web.UI.Page
     }
     public void PopulateIEUI(string IEID)
     {
-
+        if (oSQLConn.State == ConnectionState.Open) oSQLConn.Close();
         string sProvider1 = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr1 = "";
         oSQLConn.ConnectionString = sProvider1;
@@ -317,7 +328,7 @@ public partial class EditFuLowback : System.Web.UI.Page
             TblRow = sqlTbl1.Rows[0];
 
 
-           
+
             //txtFreeForm.Text = TblRow["freeform"].ToString().Trim();
             //txtFreeFormCC.Text = TblRow["freeformcc"].ToString().Trim();
             txtFreeFormA.Text = TblRow["freeforma"].ToString().Trim().Replace("      ", string.Empty);
@@ -346,7 +357,7 @@ public partial class EditFuLowback : System.Web.UI.Page
         foreach (XmlNode node in nodeList)
         {
             _fldPop = true;
-           
+
             //txtFreeForm.Text = node.SelectSingleNode("FreeForm") == null ? txtFreeForm.Text.ToString().Trim() : node.SelectSingleNode("FreeForm").InnerText;
             //txtFreeFormCC.Text = node.SelectSingleNode("FreeFormCC") == null ? txtFreeFormCC.Text.ToString().Trim() : node.SelectSingleNode("FreeFormCC").InnerText;
             txtFreeFormA.Text = node.SelectSingleNode("FreeFormA") == null ? txtFreeFormA.Text.ToString().Trim().Replace("      ", string.Empty) : node.SelectSingleNode("FreeFormA").InnerText.Trim().Replace("      ", string.Empty);
@@ -542,6 +553,7 @@ public partial class EditFuLowback : System.Web.UI.Page
         {
             ieID = Session["PatientIE_ID"].ToString();
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -555,14 +567,22 @@ public partial class EditFuLowback : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
-                        ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        //ids += DiagCode_ID + ",";
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
 
                 }
             }
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
 
         }
         catch (Exception ex)
@@ -690,7 +710,10 @@ public partial class EditFuLowback : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         string ieMode = "New";
-        SaveDiagnosis(Session["PatientIE_ID"].ToString());
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(Session["PatientIE_ID"].ToString());
+
         SaveUI(Session["patientFUId"].ToString(), ieMode, true);
         // SaveStandards(Session["PatientIE_ID"].ToString());
         PopulateUI(Session["patientFUId"].ToString());
@@ -722,6 +745,7 @@ public partial class EditFuLowback : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -775,15 +799,24 @@ public partial class EditFuLowback : System.Web.UI.Page
         {
             _FuId = Session["patientFUId"].ToString();
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_FuId != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_FuId != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -961,6 +994,38 @@ public partial class EditFuLowback : System.Web.UI.Page
                 repROMCervical.DataBind();
             }
         }
+    }
+
+    public void bindCF()
+    {
+        string path = Server.MapPath("~/Template/LowbackCC.html");
+        string body = File.ReadAllText(path);
+
+        CF.InnerHtml = body;
+        hdorgCC.Value = body;
+
+    }
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/LowbackPE.html");
+        string body = File.ReadAllText(path);
+
+
+        divPE.InnerHtml = body;
+        hdorgPE.Value = body;
+
+
+        //int val = checkTP();
+
+
+        // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",0)", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 
 }

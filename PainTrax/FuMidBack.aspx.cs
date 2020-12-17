@@ -34,6 +34,7 @@ public partial class FuMidBack : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             bindDropdown();
             if (Session["PatientIE_ID2"] != null && Session["patientFUId"] != null)
             {
@@ -72,6 +73,9 @@ public partial class FuMidBack : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
                     BindDataGrid();
+
+                    bindCC();
+                    bindPE();
                 }
                 else
                 {
@@ -80,6 +84,8 @@ public partial class FuMidBack : System.Web.UI.Page
                     //patientID.Value = Session["PatientIE_ID"].ToString();
                     PopulateUIDefaults();
                     BindDataGrid();
+                    bindCC();
+                    bindPE();
                     //PopulateUI(_CurIEid);
                     //BindDCDataGrid();
                     //BindDataGrid();
@@ -144,6 +150,9 @@ public partial class FuMidBack : System.Web.UI.Page
             TblRow["PEvalueoriginal"] = hdPEvalueoriginal.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
             TblRow["PESides"] = hdPESides.Value;
+            TblRow["PEvalueoriginal"] = hdorgPE.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
+
 
 
             if (_ieMode == "New")
@@ -217,11 +226,12 @@ public partial class FuMidBack : System.Web.UI.Page
 
             _fldPop = false;
         }
-        //else
-        //{
-        //    ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
+        else
+        {
+            bindCC();
+            bindPE();
 
-        //}
+        }
         sqlTbl.Dispose();
         sqlCmdBuilder.Dispose();
         sqlAdapt.Dispose();
@@ -231,6 +241,7 @@ public partial class FuMidBack : System.Web.UI.Page
     public void PopulateIEUI(string ieID)
     {
 
+        if (oSQLConn.State == ConnectionState.Open) oSQLConn.Close();
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
         oSQLConn.ConnectionString = sProvider;
@@ -554,6 +565,7 @@ public partial class FuMidBack : System.Web.UI.Page
         try
         {
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -567,13 +579,21 @@ public partial class FuMidBack : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    //ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
                         //ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
                 }
             }
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
             BindDCDataGrid();
         }
         catch (Exception ex)
@@ -700,7 +720,10 @@ public partial class FuMidBack : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         string ieMode = "New";
-        SaveDiagnosis(Session["patientFUId"].ToString());
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(Session["patientFUId"].ToString());
+
         SaveUI(Session["patientFUId"].ToString(), ieMode, true);
         SaveStandards(Session["PatientIE_ID"].ToString());
         PopulateUI(Session["patientFUId"].ToString());
@@ -754,15 +777,25 @@ public partial class FuMidBack : System.Web.UI.Page
         try
         {
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_CurIEid != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_CurIEid != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            _FuId = Session["patientFUId"].ToString();
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -776,6 +809,7 @@ public partial class FuMidBack : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -944,5 +978,36 @@ public partial class FuMidBack : System.Web.UI.Page
 
         return val;
 
+    }
+
+    public void bindCC()
+    {
+        string path = Server.MapPath("~/Template/MidbackCC.html");
+        string body = File.ReadAllText(path);
+
+        CF.InnerHtml = body;
+        hdorgCC.Value = body;
+
+    }
+
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/MidbackPE.html");
+        string body = File.ReadAllText(path);
+
+
+        divPE.InnerHtml = body;
+        hdorgPE.Value = body;
+
+        //int val = checkTP();
+
+        //ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",0)", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 }

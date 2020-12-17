@@ -5,7 +5,7 @@
         <span><b>Left Elbow Examination:</b></span><label style="visibility:hidden">#leftelbowtitle</label>
 
 
-        <input type="checkbox" id="chktendernessL" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the elbow. " />There is tenderness upon palpation of the elbow.
+        <input type="checkbox" id="chktendernessL" class="nocomma" onclick="checkMe(this)" checked="checked" value="There is tenderness upon palpation of the elbow. " />There is tenderness upon palpation of the elbow.
 
         <input type="checkbox" id="chkROML" class="nocomma" onclick="checkMe(this)" value="Range of motion is " /> Range of motion is
         <section class="dropdown">
@@ -62,6 +62,8 @@
             <button type="button" id="start_button" onclick="startButton(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#elbowleftrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
 
@@ -70,7 +72,7 @@
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Elbow Examination:</b></span><label style="visibility:hidden">#rightelbowtitle</label>
 
-        <input type="checkbox" id="chktendernessL" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the elbow " /> There is tenderness upon palpation of the elbow.
+        <input type="checkbox" id="chktendernessL" class="nocomma" onclick="checkMe(this)" checked="checked" value="There is tenderness upon palpation of the elbow " /> There is tenderness upon palpation of the elbow.
 
 
         <input type="checkbox" id="chkROMR" class="nocomma" onclick="checkMe(this)" value="Range of motion is " /> Range of motion is
@@ -130,6 +132,8 @@
             <button type="button" id="start_button" onclick="startButton(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#elbowrightrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
 

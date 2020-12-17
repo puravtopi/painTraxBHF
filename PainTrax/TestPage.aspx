@@ -43,6 +43,8 @@
         <asp:Button runat="server" ID="btnStop" Text="Stop" OnClick="btnStop_Click" />
          <br />
         <asp:Button runat="server" ID="btnPlay" Text="Play" OnClick="btnPlay_Click" />
+          <br />
+        <asp:Button runat="server" ID="btnDeo" Text="Demo" OnClick="btnDeo_Click" />
 
         <div class="col-md-3">
             <label class="control-label labelcolor">GAIT:</label>

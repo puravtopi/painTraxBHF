@@ -159,7 +159,7 @@
 
 
 
-            <asp:GridView ID="gvProcedureTbl" AllowSorting="true" OnSorting="gridView_Sorting" runat="server"  Width="100%" AutoGenerateColumns="false" PageSize="100" CssClass="table table-striped table-bordered table-hover" AllowPaging="True" PagerStyle-CssClass="pager" OnRowDataBound="gvProcedureTbl_RowDataBound">
+            <asp:GridView ID="gvProcedureTbl" AllowSorting="true" OnSorting="gridView_Sorting" runat="server" Width="100%" AutoGenerateColumns="false" PageSize="100" CssClass="table table-striped table-bordered table-hover" AllowPaging="True" PagerStyle-CssClass="pager" OnRowDataBound="gvProcedureTbl_RowDataBound">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -169,12 +169,13 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="sex" HeaderText="Sex" />
-                    <asp:BoundField DataField="FirstName" HeaderText="FirstName"  SortExpression="FirstName"/>
+                    <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
                     <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
                     <asp:BoundField DataField="Attorney" HeaderText="Attorney" />
                     <asp:BoundField DataField="Case" HeaderText="Case" />
                     <asp:BoundField DataField="DOB" HeaderText="DOB" />
                     <asp:BoundField DataField="DOA" HeaderText="DOA" />
+                    <asp:BoundField DataField="MCODE" HeaderText="MCODE" />
                     <%--  <asp:BoundField DataField="Sides" HeaderText="Sides" />
                         <asp:BoundField DataField="Level" HeaderText="Level" />--%>
                     <asp:BoundField DataField="Phone" HeaderText="Phone" />
@@ -201,6 +202,7 @@
 
             </asp:GridView>
 
+        
 
         </div>
     </div>

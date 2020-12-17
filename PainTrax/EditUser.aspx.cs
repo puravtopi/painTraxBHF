@@ -93,7 +93,7 @@ public partial class EditUser : System.Web.UI.Page
             else
             {
                 query = "insert into tblUserMaster(LoginID,Password,Designation,FirstName,LastName,MiddleName,eMailID,Signature,CreatedBy,CreatedDate,desig_id,GroupId,UserMasterId,,Address,Ph_No,designation) values('" + txtLoginID.Text + "','" + txtuserpass.Text + "','',";
-                query = query + " '" + txtFirstName.Text + "','" + txtLastName.Text + "','" + txtMiddleName.Text + "','" + txtEmail.Text + "',Null,'admin',GETDATE()," + ddlDesig.SelectedItem.Value + ",'Ipmpc'," + ddlGroup.SelectedItem.Value + ",'" + txtAddress.Text + "','" + txtPhoneNo.Text + "','" + ddlDesig.SelectedItem.Text + "') ";
+                query = query + " '" + txtFirstName.Text + "','" + txtLastName.Text + "','" + txtMiddleName.Text + "','" + txtEmail.Text + "',Null,'admin',GETDATE()," + ddlDesig.SelectedItem.Value + ",'BHFPC'," + ddlGroup.SelectedItem.Value + ",'" + txtAddress.Text + "','" + txtPhoneNo.Text + "','" + ddlDesig.SelectedItem.Text + "') ";
             }
 
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))

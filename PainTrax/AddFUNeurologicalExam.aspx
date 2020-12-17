@@ -28,12 +28,18 @@
         }
 
 
-         function saveDaynamicContent() {
+        function saveDaynamicContent() {
             debugger
+
             var htmlval = $("#ctl00_ContentPlaceHolder1_divHtml").html();
             $('#<%= hdHTMLContent.ClientID %>').val(htmlval);
 
-            document.getElementById('<%= btnSave.ClientID %>').click();
+             htmlval = $("#ctl00_ContentPlaceHolder1_divtopHtml").html();
+             $('#<%= hdtopHTMLContent.ClientID %>').val(htmlval);
+
+
+
+             document.getElementById('<%= btnSave.ClientID %>').click();
         }
 
         function saveall() {
@@ -164,7 +170,11 @@
     <asp:UpdatePanel runat="server" ID="up_complains">
         <ContentTemplate>
 
+            <asp:HiddenField runat="server" ID="hdtopHTMLContent" />
             <asp:HiddenField runat="server" ID="hdHTMLContent" />
+
+            <div runat="server" id="divtopHtml">
+            </div>
 
             <div runat="server" id="divHtml">
             </div>

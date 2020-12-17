@@ -30,6 +30,7 @@ public partial class EditFuNeck : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             checkTP();
             if (Session["PatientIE_ID"] != null && Session["patientFUId"] != null)
             {
@@ -69,11 +70,15 @@ public partial class EditFuNeck : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
                     BindDataGrid();
+                    bindPE();
+                    bindCF();
                 }
                 else
                 {
                     PopulateUIDefaults();
                     BindDataGrid();
+                    bindPE();
+                    bindCF();
                 }
             }
             else
@@ -126,7 +131,7 @@ public partial class EditFuNeck : System.Web.UI.Page
         if (_ieMode == "Update" || _ieMode == "New")
         {
             TblRow["PatientIE_ID"] = _ieID;
-          
+
             //TblRow["FreeForm"] = txtFreeForm.Text.ToString();
             //TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString().Trim().Replace("      ", string.Empty);
@@ -139,7 +144,7 @@ public partial class EditFuNeck : System.Web.UI.Page
             TblRow["SPTPMBB"] = false;//txtPainScale;
             TblRow["ISFirst"] = true;
 
-          
+
 
             if (_ieMode == "New")
             {
@@ -210,7 +215,7 @@ public partial class EditFuNeck : System.Web.UI.Page
         {
 
             TblRow["PatientFU_ID"] = _fuID;
-           
+
             //TblRow["FreeForm"] = txtFreeForm.Text.ToString();
             //TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString().Trim().Replace("      ", string.Empty);
@@ -223,10 +228,10 @@ public partial class EditFuNeck : System.Web.UI.Page
             TblRow["SPTPMBB"] = false;//txtPainScale;
 
             TblRow["CCvalue"] = hdCCvalue.Value;
-          
+
             TblRow["PEvalue"] = hdPEvalue.Value;
             TblRow["PEvalueoriginal"] = hdPEvalueoriginal.Value;
-           
+
             TblRow["PESides"] = hdPESides.Value;
             TblRow["PESidesText"] = hdPESidesText.Value;
             TblRow["TPDesc"] = hdPETP.Value;
@@ -250,6 +255,9 @@ public partial class EditFuNeck : System.Web.UI.Page
             TblRow["RightROM"] = strright.Substring(1);
             TblRow["NormalROM"] = strnormal.Substring(1);
             TblRow["NameROM"] = strname.Substring(1);
+
+            TblRow["PEvalueoriginal"] = hdorgvalPE.Value;
+            TblRow["CCvalueoriginal"] = hdorgvalCC.Value;
 
 
             for (int i = 0; i < repROMCervical.Items.Count; i++)
@@ -344,7 +352,7 @@ public partial class EditFuNeck : System.Web.UI.Page
         {
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
-           
+
             //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
             //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("      ", string.Empty);
@@ -355,17 +363,24 @@ public partial class EditFuNeck : System.Web.UI.Page
 
             CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
 
-          
+
             divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
 
             hdorgvalPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
 
             int val = checkTP();
 
+            hdorgvalCC.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ");bindSidesVal('" + sqlTbl.Rows[0]["PESides"].ToString() + "','" + sqlTbl.Rows[0]["PESidesText"].ToString() + "');", true);
 
 
             _fldPop = false;
+        }
+        else
+        {
+            bindCF();
+            bindPE();
         }
         sqlTbl.Dispose();
         sqlCmdBuilder.Dispose();
@@ -376,6 +391,8 @@ public partial class EditFuNeck : System.Web.UI.Page
 
     public void PopulateIEUI(string ieid)
     {
+
+        if (oSQLConn.State == ConnectionState.Open) oSQLConn.Close();
 
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
@@ -392,7 +409,7 @@ public partial class EditFuNeck : System.Web.UI.Page
         {
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
-           
+
             //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
             //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("      ", string.Empty);
@@ -420,7 +437,7 @@ public partial class EditFuNeck : System.Web.UI.Page
         foreach (XmlNode node in nodeList)
         {
             _fldPop = true;
-         
+
             //if (txtFreeForm.Text == "") txtFreeForm.Text = node.SelectSingleNode("FreeForm") == null ? txtFreeForm.Text.ToString().Trim() : node.SelectSingleNode("FreeForm").InnerText;
             //if (txtFreeFormCC.Text == "") txtFreeFormCC.Text = node.SelectSingleNode("FreeFormCC") == null ? txtFreeFormCC.Text.ToString().Trim() : node.SelectSingleNode("FreeFormCC").InnerText;
             if (txtFreeFormA.Text == "") txtFreeFormA.Text = node.SelectSingleNode("FreeFormA") == null ? txtFreeFormA.Text.ToString().Trim().Replace("      ", string.Empty) : node.SelectSingleNode("FreeFormA").InnerText.Trim().Replace("      ", string.Empty);
@@ -713,6 +730,7 @@ public partial class EditFuNeck : System.Web.UI.Page
         {
             ieID = Session["PatientIE_ID"].ToString();
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -728,13 +746,14 @@ public partial class EditFuNeck : System.Web.UI.Page
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
                     if (isChecked)
                     {
-                        ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        //ids += DiagCode_ID + ",";
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
-
                 }
             }
-
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
         }
         catch (Exception ex)
         {
@@ -862,7 +881,10 @@ public partial class EditFuNeck : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         string ieMode = "Update";
-        SaveDiagnosis(_CurIEid);
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(_CurIEid);
+
         SaveUI(Convert.ToString(Session["PatientIE_ID"]), Convert.ToString(Session["patientFUId"]), ieMode, true);
         SaveStandards(Session["PatientIE_ID"].ToString());
         PopulateUI(Session["patientFUId"].ToString());
@@ -915,6 +937,7 @@ public partial class EditFuNeck : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -968,15 +991,24 @@ public partial class EditFuNeck : System.Web.UI.Page
         {
             _FuId = Session["patientFUId"].ToString();
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_FuId != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_FuId != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -1152,5 +1184,36 @@ public partial class EditFuNeck : System.Web.UI.Page
                 repROMCervical.DataBind();
             }
         }
+    }
+
+
+    public void bindCF()
+    {
+        string path = Server.MapPath("~/Template/NeckCC.html");
+        string body = File.ReadAllText(path);
+
+        CF.InnerHtml = body;
+        hdorgvalCC.Value = body;
+    }
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/NeckPE.html");
+        string body = File.ReadAllText(path);
+
+        divPE.InnerHtml = body;
+        hdorgvalPE.Value = body;
+
+        int val = checkTP();
+
+
+
+        //   ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",0)", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 }

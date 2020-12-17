@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Data.SqlClient;
 using System.Xml;
 using System.Configuration;
+using System.IO;
 
 public partial class AddFUNeurologicalExam : System.Web.UI.Page
 {
@@ -33,8 +34,10 @@ public partial class AddFUNeurologicalExam : System.Web.UI.Page
             }
             else
             {
-                bindHTML();
+
+
                 SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString);
+
                 DBHelperClass db = new DBHelperClass();
                 string query = ("select count(*) as count1 FROM tblPatientIEDetailPage2 WHERE PatientIE_ID= " + Session["PatientIE_Id2"].ToString() + "");
                 SqlCommand cm = new SqlCommand(query, cn);
@@ -55,14 +58,17 @@ public partial class AddFUNeurologicalExam : System.Web.UI.Page
                     // PopulateUI(Session["PatientIE_Id2"].ToString());
                     // DefaultValue();
                     PopulateUI(Session["PatientIE_Id2"].ToString(), Session["patientFUId"].ToString(), "Open");
+                    bindData();
                 }
                 else if (rw == null)
                 {
                     PopulateIE(Session["PatientIE_Id2"].ToString(), "Open");
+                    bindData();
                 }
                 else
                 {
                     DefaultValue();
+                    bindHtml();
                 }
 
 
@@ -1248,11 +1254,11 @@ public partial class AddFUNeurologicalExam : System.Web.UI.Page
 
         if (ds.Tables[0].Rows.Count > 0)
         {
-            query = "update tblPage3FUHTMLContent set HTMLContent=@HTMLContent where PatientFU_ID=" + Session["PatientFuId"].ToString();
+            query = "update tblPage3FUHTMLContent set HTMLContent=@HTMLContent,topSectionHTML=@topSectionHTML where PatientFU_ID=" + Session["PatientFuId"].ToString();
         }
         else
         {
-            query = "insert into tblPage3FUHTMLContent(HTMLContent,PatientIE_ID,PatientFU_ID)values(@HTMLContent,@PatientIE_ID,@PatientFU_ID)";
+            query = "insert into tblPage3FUHTMLContent(topSectionHTML,HTMLContent,PatientIE_ID,PatientFU_ID)values(@topSectionHTML,@HTMLContent,@PatientIE_ID,@PatientFU_ID)";
         }
         using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
         using (SqlCommand command = new SqlCommand(query, connection))
@@ -1260,6 +1266,7 @@ public partial class AddFUNeurologicalExam : System.Web.UI.Page
             command.Parameters.AddWithValue("@PatientIE_ID", Session["PatientIE_ID"].ToString());
             command.Parameters.AddWithValue("@PatientFU_ID", Session["patientFUId"].ToString());
             command.Parameters.AddWithValue("@HTMLContent", string.IsNullOrEmpty(hdHTMLContent.Value) ? null : hdHTMLContent.Value);
+            command.Parameters.AddWithValue("@topSectionHTML", string.IsNullOrEmpty(hdtopHTMLContent.Value) ? null : hdtopHTMLContent.Value);
 
             connection.Open();
             var results = command.ExecuteNonQuery();
@@ -1268,7 +1275,7 @@ public partial class AddFUNeurologicalExam : System.Web.UI.Page
 
     }
 
-    public void bindHTML()
+    public void bindData()
     {
         string query = "select * from tblPage3FUHTMLContent where PatientFU_ID=" + Session["PatientFuId"].ToString();
 
@@ -1276,7 +1283,30 @@ public partial class AddFUNeurologicalExam : System.Web.UI.Page
 
         if (ds.Tables[0].Rows.Count > 0)
         {
-            divHtml.InnerHtml = ds.Tables[0].Rows[0]["HTMLContent"].ToString();
+            if (!string.IsNullOrEmpty(ds.Tables[0].Rows[0]["HTMLContent"].ToString()))
+            {
+                divHtml.InnerHtml = ds.Tables[0].Rows[0]["HTMLContent"].ToString();
+                divtopHtml.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
+            }
+           
         }
+        else
+            bindHtml();
     }
+
+    public void bindHtml()
+    {
+        string path = Server.MapPath("~/Template/Page3.html");
+        string body = File.ReadAllText(path);
+
+        divHtml.InnerHtml = body;
+
+        path = Server.MapPath("~/Template/Page3_top.html");
+        body = File.ReadAllText(path);
+
+        divtopHtml.InnerHtml = body;
+
+    }
+
+
 }

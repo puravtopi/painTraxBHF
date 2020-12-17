@@ -18,7 +18,7 @@ public partial class TimeSheet : System.Web.UI.Page
     static string prevPage = String.Empty;
     private string OTHER = "Other";
     protected void Page_Load(object sender, EventArgs e)
-    {
+     {
         if (Session["uname"] == null)
         {
             Response.Redirect("~/Login.aspx");
@@ -35,9 +35,6 @@ public partial class TimeSheet : System.Web.UI.Page
                 Session["prevPage"] = prevPage;
             }
 
-
-            txtTo.Text = System.DateTime.Now.ToString("MM/dd/yy");
-            txt_From.Text = System.DateTime.Now.ToString("MM/dd/yy");
 
 
             bindDOE();
@@ -58,8 +55,8 @@ public partial class TimeSheet : System.Web.UI.Page
             {
                 pnlSearch.Visible = false;
                 int patientIEID = Convert.ToInt32(Request.QueryString["PId"]);
-                int FUID = Convert.ToInt32(Request.QueryString["FID"]);
-
+                int FUID = Convert.ToInt32(Request.QueryString["FID"]); 
+                
                 BusinessLogic bl = new BusinessLogic();
                 List<PatientsByDOE_Result> PatientResult = bl.getPatientByIE(patientIEID);
 
@@ -114,8 +111,8 @@ public partial class TimeSheet : System.Web.UI.Page
         {
             // txtDate.Text = 
             Session["doe"] = txtDate.Text;
-            //ddDate.SelectedValue;  
-            //Session["doe"].ToString();
+                //ddDate.SelectedValue;  
+                //Session["doe"].ToString();
         }
 
         //if (ViewState["tblProcedures"] != null && pnlProcedures.Controls.Count == 0)
@@ -182,18 +179,18 @@ public partial class TimeSheet : System.Web.UI.Page
         List<Procedure> _procedures = new List<Procedure>();
         string[] tokens = _bodypart.Split('_');
         string Position = "";
-        if (tokens.Length > 1)
-            if (tokens[1] != null)
-            {
-                if (tokens[1] == "L") { Position = "Left"; }
-                else if (tokens[1] == "R") { Position = "Right"; }
-            }
+        if(tokens.Length > 1)
+        if (tokens[1] != null)
+        {
+            if (tokens[1] == "L") { Position = "Left"; }
+            else if (tokens[1] == "R") { Position = "Right"; }
+        }
         //if (_bodypart == OTHER)
         //{ _procedures = _bl.GetProceduresByBody("Other"); }
         //else
         //{
-        _procedures = GetProceduresByBody(_bodypart, Position).Where(s => s.DateType == _datetype).Distinct<Procedure>(new ProcedureEqualityComparer()).ToList<Procedure>();
-        //}
+            _procedures = GetProceduresByBody(_bodypart,Position).Where(s => s.DateType == _datetype).Distinct<Procedure>(new ProcedureEqualityComparer()).ToList<Procedure>();
+    //}
 
         ddProcedure.Items.Clear();
         ddProcedure.Items.Add(new ListItem("Please Select", "0"));
@@ -204,8 +201,8 @@ public partial class TimeSheet : System.Web.UI.Page
             //{ MCodeDetails = _procedure.DateType + "," + _procedure.Heading; }
             //else
             //{
-            MCodeDetails = _procedure.MCode + "," + _procedure.Heading;
-            //}
+                MCodeDetails = _procedure.MCode + "," + _procedure.Heading;
+        //}
 
             ddProcedure.Items.Add(new ListItem(MCodeDetails, _procedure.ProcedureId.ToString()));
         }
@@ -241,7 +238,7 @@ public partial class TimeSheet : System.Web.UI.Page
     }
 
 
-    protected void bindSubProcedures(long _procedureId, string MCODE, string bodypart)
+    protected void bindSubProcedures(long _procedureId, string MCODE,string bodypart)
     {
         lblAlert.Text = "";
         BusinessLogic _bl = new BusinessLogic();
@@ -303,7 +300,7 @@ public partial class TimeSheet : System.Web.UI.Page
                 {
                     sqlcmd = "Select DiagCervialBulgeDate, Other1Date, Other2Date,Other3Date,Other4Date,Other5Date,Other6Date,Other7Date,Other1Study, Other2Study,Other3Study,Other4Study,Other5Study,Other6Study,Other7Study from tblFUPatientFUDetailPage1 WHERE PatientFU_ID = " + _patientFUID;
                 }
-                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_BHF"].ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand(sqlcmd, con);
                     con.Open();
@@ -354,7 +351,7 @@ public partial class TimeSheet : System.Web.UI.Page
                 {
                     sqlcmd = "Select DiagThoracicBulgeDate,Other1Date, Other2Date,Other3Date,Other4Date,Other5Date,Other6Date,Other7Date,Other1Study, Other2Study,Other3Study,Other4Study,Other5Study,Other6Study,Other7Study from tblFUPatientFUDetailPage1 WHERE PatientFU_ID = " + _patientFUID;
                 }
-                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_BHF"].ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand(sqlcmd, con);
                     con.Open();
@@ -405,7 +402,7 @@ public partial class TimeSheet : System.Web.UI.Page
                 {
                     sqlcmd = "Select DiagLumberBulgeDate, Other1Date, Other2Date,Other3Date,Other4Date,Other5Date,Other6Date,Other7Date,Other1Study, Other2Study,Other3Study,Other4Study,Other5Study,Other6Study,Other7Study from tblFUPatientFUDetailPage1 WHERE PatientFU_ID = " + _patientFUID;
                 }
-                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_BHF"].ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand(sqlcmd, con);
                     con.Open();
@@ -459,7 +456,7 @@ public partial class TimeSheet : System.Web.UI.Page
         #region Bind Injured Body Parts
         foreach (string _injuredbodypart in _injuredBodyParts)
         {
-            List<Procedure> _procedures = GetProceduresByBody(_injuredbodypart, "");
+            List<Procedure> _procedures = GetProceduresByBody(_injuredbodypart,"");
             bool _istitletobebind = true;
             //Row to display a body part details completely
             //TableRow _trBodyPart = new TableRow();
@@ -583,7 +580,7 @@ public partial class TimeSheet : System.Web.UI.Page
 
                     ProcedureDetailR_ID = (_pdRequested != null) ? _pdRequested.ProcedureDetail_ID : ProcedureDetailR_ID;
                     ProcedureDetailS_ID = (_pdScheduled != null) ? _pdScheduled.ProcedureDetail_ID : ProcedureDetailS_ID;
-                    ProcedureDetailE_ID = (_pdExecuted != null) ? _pdExecuted.ProcedureDetail_ID : ProcedureDetailE_ID;
+                    ProcedureDetailE_ID = (_pdExecuted != null) ? _pdExecuted.ProcedureDetail_ID : ProcedureDetailE_ID;              
                     long Procedure_ID = 0;
                     Procedure_ID = (_pdRequested != null) ? _pdRequested.Procedure_ID : Procedure_ID;
                     Procedure_ID = (_pdScheduled != null) ? _pdScheduled.Procedure_ID : Procedure_ID;
@@ -593,7 +590,7 @@ public partial class TimeSheet : System.Web.UI.Page
                     if (_proc == ((_pdRequested != null ? _pdRequested.MCODE : "")))
                     {
                         //Session["_proc"] = "";
-                        // if ((Session["_proc"] != null ? Session["_proc"].ToString() : "").Contains(_proc))
+                       // if ((Session["_proc"] != null ? Session["_proc"].ToString() : "").Contains(_proc))
                         if (_proc == (Session["_proc"] != null ? Session["_proc"].ToString() : ""))
                         {
                             Session["_proc"] = (Session["_proc"] != null ? Session["_proc"].ToString() : "");
@@ -631,7 +628,7 @@ public partial class TimeSheet : System.Web.UI.Page
                     //cell for requested
                     //if (_proc.Contains((_pdRequested != null ? _pdRequested.MCODE : "")))
                     //{
-
+                   
                     if (_proc != "")
                     {
                         if ((Session["_proc"] != null ? Session["_proc"].ToString() : "").Contains(_proc))
@@ -641,7 +638,7 @@ public partial class TimeSheet : System.Web.UI.Page
                             //TableCell SubProc = new TableCell();                           
                             //SubProc.Controls.Add(_tbProcedure);
                             ////SubRow.Cells.Add(SubProc);
-
+                            
                             TableCell _tcSubProcedureRequested = new TableCell();
                             TextBox _txtSubProcedureRequested = new TextBox();
                             _txtSubProcedureRequested.ID = Procedure_ID + "_" + _patientIEID + "_" + _patientFUID + "_" + _proc + "_" + "R" + "_" + _subProcedure + "_" + _injuredbodypart + "_" + ProcedureDetailR_ID;
@@ -739,7 +736,7 @@ public partial class TimeSheet : System.Web.UI.Page
                 }
 
                 //add rows to subprocedure table
-
+                
 
                 //add subprocedure table to main table
                 if (_trRequested.Cells.Count > 1 || _trScheduled.Cells.Count > 1 || _trExecuted.Cells.Count > 1)
@@ -898,8 +895,7 @@ public partial class TimeSheet : System.Web.UI.Page
         lblPDLocation.Text = "";
         lblDCaseType.Text = "";
         ltNew.Text = "";
-        //List<PatientsByDOE_Result> _patients = _bl.getPatientsByDOE(Convert.ToDateTime(ddDate.SelectedValue), ddLocation.SelectedValue);
-        List<PatientsByDOE_Result> _patients = _bl.getPatientsByDOENew(Convert.ToDateTime(txt_From.Text), Convert.ToDateTime(txtTo.Text), ddLocation.SelectedValue);
+        List<PatientsByDOE_Result> _patients = _bl.getPatientsByDOE(Convert.ToDateTime(ddDate.SelectedValue), ddLocation.SelectedValue);
         foreach (TreeNode tn in loadPatientsToTreeNode(_patients))
         {
             tvPatients.Nodes.Add(tn);
@@ -959,14 +955,14 @@ public partial class TimeSheet : System.Web.UI.Page
         //}
         //else
         //{
-        rblDateType.Enabled = true;
-        ddProcedure.Items.Clear();
-        ddProcedure.Enabled = false;
-        ddSubProcedure.Items.Clear();
-        ddSubProcedure.Enabled = false;
-        //txtDate.Enabled = false;
-        txtNumber.Enabled = false;
-        // }
+            rblDateType.Enabled = true;
+            ddProcedure.Items.Clear();
+            ddProcedure.Enabled = false;
+            ddSubProcedure.Items.Clear();
+            ddSubProcedure.Enabled = false;
+            //txtDate.Enabled = false;
+            txtNumber.Enabled = false;
+       // }
     }
 
     protected void ddProcedure_SelectedIndexChanged(object sender, EventArgs e)
@@ -1015,9 +1011,9 @@ public partial class TimeSheet : System.Web.UI.Page
                 _mcode,
                 ddBodyPart.SelectedValue,
                 Convert.ToDateTime(date1),
-               //((txtDate.Text != "") ? (DateTime?)Convert.ToDateTime(txtDate.Text.Split('/')[1] + "/" + txtDate.Text.Split('/')[0] + "/" + txtDate.Text.Split('/')[2]) : null),
+                //((txtDate.Text != "") ? (DateTime?)Convert.ToDateTime(txtDate.Text.Split('/')[1] + "/" + txtDate.Text.Split('/')[0] + "/" + txtDate.Text.Split('/')[2]) : null),
                "",//will automatically inserted from sp
-                Convert.ToInt64(hfUserID.Value), 0,
+                Convert.ToInt64(hfUserID.Value),0,
                 true
                 );
             if (count != "0")
@@ -1142,7 +1138,6 @@ public partial class TimeSheet : System.Web.UI.Page
             Response.Redirect(string.Format("~/SIDownloadSheet.aspx?L={0}&&D={1}", LocationId, date.ToString("s", CultureInfo.InvariantCulture)));
         }
     }
-
     protected void lbtnPatientDetails_Click(object sender, EventArgs e)
     {
         Response.Redirect(prevPage);

@@ -37,6 +37,7 @@ public partial class FuKnee : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             BindROM();
             if (Session["PatientIE_ID2"] != null && Session["patientFUId"] != null)
             {
@@ -73,6 +74,9 @@ public partial class FuKnee : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
                     BindDataGrid();
+
+                    bindCC();
+                    bindPE();
                 }
                 else
                 {
@@ -84,6 +88,8 @@ public partial class FuKnee : System.Web.UI.Page
                     //PopulateUI(_CurIEid);
                     //BindDCDataGrid();
                     //BindDataGrid();
+                    bindCC();
+                    bindPE();
                 }
                 if (Position != "")
                 {
@@ -213,7 +219,7 @@ public partial class FuKnee : System.Web.UI.Page
         if (_ieMode == "Update" || _ieMode == "New")
         {
             TblRow["PatientFU_ID"] = _FuId;
-          
+
             TblRow["FreeForm"] = txtFreeForm.Text.ToString().ToString();
             TblRow["FreeFormCC"] = txtFreeFormCC.Text.ToString();
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
@@ -305,20 +311,40 @@ public partial class FuKnee : System.Web.UI.Page
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
-            if (SessionManager.forwardCC)
-                CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
-            else
-                CF.InnerHtml = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+            string cc = sqlTbl.Rows[0]["CCvalue"].ToString();
+            string ccOrg = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
-            hdorgCC.Value= sqlTbl.Rows[0]["CCvalueoriginal"].ToString(); 
+            string p = Request.QueryString["P"];
+
+
+
+
+
+            string pe = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string peOrg = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+
+
+
+
+
+
+
+            if (SessionManager.forwardCC)
+                CF.InnerHtml = cc;
+            else
+                CF.InnerHtml = ccOrg;
+
+            hdorgCC.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
 
 
             if (SessionManager.forwardPE)
-                divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
+                divPE.InnerHtml = pe;
             else
-                divPE.InnerHtml = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+                divPE.InnerHtml = peOrg;
 
             hdorgPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
 
 
             int val = checkTP();
@@ -330,10 +356,11 @@ public partial class FuKnee : System.Web.UI.Page
 
             _fldPop = false;
         }
-        //else
-        //{
-        //    ClientScript.RegisterStartupScript(this.GetType(), "funclean", "clnVal();", true);
-        //}
+        else
+        {
+            bindCC();
+            bindPE();
+        }
 
         sqlTbl.Dispose();
         sqlCmdBuilder.Dispose();
@@ -344,7 +371,8 @@ public partial class FuKnee : System.Web.UI.Page
 
     public void PopulateIEUI(string ieID)
     {
-
+        if (oSQLConn.State == ConnectionState.Open)
+            oSQLConn.Close();
 
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
@@ -814,6 +842,7 @@ public partial class FuKnee : System.Web.UI.Page
         try
         {
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -827,13 +856,21 @@ public partial class FuKnee : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    //ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
                         //ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
                 }
             }
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
             BindDCDataGrid();
         }
         catch (Exception ex)
@@ -958,7 +995,9 @@ public partial class FuKnee : System.Web.UI.Page
         string ieMode = "New";
         _CurIEid = Session["PatientIE_ID2"].ToString();
         _FuId = Session["patientFUId"].ToString();
-        SaveDiagnosis(_CurIEid);
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(_CurIEid);
         SaveUI(_CurIEid, _FuId, ieMode, true);
         SaveStandards(Session["PatientIE_ID2"].ToString());
         PopulateUI(Session["patientFUId"].ToString());
@@ -973,15 +1012,25 @@ public partial class FuKnee : System.Web.UI.Page
         try
         {
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_CurIEid != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_CurIEid != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            _FuId = Session["patientFUId"].ToString();
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -995,6 +1044,7 @@ public partial class FuKnee : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -1091,62 +1141,66 @@ public partial class FuKnee : System.Web.UI.Page
 
     protected void BindROM()
     {
-
-        _FuId = Session["patientFUId"].ToString();
-        string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
-        string SqlStr = "";
-        oSQLConn.ConnectionString = sProvider;
-        oSQLConn.Open();
-        SqlStr = "Select * from tblFUbpknee WHERE PatientFU_ID = " + _FuId;
-        SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
-        SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder(sqlAdapt);
-        DataTable sqlTbl = new DataTable();
-        sqlAdapt.Fill(sqlTbl);
-        if (sqlTbl.Rows.Count > 0)
+        if (SessionManager.forwardROM)
         {
-            string[] strname, strleft, strright, strnormal;
-            if (string.IsNullOrEmpty(sqlTbl.Rows[0]["NameROM"].ToString()) == false)
+            _FuId = Session["patientFUId"].ToString();
+            string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+            string SqlStr = "";
+            oSQLConn.ConnectionString = sProvider;
+            oSQLConn.Open();
+            SqlStr = "Select * from tblFUbpknee WHERE PatientFU_ID = " + _FuId;
+            SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
+            SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder(sqlAdapt);
+            DataTable sqlTbl = new DataTable();
+            sqlAdapt.Fill(sqlTbl);
+            if (sqlTbl.Rows.Count > 0)
             {
-                strname = sqlTbl.Rows[0]["NameROM"].ToString().Split(',');
-                strleft = sqlTbl.Rows[0]["LeftROM"].ToString().Split(',');
-                strright = sqlTbl.Rows[0]["RightROM"].ToString().Split(',');
-                strnormal = sqlTbl.Rows[0]["NormalROM"].ToString().Split(',');
-
-
-                // Create the Table
-                DataTable OrdersTable = new DataTable("ROM");
-                // Build the Orders schema
-                OrdersTable.Columns.Add("name", Type.GetType("System.String"));
-                OrdersTable.Columns.Add("left", Type.GetType("System.String"));
-                OrdersTable.Columns.Add("right", Type.GetType("System.String"));
-                OrdersTable.Columns.Add("normal", Type.GetType("System.String"));
-
-                DataRow workRow;
-
-                for (int i = 0; i < strname.Length; i++)
+                string[] strname, strleft, strright, strnormal;
+                if (string.IsNullOrEmpty(sqlTbl.Rows[0]["NameROM"].ToString()) == false)
                 {
+                    strname = sqlTbl.Rows[0]["NameROM"].ToString().Split(',');
+                    strleft = sqlTbl.Rows[0]["LeftROM"].ToString().Split(',');
+                    strright = sqlTbl.Rows[0]["RightROM"].ToString().Split(',');
+                    strnormal = sqlTbl.Rows[0]["NormalROM"].ToString().Split(',');
 
-                    workRow = OrdersTable.NewRow();
-                    workRow[0] = strname[i];
-                    workRow[1] = strleft[i];
-                    workRow[2] = strright[i];
-                    workRow[3] = strnormal[i];
-                    OrdersTable.Rows.Add(workRow);
-                }
 
-                if (OrdersTable.Rows.Count != 0)
-                {
-                    repROM.DataSource = OrdersTable;
-                    repROM.DataBind();
+                    // Create the Table
+                    DataTable OrdersTable = new DataTable("ROM");
+                    // Build the Orders schema
+                    OrdersTable.Columns.Add("name", Type.GetType("System.String"));
+                    OrdersTable.Columns.Add("left", Type.GetType("System.String"));
+                    OrdersTable.Columns.Add("right", Type.GetType("System.String"));
+                    OrdersTable.Columns.Add("normal", Type.GetType("System.String"));
+
+                    DataRow workRow;
+
+                    for (int i = 0; i < strname.Length; i++)
+                    {
+
+                        workRow = OrdersTable.NewRow();
+                        workRow[0] = strname[i];
+                        workRow[1] = strleft[i];
+                        workRow[2] = strright[i];
+                        workRow[3] = strnormal[i];
+                        OrdersTable.Rows.Add(workRow);
+                    }
+
+                    if (OrdersTable.Rows.Count != 0)
+                    {
+                        repROM.DataSource = OrdersTable;
+                        repROM.DataBind();
+                    }
                 }
+                else
+                    getXMLROMvalue();
             }
             else
+            {
                 getXMLROMvalue();
+            }
         }
         else
-        {
             getXMLROMvalue();
-        }
     }
 
     private void getXMLROMvalue()
@@ -1183,5 +1237,47 @@ public partial class FuKnee : System.Web.UI.Page
                 }
             }
         }
+    }
+
+    public void bindCC()
+    {
+        string path = Server.MapPath("~/Template/KneeCC.html");
+        string body = File.ReadAllText(path);
+
+
+
+        var gender = Session["Gender"].ToString().ToLower() == "mr." ? "He" : "She";
+
+        body = body.Replace("#gender", gender);
+
+        CF.InnerHtml = body;
+        hdorgCC.Value = body;
+
+    }
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/KneePE.html");
+        string body = File.ReadAllText(path);
+
+        string p = Request.QueryString["P"];
+
+
+
+        divPE.InnerHtml = body;
+        hdorgPE.Value = body;
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
+
+
+        //int val = checkTP();
+
+        // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 }

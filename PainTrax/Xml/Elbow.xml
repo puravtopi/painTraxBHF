@@ -4,13 +4,13 @@
     <name>Extension</name>
     <left></left>
     <right></right>
-    <normal>150</normal>
+    <normal>0</normal>
   </ROM>
   <ROM>
     <name>Flexion</name>
     <left></left>
     <right></right>
-    <normal>0</normal>
+    <normal>150</normal>
   </ROM>
   <ROM>
     <name>Supination</name>

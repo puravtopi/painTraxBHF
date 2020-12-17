@@ -72,9 +72,22 @@ public partial class AddFU : System.Web.UI.Page
                 bindFUDetails(PatientIE_Id);
                 hfPatientIEId.Value = PatientIE_Id.ToString();
                 Session["bodyPartsList"] = null;
+
+                hfPatientFUId.Value = GetFUID(Convert.ToInt64(hfPatientIEId.Value != "" ? hfPatientIEId.Value : "0")).ToString();
+
                 AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
-                master.bindData(Session["PatientIE_Id2"].ToString());
-                bindPatientDetails(PatientIE_Id);
+                if (hfPatientFUId.Value == "0")
+                {
+                    master.bindData("", Session["PatientIE_Id2"].ToString());
+                    bindPatientDetails(PatientIE_Id);
+                }
+                else
+                {
+                    master.bindData(hfPatientFUId.Value, "");
+                    bindPatientDetails(PatientIE_Id, Convert.ToInt32(hfPatientFUId.Value), false);
+                }
+
+
 
 
                 if (!string.IsNullOrEmpty(Convert.ToString(Session["patientFUId"])) && !redirectpage.Equals("PatientIntakeList.aspx"))
@@ -82,8 +95,8 @@ public partial class AddFU : System.Web.UI.Page
                     bindRestrictions(Convert.ToInt32(hfPatientIEId.Value), Convert.ToString(Session["patientFUId"]));
                 }
 
-                // Session["patientFUId"]=GetFUID(Convert.ToInt64(hfPatientIEId.Value != "" ? hfPatientIEId.Value : "0")).ToString();
-                //hfPatientFUId.Value = GetFUID(Convert.ToInt64(hfPatientIEId.Value != "" ? hfPatientIEId.Value : "0")).ToString();
+                //  Session["patientFUId"] = GetFUID(Convert.ToInt64(hfPatientIEId.Value != "" ? hfPatientIEId.Value : "0")).ToString();
+
             }
             else if (Session["PatientIE_Id2"] != null)
             {
@@ -92,9 +105,12 @@ public partial class AddFU : System.Web.UI.Page
                 hfPatientFUId.Value = Session["patientFUId"].ToString();
                 Session["PatientIE_ID"] = Session["PatientIE_Id2"];
                 bindFUDetails(Convert.ToInt32(hfPatientIEId.Value));
+
                 AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
-                master.bindData(Session["PatientIE_Id2"].ToString());
-                bindPatientDetails((int)Session["PatientIE_Id2"]);
+                //master.bindData(Session["PatientIE_Id2"].ToString());
+                master.bindData(hfPatientFUId.Value);
+
+                bindPatientDetails((int)Session["PatientIE_Id2"], Convert.ToInt32(hfPatientFUId.Value));
 
                 if (!string.IsNullOrEmpty(Convert.ToString(Session["patientFUId"])) && !redirectpage.Equals("PatientIntakeList.aspx"))
                 {
@@ -202,7 +218,7 @@ public partial class AddFU : System.Web.UI.Page
         gvPatientFUDetails.DataBind();
     }
 
-    protected void bindPatientDetails(int PatientIE_Id)
+    protected void bindPatientDetails(int PatientIE_Id = 0, int PatientFU_ID = 0, bool isforwad = true)
     {
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
         {
@@ -212,6 +228,8 @@ public partial class AddFU : System.Web.UI.Page
             cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
+
+
             while (sdr.Read())
             {
                 // if (!sdr.IsDBNull(0))
@@ -235,6 +253,7 @@ public partial class AddFU : System.Web.UI.Page
                 txtDOA.Text = (sdr["DOA"] != DBNull.Value) ? Convert.ToDateTime(sdr["DOA"]).ToString("MM/dd/yyyy") : "";
                 txtDOB.Text = (sdr["DOB"] != DBNull.Value) ? Convert.ToDateTime(sdr["DOB"]).ToString("MM/dd/yyyy") : "";
                 rblGender.SelectedValue = sdr["Sex"].ToString();
+                Session["Gender"] = sdr["Sex"].ToString();
                 txtSSN.Text = sdr["SSN"].ToString();
                 txtHomePh.Text = sdr["Phone"].ToString();
                 txtWorkPh.Text = sdr["work_phone"].ToString();
@@ -247,9 +266,25 @@ public partial class AddFU : System.Web.UI.Page
                 chkDeniesdrinking.Checked = !string.IsNullOrEmpty(sdr["DeniesDrinking"].ToString()) ? Convert.ToBoolean(sdr["DeniesDrinking"].ToString()) : false;
                 chkDeniesdrugs.Checked = !string.IsNullOrEmpty(sdr["DeniesDrugs"].ToString()) ? Convert.ToBoolean(sdr["DeniesDrugs"].ToString()) : false;
                 chkSocialdrinking.Checked = !string.IsNullOrEmpty(sdr["DeniesSocialDrinking"].ToString()) ? Convert.ToBoolean(sdr["DeniesSocialDrinking"].ToString()) : false;
-                cboReturnToWork.Text = Convert.ToString(sdr["ReturnToWork"]);
-                cboRecevingPhyTherapy.Text = Convert.ToString(sdr["RecevingPhyTherapy"]);
-                cboFeelPainRelief.Text = Convert.ToString(sdr["FeelPainRelief"]);
+
+
+                if (isforwad)
+                {
+                    cboReturnToWork.Text = Convert.ToString(sdr["ReturnToWork"]);
+                    cboRecevingPhyTherapy.Text = Convert.ToString(sdr["RecevingPhyTherapy"]);
+                    cboFeelPainRelief.Text = Convert.ToString(sdr["FeelPainRelief"]);
+
+
+
+
+                    if (PatientFU_ID > 0)
+                    {
+                        cbonote4.Text = Convert.ToString(sdr["Note4"]);
+                        cbonote5.Text = Convert.ToString(sdr["Note5"]);
+                    }
+                }
+
+
                 string filePath = Server.MapPath("~/Xml/USStates.xml");
                 using (DataSet ds = new DataSet())
                 {
@@ -290,16 +325,27 @@ public partial class AddFU : System.Web.UI.Page
             }
             //}
             con.Close();
-            bindInjuredBodyParts(PatientIE_Id);
+            bindInjuredBodyParts(PatientIE_Id, PatientFU_ID);
         }
     }
 
-    protected void bindInjuredBodyParts(int PatientIE_Id)
+    protected void bindInjuredBodyParts(int PatientIE_Id = 0, int PatientFU_Id = 0)
     {
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
         {
-            SqlCommand cmd = new SqlCommand("nusp_GetInjuredBodyParts", con);
-            cmd.Parameters.Add("@PatientIE_ID", PatientIE_Id);
+            SqlCommand cmd = null;
+            if (PatientFU_Id == 0)
+            {
+                cmd = new SqlCommand("nusp_GetInjuredBodyParts", con);
+                cmd.Parameters.Add("@PatientIE_ID", PatientIE_Id);
+            }
+            else
+            {
+                cmd = new SqlCommand("nusp_GetInjuredBodyParts_FU", con);
+                cmd.Parameters.Add("@PatientFU_ID", PatientFU_Id);
+            }
+
+
             cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
@@ -338,11 +384,17 @@ public partial class AddFU : System.Web.UI.Page
                 cmd.Parameters.Add("@Patient_Id", hfPatientId.Value);
                 cmd.Parameters.Add("@PatientIE_ID", hfPatientIEId.Value);
                 cmd.Parameters.Add("@FreeForm", FreeForm);
-                if (!string.IsNullOrEmpty(hfPatientFUId.Value))
+                //if (!string.IsNullOrEmpty(hfPatientFUId.Value))
+                //{
+                //    cmd.Parameters.Add("@PatientFU_ID", hfPatientFUId.Value);
+                //    cmd.Parameters.Add("@isEditFU", true);
+                //}
+                if (!string.IsNullOrEmpty(Session["patientFUId"].ToString()))
                 {
-                    cmd.Parameters.Add("@PatientFU_ID", hfPatientFUId.Value);
+                    cmd.Parameters.Add("@PatientFU_ID", Session["patientFUId"].ToString());
                     cmd.Parameters.Add("@isEditFU", true);
                 }
+
                 cmd.Parameters.Add("@DOE", DateTime.ParseExact(txtDOV.Text, "MM/dd/yyyy", null));
                 if (!string.IsNullOrEmpty(txtDOA.Text.Trim()))
                     cmd.Parameters.Add("@DOA", DateTime.ParseExact(txtDOA.Text, "MM/dd/yyyy", null));
@@ -409,53 +461,12 @@ public partial class AddFU : System.Web.UI.Page
                 cmd.Parameters.Add("@ReturnToWork", cboReturnToWork.Text);
                 cmd.Parameters.Add("@RecevingPhyTherapy", cboRecevingPhyTherapy.Text);
                 cmd.Parameters.Add("@FeelPainRelief", cboFeelPainRelief.Text);
+                cmd.Parameters.Add("@Note4", cbonote4.Text);
+                cmd.Parameters.Add("@Note5", cbonote5.Text);
 
                 SqlParameter outDirectoryId = new SqlParameter("@PatientFUIDS", SqlDbType.Int) { Direction = ParameterDirection.Output };
                 cmd.Parameters.Add(outDirectoryId);
-                //if (cbNeck.Checked)
-                //    cmd.Parameters.Add("@Neck", cbNeck.Checked);
 
-                //if (cbMidBack.Checked)
-                //    cmd.Parameters.Add("@MidBack", cbMidBack.Checked);
-
-                //if (cbLowBack.Checked)
-                //    cmd.Parameters.Add("@LowBack", cbLowBack.Checked);
-
-                //if (cbRShoulder.Checked)
-                //    cmd.Parameters.Add("@RShoulder", cbRShoulder.Checked);
-
-                //if (cbLShoulder.Checked)
-                //    cmd.Parameters.Add("@LShoulder", cbLShoulder.Checked);
-
-                //if (cbRKnee.Checked)
-                //    cmd.Parameters.Add("@cbRKnee", cbRKnee.Checked);
-
-                //if (cbLKnee.Checked)
-                //    cmd.Parameters.Add("@cbLKNee", cbLKnee.Checked);
-
-                //if (cbLElbow.Checked)
-                //    cmd.Parameters.Add("@cbLElbow", cbLElbow.Checked);
-
-                //if (cbRElbow.Checked)
-                //    cmd.Parameters.Add("@cbRElbow", cbRElbow.Checked);
-
-                //if (cbLWrist.Checked)
-                //    cmd.Parameters.Add("@cbLWrist", cbLWrist.Checked);
-
-                //if (cbRWrist.Checked)
-                //    cmd.Parameters.Add("@cbRWrist", cbRWrist.Checked);
-
-                //if (cbLHip.Checked)
-                //    cmd.Parameters.Add("@cbLHip", cbLHip.Checked);
-
-                //if (cbRHip.Checked)
-                //    cmd.Parameters.Add("@cbRHip", cbRHip.Checked);
-
-                //if (cblAnkle.Checked)
-                //    cmd.Parameters.Add("@cblAnkle", cblAnkle.Checked);
-
-                //if (cbRAnkle.Checked)
-                //    cmd.Parameters.Add("@cbRAnkle", cbRAnkle.Checked);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
@@ -480,18 +491,19 @@ public partial class AddFU : System.Web.UI.Page
                     {
                         Session["patientFUId"] = Convert.ToString(DirectoryId);
                     }
-                    alertText = "Follow Up Added Successfully";
 
+                    alertText = "Follow Up Added Successfully";
+                    hfPatientFUId.Value = Session["patientFUId"].ToString();
                     savePage3FU(Session["patientFUId"].ToString());
                     string query = "select top 1 * from tblPage1FUHTMLContent where PateintFU_ID=" + (!string.IsNullOrEmpty(Session["patientFUId"].ToString()) ? Session["patientFUId"].ToString() : "0");
                     DataSet ds = db.selectData(query);
                     if (ds.Tables[0].Rows.Count == 0)
                     {
-                        query = "insert into tblPage1FUHTMLContent values(@degreeSectionHTML,@socialSectionHTML,@PatientIE_ID,@PatientFU_ID,@topSectionHTML)";
+                        query = "insert into tblPage1FUHTMLContent values(@degreeSectionHTML,@socialSectionHTML,@PatientIE_ID,@PatientFU_ID,@topSectionHTML,@activityEffectedHTML)";
                     }
                     else
                     {
-                        query = "update tblPage1FUHTMLContent set degreeSectionHTML=@degreeSectionHTML,socialSectionHTML=@socialSectionHTML where PateintFU_ID=@PatientFU_ID";
+                        query = "update tblPage1FUHTMLContent set degreeSectionHTML=@degreeSectionHTML,socialSectionHTML=@socialSectionHTML,topSectionHTML=@topSectionHTML,activityEffectedHTML=@activityEffectedHTML where PateintFU_ID=@PatientFU_ID";
                     }
 
                     using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
@@ -502,6 +514,8 @@ public partial class AddFU : System.Web.UI.Page
                         command.Parameters.AddWithValue("@degreeSectionHTML", hddegreeHTMLContent.Value);
                         command.Parameters.AddWithValue("@socialSectionHTML", hdsocialHTMLContent.Value);
                         command.Parameters.AddWithValue("@topSectionHTML", hdtopHTMLContent.Value);
+                        command.Parameters.AddWithValue("@activityEffectedHTML", hdactivityeffectedHTMLContent.Value);
+
 
                         connection.Open();
                         var results = command.ExecuteNonQuery();
@@ -510,13 +524,19 @@ public partial class AddFU : System.Web.UI.Page
 
                 }
                 con.Close();
+                AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
+
+                if (Session["patientFUId"] == null)
+                    master.bindData(hfPatientIEId.Value);
+                else
+                    master.bindData(Session["patientFUId"].ToString());
+
                 if (pageHDN.Value != null)
                 {
                     Response.Redirect(Convert.ToString(pageHDN.Value));
                 }
-                AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
-                master.bindData(hfPatientIEId.Value);
-                this.Page.RegisterStartupScript("Alert", "<script>javascript:alert('" + alertText + "')</script>");
+
+
             }
         }
         catch (Exception ex)
@@ -734,6 +754,7 @@ public partial class AddFU : System.Web.UI.Page
                     Session["RightShoulder"] = 0;
                 }
                 Chk_r_Shoulder = false;
+                this.removeROM("rightNormal", hfPatientFUId.Value, "tblFUbpShoulder");
             }
             Session["FUbodyPartsList"] = s;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
@@ -767,6 +788,15 @@ public partial class AddFU : System.Web.UI.Page
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
 
         }
+
+        if (chk_r_Shoulder.Checked == false && chk_L_Shoulder.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpshoulder");
+        else
+            saveSideIE("shoulder", chk_L_Shoulder.Checked, chk_r_Shoulder.Checked, false);
+
+
+        if (chk_r_Shoulder.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "shoulder", "right");
     }
     /// <summary>
     /// Event fires if check box chk_L_Shoulder checked or unchecked in the form.
@@ -804,6 +834,7 @@ public partial class AddFU : System.Web.UI.Page
                 }
                 Chk_L_Shoulder = false;
                 Session["LeftShoulder"] = 0;
+                this.removeROM("leftNormal", hfPatientFUId.Value, "tblFUbpShoulder");
             }
             Session["FUbodyPartsList"] = s;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
@@ -837,6 +868,14 @@ public partial class AddFU : System.Web.UI.Page
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
 
         }
+        if (chk_r_Shoulder.Checked == false && chk_L_Shoulder.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpshoulder");
+        else
+            saveSideIE("shoulder", chk_L_Shoulder.Checked, chk_r_Shoulder.Checked, false);
+
+
+        if (chk_L_Shoulder.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "shoulder", "left");
     }
     /// <summary>
     /// Event fires if check box chk_Neck checked or unchecked in the form.
@@ -904,6 +943,16 @@ public partial class AddFU : System.Web.UI.Page
             Session["FUbodyPartsList"] = s1;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
         }
+
+        if (Chk_Neck == false)
+        {
+            removeDaignosis(hfPatientFUId.Value, "neck");
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpneck");
+        }
+        else
+        {
+            this.saveIE("neck", !Chk_Neck);
+        }
     }
     /// <summary>
     /// Event fires if check box chk_Midback checked or unchecked in the form.
@@ -967,6 +1016,15 @@ public partial class AddFU : System.Web.UI.Page
             Session["FUbodyPartsList"] = s1;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
         }
+        if (Chk_Midback == false)
+        {
+            removeDaignosis(hfPatientFUId.Value, "midback");
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpmidback");
+        }
+        else
+        {
+            this.saveIE("midback", !Chk_Midback);
+        }
     }
     /// <summary>
     /// Event fires if check box chk_lowback checked or unchecked in the form.
@@ -1028,6 +1086,16 @@ public partial class AddFU : System.Web.UI.Page
             Session["FUbodyPartsList"] = s1;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
         }
+
+        if (Chk_lowback == false)
+        {
+            removeDaignosis(hfPatientFUId.Value, "lowback");
+            removeBodyParts(hfPatientFUId.Value, "tblFUbplowback");
+        }
+        else
+        {
+            this.saveIE("lowback", !Chk_lowback);
+        }
     }
     /// <summary>
     /// Event fires if check box chk_r_Keen checked or unchecked in the form.
@@ -1063,6 +1131,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_Keen = false;
+                this.removeROM("rightNormal", hfPatientFUId.Value, "tblFUbpKnee");
             }
             Session["FUbodyPartsList"] = s;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
@@ -1089,11 +1158,22 @@ public partial class AddFU : System.Web.UI.Page
                 s1.Add(d);
 
                 Chk_r_Keen = false;
+
             }
             Session["FUbodyPartsList"] = s1;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
 
         }
+
+        if (chk_r_Keen.Checked == false && chk_L_Keen.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFubpknee");
+        else
+            saveSideIE("knee", chk_L_Keen.Checked, chk_r_Keen.Checked, false);
+
+
+
+        if (chk_r_Keen.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "knee", "right");
     }
     /// <summary>
     /// Event fires if check box chk_L_Keen checked or unchecked in the form.
@@ -1129,6 +1209,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_L_Keen = true;
+                this.removeROM("leftNormal", hfPatientFUId.Value, "tblFUbpKnee");
             }
 
             Session["FUbodyPartsList"] = s;
@@ -1162,6 +1243,14 @@ public partial class AddFU : System.Web.UI.Page
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
 
         }
+
+        if (chk_r_Keen.Checked == false && chk_L_Keen.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpknee");
+        else
+            saveSideIE("knee", chk_L_Keen.Checked, chk_r_Keen.Checked, false);
+
+        if (chk_L_Keen.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "knee", "left");
     }
     /// <summary>
     /// Event fires if check box chk_r_Elbow checked or unchecked in the form.
@@ -1197,6 +1286,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_Elbow = false;
+                this.removeROM("rightNormal", hfPatientFUId.Value, "tblFUbpElbow");
             }
 
             Session["FUbodyPartsList"] = s;
@@ -1230,7 +1320,14 @@ public partial class AddFU : System.Web.UI.Page
             Session["FUbodyPartsList"] = s1;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
         }
+        if (chk_r_Elbow.Checked == false && chk_l_Elbow.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpElbow");
+        else
+            saveSideIE("elbow", chk_l_Elbow.Checked, chk_r_Elbow.Checked, false);
 
+
+        if (chk_r_Elbow.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "elbow", "right");
     }
     /// <summary>
     /// Event fires if check box chk_l_Elbow checked or unchecked in the form.
@@ -1266,6 +1363,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_l_Elbow = true;
+                this.removeROM("leftNormal", hfPatientFUId.Value, "tblFUbpElbow");
             }
 
             Session["FUbodyPartsList"] = s;
@@ -1298,6 +1396,14 @@ public partial class AddFU : System.Web.UI.Page
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
 
         }
+
+        if (chk_r_Elbow.Checked == false && chk_l_Elbow.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpElbow");
+        else
+            saveSideIE("elbow", chk_l_Elbow.Checked, chk_r_Elbow.Checked, false);
+
+        if (chk_l_Elbow.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "elbow", "left");
     }
     /// <summary>
     /// Event fires if check box chk_r_Wrist checked or unchecked in the form.
@@ -1333,6 +1439,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_Wrist = false;
+                this.removeROM("rightNormal", hfPatientFUId.Value, "tblFUbpWrist");
             }
 
             Session["FUbodyPartsList"] = s;
@@ -1363,6 +1470,15 @@ public partial class AddFU : System.Web.UI.Page
             Session["FUbodyPartsList"] = s1;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
         }
+
+        if (chk_r_Wrist.Checked == false && chk_l_Wrist.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpWrist");
+        else
+            saveSideIE("wrist", chk_l_Wrist.Checked, chk_r_Wrist.Checked, false);
+
+
+        if (chk_r_Wrist.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "wrist", "right");
     }
     /// <summary>
     /// Event fires if check box chk_l_Wrist checked or unchecked in the form.
@@ -1397,6 +1513,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_l_Wrist = true;
+                this.removeROM("leftNormal", hfPatientFUId.Value, "tblFUbpWrist");
             }
             Session["FUbodyPartsList"] = s;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
@@ -1427,6 +1544,15 @@ public partial class AddFU : System.Web.UI.Page
             Session["FUbodyPartsList"] = s1;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
         }
+
+
+        if (chk_r_Wrist.Checked == false && chk_l_Wrist.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpWrist");
+        else
+            saveSideIE("wrist", chk_l_Wrist.Checked, chk_r_Wrist.Checked, false);
+
+        if (chk_l_Wrist.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "wrist", "left");
     }
     /// <summary>
     /// Event fires if check box chk_r_Hip checked or unchecked in the form.
@@ -1461,6 +1587,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_Hip = false;
+                this.removeROM("rightNormal", hfPatientFUId.Value, "tblFUbpHip");
             }
 
             Session["FUbodyPartsList"] = s;
@@ -1494,6 +1621,14 @@ public partial class AddFU : System.Web.UI.Page
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
 
         }
+
+        if (chk_r_Hip.Checked == false && chk_l_Hip.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbphip");
+        else
+            saveSideIE("hip", chk_l_Hip.Checked, chk_r_Hip.Checked, false);
+
+        if (chk_r_Hip.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "hip", "right");
     }
     /// <summary>
     /// Event fires if check box chk_l_Hip checked or unchecked in the form.
@@ -1528,6 +1663,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_l_Hip = false;
+                this.removeROM("leftNormal", hfPatientFUId.Value, "tblFUbpHip");
             }
             Session["FUbodyPartsList"] = s;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
@@ -1556,6 +1692,14 @@ public partial class AddFU : System.Web.UI.Page
             Session["FUbodyPartsList"] = s1;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
         }
+
+        if (chk_r_Hip.Checked == false && chk_l_Hip.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbphip");
+        else
+            saveSideIE("hip", chk_l_Hip.Checked, chk_r_Hip.Checked, false);
+
+        if (chk_l_Hip.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "hip", "left");
     }
     /// <summary>
     /// Event fires if check box chk_r_ankle checked or unchecked in the form.
@@ -1590,6 +1734,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_r_ankle = false;
+                this.removeROM("rightNormal", hfPatientFUId.Value, "tblFUbpAnkle");
             }
             Session["FUbodyPartsList"] = s;
 
@@ -1622,6 +1767,14 @@ public partial class AddFU : System.Web.UI.Page
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master; master.bindData(hfPatientFUId.Value);
 
         }
+
+        if (chk_r_ankle.Checked == false && chk_l_ankle.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpankle");
+        else
+            saveSideIE("ankle", chk_l_ankle.Checked, chk_r_ankle.Checked, false);
+
+        if (chk_r_ankle.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "ankle", "right");
     }
     /// <summary>
     /// Event fires if check box chk_l_ankle checked or unchecked in the form.
@@ -1659,6 +1812,7 @@ public partial class AddFU : System.Web.UI.Page
                     s.Add(d);
                 }
                 Chk_l_ankle = false;
+                this.removeROM("leftNormal", hfPatientFUId.Value, "tblFUbpAnkle");
             }
             Session["FUbodyPartsList"] = s;
             AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
@@ -1690,6 +1844,13 @@ public partial class AddFU : System.Web.UI.Page
             master.bindData(hfPatientFUId.Value);
 
         }
+        if (chk_r_ankle.Checked == false && chk_l_ankle.Checked == false)
+            removeBodyParts(hfPatientFUId.Value, "tblFUbpankle");
+        else
+            saveSideIE("ankle", chk_l_ankle.Checked, chk_r_ankle.Checked, false);
+
+        if (chk_l_ankle.Checked == false)
+            removeDaignosis(hfPatientFUId.Value, "ankle", "left");
     }
 
     public void SaveData()
@@ -1702,8 +1863,16 @@ public partial class AddFU : System.Web.UI.Page
             cmd.Parameters.Add("@Patient_Id", hfPatientId.Value);
             cmd.Parameters.Add("@PatientIE_ID", hfPatientIEId.Value);
             cmd.Parameters.Add("@FreeForm", FreeForm);
-            if (!string.IsNullOrEmpty(hfPatientFUId.Value))
-                cmd.Parameters.Add("@PatientFU_ID", hfPatientFUId.Value);
+            //if (!string.IsNullOrEmpty(hfPatientFUId.Value))
+            //    cmd.Parameters.Add("@PatientFU_ID", hfPatientFUId.Value);
+
+            if (!string.IsNullOrEmpty(Session["patientFUId"].ToString()))
+            {
+                cmd.Parameters.Add("@PatientFU_ID", Session["patientFUId"].ToString());
+                cmd.Parameters.Add("@isEditFU", true);
+
+            }
+
             cmd.Parameters.Add("@DOE", DateTime.ParseExact(txtDOV.Text, "MM/dd/yyyy", null));
             if (!string.IsNullOrEmpty(txtDOA.Text.Trim()))
                 cmd.Parameters.Add("@DOA", DateTime.ParseExact(txtDOA.Text, "MM/dd/yyyy", null));
@@ -1736,6 +1905,11 @@ public partial class AddFU : System.Web.UI.Page
             //cmd.Parameters.Add("@PSH", PSH.Text.Trim());
             //cmd.Parameters.Add("@Medications", Medication.Text.Trim());
             //cmd.Parameters.Add("@Allergies", Allergies.Text.Trim());
+
+            cmd.Parameters.Add("@PMH", "");
+            cmd.Parameters.Add("@PSH", "");
+            cmd.Parameters.Add("@Medications", "");
+            cmd.Parameters.Add("@Allergies", "");
             cmd.Parameters.Add("@FamilyHistory", FamilyHistory.Text.Trim());
             cmd.Parameters.Add("@Neck", chk_Neck.Checked);
             cmd.Parameters.Add("@MidBack", chk_Midback.Checked);
@@ -1760,6 +1934,8 @@ public partial class AddFU : System.Web.UI.Page
             cmd.Parameters.Add("@ReturnToWork", cboReturnToWork.Text);
             cmd.Parameters.Add("@RecevingPhyTherapy", cboRecevingPhyTherapy.Text);
             cmd.Parameters.Add("@FeelPainRelief", cboFeelPainRelief.Text);
+            cmd.Parameters.Add("@Note4", cbonote4.Text);
+            cmd.Parameters.Add("@Note5", cbonote5.Text);
 
             SqlParameter outDirectoryId = new SqlParameter("@PatientFUIDS", SqlDbType.Int) { Direction = ParameterDirection.Output };
             cmd.Parameters.Add(outDirectoryId);
@@ -1772,6 +1948,7 @@ public partial class AddFU : System.Web.UI.Page
             if (DirectoryId > 0)
             {
                 hfPatientFUId.Value = Convert.ToString(DirectoryId);
+                Session["patientFUId"] = hfPatientFUId.Value;
             }
             //if (count > 0)
             //{
@@ -1789,8 +1966,10 @@ public partial class AddFU : System.Web.UI.Page
             //}
 
             con.Close();
-            AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
-            master.bindData(hfPatientIEId.Value);
+            //AddFollowUpMaster master = (AddFollowUpMaster)this.Master;
+            //master.bindData(hfPatientIEId.Value);
+
+            //  Response.Redirect("AddFU.aspx?PID=" + Request.QueryString["PID"]);
             //this.Page.RegisterStartupScript("Alert", "<script>javascript:alert('" + alertText + "')</script>");
         }
     }
@@ -2019,15 +2198,25 @@ public partial class AddFU : System.Web.UI.Page
         {
             cboFeelPainRelief.Items.Add(new ListItem(node.Attributes["name"].InnerText, node.Attributes["name"].InnerText));
         }
+        foreach (XmlNode node in doc.SelectNodes("//HSM/Note4S/Note4"))
+        {
+            cbonote4.Items.Add(new ListItem(node.Attributes["name"].InnerText, node.Attributes["name"].InnerText));
+        }
+        foreach (XmlNode node in doc.SelectNodes("//HSM/Note5S/Note5"))
+        {
+            cbonote5.Items.Add(new ListItem(node.Attributes["name"].InnerText, node.Attributes["name"].InnerText));
+        }
 
     }
     public void bindHtml()
     {
 
-        string path = Server.MapPath("~/Template/Page2_degree.html");
+        string path = Server.MapPath("~/Template/Page1_degree.html");
         string body = File.ReadAllText(path);
 
         divdegreeHTML.InnerHtml = body;
+
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "hideWorkStatus();", true);
 
         path = Server.MapPath("~/Template/Page1_social.html");
         body = File.ReadAllText(path);
@@ -2039,30 +2228,37 @@ public partial class AddFU : System.Web.UI.Page
 
         if (_fuID == 0)
         {
-            DataSet ds = db.selectData("select * from tblPage1HTMLContent where PatientIE_ID=" + _ieID.ToString());
+            DataSet ds = db.selectData("select topSectionHTML from tblPage1HTMLContent where PatientIE_ID=" + _ieID.ToString());
+            if (ds.Tables[0].Rows.Count > 0)
+                divHistory.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
+
+
+            ds = db.selectData("select activityEffectedHTML from tblPage2HTMLContent where PatientIE_ID=" + _ieID.ToString());
+            if (ds.Tables[0].Rows.Count > 0)
+                divactivityeffected.InnerHtml = ds.Tables[0].Rows[0]["activityEffectedHTML"].ToString();
+        }
+        else
+        {
+            string query = "select top 1 activityEffectedHTML,topSectionHTML from tblPage1FUHTMLContent where PateintFU_ID=" + _fuID;
+            DataSet ds = db.selectData(query);
 
             if (ds.Tables[0].Rows.Count > 0)
             {
                 divHistory.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
+                divactivityeffected.InnerHtml = ds.Tables[0].Rows[0]["activityEffectedHTML"].ToString();
             }
 
-        }
-        else
-        {
-            string query = "select top 1 * from tblPage1FUHTMLContent where PateintFU_ID=" + _fuID;
-            DataSet ds = db.selectData(query);
 
-            if (ds.Tables[0].Rows.Count > 0)
-                divHistory.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
         }
 
     }
 
     public void bindHTMLEdit()
     {
-        if (!string.IsNullOrEmpty(Session["patientFUId"].ToString()))
+        //if (!string.IsNullOrEmpty(Session["patientFUId"].ToString()))
+        if (hfPatientFUId.Value != "0" && Request["PID"] == null)
         {
-            string query = "select top 1 * from tblPage1FUHTMLContent where PateintFU_ID=" + Session["patientFUId"].ToString();
+            string query = "select top 1 * from tblPage1FUHTMLContent where PateintFU_ID=" + hfPatientFUId.Value;
             DataSet ds = db.selectData(query);
             if (ds.Tables[0].Rows.Count == 0)
             {
@@ -2073,9 +2269,355 @@ public partial class AddFU : System.Web.UI.Page
                 divdegreeHTML.InnerHtml = ds.Tables[0].Rows[0]["degreeSectionHTML"].ToString();
                 divsocialHTML.InnerHtml = ds.Tables[0].Rows[0]["socialSectionHTML"].ToString();
                 divHistory.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
+                divactivityeffected.InnerHtml = ds.Tables[0].Rows[0]["activityEffectedHTML"].ToString();
+
             }
+
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "hideWorkStatus();", true);
         }
         else
             bindHtml();
+    }
+
+    private void removeROM(string colName, string id, string tblName)
+    {
+        try
+        {
+            DBHelperClass db = new DBHelperClass();
+            string query = "select * from " + tblName + " where PatientFU_ID=" + id;
+
+            DataSet ds = db.selectData(query);
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                string[] strname = ds.Tables[0].Rows[0]["NameROM"].ToString().Split(',');
+                string str = "";
+                for (int i = 0; i < strname.Length; i++)
+                    str = ", " + str;
+
+
+                query = "update " + tblName + " set " + colName + "='" + str.TrimStart(',') + "' where PatientFU_ID=" + id;
+
+                new DBHelperClass().executeQuery(query);
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    //private void deleteShoulder()
+    //{
+    //    try
+    //    {
+    //        if (chk_r_Shoulder.Checked == false && chk_L_Shoulder.Checked)
+    //        {
+    //            string query = "delete from  where PatientIE_ID=" + Session["PatientIE_ID"].ToString();
+
+    //            int val = gDbhelperobj.executeQuery(query);
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //    }
+    //}
+
+    private void removeDaignosis(string id, string bodypart, string side = "")
+    {
+        try
+        {
+            DBHelperClass db = new DBHelperClass();
+            string query = "delete from tblDiagCodesDetail where PatientFU_ID=" + id + "  AND BodyPart LIKE '%" + bodypart + "%'";
+
+            if (!string.IsNullOrEmpty(side))
+                query = query + " and Description Like '%" + side + "%'";
+
+            db.executeQuery(query);
+        }
+        catch (Exception ex)
+        {
+            db.LogError(ex);
+        }
+    }
+
+    private void removeBodyParts(string id, string tblName)
+    {
+        try
+        {
+            DBHelperClass db = new DBHelperClass();
+            string query = "delete from " + tblName + " where PatientFU_ID=" + id;
+            db.executeQuery(query);
+        }
+        catch (Exception ex)
+        {
+            db.LogError(ex);
+        }
+    }
+
+
+    private void saveIE(string bodyPart, bool isDelete = false)
+    {
+        try
+        {
+            string query = "", tblName = "", ccHTML = "", peHTML = "";
+            if (bodyPart == "neck")
+            {
+                tblName = "tblFUbpNeck";
+                ccHTML = "NeckCC.html";
+                peHTML = "NeckPE.html";
+            }
+            else if (bodyPart == "midback")
+            {
+                tblName = "tblFUbpMidback";
+                ccHTML = "MidbackCC.html";
+                peHTML = "MidbackPE.html";
+            }
+            else if (bodyPart == "lowback")
+            {
+                tblName = "tblFUbplowback";
+                ccHTML = "LowbackCC.html";
+                peHTML = "LowbackPE.html";
+            }
+
+
+            if (!isDelete)
+            {
+
+
+                string ccpath = Server.MapPath("~/Template/" + ccHTML);
+                string ccbody = File.ReadAllText(ccpath);
+
+                string pepath = Server.MapPath("~/Template/" + peHTML);
+                string pebody = File.ReadAllText(pepath);
+
+                query = "insert into " + tblName + " (PatientFU_ID,CCvalue,CCvalueoriginal,PEvalue,PEvalueoriginal)";
+                query += "values(@PatientFU_ID,@CCvalue,@CCvalueoriginal,@PEvalue,@PEvalueoriginal)";
+
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@CCvalue", ccbody);
+                    command.Parameters.AddWithValue("@CCvalueoriginal", ccbody);
+                    command.Parameters.AddWithValue("@PEvalue", pebody);
+                    command.Parameters.AddWithValue("@PEvalueoriginal", pebody);
+
+                    command.Parameters.AddWithValue("@PatientFU_ID", Session["patientFUId"].ToString());
+
+                    connection.Open();
+                    var results = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            else
+            {
+                //  query = "delete from  " + tblName + " where PatientIE_ID=" + Session["PatientIE_ID"].ToString();
+                // new DBHelperClass().executeQuery(query);
+            }
+
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    private void saveSideIE(string bodyPart, bool left, bool right, bool isDelete)
+    //    private void saveSideIE(string bodyPart, string side, bool isDelete, bool otherBody)
+    {
+        try
+        {
+            string query = "", tblName = "", ccHTML = "", peHTML = "";
+
+            if (bodyPart == "shoulder")
+            {
+                tblName = "tblFUbpShoulder";
+                ccHTML = "ShoulderCC.html";
+                peHTML = "ShoulderPE.html";
+            }
+            else if (bodyPart == "wrist")
+            {
+                tblName = "tblFUbpWrist";
+                ccHTML = "WristCC.html";
+                peHTML = "WristPE.html";
+            }
+            else if (bodyPart == "ankle")
+            {
+                tblName = "tblFUbpAnkle";
+                ccHTML = "AnkleCC.html";
+                peHTML = "AnklePE.html";
+            }
+            else if (bodyPart == "elbow")
+            {
+                tblName = "tblFUbpEblow";
+                ccHTML = "ElbowCC.html";
+                peHTML = "ElbowPE.html";
+            }
+            else if (bodyPart == "hip")
+            {
+                tblName = "tblFUbpHip";
+                ccHTML = "HipCC.html";
+                peHTML = "HipPE.html";
+            }
+            else if (bodyPart == "knee")
+            {
+                tblName = "tblFUbpKnee";
+                ccHTML = "KneeCC.html";
+                peHTML = "KneePE.html";
+            }
+
+
+            if (!isDelete)
+            {
+                bool isExist = false;
+
+
+                string ccpath = Server.MapPath("~/Template/" + ccHTML);
+                string ccbody = File.ReadAllText(ccpath);
+                string ccOrg = ccbody;
+
+
+
+
+                string pepath = Server.MapPath("~/Template/" + peHTML);
+                string pebody = File.ReadAllText(pepath);
+                string peOrg = pebody;
+
+
+                string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+                SqlConnection oSQLConn = new SqlConnection(sProvider);
+                string SqlStr = "Select * from  " + tblName + " where PatientFU_ID=" + Session["patientFUId"].ToString();
+                SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
+                DataTable sqlTbl = new DataTable();
+                sqlAdapt.Fill(sqlTbl);
+                if (sqlTbl.Rows.Count > 0)
+                    isExist = true;
+                else
+                    isExist = false;
+
+                if (!isExist)
+                {
+                    if (left)
+                    {
+                        ccbody = ccbody.Replace("#rigthtdiv", "style='display:none' ");
+                        pebody = pebody.Replace("#rigthtdiv", "style='display:none' ");
+
+                        ccbody = ccbody.Replace("#leftdiv", "style='display:block' ");
+                        pebody = pebody.Replace("#leftdiv", "style='display:block' ");
+                    }
+                    else if (right)
+                    {
+                        ccbody = ccbody.Replace("#leftdiv", "style='display:none' ");
+                        pebody = pebody.Replace("#leftdiv", "style='display:none' ");
+
+                        ccbody = ccbody.Replace("#rigthtdiv", "style='display:block' ");
+                        pebody = pebody.Replace("#rigthtdiv", "style='display:block' ");
+
+                    }
+                    query = "insert into " + tblName + " (PatientFU_ID,CCvalue,CCvalueoriginal,PEvalue,PEvalueoriginal)";
+                    query += "values(@PatientFU_ID,@CCvalue,@CCvalueoriginal,@PEvalue,@PEvalueoriginal)";
+
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@CCvalue", ccbody);
+                        command.Parameters.AddWithValue("@CCvalueoriginal", ccOrg);
+                        command.Parameters.AddWithValue("@PEvalue", pebody);
+                        command.Parameters.AddWithValue("@PEvalueoriginal", peOrg);
+
+                        command.Parameters.AddWithValue("@PatientFU_ID", Session["patientFUId"].ToString());
+
+                        connection.Open();
+                        var results = command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+
+                }
+                else
+                {
+                    pebody = sqlTbl.Rows[0]["pevalue"].ToString();
+                    ccbody = sqlTbl.Rows[0]["ccvalue"].ToString();
+                    if (right)
+                    {
+                        pebody = Regex.Replace(pebody, @"<div id=""WrapRightPE"" .*style='display:none'.*>", @"<div id=""WrapRightPE"" style='display:block'>");
+                        ccbody = Regex.Replace(ccbody, @"<div id=""WrapRight"" .*style='display:none'.*>", @"<div id=""WrapRight"" style='display:block'>");
+
+                    }
+                    else
+                    {
+                        ccbody = ReplacePart(@"<div id=""WrapRight""", @"</div>", ccOrg, ccbody);
+                        pebody = ReplacePart(@"<div id=""WrapRightPE""", @"</div>", peOrg, pebody);
+                        ccbody = ccbody.Replace("#rigthtdiv", "style='display:none' ");
+                        pebody = pebody.Replace("#rigthtdiv", "style='display:none' ");
+                    }
+                    if (left)
+                    {
+                        pebody = Regex.Replace(pebody, @"<div id=""WrapLeftPE"" .*style='display:none'.*>", @"<div id=""WrapLeftPE"" style='display:block'>");
+                        ccbody = Regex.Replace(ccbody, @"<div id=""WrapLeft"" .*style='display:none'.*>", @"<div id=""WrapLeft"" style='display:block'>");
+
+                    }
+                    else
+                    {
+                        ccbody = ReplacePart(@"<div id=""WrapLeft""", @"</div>", ccOrg, ccbody);
+                        pebody = ReplacePart(@"<div id=""WrapLeftPE""", @"</div>", peOrg, pebody);
+                        ccbody = ccbody.Replace("#leftdiv", "style='display:none' ");
+                        pebody = pebody.Replace("#leftdiv", "style='display:none' ");
+                    }
+                    //ccbody = ReplacePart ( ccbody.Replace("#leftdiv", "style='display:none'");
+                    //pebody = pebody.Replace("#leftdiv", "style='display:none'");
+                    //ccbody = ReplacePart(@"<div id=""WrapRight""", @"</div>", ccOrg, ccbody);
+                    //pebody = ReplacePart(@"<div id=""WrapRightPE""", @"</div>", ccOrg, ccbody);
+
+                    //ccbody = ccbody.Replace("#rigthtdiv", "style='display:none'");
+                    //pebody = pebody.Replace("#rigthtdiv", "style='display:none'");
+
+                    query = "update " + tblName + " set  CCvalue=@CCvalue,PEvalue=@PEvalue where ";
+                    query += "  PatientFU_ID=@PatientFU_ID ";
+
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString))
+                    {
+                        SqlCommand command = new SqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@CCvalue", ccbody);
+                        command.Parameters.AddWithValue("@PEvalue", pebody);
+                        command.Parameters.AddWithValue("@PatientFU_ID", Session["patientFUId"].ToString());
+
+                        connection.Open();
+                        var results = command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+
+                }
+
+
+
+            }
+            else
+            {
+                // if (isDelete == true && otherBody == false)
+                //{
+                //   query = "delete from  " + tblName + " where PatientIE_ID=" + Session["PatientIE_ID"].ToString();
+                // new DBHelperClass().executeQuery(query);
+                // }
+            }
+
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    protected string ReplacePart(string start, string end, string tHtml, string Html)
+    {
+
+        //string tHtml = File.ReadAllText(Server.MapPath(TemplateFile));
+        int righttstart = tHtml.IndexOf(start);
+        int righttend = tHtml.IndexOf(end, righttstart);
+        //string template = tHtml.Substring(righttstart, righttend - righttstart) + "\n </div>";
+        string template = tHtml.Substring(righttstart, righttend - righttstart) ;
+        int rightstart = Html.IndexOf(start);
+        int rightend = Html.IndexOf(end, rightstart);
+        Html = Html.Remove(rightstart, rightend - rightstart);
+        Html = Html.Insert(rightstart, template);
+        return Html;
+
     }
 }

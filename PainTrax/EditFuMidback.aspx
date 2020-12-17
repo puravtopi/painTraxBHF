@@ -269,6 +269,8 @@
 
            
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
+                <asp:HiddenField runat="server" ID="hdorgCC" />
+                <asp:HiddenField runat="server" ID="hdorgPE" />
              
                 <%--<div class="row">
                     <div class="col-md-3">
@@ -291,17 +293,6 @@
                 <asp:HiddenField runat="server" ID="hdPESidesText" />
                 
 
-                <div class="row">
-                    <div class="col-md-3">
-                        <label class="control-label">Notes:</label>
-                    </div>
-                    <div class="col-md-9" style="margin-top: 5px">
-                        <asp:TextBox runat="server" Style="" ID="txtFreeForm" TextMode="MultiLine" Width="700px" Height="100px"></asp:TextBox>
-                        <button type="button" id="start_button" onclick="startButton(event)">
-                            <img src="images/mic.gif" alt="start" /></button>
-                        <div style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></div>
-                    </div>
-                </div>
                 <asp:UpdatePanel runat="server" ID="upMedicine">
                     <ContentTemplate>
                         <div class="row">
@@ -336,7 +327,7 @@
                                         <asp:TemplateField HeaderText="Action" ItemStyle-Width="50">
                                             <ItemTemplate>
                                                 <%--    <asp:HiddenField runat="server" ID="hidDiagCodeDetailID" Value='<%# Eval("DiagCodeDetail_ID") %>' />--%>
-                                                <asp:CheckBox runat="server" ID="chkRemove" Checked="true" />
+                                                <asp:CheckBox runat="server" ID="chkRemove" Checked="true" AutoPostBack="true" OnCheckedChanged="chkRemove_CheckedChanged"/>
 
                                             </ItemTemplate>
                                         </asp:TemplateField>

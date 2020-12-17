@@ -12,6 +12,7 @@ public class GetSettings
 
     public bool forwardCC { get; set; }
     public bool forwardPE { get; set; }
+    public bool forwardROM { get; set; }
 
     public GetSettings()
     {
@@ -29,6 +30,7 @@ public class GetSettings
             {
                 forwardCC = node.SelectSingleNode("forwardCC") == null ? false : Convert.ToBoolean(node.SelectSingleNode("forwardCC").InnerText);
                 forwardPE = node.SelectSingleNode("forwardPE") == null ? false : Convert.ToBoolean(node.SelectSingleNode("forwardPE").InnerText);
+                forwardROM = node.SelectSingleNode("forwardROM") == null ? false : Convert.ToBoolean(node.SelectSingleNode("forwardROM").InnerText);
             }
         }
         catch (Exception ex)

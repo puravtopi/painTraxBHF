@@ -32,12 +32,13 @@ public partial class Neck : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         if (!IsPostBack)
         {
-
-            checkTP();
+            //to save daignosis change on page save event 
+            ViewState["saveDaigno"] = "0";
+            // checkTP();
 
             if (Session["PatientIE_ID"] != null)
             {
-                bindDropdown();
+                //  bindDropdown();
 
                 BindROM();
                 _CurIEid = Session["PatientIE_ID"].ToString();
@@ -75,7 +76,7 @@ public partial class Neck : System.Web.UI.Page
 
                 if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["ISFirst"] != DBNull.Value ? !Convert.ToBoolean(ds.Tables[0].Rows[0]["ISFirst"].ToString()) : true)
                 {  // row exists
-                    PopulateUIDefaults();
+                   // PopulateUIDefaults();
                     BindDataGrid();
                     bindCF();
                     bindPE();
@@ -96,8 +97,6 @@ public partial class Neck : System.Web.UI.Page
             }
             bindgridPoup();
             BindDCDataGrid();
-
-           
         }
 
 
@@ -201,8 +200,19 @@ public partial class Neck : System.Web.UI.Page
 
             string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
             string SqlStr = "";
+
+
+            if (oSQLConn.State != ConnectionState.Open)
+            {
+                oSQLConn.Close();
+                oSQLConn.Dispose();
+            }
+
+
             oSQLConn.ConnectionString = sProvider;
             oSQLConn.Open();
+
+
             SqlStr = "Select * from tblbpNeck WHERE PatientIE_ID = " + ieID;
             SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
             SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder(sqlAdapt);
@@ -253,7 +263,7 @@ public partial class Neck : System.Web.UI.Page
                 TblRow["PEvalueoriginal"] = hdorgvalPE.Value;
                 TblRow["PESides"] = hdPESides.Value;
                 TblRow["PESidesText"] = hdPESidesText.Value;
-                TblRow["TPDesc"] = hdPETP.Value;
+                // TblRow["TPDesc"] = hdPETP.Value;
 
                 string strname = "", strleft = "", strright = "", strnormal = "", strcname = "", strcrom = "", strcnormal = "";
 
@@ -382,20 +392,20 @@ public partial class Neck : System.Web.UI.Page
             //txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
             //txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim().Replace("    ", string.Empty);
-            hdPETP.Value = TblRow["TPDesc"].ToString();
+            //   hdPETP.Value = TblRow["TPDesc"].ToString();
 
 
             CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
 
             divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
 
-           
+
             hdorgval.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
             hdorgvalPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
 
             int val = checkTP();
 
-           // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",1);bindSidesVal('" + sqlTbl.Rows[0]["PESides"].ToString() + "','" + sqlTbl.Rows[0]["PESidesText"].ToString() + "');", true);
+            // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",1);bindSidesVal('" + sqlTbl.Rows[0]["PESides"].ToString() + "','" + sqlTbl.Rows[0]["PESidesText"].ToString() + "');", true);
 
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
             _fldPop = false;
@@ -485,7 +495,7 @@ public partial class Neck : System.Web.UI.Page
                         				THEN p.E_PDesc
                               END  END END as PDesc
                         	 -- ,p.Requested,p.Heading RequestedHeading,p.Scheduled,p.S_Heading ScheduledHeading,p.Executed,p.E_Heading ExecutedHeading
-                         from tblProceduresDetail p WHERE PatientIE_ID = " + _CurIEid + " AND BodyPart = '" + _CurBP + "'  and IsConsidered=0 Order By BodyPart,Heading";
+                         from tblProceduresDetail p WHERE PatientIE_ID = " + _CurIEid + " and PatientFU_ID is null AND BodyPart = '" + _CurBP + "'  and IsConsidered=0 Order By BodyPart,Heading";
             oSQLCmd.Connection = oSQLConn;
             oSQLCmd.CommandText = SqlStr;
             oSQLAdpr = new SqlDataAdapter(SqlStr, oSQLConn);
@@ -711,6 +721,7 @@ public partial class Neck : System.Web.UI.Page
         try
         {
             RemoveDiagCodesDetail(ieID);
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -727,10 +738,15 @@ public partial class Neck : System.Web.UI.Page
                     if (isChecked)
                     {
                         //ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
+                        // SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
                     }
                 }
             }
+            //SaveDiagUI(ieID, codeId, true, _CurBP, desc, codes);
+            gDbhelperobj.SaveDiagUI(ieID, null, codeId, true, _CurBP, desc, codes);
             BindDCDataGrid();
         }
         catch (Exception ex)
@@ -744,66 +760,90 @@ public partial class Neck : System.Web.UI.Page
     }
     public void SaveDiagUI(string ieID, string iDiagID, bool DiagChecked, string bp, string dcd, string dc)
     {
-        string _ieMode = "";
-        long _ieID = Convert.ToInt64(ieID);
-        long _DiagID = Convert.ToInt64(iDiagID);
-        string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
-        string SqlStr = "";
-        oSQLConn.ConnectionString = sProvider;
-        oSQLConn.Open();
-        SqlStr = "Select * FROM tblDiagCodesDetail WHERE PatientIE_ID = " + ieID + " AND Diag_Master_ID = " + _DiagID;
-        SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
-        SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder(sqlAdapt);
-        DataTable sqlTbl = new DataTable();
-        sqlAdapt.Fill(sqlTbl);
-        DataRow TblRow;
 
-        if (sqlTbl.Rows.Count == 0 && DiagChecked == true)
-            _ieMode = "New";
-        else if (sqlTbl.Rows.Count == 0 && DiagChecked == false)
-            _ieMode = "None";
-        else if (sqlTbl.Rows.Count > 0 && DiagChecked == false)
-            _ieMode = "Delete";
-        else
-            _ieMode = "Update";
 
-        if (_ieMode == "New")
-            TblRow = sqlTbl.NewRow();
-        else if (_ieMode == "Update" || _ieMode == "Delete")
+        using (SqlConnection conn = new SqlConnection())
         {
-            TblRow = sqlTbl.Rows[0];
-            TblRow.AcceptChanges();
-        }
-        else
-            TblRow = null;
-
-        if (_ieMode == "Update" || _ieMode == "New")
-        {
-            TblRow["Diag_Master_ID"] = _DiagID;
-            TblRow["PatientIE_ID"] = _ieID;
-            TblRow["BodyPart"] = bp.ToString().Trim();
-            TblRow["DiagCode"] = dc.ToString().Trim();
-            TblRow["Description"] = dcd.ToString().Trim();
-
-            if (_ieMode == "New")
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
             {
-                TblRow["CreatedBy"] = "Admin";
-                TblRow["CreatedDate"] = DateTime.Now;
-                sqlTbl.Rows.Add(TblRow);
+                cmd.CommandText = "nusp_save_bulk_daignosis";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@PatientIEId", ieID);
+                cmd.Parameters.AddWithValue("@PatientFuId", null);
+                cmd.Parameters.AddWithValue("@DiagCode_IDs", iDiagID.TrimStart(','));
+                cmd.Parameters.AddWithValue("@_CurBP", bp);
+                cmd.Parameters.AddWithValue("@Description", dcd.TrimStart(','));
+                cmd.Parameters.AddWithValue("@DiagCode", dc.TrimStart(','));
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
             }
-            sqlAdapt.Update(sqlTbl);
+
         }
-        else if (_ieMode == "Delete")
-        {
-            TblRow.Delete();
-            sqlAdapt.Update(sqlTbl);
-        }
-        if (TblRow != null)
-            TblRow.Table.Dispose();
-        sqlTbl.Dispose();
-        sqlCmdBuilder.Dispose();
-        sqlAdapt.Dispose();
-        oSQLConn.Close();
+
+
+        //string _ieMode = "";
+        //long _ieID = Convert.ToInt64(ieID);
+        //long _DiagID = Convert.ToInt64(iDiagID);
+        //string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
+        //string SqlStr = "";
+        //oSQLConn.ConnectionString = sProvider;
+        //oSQLConn.Open();
+        //SqlStr = "Select * FROM tblDiagCodesDetail WHERE PatientIE_ID = " + ieID + " AND Diag_Master_ID = " + _DiagID;
+        //SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
+        //SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder(sqlAdapt);
+        //DataTable sqlTbl = new DataTable();
+        //sqlAdapt.Fill(sqlTbl);
+        //DataRow TblRow;
+
+        //if (sqlTbl.Rows.Count == 0 && DiagChecked == true)
+        //    _ieMode = "New";
+        //else if (sqlTbl.Rows.Count == 0 && DiagChecked == false)
+        //    _ieMode = "None";
+        //else if (sqlTbl.Rows.Count > 0 && DiagChecked == false)
+        //    _ieMode = "Delete";
+        //else
+        //    _ieMode = "Update";
+
+        //if (_ieMode == "New")
+        //    TblRow = sqlTbl.NewRow();
+        //else if (_ieMode == "Update" || _ieMode == "Delete")
+        //{
+        //    TblRow = sqlTbl.Rows[0];
+        //    TblRow.AcceptChanges();
+        //}
+        //else
+        //    TblRow = null;
+
+        //if (_ieMode == "Update" || _ieMode == "New")
+        //{
+        //    TblRow["Diag_Master_ID"] = _DiagID;
+        //    TblRow["PatientIE_ID"] = _ieID;
+        //    TblRow["BodyPart"] = bp.ToString().Trim();
+        //    TblRow["DiagCode"] = dc.ToString().Trim();
+        //    TblRow["Description"] = dcd.ToString().Trim();
+
+        //    if (_ieMode == "New")
+        //    {
+        //        TblRow["CreatedBy"] = "Admin";
+        //        TblRow["CreatedDate"] = DateTime.Now;
+        //        sqlTbl.Rows.Add(TblRow);
+        //    }
+        //    sqlAdapt.Update(sqlTbl);
+        //}
+        //else if (_ieMode == "Delete")
+        //{
+        //    TblRow.Delete();
+        //    sqlAdapt.Update(sqlTbl);
+        //}
+        //if (TblRow != null)
+        //    TblRow.Table.Dispose();
+        //sqlTbl.Dispose();
+        //sqlCmdBuilder.Dispose();
+        //sqlAdapt.Dispose();
+        //oSQLConn.Close();
     }
     public void BindDCDataGrid()
     {
@@ -855,7 +895,8 @@ public partial class Neck : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         string ieMode = "New";
-        SaveDiagnosis(Session["PatientIE_ID"].ToString());
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(Session["PatientIE_ID"].ToString());
         SaveStandards(Session["PatientIE_ID"].ToString());
         SaveUI(Session["PatientIE_ID"].ToString(), ieMode, true);
 
@@ -912,15 +953,26 @@ public partial class Neck : System.Web.UI.Page
         try
         {
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_CurIEid != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+
+
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", _CurIEid);
+            param[2] = new SqlParameter("@PatientFU_ID", 0);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
+
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_CurIEid != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -934,6 +986,8 @@ public partial class Neck : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        //to save daignosis change on page save event 
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -1244,6 +1298,12 @@ public partial class Neck : System.Web.UI.Page
                 repROMCervical.DataBind();
             }
         }
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 
 }

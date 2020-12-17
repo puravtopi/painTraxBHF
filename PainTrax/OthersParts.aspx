@@ -6,8 +6,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet" />
-    <script src="Scripts/jquery-1.8.2.min.js"></script>
-    <script src="js/images/bootstrap.min.js"></script>
+<%--    <script src="Scripts/jquery-1.8.2.min.js"></script>
+    <script src="js/images/bootstrap.min.js"></script>--%>
     <style>
         .table_cell {
             width: 100px;
@@ -313,9 +313,13 @@
 
                    <div class="row" >
                     <div class="col-md-3">
-                        <label class="control-label labelcolor">FOLLOW UP:</label><asp:TextBox ID="txtFollowUpIn" runat="server" Text="2-4 weeks." />
+                        <label class="control-label labelcolor">FOLLOW UP:</label>
+                          <editable:EditableDropDownList runat="server" ID="cboFollowUpIn" Width="250px" CssClass="inline">
+                              
+                    </editable:EditableDropDownList>
+                     <%--   <asp:TextBox ID="txtFollowUpIn" runat="server" Text="2-4 weeks." />--%>
                         &nbsp;
-                        <asp:TextBox ID="txtFollowUpInDate" runat="server" placeholder="MM/dd/yyyy" Visible="false" />
+                        <asp:TextBox ID="txtFollowUpInDate" runat="server" placeholder="MM/dd/yyyy"  />
                     </div>
                     <div class="col-md-9" style="margin-top: 5px">
                         <%--<label class="control-label">weeks. </label>
@@ -539,7 +543,11 @@
             });
         });
 
+
         $(document).ready(function () {
+
+          
+
             $('#rep_hospitalized input').change(function () {
                 if ($(this).val() == '0') {
                     $("#txt_hospital").prop('disabled', true);

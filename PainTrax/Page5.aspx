@@ -49,6 +49,12 @@
             document.getElementById('<%= btnSave.ClientID %>').click();
         }
     </script>
+
+
+  
+
+
+
     <asp:HiddenField ID="pageHDN" runat="server" />
     <script>
         function openPopup(divid) {
@@ -497,6 +503,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox Width="900px" TextMode="MultiLine" ID="txtOther7Text" runat="server"></asp:TextBox>
+
                                 </td>
                             </tr>
                             <%--<tr>
@@ -587,7 +594,7 @@
                         </div>
                         <div class="col-md-9" style="margin-top: 5px">
                             <asp:CheckBox ID="chkgoal" runat="server" Text="To increase range of motion, strength, flexibility, to decrease pain and to improve body biomechanics and activities of daily living and improve the functional status." Checked="true" />
-                           
+
                         </div>
                     </div>
                     <div class="row">
@@ -600,9 +607,9 @@
                             <asp:CheckBox ID="chkWeightBearing" Text="weight bearing precaution and " runat="server" />--%>
                             <%--<asp:TextBox ID="txtPrecautions" Width="300" runat="server" />.--%>
                             <asp:TextBox ID="txtPrecautions" runat="server" TextMode="MultiLine" Width="700px" Height="100px"
-                                Text="All the treatment options have been discussed with the patient in detail. Pain management compliance was discussed with patient.Patient may need urine toxicology for the possibility of prescribing controlled medicine because pain still complains of pain affecting activities of daily living. Pain contract signed in chart. Patient understood and agrees with the plan."></asp:TextBox>
+                                Text=""></asp:TextBox>
                         </div>
-                        <div class="col-md-9" style="margin-top: 5px;display:none">
+                        <div class="col-md-9" style="margin-top: 5px; display: none">
                             <asp:CheckBox ID="chkEducationProvided" Text="Patient education provided via  " runat="server" />
                             <asp:CheckBox ID="chkViaPhysician" Text="physician  " runat="server" />
                             <asp:CheckBox ID="chkViaPrintedMaterial" Text="printed material  " runat="server" />

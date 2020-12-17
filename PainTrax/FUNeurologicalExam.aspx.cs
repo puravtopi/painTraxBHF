@@ -23,7 +23,7 @@ public partial class FUNeurologicalExam : System.Web.UI.Page
     {
         if (Session["uname"] == null)
             Response.Redirect("Login.aspx");
-       
+
         if (!IsPostBack)
         {
             if (Session["patientFUId"] == null || Session["patientFUId"] == "")
@@ -60,7 +60,7 @@ public partial class FUNeurologicalExam : System.Web.UI.Page
                     PopulateIE(Session["PatientIE_Id"].ToString(), "Open");
                 }
             }
-             
+
         }
         Logger.Info(Session["uname"].ToString() + "- Visited in  EditFUNeurologicalExam for -" + Convert.ToString(Session["LastNameFUEdit"]) + Convert.ToString(Session["FirstNameFUEdit"]) + "-" + DateTime.Now);
     }
@@ -114,7 +114,7 @@ public partial class FUNeurologicalExam : System.Web.UI.Page
             TblRow["DTRAnkleLeft"] = txtDTRAnkleLeft.Text.ToString();
             TblRow["Sensory"] = txtSensory.Text.ToString();
             TblRow["Pinprick"] = chkPinPrick.Checked;
-        //    TblRow["Lighttouch"] = chkLighttouch.Checked;
+            //    TblRow["Lighttouch"] = chkLighttouch.Checked;
             TblRow["UEsen"] = (bool)UESen.Checked;
             TblRow["LEsen"] = (bool)LESen.Checked;
             TblRow["UEC5Right"] = txtUEC5Right.Text.ToString();
@@ -390,7 +390,7 @@ public partial class FUNeurologicalExam : System.Web.UI.Page
             txtDTRAnkleLeft.Text = node.SelectSingleNode("DTRAnkleLeft") == null ? txtDTRAnkleLeft.Text.ToString().Trim() : node.SelectSingleNode("DTRAnkleLeft").InnerText;
             txtSensory.Text = node.SelectSingleNode("Sensory") == null ? txtSensory.Text.ToString().Trim() : node.SelectSingleNode("Sensory").InnerText;
             chkPinPrick.Checked = node.SelectSingleNode("Pinprick") == null ? chkPinPrick.Checked : Safe.GetSafeBooleanD(node.SelectSingleNode("Pinprick").InnerText);
-           // chkLighttouch.Checked = node.SelectSingleNode("Lighttouch") == null ? chkLighttouch.Checked : Safe.GetSafeBooleanD(node.SelectSingleNode("Lighttouch").InnerText);
+            // chkLighttouch.Checked = node.SelectSingleNode("Lighttouch") == null ? chkLighttouch.Checked : Safe.GetSafeBooleanD(node.SelectSingleNode("Lighttouch").InnerText);
             UESen.Checked = node.SelectSingleNode("UEsen") == null ? UESen.Checked : Safe.GetSafeBooleanD(node.SelectSingleNode("UEsen").InnerText);
             LESen.Checked = node.SelectSingleNode("LEsen") == null ? LESen.Checked : Safe.GetSafeBooleanD(node.SelectSingleNode("LEsen").InnerText);
             txtUEC5Right.Text = node.SelectSingleNode("UEC5Right") == null ? txtUEC5Right.Text.ToString().Trim() : node.SelectSingleNode("UEC5Right").InnerText;
@@ -1040,68 +1040,68 @@ public partial class FUNeurologicalExam : System.Web.UI.Page
     //}
 
 
-//    protected string GetFreeForm()
-//    {
-//        string restrictions = string.Empty;
-//        //foreach (ListItem s in cblRestictions.Items)
-//        //{
-//        //    if (s.Selected)
-//        //    {
-//        //        restrictions += s.Value.ToLower() + ",";
-//        //    }
-//        //}
-//        //string workStatus = string.Empty;
-//        //foreach (RepeaterItem item in this.Repeater1.Items)
-//        //{
-//        //    CheckBox chk = item.FindControl("cblWorkStatus") as CheckBox;
-//        //    if (chk.Checked)
-//        //    {
-//        //        string collageName = (item.FindControl("txtCollageName") as TextBox).Text;
-//        //        string degree = chk.Text;
-//        //        workStatus += degree.ToLower() + "-" + collageName.ToLower() + ", ";
-//        //        // this.SaveData(degree, collageName);
-//        //    }
-//        //}
-//        //foreach (ListItem s in cblWorkStatus.Items)
-//        //{
-//        //    if (s.Selected)
-//        //    {
-//        //        workStatus += s.Value.ToLower() + ", ";
-//        //    }
-//        //}
+    //    protected string GetFreeForm()
+    //    {
+    //        string restrictions = string.Empty;
+    //        //foreach (ListItem s in cblRestictions.Items)
+    //        //{
+    //        //    if (s.Selected)
+    //        //    {
+    //        //        restrictions += s.Value.ToLower() + ",";
+    //        //    }
+    //        //}
+    //        //string workStatus = string.Empty;
+    //        //foreach (RepeaterItem item in this.Repeater1.Items)
+    //        //{
+    //        //    CheckBox chk = item.FindControl("cblWorkStatus") as CheckBox;
+    //        //    if (chk.Checked)
+    //        //    {
+    //        //        string collageName = (item.FindControl("txtCollageName") as TextBox).Text;
+    //        //        string degree = chk.Text;
+    //        //        workStatus += degree.ToLower() + "-" + collageName.ToLower() + ", ";
+    //        //        // this.SaveData(degree, collageName);
+    //        //    }
+    //        //}
+    //        //foreach (ListItem s in cblWorkStatus.Items)
+    //        //{
+    //        //    if (s.Selected)
+    //        //    {
+    //        //        workStatus += s.Value.ToLower() + ", ";
+    //        //    }
+    //        //}
 
-//        string FreeForm = string.Empty;
-//        if (rblDOD.SelectedIndex > -1)
-//        {
-//            FreeForm = "Degree of Disability: " + rblDOD.SelectedValue;
-//        }
-//        if (!string.IsNullOrEmpty(restrictions))
-//        {
-//            if (!string.IsNullOrEmpty(FreeForm))
-//            {
-//                FreeForm += ";";
-//            }
-//            FreeForm += "Restrictions: " + restrictions.TrimEnd(',');
-//        }
-//        if (!string.IsNullOrEmpty(txtOtherRestrictions.Text.Trim()))
-//        {
-//            if (!string.IsNullOrEmpty(FreeForm))
-//            {
-//                FreeForm += ";";
-//            }
-//            FreeForm += "Others: " + txtOtherRestrictions.Text.Trim();
-//        }
-//        if (!string.IsNullOrEmpty(workStatus))
-//        {
-//            if (!string.IsNullOrEmpty(FreeForm))
-//            {
-//                FreeForm += ";";
-//            }
-//            FreeForm += "Work Status: " + workStatus.TrimEnd(',');
-//        }
+    //        string FreeForm = string.Empty;
+    //        if (rblDOD.SelectedIndex > -1)
+    //        {
+    //            FreeForm = "Degree of Disability: " + rblDOD.SelectedValue;
+    //        }
+    //        if (!string.IsNullOrEmpty(restrictions))
+    //        {
+    //            if (!string.IsNullOrEmpty(FreeForm))
+    //            {
+    //                FreeForm += ";";
+    //            }
+    //            FreeForm += "Restrictions: " + restrictions.TrimEnd(',');
+    //        }
+    //        if (!string.IsNullOrEmpty(txtOtherRestrictions.Text.Trim()))
+    //        {
+    //            if (!string.IsNullOrEmpty(FreeForm))
+    //            {
+    //                FreeForm += ";";
+    //            }
+    //            FreeForm += "Others: " + txtOtherRestrictions.Text.Trim();
+    //        }
+    //        if (!string.IsNullOrEmpty(workStatus))
+    //        {
+    //            if (!string.IsNullOrEmpty(FreeForm))
+    //            {
+    //                FreeForm += ";";
+    //            }
+    //            FreeForm += "Work Status: " + workStatus.TrimEnd(',');
+    //        }
 
-//        return (!string.IsNullOrEmpty(FreeForm)) ? FreeForm : "None";
-//    }
+    //        return (!string.IsNullOrEmpty(FreeForm)) ? FreeForm : "None";
+    //    }
     protected void txtLEL3Left_TextChanged(object sender, EventArgs e)
     {
         Settextboxvalue(sender);
@@ -1236,7 +1236,7 @@ public partial class FUNeurologicalExam : System.Web.UI.Page
             if (!string.IsNullOrEmpty(hdHTMLContent.Value))
             {
                 connection.Open();
-               // var results = command.ExecuteNonQuery();
+                var results = command.ExecuteNonQuery();
                 connection.Close();
             }
         }

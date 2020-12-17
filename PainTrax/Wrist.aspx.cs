@@ -33,6 +33,7 @@ public partial class Wrist : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         if (!IsPostBack)
         {
+            ViewState["saveDaigno"] = "0";
             if (Session["PatientIE_ID"] != null)
             {
                 bindDropdown();
@@ -194,7 +195,7 @@ public partial class Wrist : System.Web.UI.Page
             bindgridPoup();
             BindDCDataGrid();
         }
-        
+
         Logger.Info(Session["uname"].ToString() + "- Visited in  Wrist for -" + Convert.ToString(Session["LastNameIE"]) + Convert.ToString(Session["FirstNameIE"]) + "-" + DateTime.Now);
     }
     public string SaveUI(string ieID, string ieMode, bool bpIsChecked)
@@ -234,7 +235,7 @@ public partial class Wrist : System.Web.UI.Page
         if (_ieMode == "Update" || _ieMode == "New")
         {
             TblRow["PatientIE_ID"] = _ieID;
-           
+
             TblRow["FlexionROMLeft"] = txtFlexionLeft.Text.Trim();
             TblRow["FlexionROMRight"] = txtFlexionRight.Text.Trim();
             TblRow["ExtensionROMRight"] = txtExtensionRight.Text.Trim();
@@ -251,7 +252,7 @@ public partial class Wrist : System.Web.UI.Page
 
 
 
-            
+
             TblRow["TinelLeft"] = chkTinelLeft.Checked;
             TblRow["TinelRight"] = chkTinelRight.Checked;
             TblRow["TinelBilaterally"] = chkTinelBilaterally.Checked;
@@ -275,7 +276,7 @@ public partial class Wrist : System.Web.UI.Page
             TblRow["PainUponDorsiFlexionLeft"] = chkPainUponDorsiFlexionLeft.Checked;
             TblRow["PainUponDorsiFlexionRight"] = chkPainUponDorsiFlexionRight.Checked;
             TblRow["PainUponDorsiFlexionBilaterally"] = chkPainUponDorsiFlexionBilaterally.Checked;
-         
+
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
             TblRow["CCvalue"] = hdCCvalue.Value;
@@ -358,7 +359,7 @@ public partial class Wrist : System.Web.UI.Page
             _fldPop = true;
             TblRow = sqlTbl1.Rows[0];
 
-        
+
 
             txtFlexionLeft.Text = TblRow["FlexionROMLeft"].ToString();
             txtFlexionRight.Text = TblRow["FlexionROMRight"].ToString();
@@ -376,7 +377,7 @@ public partial class Wrist : System.Web.UI.Page
             txtUlnarDeviationRange.Text = Convert.ToString(TblRow["UlnarDeviationRangeNormal"]);
 
 
-          
+
             chkTinelLeft.Checked = CommonConvert.ToBoolean(TblRow["TinelLeft"].ToString());
             chkTinelRight.Checked = CommonConvert.ToBoolean(TblRow["TinelRight"].ToString());
             chkTinelBilaterally.Checked = CommonConvert.ToBoolean(TblRow["TinelBilaterally"].ToString());
@@ -405,13 +406,30 @@ public partial class Wrist : System.Web.UI.Page
             // txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
-            CF.InnerHtml = TblRow["CCvalue"].ToString();
+
 
 
             string orgval = TblRow["PEvalueoriginal"].ToString();
             string editval = TblRow["PEvalue"].ToString();
 
-            divPE.InnerHtml = editval;
+
+
+
+            string cc = TblRow["CCvalue"].ToString();
+
+            string p = Request.QueryString["P"];
+
+
+
+            CF.InnerHtml = cc;
+
+            string pe = TblRow["PEvalue"].ToString();
+
+
+
+
+            divPE.InnerHtml = pe;
+
 
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + Request.QueryString["P"] + "');", true);
@@ -630,7 +648,7 @@ public partial class Wrist : System.Web.UI.Page
                         				THEN p.E_PDesc
                               END  END END as PDesc
                         	 -- ,p.Requested,p.Heading RequestedHeading,p.Scheduled,p.S_Heading ScheduledHeading,p.Executed,p.E_Heading ExecutedHeading
-                         from tblProceduresDetail p WHERE PatientIE_ID = " + _CurIEid + " AND BodyPart = '" + _CurBP + "'  and IsConsidered=0 Order By BodyPart,Heading";
+                         from tblProceduresDetail p WHERE PatientIE_ID = " + _CurIEid + " and PatientFU_ID is null  AND BodyPart = '" + _CurBP + "'  and IsConsidered=0 Order By BodyPart,Heading";
             oSQLCmd.Connection = oSQLConn;
             oSQLCmd.CommandText = SqlStr;
             oSQLAdpr = new SqlDataAdapter(SqlStr, oSQLConn);
@@ -776,6 +794,7 @@ public partial class Wrist : System.Web.UI.Page
         try
         {
             RemoveDiagCodesDetail(ieID);
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -789,13 +808,22 @@ public partial class Wrist : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    //ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
                         //ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
+                        // SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
                     }
                 }
             }
+            gDbhelperobj.SaveDiagUI(ieID, null, codeId, true, _CurBP, desc, codes);
             BindDCDataGrid();
         }
         catch (Exception ex)
@@ -921,7 +949,8 @@ public partial class Wrist : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         string ieMode = "New";
-        SaveDiagnosis(Session["PatientIE_ID"].ToString());
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(Session["PatientIE_ID"].ToString());
         SaveUI(Session["PatientIE_ID"].ToString(), ieMode, true);
         SaveStandards(Session["PatientIE_ID"].ToString());
         PopulateUI(Session["PatientIE_ID"].ToString());
@@ -944,7 +973,6 @@ public partial class Wrist : System.Web.UI.Page
 
     protected void BindROM()
     {
-
 
         long _ieID = Convert.ToInt64(Session["PatientIE_ID"]);
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
@@ -1050,15 +1078,24 @@ public partial class Wrist : System.Web.UI.Page
         try
         {
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_CurIEid != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_CurIEid != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS(" + _CurIEid + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTS('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", _CurIEid);
+            param[2] = new SqlParameter("@PatientFU_ID", 0);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             DataTable newTable = new DataTable();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -1092,6 +1129,7 @@ public partial class Wrist : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
@@ -1164,13 +1202,9 @@ public partial class Wrist : System.Web.UI.Page
         string path = Server.MapPath("~/Template/WristCC.html");
         string body = File.ReadAllText(path);
 
-        if (p == "L")
-            body = body.Replace("#rigthtdiv", "style='display:none'");
-        else if (p == "R")
-            body = body.Replace("#leftdiv", "style='display:none'");
-
 
         CF.InnerHtml = body;
+        hdorgCC.Value = body;
 
     }
 
@@ -1179,16 +1213,20 @@ public partial class Wrist : System.Web.UI.Page
         string path = Server.MapPath("~/Template/WristPE.html");
         string body = File.ReadAllText(path);
 
-        if (p == "L")
-            body = body.Replace("#rigthtdiv", "style='display:none'");
-        else if (p == "R")
-            body = body.Replace("#leftdiv", "style='display:none'");
+
 
 
         divPE.InnerHtml = body;
+        hdorgPE.Value = body;
 
 
-        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "displaySide('" + p.ToLower() + "');", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 
 }

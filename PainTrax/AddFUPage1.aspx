@@ -270,22 +270,25 @@
                     <div runat="server" id="divHtml">
                     </div>
                 </div>
-                                             
-                <div class="row" style="display: none">
+
+                <div class="row">
                     <div class="col-md-3">
                         <label class="control-label">GAIT:</label>
                     </div>
                     <div class="col-md-9" style="margin-top: 5px">
                         <asp:DropDownList Style="" DataSourceID="cboGAITDS" Width="150px" DataTextField="name" ID="cboGAIT" runat="server"></asp:DropDownList>
                         <asp:XmlDataSource ID="cboGAITDS" runat="server" DataFile="~/xml/HSMData.xml" XPath="HSM/GAITs/GAIT" />
+
                         <asp:DropDownList Style="" Width="280px" DataSourceID="cboAmbulatesDS" DataTextField="name" ID="cboAmbulates" runat="server"></asp:DropDownList>
                         <asp:XmlDataSource ID="cboAmbulatesDS" runat="server" DataFile="~/xml/HSMData.xml" XPath="HSM/Ambulatess/Ambulates" />
-                        <asp:CheckBox ID="chkFootslap" runat="server" Text="Foot slap/drop " />
-                        <asp:CheckBox ID="chkKneehyperextension" runat="server" Text="knee hyperextension  " />
-                        <asp:CheckBox ID="chkUnabletohealwalk" runat="server" Text="unable to heel walk  " />
-                        <asp:CheckBox ID="chkUnabletotoewalk" runat="server" Text="unable to toe walk  " />
-                        <label class="control-label">and </label>
-                        <asp:TextBox ID="txtOther" Width="350px" runat="server"></asp:TextBox>.
+                        <div style="display: none">
+                            <asp:CheckBox ID="chkFootslap" runat="server" Text="Foot slap/drop " />
+                            <asp:CheckBox ID="chkKneehyperextension" runat="server" Text="knee hyperextension  " />
+                            <asp:CheckBox ID="chkUnabletohealwalk" runat="server" Text="unable to heel walk  " />
+                            <asp:CheckBox ID="chkUnabletotoewalk" runat="server" Text="unable to toe walk  " />
+                            <label class="control-label">and </label>
+                            <asp:TextBox ID="txtOther" Width="350px" runat="server"></asp:TextBox>.
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -587,7 +590,7 @@
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label class="control-label">PROCEDURE:</label>
                     </div>
@@ -601,7 +604,10 @@
                     <div class="col-md-3">
                         <label class="control-label">CARE:</label>
                     </div>
-                    <div class="col-md-9" style="margin-top: 5px">
+                    <div class="col-md-9">
+                        <asp:CheckBox runat="server" ID="chkcare" Text="Chiropractic and physical therapy. Avoid heavy lifting, carrying, excessive bending and prolonged sitting and standing." Checked="true" />
+                    </div>
+                    <div class="col-md-9" style="margin-top: 5px; display: none">
                         <asp:CheckBox ID="chkAcupuncture" runat="server" Checked="true" Text="Acupuncture" />
                         <asp:CheckBox ID="chkChiropratic" runat="server" Checked="true" Text="chiropractic" />
                         <asp:CheckBox ID="chkPhysicalTherapy" runat="server" Checked="true" Text="physical therapy  " />
@@ -618,7 +624,8 @@
                         <label class="control-label">GOALS :</label>
                     </div>
                     <div class="col-md-9" style="margin-top: 5px">
-                        <label class="control-label">To increase range of motion, strength, flexibility, to decrease pain and to improve body biomechanics and activities of daily living and improve the functional status.</label>
+                        <asp:CheckBox ID="chkgoal" runat="server" Text="To increase range of motion, strength, flexibility, to decrease pain and to improve body biomechanics and activities of daily living and improve the functional status." Checked="true" />
+
                     </div>
                 </div>
                 <div class="row">
@@ -626,12 +633,15 @@
                         <label class="control-label">PRECAUTIONS :</label>
                     </div>
                     <div class="col-md-9" style="margin-top: 5px">
-                        <label class="control-label">Universal  </label>
+                        <%-- <label class="control-label">Universal  </label>
                         <asp:CheckBox ID="chkCardiac" Text="cardiac  " runat="server" />
                         <asp:CheckBox ID="chkWeightBearing" Text="weight bearing precaution and " runat="server" />
-                        <asp:TextBox ID="txtPrecautions" Width="300" runat="server" />.
+                        <asp:TextBox ID="txtPrecautions" Width="300" runat="server" />.--%>
+                        <asp:TextBox ID="txtPrecautions" runat="server" TextMode="MultiLine" Width="700px" Height="100px"
+                            Text="All the treatment options have been discussed with the patient in detail. Pain management compliance was discussed with patient.Patient may need urine toxicology for the possibility of prescribing controlled medicine because pain still complains of pain affecting activities of daily living. Pain contract signed in chart. Patient understood and agrees with the plan."></asp:TextBox>
+
                     </div>
-                    <div class="col-md-9" style="margin-top: 5px">
+                    <div class="col-md-9" style="margin-top: 5px; display: none">
                         <asp:CheckBox ID="chkEducationProvided" Text="Patient education provided via  " runat="server" />
                         <asp:CheckBox ID="chkViaPhysician" Text="physician  " runat="server" />
                         <asp:CheckBox ID="chkViaPrintedMaterial" Text="printed material  " runat="server" />
@@ -640,7 +650,7 @@
                         <asp:TextBox ID="txtViaVideo" runat="server" />
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label class="control-label">CONSULATION:</label>
                     </div>
@@ -652,7 +662,7 @@
                         <asp:TextBox ID="txtConsultOther" runat="server" />.
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="display: none">
                     <div class="col-md-3">
                         <label class="control-label">FOLLOW UP:</label><asp:TextBox ID="txtFollowUpIn" runat="server" />
                         &nbsp;

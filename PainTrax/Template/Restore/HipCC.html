@@ -1,0 +1,357 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <span class="control-label"><b><u>CHIEF COMPLAINT</u></b></span>
+    </div>
+    <div class="col-md-9" style="margin-top: 5px">
+        <div id="WrapLeft" #leftdiv>
+            <label class="control-label" id="lblpain1L">The patient complains of left hip pain that is </label>
+            <input type="text" id="txtPainScaleL" style="Width:40px" class="paincls" value="#painL" onchange="txtMe(this); removePainClass(this, 'L');" />
+            <label class="control-label" id="lblpain2L">/10, with 10 being the worst</label>
+            <label class="noprint" id="lblwhichL">, which is </label>
+            <input type="checkbox" id="chkcontentL" class="painL" value="constant" onclick="checkMe(this);removeClass(this,'L');" #chkconstantL />constant,
+            <input type="checkbox" id="chkintermittentL" class="painL" value="intermittent" onclick="checkMe(this);removeClass(this,'L');" #chkintermittentL />intermittent,
+            <input type="checkbox" id="chksharpL" value="sharp" class="painL" onclick="checkMe(this);removeClass(this,'L');" #chksharpL />sharp,
+            <input type="checkbox" id="chkelectricL" class="painL" value="electric" onclick="checkMe(this);removeClass(this,'L');" #chkelectricL />electric,
+            <input type="checkbox" id="chkshootingL" class="painL" value="shooting" onclick="checkMe(this);removeClass(this,'L');" #chkshootingL />shooting,
+
+            <input type="checkbox" id="chkthrobbingL" class="painL" value="throbbing" onclick="checkMe(this);removeClass(this,'L');" #chkthrobbingL />throbbing,
+            <input type="checkbox" id="chkpulsatingL" class="painL" value="pulsating" onclick="checkMe(this);removeClass(this,'L');" #chkpulsatingL />pulsating,
+
+            <input type="checkbox" id="chkdullL" value="dull" class="painL" onclick="checkMe(this);removeClass(this,'L');" #chkdullL />dull,
+            <input type="checkbox" id="chkachyL" value="achy" class="painL" onclick="checkMe(this);removeClass(this,'L');" #chkachyL />achy
+            <span class="noprint" id="lblnatureL"> in nature</span>
+            <span id="lblpain3L">.</span>
+
+
+            <input type="checkbox" id="chkhipworsL" value="The hip pain worsened with " class="nocomma" #chkspecL />The hip pain worsened with
+            <input type="checkbox" id="chkWorseSittingL" class="chkpainL" value="sitting" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" #chksittingL /> sitting,
+            <input type="checkbox" id="chkWorseStandingL" class="chkpainL" value="standing" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" #chkstandingL /> standing,
+            <input type="checkbox" id="chkWorseMovementL" class="chkpainL" value="movement" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" #chkmovementL /> movement,
+            <input type="checkbox" id="chkWorseActivitiesL" class="chkpainL" value="activities" onclick="checkMe(this);checkDefault(this, 'chkhipworsL');" #chkactivitiesL /> activities
+            <input type="text" id="txtHip1L" style="width:240px" class="nocomma" value="#txtspecL" />
+            <span>.</span>
+
+            <br />
+
+            <section class="col-md-3">
+                <span class="control-label">Notes</span>
+            </section>
+            <section class="col-md-9" style="margin-top: 5px">
+                <textarea id="txtFreeFormCCL" Style="Width:700px;height:100px" onchange="txtAreaMe(this)">#txtNoteL</textarea>
+                <button type="button" id="start_button1" onclick="startButton1(event)">
+                    <img src="images/mic.gif" alt="start" />
+                </button>
+
+                <section style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></section>
+            </section>
+
+
+        </div>
+        <div id="WrapRight" #rigthtdiv>
+            <label id="lblpain1R" class="control-label">The patient complains of right hip pain that is </label>
+            <input type="text" id="txtPainScaleR" style="Width:40px" class="paincls" value="#painR" onchange="txtMe(this); removePainClass(this, 'R');" />
+            <label id="lblpain2R" class="control-label">/10, with 10 being the worst</label>
+            <label class="noprint" id="lblwhichR">, which is </label>
+            <input type="checkbox" id="chkcontentR" class="painR" value="constant" onclick="checkMe(this);removeClass(this,'R');" #chkconstantR />constant,
+            <input type="checkbox" id="chkintermittentR" class="painR" value="intermittent" onclick="checkMe(this);removeClass(this,'R');" #chkintermittentR />intermittent,
+            <input type="checkbox" id="chksharpR" value="sharp" class="painR" onclick="checkMe(this);removeClass(this,'R');" #chksharpR />sharp,
+            <input type="checkbox" id="chkelectricR" value="electric" class="painR" onclick="checkMe(this);removeClass(this,'R');" #chkelectricR />electric,
+            <input type="checkbox" id="chkshootingR" value="shooting" class="painR" onclick="checkMe(this);removeClass(this,'R');" #chkshootingR />shooting,
+
+            <input type="checkbox" id="chkthrobbingR" value="throbbing" class="painR" onclick="checkMe(this);removeClass(this,'R');" #chkthrobbingR />throbbing,
+            <input type="checkbox" id="chkpulsatingR" value="pulsating" class="painR" onclick="checkMe(this);removeClass(this,'R');" #chkpulsatingR />pulsating,
+
+            <input type="checkbox" id="chkdullR" value="dull" class="painR" onclick="checkMe(this);removeClass(this,'R');" #chkdullR />dull,
+            <input type="checkbox" id="chkachyR" value="achy" class="painR" onclick="checkMe(this);removeClass(this,'R');" #chkachyR />achy
+            <span class="noprint" id="lblnatureR"> in nature</span>
+            <span id="lblpain3R">.</span>
+
+
+            <input type="checkbox" id="chkhipworsR" value="The hip pain worsened with " class="nocomma" #chkspecR />The hip pain worsened with
+            <input type="checkbox" id="chkWorseSittingR" class="chkpainR" value="sitting" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" #chksittingR /> sitting,
+            <input type="checkbox" id="chkWorseStandingR" class="chkpainR" value="standing" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" #chkstandingR /> standing,
+            <input type="checkbox" id="chkWorseMovementR" class="chkpainR" value="movement" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" #chkmovementR /> movement,
+            <input type="checkbox" id="chkWorseActivitiesR" class="chkpainR" value="activities" onclick="checkMe(this);checkDefault(this, 'chkhipworsR');" #chkactivitiesR /> activities
+            <input type="text" id="txtHip1R" style="width:240px" class="nocomma" onchange="txtMe(this)" value="#txtspecR" />
+            <label>.</label>
+            <br />
+
+            <section class="col-md-3">
+                <span class="control-label">Notes</span>
+            </section>
+            <section class="col-md-9" style="margin-top: 5px">
+                <textarea id="txtFreeFormCCR" Style="Width:700px;height:100px" onchange="txtAreaMe(this)">#txtNoteR</textarea>
+                <button type="button" id="start_button1" onclick="startButton1(event)">
+                    <img src="images/mic.gif" alt="start" />
+                </button>
+
+                <section style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></section>
+            </section>
+
+        </div>
+
+    </div>
+</div>
+<script>
+
+    function removePainClass(txtId, side) {
+
+        var $span1 = $("#lblpain1" + side);
+        var $span2 = $("#lblpain2" + side);
+        var $span3 = $("#lblpain3" + side);
+
+
+
+        if ($(txtId).val() !== '') {
+
+
+
+            $span1.replaceWith(function () {
+                return $('<label/>', {
+                    Id: 'lblpain1' + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<label/>', {
+
+                    Id: 'lblpain2' + side,
+                    html: this.innerHTML
+                });
+            });
+
+            $span3.replaceWith(function () {
+                return $('<label/>', {
+
+                    Id: 'lblpain3' + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            //$('#lblnature').removeClass("noprint");
+            //$('#lblwhich').removeClass("noprint");
+        }
+        else {
+
+
+
+            $span1.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain1' + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain2' + side,
+                    html: this.innerHTML
+                });
+            });
+            $span3.replaceWith(function () {
+                return $('<span/>', {
+                    class: 'noprint',
+                    Id: 'lblpain3' + side,
+                    html: this.innerHTML
+                });
+            });
+
+        }
+
+    }
+
+    function displaySide(side) {
+
+
+
+        if (side === 'l') {
+            $('#WrapLeft').show();
+            $('#WrapRight').hide();
+            $('#WrapLeftPE').show();
+            $('#WrapRightPE').hide();
+        }
+        else if (side === 'r') {
+            $('#WrapLeft').hide();
+            $('#WrapRight').show();
+            $('#WrapLeftPE').hide();
+            $('#WrapRightPE').show();
+        }
+        else {
+            $('#WrapLeft').show();
+            $('#WrapRight').show();
+            $('#WrapLeftPE').show();
+            $('#WrapRightPE').show();
+        }
+
+    }
+
+    function checkMe(chk) {
+
+        if ($(chk).prop("checked")) {
+            if ($(chk).attr("type") === "radio")
+                $("[name=" + $(chk).attr("name") + "]").removeAttr('checked');
+            $(chk).attr('checked', 'checked');
+        }
+        else {
+            $(chk).removeAttr('checked');
+        }
+
+    }
+
+    function checkDefault(chk, deafCheck) {
+
+        debugger
+
+
+        var isCheck = false;
+        var className = "";
+        if ($("#" + deafCheck).prop("checked") == false) {
+
+            if ($(chk).prop("checked")) {
+                $("#" + deafCheck).attr('checked', 'checked');
+
+            }
+        }
+
+
+        if (deafCheck === "chkhipworsL")
+            className = "chkpainL";
+        else if (deafCheck === "chkhipworsR")
+            className = "chkpainR";
+        else if (deafCheck === "chkrightrevel")
+            className = "chkuponR";
+        else if (deafCheck === "chkleftrevel")
+            className = "chkuponL";
+
+
+
+
+        if ($("#" + deafCheck).prop("checked") == true) {
+
+
+
+
+            if ($(chk).prop("checked") == false) {
+
+                $("input:checkbox[class=" + className + "]").each(function () {
+                    if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                        isCheck = true;
+                    }
+                });
+
+                if (!isCheck)
+                    $("#" + deafCheck).removeAttr('checked');
+
+            }
+        }
+    }
+
+
+    function removeClass(chkid, side) {
+
+        var $span1 = $("#lblnature" + side);
+        var $span2 = $("#lblwhich" + side);
+
+        if ($(chkid).prop("checked") == true) {
+
+
+
+
+
+            $span1.replaceWith(function () {
+                return $('<label/>', {
+                    class: 'noprint',
+                    id: "lblnature" + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+            $span2.replaceWith(function () {
+                return $('<label/>', {
+                    class: 'noprint',
+                    id: "lblwhich" + side,
+                    html: this.innerHTML
+                });
+            });
+
+
+        }
+        else {
+
+
+            var className = 'pain' + side;
+            var isCheck = false;
+
+
+
+            $("input:checkbox[class=" + className + "]").each(function () {
+                if ($("#" + $(this).attr("id")).prop("checked") == true) {
+                    isCheck = true;
+                }
+            });
+
+            if (!isCheck) {
+
+
+                $span1.replaceWith(function () {
+                    return $('<span/>', {
+                        class: 'noprint',
+                        id: "lblnature" + side,
+                        html: this.innerHTML
+                    });
+                });
+
+
+                $span2.replaceWith(function () {
+                    return $('<span/>', {
+                        class: 'noprint',
+                        id: "lblwhich" + side,
+                        html: this.innerHTML
+                    });
+                });
+
+            }
+
+
+        }
+
+    }
+
+    function txtMe(txt) {
+        var val = $(txt).val();
+        $(txt).attr('value', val);
+    }
+
+
+    function txtAreaMe(txt) {
+        debugger
+        var val = $(txt).val();
+        $(txt).text(val);
+    }
+
+    function startButton1(event) {
+        controlname = "#txtFreeFormCC";
+        if (recognizing) {
+            recognition.stop();
+            return;
+        }
+        final_transcript = '';
+        recognition.lang = 'en';
+        recognition.start();
+        ignore_onend = false;
+        final_span1.innerHTML = '';
+        interim_span1.innerHTML = '';
+
+        start_timestamp = event.timeStamp;
+    }
+
+</script>
+
+

@@ -4,8 +4,8 @@
 <div class="col-md-9 row" style="margin-top: 5px">
     <div id="WrapLeftPE" #leftdiv>
         <span><b>Left Hip Examination:</b> </span><label style="visibility:hidden">#lefthiptitle</label>
-        <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the " /> There is tenderness upon palpation of the
-        <input type="checkbox" ID="chkGreaterTrochanterLeft" class="chkuponL" onclick="checkMe(this);checkDefault(this, 'chkleftrevel');" value="greater trochanter" /> greater trochanter
+        <input type="checkbox" id="chkleftrevel" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the " checked="checked" /> There is tenderness upon palpation of the
+        <input type="checkbox" ID="chkGreaterTrochanterLeft" class="chkuponL" onclick="checkMe(this);checkDefault(this, 'chkleftrevel');" value="greater trochanter" checked="checked" /> greater trochanter
         <input type="checkbox" ID="chkPosteriorLeft" class="chkuponL" onclick="checkMe(this);checkDefault(this, 'chkleftrevel');" value="posterior aspect of the greater trochanter" /> posterior aspect of the greater trochanter
         <input type="checkbox" ID="chkIliotibialLeft" class="chkuponL" onclick="checkMe(this);checkDefault(this, 'chkleftrevel');" value="iliotibial band" /> iliotibial band
         <label>.</label>
@@ -34,6 +34,8 @@
             <button type="button" id="start_button" onclick="startButton(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#hipleftrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
 
@@ -43,8 +45,8 @@
     <div id="WrapRightPE" #rigthtdiv>
         <span><b>Right Hip Examination:</b> </span><label style="visibility:hidden">#rigthhiptitle</label>
 
-        <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the " />There is tenderness upon palpation of the
-        <input type="checkbox" ID="chkGreaterTrochanterRight" class="chkuponR" onclick="checkMe(this);checkDefault(this, 'chkrightrevel');" value="greater trochanter" /> greater trochanter
+        <input type="checkbox" id="chkrightrevel" class="nocomma" onclick="checkMe(this)" value="There is tenderness upon palpation of the " checked="checked" />There is tenderness upon palpation of the
+        <input type="checkbox" ID="chkGreaterTrochanterRight" class="chkuponR" onclick="checkMe(this);checkDefault(this, 'chkrightrevel');" value="greater trochanter" checked="checked" /> greater trochanter
         <input type="checkbox" ID="chkPosteriorRight" class="chkuponR" onclick="checkMe(this);checkDefault(this, 'chkrightrevel');" value="posterior aspect of the greater trochanter" /> posterior aspect of the greater trochanter
         <input type="checkbox" ID="chkIliotibialRight" class="chkuponR" onclick="checkMe(this);checkDefault(this, 'chkrightrevel');" value="iliotibial band" /> iliotibial band
         <label>.</label>
@@ -73,12 +75,14 @@
             <button type="button" id="start_button" onclick="startButton(event)">
                 <img src="images/mic.gif" alt="start" />
             </button>
+            <br />
+            <label style="visibility:hidden">#hiprightrom</label>
             <section style="display: none"><span class="final" id="final_span"></span><span class="interim" id="interim_span"></span></section>
         </section>
 
     </div>
 
-    <div id="TestPE">
+    <div id="TestPE" style="display:none">
         <br />
         <input type="checkbox" id="chkOber" value="Ober test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Ober test is&nbsp;
 

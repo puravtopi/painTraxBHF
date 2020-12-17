@@ -55,6 +55,19 @@
 
 
                             </div>
+                              <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label class="lblstyle">Forward ROM </label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <asp:CheckBox runat="server" ID="chkROM" />
+                                    </div>
+                                  
+                                </div>
+
+
+                            </div>
 
 
                             <div class="clearfix"></div>

@@ -1,0 +1,417 @@
+﻿
+<div class="col-md-9 row" style="margin-top: 5px">
+    <label>
+        Reveals tenderness upon palpation at
+    </label>
+    <input id="txtspineexam" type="text" style="width:100px;text-align:left" value="L1-S1" onchange="txtMe(this)" />
+    <label> levels </label>
+    <section class="dropdown">
+        <input type="text" id="txtWorse1" onchange="txtMe(this)" value="bilaterally" />
+        <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus();selectVal('txtWorse1', this.value)" id="ddlWorse1">
+            <option></option>
+            <option selected="selected"> bilaterally</option>
+            <option> on the left</option>
+            <option> on the right</option>
+        </select>
+    </section>
+    <label> with muscle spasm present. </label>
+
+    <br />
+    <table>
+        <tr>
+            <td>
+                <input type="checkbox" id="chkSLR" value="Straight leg raise test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Straight leg raise test is
+
+                <section class="dropdown">
+                    <input type="text" id="txtSLR" onchange="txtMe(this);selectTestCHK('chkSLR', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtSLR', this.value);selectTestCHK('chkSLR', this.value)" id="ddlSLR">
+                        <option></option>
+
+                        <option>positive on left.</option>
+                        <option>positive on right.</option>
+                        <option>positive bilaterally.</option>
+                    </select>
+                </section>
+                <span>.</span>
+            </td>
+            <td>
+                <input type="checkbox" id="chkFABR" value="Braggard test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Braggard test is
+
+                <section class="dropdown">
+                    <input type="text" id="txtBraggard" onchange="txtMe(this);selectTestCHK('chkFABR', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtBraggard', this.value);selectTestCHK('chkFABR', this.value)" id="ddlBraggard"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+                </section>
+                <span>.</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="chkKS" value="Kernig sign test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Kernig sign test is
+
+                <section class="dropdown">
+                    <input type="text" id="txtKS" onchange="txtMe(this);selectTestCHK('chkKS', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtKS', this.value);selectTestCHK('chkKS', this.value)" id="ddlKS">
+                        <option></option>
+
+                        <option>positive on left.</option>
+                        <option>positive on right.</option>
+                        <option>positive bilaterally.</option>
+                    </select>
+                </section>
+                <span>.</span>
+            </td>
+            <td>
+                <input type="checkbox" id="chkBT" value="Brudzinski test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Brudzinski test is
+
+                <section class="dropdown">
+                    <input type="text" id="txtBT" onchange="txtMe(this);selectTestCHK('chkBT', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtBT', this.value);selectTestCHK('chkBT', this.value)" id="ddlBT"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+                </section>
+                <span>.</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="chkSC" value="Sacroiliac compression test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Sacroiliac compression test is
+
+                <section class="dropdown">
+                    <input type="text" id="txtSC" onchange="txtMe(this);selectTestCHK('chkSC', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtSC', this.value);selectTestCHK('chkSC', this.value)" id="ddlSC">
+                        <option></option>
+
+                        <option>positive on left.</option>
+                        <option>positive on right.</option>
+                        <option>positive bilaterally.</option>
+                    </select>
+                </section>
+                <span>.</span>
+            </td>
+            <td>
+                <input type="checkbox" id="chkSNT" value="Sacral notch tenderness test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Sacral notch tenderness test is
+
+                <section class="dropdown">
+                    <input type="text" id="txtSNT" onchange="txtMe(this);selectTestCHK('chkSNT', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtSNT', this.value);selectTestCHK('chkSNT', this.value)" id="ddlSNT"><option></option><option>positive on left.</option><option>positive on right.</option><option>positive bilaterally.</option></select>
+                </section>
+                <span>.</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" id="chkOTC" value="Ober's test causing pain at the SI joint test is " class="nocomma" onclick="checkMe(this)" />&nbsp;The Ober's test causing pain at the SI joint test is
+
+                <section class="dropdown">
+                    <input type="text" id="txtOTC" onchange="txtMe(this);selectTestCHK('chkOTC', this.value)" />
+                    <select onchange="this.previousElementSibling.value = this.value; this.previousElementSibling.focus(); selectVal('txtOTC', this.value); selectTestCHK('chkOTC', this.value);" id="ddlOTC">
+                        <option></option>
+
+                        <option>positive on left.</option>
+                        <option>positive on right.</option>
+                        <option>positive bilaterally.</option>
+                    </select>
+                </section>
+                <span>.</span>
+            </td>
+
+        </tr>
+    </table>
+
+
+
+
+    <label style="display:none">#romlowback</label>
+</div>
+<br />
+<div id="divTP">
+    <div class="row">
+        <div class="col-md-3">
+            <span class="control-label"><b><u>Trigger Point:</u></b></span>
+        </div>
+        <div class="col-md-9" style="margin-top: 5px">
+            <input id="hidTPText" type="hidden" />
+            <span>On exam, patient has taut tender bands in the   <input type="text" ID="txtTP" onchange="txtMe(this);writeTPtxt()" class="txtTP" Style="margin-left: 10px;Width:400px" /> muscles. </span>
+
+
+        </div>
+
+        <!--<table>
+            <tr>
+                <td>
+                    <select ID="ddlTPSide1" Style="height: 30px; width: 100px">
+                        <option></option>
+                        <option>left</option>
+                        <option>right</option>
+                        <option>bilateral</option>
+                    </select>
+                    <input type="text" ID="txtTPText1" onchange="txtMe(this)" class="txtTP" Style="margin-left: 10px;Width:557px" Text="paraspinal level L3-S1 with referral patterns laterally to the region in a fan-like pattern"/>
+                </td>
+            </tr>
+            <!-- <tr>
+                 <td>
+                     <select ID="ddlTPSide2" Style="height: 30px; width: 100px"></select>
+                     <input type="text" ID="txtTPText2" onchange="txtMe(this)" Style="margin-left: 10px;Width:557px" />
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     <select ID="ddlTPSide3" Style="height: 30px; width: 100px"></select>
+                     <input type="text" ID="txtTPText3" onchange="txtMe(this)" Style="margin-left: 10px;Width:557px" />
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     <select ID="ddlTPSide4" Style="height: 30px; width: 100px"></select>
+                     <input type="text" ID="txtTPText4" onchange="txtMe(this)" Style="margin-left: 10px;Width:557px" />
+                 </td>
+             </tr>
+        </table>-->
+        <div class="row">
+            <div class="col-md-3">
+                <label class="control-label"></label>
+            </div>
+            <div class="col-md-9" style="margin-top: 5px">
+                <!--<span> with referral patterns laterally to the region in a fan-like pattern.</span>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<label style="display:none">#lowbacknotebp</label>
+<section class="row">
+    <section class="col-md-3 ">
+        <span class="control-label">Notes</span>
+    </section>
+    <section class="col-md-9" style="margin-top: 5px">
+        <textarea id="txtFreeForm" Style="width:700px;height:100px" onchange="txtAreaMe(this)" Text="Tender (+) interspinous region, at facets L3-4, L4-5, L5-S1 bilaterally. Axial lumbar facet loading positive bilaterally, lower back pain worse on extension and lateral rotation of the lumbar spine bilaterally. Patrick test (+) bilaterally. Kemp test (+) bilaterally. Lumbar rigidity (+). Muscle spasms (+). Trigger points identified at bilateral lumbar paraspinal muscles - taut bands with discrete, hyperirritable, tender spots, with palpation induced muscle twitches and pain referred to buttocks"></textarea>
+        <button type="button" id="start_button2" onclick="startButton2(event)">
+            <img src="images/mic.gif" alt="start" />
+        </button>
+        <div style="display: none"><span class="final" id="final_span1"></span><span class="interim" id="interim_span1"></span></div>
+    </section>
+</section>
+
+<style>
+
+    .dropdown {
+        position: relative;
+        width: 200px;
+        display: inline-block;
+    }
+
+        .dropdown select {
+            width: 100%;
+        }
+
+        .dropdown > * {
+            box-sizing: border-box;
+            height: 2em;
+        }
+
+        .dropdown select {
+        }
+
+        .dropdown input {
+            position: absolute;
+            width: calc(100% - 20px);
+        }
+</style>
+<script type="text/javascript">
+
+    window.load = disableTableDefault();
+
+    function disableTableDefault() {
+        $('#tblLB1').find("*").attr("disabled", "disabled");
+        $('#tblLB2').find("*").attr("disabled", "disabled");
+    }
+
+    function PopulateDropDownList() {
+
+
+        //var ddl1 = document.getElementById("ddlTPSide1");
+        //if (ddl1.options.length === 0) {
+
+        //    var ddl2 = document.getElementById("ddlTPSide2");
+        //    var ddl3 = document.getElementById("ddlTPSide3");
+        //    var ddl4 = document.getElementById("ddlTPSide4");
+
+
+        //    ddl1.length.options = 0;
+        //    ddl2.length.options = 0;
+        //    ddl3.length.options = 0;
+        //    ddl4.length.options = 0;
+
+
+        //    $.get('/xml/HSMData.xml', function (res) {
+
+        //        //var $xml = $(xmlDoc);
+
+        //        // Find Person Tag
+        //        var TPSides = $(res).find("sTPSides");
+        //        var Rom = $(TPSides).find("TPSide");
+
+
+
+        //        for (var i = 0; i < Rom.length; i++) {
+        //            var option1 = document.createElement("option");
+        //            var option2 = document.createElement("option");
+        //            var option3 = document.createElement("option");
+        //            var option4 = document.createElement("option");
+
+
+
+        //            //Set Customer Name in Text part.
+        //            option1.text = Rom[i].getAttribute('name');
+        //            option2.text = Rom[i].getAttribute('name');
+        //            option3.text = Rom[i].getAttribute('name');
+        //            option4.text = Rom[i].getAttribute('name');
+
+        //            option1.value = Rom[i].getAttribute('name');
+        //            option2.value = Rom[i].getAttribute('name');
+        //            option3.value = Rom[i].getAttribute('name');
+        //            option4.value = Rom[i].getAttribute('name');
+
+        //            //Add the Option element to DropDownList.
+        //            ddl1.options.add(option1);
+        //            ddl2.options.add(option2);
+        //            ddl3.options.add(option3);
+        //            ddl4.options.add(option4);
+
+        //        }
+        //    });
+
+
+        //    // var ddlLevels1 = document.getElementById("ddlLevels1");
+        //    // var ddlLevels2 = document.getElementById("ddlLevels2");
+        //    // var ddlLevels3 = document.getElementById("ddlLevels3");
+
+        //    //  ddlLevels1.options.length = 0;
+        //    //   ddlLevels2.options.length = 0;
+        //    //  ddlLevels3.options.length = 0;
+
+        //    $.get('/xml/HSMData.xml', function (res) {
+
+        //        //var $xml = $(xmlDoc);
+
+
+        //        // var Levels = $(res).find("Level");
+
+
+        //        //for (i = 0; i < Levels.length; i++) {
+        //        //     var optionLevels = document.createElement("option");
+
+
+        //        //     //Set Customer Name in Text part.
+        //        //     optionLevels.text = Levels[i].getAttribute('name');
+        //        //     optionLevels.value = Levels[i].getAttribute('name');
+
+
+        //        //     //Add the Option element to DropDownList.
+        //        //     ddlLevels1.options.add(optionLevels);
+
+        //        //     var optionLevels2 = document.createElement("option");
+
+        //        //     //Set Customer Name in Text part.
+        //        //     optionLevels2.text = Levels[i].getAttribute('name');
+        //        //     optionLevels2.value = Levels[i].getAttribute('name');
+
+
+        //        //     //Add the Option element to DropDownList.
+        //        //     ddlLevels2.options.add(optionLevels2);
+
+        //        //     var optionLevels3 = document.createElement("option");
+
+        //        //     //Set Customer Name in Text part.
+        //        //     optionLevels3.text = Levels[i].getAttribute('name');
+        //        //     optionLevels3.value = Levels[i].getAttribute('name');
+
+
+        //        //     //Add the Option element to DropDownList.
+        //        //     ddlLevels3.options.add(optionLevels3);
+
+
+        //        // }
+        //    });
+        //}
+    }
+    function checkMe(chk) {
+
+        if ($(chk).prop("checked")) {
+            if ($(chk).attr("type") === "radio")
+                $("[name=" + $(chk).attr("name") + "]").removeAttr('checked');
+            $(chk).attr('checked', 'checked');
+        }
+        else {
+            $(chk).removeAttr('checked');
+        }
+    }
+
+    function checkBilateral(chk, chkleft, checkright, txtleft, txtright) {
+        debugger
+        $('#' + checkright).prop("disabled", $(chk).prop("checked"));
+        $('#' + chkleft).prop("disabled", $(chk).prop("checked"));
+        if (txtleft !== '') {
+            $('#' + txtleft).prop("disabled", $(chk).prop("checked"));
+            $('#' + txtright).prop("disabled", $(chk).prop("checked"));
+        }
+    }
+
+    function selectTestCHK(chkid, val) {
+
+        if (val !== '')
+            $("#" + chkid).attr("checked", "checked");
+        else
+            $("#" + chkid).removeAttr("checked");
+    }
+
+
+    function writeTPtxt() {
+
+
+
+        var str = $('#txtTP').val();
+
+        var strspan = " On exam, patient has taut tender bands in the  #txtmsg muscles. ";
+        strspan = strspan.replace('#txtmsg', str);
+
+
+        if (str !== '')
+            $('#hidTPText').val(strspan);
+        else
+            $('#hidTPText').val('');
+
+        $('#ctl00_ContentPlaceHolder1_hdPETP').val(strspan);
+
+    }
+
+    function txtMe(txt) {
+        var val = $(txt).val();
+        $(txt).attr('value', val);
+    }
+
+    function selectVal(txtid, val) {
+        $("#" + txtid).attr('value', val);
+    }
+
+    function txtAreaMe(txt) {
+        debugger
+        var val = $(txt).val();
+        $(txt).text(val);
+    }
+
+    function startButton2(event) {
+        controlname = "#txtFreeForm";
+        if (recognizing) {
+            recognition.stop();
+            return;
+        }
+        final_transcript = '';
+        recognition.lang = 'en';
+        recognition.start();
+        ignore_onend = false;
+        final_span1.innerHTML = '';
+        interim_span1.innerHTML = '';
+
+        start_timestamp = event.timeStamp;
+    }
+
+</script>

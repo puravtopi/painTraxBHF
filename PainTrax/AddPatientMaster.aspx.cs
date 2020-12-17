@@ -203,6 +203,9 @@ public partial class AddPatientMaster : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@SDate", null);
             cmd.Parameters.AddWithValue("@EDate", null);
 
+            cmd.Parameters.Add("@TOTALRECORDS", SqlDbType.Int, 4);
+            cmd.Parameters["@TOTALRECORDS"].Direction = ParameterDirection.Output;
+
 
 
             cmd.CommandType = CommandType.StoredProcedure;

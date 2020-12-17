@@ -113,6 +113,9 @@
             htmlval = $("#ctl00_ContentPlaceHolder1_divrosHTML").html();
             $('#<%= hdrosHTMLContent.ClientID %>').val(htmlval);
 
+            htmlval = $("#ctl00_ContentPlaceHolder1_divactivityeffected").html();
+            $('#<%= hdactivityeffectedHTMLContent.ClientID %>').val(htmlval);
+
 
             document.getElementById('<%= btnSave.ClientID %>').click();
         }
@@ -146,15 +149,19 @@
     <asp:HiddenField runat="server" ID="hdcomplainHTMLContent" />
     <asp:HiddenField runat="server" ID="hdtopHTMLContent" />
     <asp:HiddenField runat="server" ID="hddegreeHTMLContent" />
+    <asp:HiddenField runat="server" ID="hdactivityeffectedHTMLContent" />
 
 
     <div id="divrosHTML" runat="server"></div>
-  
-    <div id="divcomplainHTML" runat="server" style="display:none"></div>
- 
+
+    <div id="divcomplainHTML" runat="server" style="display: none"></div>
+
     <div id="divtopHTML" runat="server"></div>
     <br />
     <div id="divdegreeHTML" runat="server"></div>
+
+    <br />
+    <div id="divactivityeffected" runat="server"></div>
 
     <br />
 

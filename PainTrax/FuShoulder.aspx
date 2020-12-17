@@ -62,12 +62,18 @@
         }
 
 
-       function funSavePE() {
+        function funSavePE() {
 
             var htmlval = $("#ctl00_ContentPlaceHolder1_divPE").html();
             $('#<%= hdPEvalue.ClientID %>').val(htmlval);
 
-            txtTPText1 = $("#txtTPText1").val();
+           var tpText = $("#hidTPText").val();
+
+
+
+           $('#<%= hdTPText.ClientID %>').val(tpText);
+
+          <%--  txtTPText1 = $("#txtTPText1").val();
             txtTPText2 = $("#txtTPText2").val();
             txtTPText3 = $("#txtTPText3").val();
             txtTPText4 = $("#txtTPText4").val();
@@ -91,7 +97,7 @@
 
 
             $('#<%= hdPESides.ClientID %>').val(sidestr);
-            $('#<%= hdPESidesText.ClientID %>').val(sidestrText);
+            $('#<%= hdPESidesText.ClientID %>').val(sidestrText);--%>
 
         }
 
@@ -141,121 +147,16 @@
 
             funSavePE();
 
-        
+
             $('#<%= hdCCvalueoriginal.ClientID %>').val(orghtmlval);
 
 
             document.getElementById('<%= btnSave.ClientID %>').click();
 
 
-            chkcontentL = $("#chkcontentL").is(':checked') ? "checked=\"checked\"" : "";
-            chkintermittentL = $("#chkintermittentL").is(':checked') ? "checked=\"checked\"" : "";
+         
 
 
-            chksharpL = $("#chksharpL").is(':checked') ? "checked=\"checked\"" : "";
-            chkelectricL = $("#chkelectricL").is(':checked') ? "checked=\"checked\"" : "";
-            chkshootingL = $("#chkshootingL").is(':checked') ? "checked=\"checked\"" : "";
-            chkthrobbingL = $("#chkthrobbingL").is(':checked') ? "checked=\"checked\"" : "";
-            chkpulsatingL = $("#chkpulsatingL").is(':checked') ? "checked=\"checked\"" : "";
-            chkdullL = $("#chkdullL").is(':checked') ? "checked=\"checked\"" : "";
-            chkachyL = $("#chkachyL").is(':checked') ? "checked=\"checked\"" : "";
-
-            chkWorseLyingL = $("#chkWorseLyingL").is(':checked') ? "checked=\"checked\"" : "";
-            chkWorseMovementL = $("#chkWorseMovementL").is(':checked') ? "checked=\"checked\"" : "";
-            chkWorseLiftingL = $("#chkWorseLiftingL").is(':checked') ? "checked=\"checked\"" : "";
-
-            chkWorseRotationL = $("#chkWorseRotationL").is(':checked') ? "checked=\"checked\"" : "";
-            chkWorseWorkingL = $("#chkWorseWorkingL").is(':checked') ? "checked=\"checked\"" : "";
-            chkWorseActivitiesL = $("#chkWorseActivitiesL").is(':checked') ? "checked=\"checked\"" : "";
-
-            chkImprovedRestingL = $("#chkImprovedRestingL").is(':checked') ? "checked=\"checked\"" : "";
-            chkImprovedMedicationL = $("#chkImprovedMedicationL").is(':checked') ? "checked=\"checked\"" : "";
-            chkImprovedTherapyL = $("#chkImprovedTherapyL").is(':checked') ? "checked=\"checked\"" : "";
-            chkImprovedSleepingL = $("#chkImprovedSleepingL").is(':checked') ? "checked=\"checked\"" : "";
-
-
-
-
-            txtPainScaleL = 'value="' + $("#txtPainScaleL").val() + '"';
-
-
-            chkcontentR = $("#chkcontentR").is(':checked') ? "checked=\"checked\"" : "";
-            chkintermittentR = $("#chkintermittentR").is(':checked') ? "checked=\"checked\"" : "";
-
-
-            chksharpR = $("#chksharpR").is(':checked') ? "checked=\"checked\"" : "";
-            chkelectricR = $("#chkelectricR").is(':checked') ? "checked=\"checked\"" : "";
-            chkshootingR = $("#chkshootingR").is(':checked') ? "checked=\"checked\"" : "";
-            chkthrobbingR = $("#chkthrobbingR").is(':checked') ? "checked=\"checked\"" : "";
-            chkpulsatingR = $("#chkpulsatingR").is(':checked') ? "checked=\"checked\"" : "";
-            chkdullR = $("#chkdullR").is(':checked') ? "checked=\"checked\"" : "";
-            chkachyR = $("#chkachyR").is(':checked') ? "checked=\"checked\"" : "";
-
-            chkWorseLyingR = $("#chkWorseLyingR").is(':checked') ? "checked=\"checked\"" : "";
-            chkWorseMovementR = $("#chkWorseMovementR").is(':checked') ? "checked=\"checked\"" : "";
-            chkWorseLiftingR = $("#chkWorseLiftingR").is(':checked') ? "checked=\"checked\"" : "";
-
-            chkWorseRotationR = $("#chkWorseRotationR").is(':checked') ? "checked=\"checked\"" : "";
-            chkWorseWorkingR = $("#chkWorseWorkingR").is(':checked') ? "checked=\"checked\"" : "";
-            chkWorseActivitiesR = $("#chkWorseActivitiesR").is(':checked') ? "checked=\"checked\"" : "";
-
-            chkImprovedRestingR = $("#chkImprovedRestingR").is(':checked') ? "checked=\"checked\"" : "";
-            chkImprovedMedicationR = $("#chkImprovedMedicationR").is(':checked') ? "checked=\"checked\"" : "";
-            chkImprovedTherapyR = $("#chkImprovedTherapyR").is(':checked') ? "checked=\"checked\"" : "";
-            chkImprovedSleepingR = $("#chkImprovedSleepingR").is(':checked') ? "checked=\"checked\"" : "";
-
-
-
-
-            txtPainScaleR = 'value="' + $("#txtPainScaleR").val() + '"';
-
-
-            htmlval = htmlval.replace('#txtPainScaleL', txtPainScaleL);
-            htmlval = htmlval.replace('#txtPainScaleR', txtPainScaleR);
-
-
-            htmlval = htmlval.replace('#chkcontentL', chkcontentL);
-            htmlval = htmlval.replace('#chkintermittentL', chkintermittentL);
-            htmlval = htmlval.replace('#chksharpL', chksharpL);
-            htmlval = htmlval.replace('#chkelectricL', chkelectricL);
-            htmlval = htmlval.replace('#chkshootingL', chkshootingL);
-            htmlval = htmlval.replace('#chkthrobbingL', chkthrobbingL);
-            htmlval = htmlval.replace('#chkpulsatingL', chkpulsatingL);
-            htmlval = htmlval.replace('#chkdullL', chkdullL);
-            htmlval = htmlval.replace('#chkachyL', chkachyL);
-            htmlval = htmlval.replace('#chkWorseLyingL', chkWorseLyingL);
-            htmlval = htmlval.replace('#chkWorseMovementL', chkWorseMovementL);
-            htmlval = htmlval.replace('#chkWorseLiftingL', chkWorseLiftingL);
-            htmlval = htmlval.replace('#chkWorseRotationL', chkWorseRotationL);
-            htmlval = htmlval.replace('#chkWorseWorkingL', chkWorseWorkingL);
-            htmlval = htmlval.replace('#chkWorseActivitiesL', chkWorseActivitiesL);
-            htmlval = htmlval.replace('#chkImprovedRestingL', chkImprovedRestingL);
-            htmlval = htmlval.replace('#chkImprovedMedicationL', chkImprovedMedicationL);
-            htmlval = htmlval.replace('#chkImprovedTherapyL', chkImprovedTherapyL);
-            htmlval = htmlval.replace('#chkImprovedSleepingL', chkImprovedSleepingL);
-
-            htmlval = htmlval.replace('#chkcontentR', chkcontentR);
-            htmlval = htmlval.replace('#chkintermittentR', chkintermittentR);
-            htmlval = htmlval.replace('#chksharpR', chksharpR);
-            htmlval = htmlval.replace('#chkelectricR', chkelectricR);
-            htmlval = htmlval.replace('#chkshootingR', chkshootingR);
-            htmlval = htmlval.replace('#chkthrobbingR', chkthrobbingR);
-            htmlval = htmlval.replace('#chkpulsatingR', chkpulsatingR);
-            htmlval = htmlval.replace('#chkdullR', chkdullR);
-            htmlval = htmlval.replace('#chkachyR', chkachyR);
-            htmlval = htmlval.replace('#chkWorseLyingR', chkWorseLyingR);
-            htmlval = htmlval.replace('#chkWorseMovementR', chkWorseMovementR);
-            htmlval = htmlval.replace('#chkWorseLiftingR', chkWorseLiftingR);
-            htmlval = htmlval.replace('#chkWorseRotationR', chkWorseRotationR);
-            htmlval = htmlval.replace('#chkWorseWorkingR', chkWorseWorkingR);
-            htmlval = htmlval.replace('#chkWorseActivitiesR', chkWorseActivitiesR);
-            htmlval = htmlval.replace('#chkImprovedRestingR', chkImprovedRestingR);
-            htmlval = htmlval.replace('#chkImprovedMedicationR', chkImprovedMedicationR);
-            htmlval = htmlval.replace('#chkImprovedTherapyR', chkImprovedTherapyR);
-            htmlval = htmlval.replace('#chkImprovedSleepingR', chkImprovedSleepingR);
-
-
-          
 
         }
 
@@ -323,7 +224,7 @@
                     </div>
                 </div>--%>
 
-              <%--  <div class="row">
+                <%--  <div class="row">
                     <div class="col-md-3">
                         <label class="control-label"></label>
                     </div>
@@ -386,13 +287,13 @@
                         <br />
                     </div>
                 </div>
-               --%>
+                --%>
                 <div class="row">
                     <div class="col-md-3">
                         <label class="control-label"><b><u>PHYSICAL EXAM:</u></b></label>
                     </div>
 
-                          <div class="col-md-9" style="margin-top: 5px">
+                    <div class="col-md-9" style="margin-top: 5px">
 
                         <asp:Repeater runat="server" ID="repROM" OnItemDataBound="repROM_ItemDataBound">
                             <HeaderTemplate>
@@ -413,10 +314,10 @@
                                         <td></td>
                                         <td style="">Left
                                         </td>
-                                       
+
                                         <td style="">Right
                                         </td>
-                                       
+
                                         <td style="">Normal
                                         </td>
                                     </tr>
@@ -425,10 +326,10 @@
                                 <tr>
                                     <td style="text-align: left;">
                                         <asp:Label runat="server" ID="lblname" Text='<%# Eval("name") %>'></asp:Label></td>
-                                   
+
                                     <td>
                                         <asp:TextBox ID="txtleft" CssClass="paincls" runat="server" Width="50px" onkeypress="return onlyNumbers(event);" Text='<%# Eval("left") %>'></asp:TextBox></td>
-                                   
+
                                     <td>
                                         <asp:TextBox ID="txtright" CssClass="paincls" Width="50px" Text='<%# Eval("right") %>' onkeypress="return onlyNumbers(event);" runat="server"></asp:TextBox></td>
                                     <td>
@@ -451,7 +352,8 @@
                     <asp:HiddenField runat="server" ID="hdPEvalueoriginal" />
                     <asp:HiddenField runat="server" ID="hdPESides" />
                     <asp:HiddenField runat="server" ID="hdPESidesText" />
-                  <%--  <div class="row">
+                    <asp:HiddenField runat="server" ID="hdTPText" />
+                    <%--  <div class="row">
                         <div class="col-md-3">
                             <label class="control-label">Notes:</label>
                         </div>
@@ -500,7 +402,7 @@
                                                 <asp:TemplateField HeaderText="Action" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <%--    <asp:HiddenField runat="server" ID="hidDiagCodeDetailID" Value='<%# Eval("DiagCodeDetail_ID") %>' />--%>
-                                                        <asp:CheckBox runat="server" ID="chkRemove" Checked="true" />
+                                                        <asp:CheckBox runat="server" ID="chkRemove" Checked="true" AutoPostBack="true" OnCheckedChanged="chkRemove_CheckedChanged"/>
 
                                                     </ItemTemplate>
                                                 </asp:TemplateField>

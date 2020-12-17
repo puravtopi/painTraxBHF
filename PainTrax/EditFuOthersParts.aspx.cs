@@ -32,6 +32,7 @@ public partial class EditFuOthersParts : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            bindDropdown();
             if (Session["PatientIE_ID"] != null && Session["patientFUId"] != null)
             {
                 _CurIEid = Session["PatientIE_ID"].ToString();
@@ -140,6 +141,12 @@ public partial class EditFuOthersParts : System.Web.UI.Page
             TblRow["PONDelimit"] = bindPONPrintvalue();
             TblRow["PONPrint"] = ViewState["PONPrint"].ToString();
 
+            TblRow["FollowUpIn"] = cboFollowUpIn.Text.ToString();
+            if (!string.IsNullOrWhiteSpace(txtFollowUpInDate.Text))
+                TblRow["FollowUpInDate"] = DateTime.ParseExact(txtFollowUpInDate.Text, "MM/dd/yyyy", null);
+            else
+                TblRow["FollowUpInDate"] = DBNull.Value;
+
 
             if (_fuMode == "New")
             {
@@ -195,9 +202,13 @@ public partial class EditFuOthersParts : System.Web.UI.Page
             txtOthersP.Text = TblRow["OthersP"].ToString().Trim();
             txtTreatmentParagraph.Text = TblRow["RecommandationDetails"].ToString().Trim();
             txtPONDetails.Text = TblRow["PONDetails"].ToString().Trim();
+            cboFollowUpIn.Text = TblRow["FollowUpIn"].ToString();
             BindTreatmentEditValues(TblRow["RecommandationDelimit"].ToString().Trim());
             BindPONEditValues(TblRow["PONDelimit"].ToString().Trim());
             ViewState["PONPrint"] = TblRow["PONPrint"].ToString().Trim();
+
+            txtFollowUpInDate.Text = TblRow["FollowUpInDate"].ToString();
+
             _fldPop = false;
         }
 
@@ -724,6 +735,19 @@ public partial class EditFuOthersParts : System.Web.UI.Page
     protected void txtPON_TextChanged(object sender, EventArgs e)
     {
         bindPONPrintvalue();
+    }
+
+    public void bindDropdown()
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.Load(Server.MapPath("~/xml/HSMData.xml"));
+
+        foreach (XmlNode node in doc.SelectNodes("//HSM/Followups/Followup"))
+        {
+            cboFollowUpIn.Items.Add(new ListItem(node.Attributes["name"].InnerText, node.Attributes["name"].InnerText));
+        }
+
+        cboFollowUpIn.Text = "2-4 weeks.";
     }
 
 }

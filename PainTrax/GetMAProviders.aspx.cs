@@ -154,13 +154,22 @@ public partial class GetMAProviders : System.Web.UI.Page
         }
         if (lbSelectedMAandProviders.Items.Count > 0)
         {
-            string providers = string.Empty;
+            string providers = string.Empty, providrsId = string.Empty;
             foreach (ListItem li in lbSelectedMAandProviders.Items)
             {
                 providers += (li.Text + "~ ");
+                providrsId = li.Value;
             }
             Session["Providers"] = providers.Trim().TrimEnd('~');
             providersCookie["Providers"] = providers.Trim().TrimEnd('~');
+
+            //if (!string.IsNullOrEmpty(providrsId))
+            //{
+            //    DataSet dt = db.selectData("select LoginID from tblUserMaster where User_ID="+ providrsId);
+
+            //    if (dt != null && dt.Tables[0].Rows.Count > 0)
+            //        Session["ProviderLoginName"] = dt.Tables[0].Rows[0]["LoginID"].ToString();
+            //}
         }
         if (providersCookie.HasKeys)
         {

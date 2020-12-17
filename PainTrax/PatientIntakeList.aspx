@@ -4,6 +4,8 @@
 
     <script type="text/javascript" src="js/SignJs/bootstrap3-typeahead.min.js"></script>
 
+
+
     <link rel="stylesheet" href="css/signature-pad.css" />
     <style>
         #container {
@@ -318,9 +320,9 @@
 
                                     <div class="col-sm-1" style="float: right">
                                         <asp:DropDownList runat="server" ID="ddlPage" AutoPostBack="true" Style="float: right; width: 70px" OnSelectedIndexChanged="ddlPage_SelectedIndexChanged">
-                                            <asp:ListItem Text="10" Value="10"></asp:ListItem>
-                                            <asp:ListItem Text="20" Value="20"></asp:ListItem>
-                                            <asp:ListItem Text="25" Value="25" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text="10" Value="10" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text="20" Value="20" ></asp:ListItem>
+                                            <asp:ListItem Text="25" Value="25"></asp:ListItem>
 
                                             <asp:ListItem Text="50" Value="50"></asp:ListItem>
                                             <asp:ListItem Text="100" Value="100"></asp:ListItem>
@@ -342,7 +344,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="table-responsive">
-                                    <asp:GridView ID="gvPatientDetails" runat="server" AutoGenerateColumns="false" AllowSorting="true" OnSorting="gvPatientDetails_Sorting" CssClass="table table-striped table-bordered table-hover" DataKeyNames="PatientIE_ID" OnRowDataBound="OnRowDataBound" AllowPaging="True" OnPageIndexChanging="gvPatientDetails_PageIndexChanging1" PagerStyle-CssClass="pager" PageSize="25">
+                                    <asp:GridView ID="gvPatientDetails" runat="server" AutoGenerateColumns="false" AllowSorting="true" OnSorting="gvPatientDetails_Sorting" CssClass="table table-striped table-bordered table-hover" DataKeyNames="PatientIE_ID" OnRowDataBound="OnRowDataBound" OnPageIndexChanging="gvPatientDetails_PageIndexChanging" PagerStyle-CssClass="pager" AllowPaging="true" PageSize="10">
                                         <Columns>
                                             <asp:TemplateField>
                                                 <ItemTemplate>
@@ -358,12 +360,12 @@
                                                                     <ItemTemplate>
 
                                                                         <asp:HyperLink runat="server" CssClass="btn btn-link" ID="HyperLink1" NavigateUrl='<%# "~/EditFU.aspx?FUID="+Eval("PatientFUId") %>' Text="Edit FU"></asp:HyperLink>
-                                                                        <asp:HyperLink runat="server" CssClass="btn btn-link PrintClick" data-id='<%# Eval("PatientFUId") %>' data-FUIE="FU" ID="HyperLink2" Text='<%# Eval("PrintStatus").ToString() %>'></asp:HyperLink>
+                                                                        <asp:HyperLink runat="server" CssClass="btn btn-link PrintClick" Visible="false" data-id='<%# Eval("PatientFUId") %>' data-FUIE="FU" ID="HyperLink2" Text='<%# Eval("PrintStatus").ToString() %>'></asp:HyperLink>
 
-                                                                        <asp:HyperLink runat="server" CssClass="btn btn-link PrintClickRod" data-id='<%# Eval("PatientFUId") %>' data-FUIE="FU" ID="HyperLink3" Text='<%# (Eval("PrintStatusRod").ToString().Equals("Print Requested")? "" : Eval("PrintStatusRod").ToString().Equals("Printing")?"Printing Rod":Eval("PrintStatusRod").ToString().Equals("Download")? "dl RoD":Eval("PrintStatusRod").ToString())  %>'></asp:HyperLink>
+                                                                        <asp:HyperLink runat="server" CssClass="btn btn-link PrintClickRod" Visible="false" data-id='<%# Eval("PatientFUId") %>' data-FUIE="FU" ID="HyperLink3" Text='<%# (Eval("PrintStatusRod").ToString().Equals("Print Requested")? "" : Eval("PrintStatusRod").ToString().Equals("Printing")?"Printing Rod":Eval("PrintStatusRod").ToString().Equals("Download")? "dl RoD":Eval("PrintStatusRod").ToString())  %>'></asp:HyperLink>
 
                                                                         <asp:LinkButton runat="server" ID="lnkprintFU" CssClass="btn btn-link" CommandArgument='<%# Eval("PatientIEId").ToString()+","+Eval("PatientFUId").ToString()  %>' OnClick="lnkprintFU_Click">| Print</asp:LinkButton>
-                                                                        <asp:LinkButton runat="server" ID="lnkDownloadFU" Text="| Download" Visible='<%# downloadVisible("0",Eval("PatientFUId").ToString())%>' OnClick="lnkDownloadFU_Click" CommandArgument='<%# Eval("PatientIEId").ToString()+"_"+Eval("PatientFUId").ToString()+","+Eval("firstname").ToString()+","+Eval("lastname").ToString() %>'></asp:LinkButton>
+                                                                        <asp:LinkButton runat="server" ID="lnkDownloadFU" Text="| Download" Visible='<%# downloadVisible(Eval("PatientIEId").ToString(),Eval("PatientFUId").ToString())%>' OnClick="lnkDownloadFU_Click" CommandArgument='<%# Eval("PatientIEId").ToString()+","+Eval("PatientFUId").ToString()+","+Eval("firstname").ToString()+","+Eval("lastname").ToString()+","+Eval("DOE").ToString() %>'></asp:LinkButton>
                                                                         <asp:LinkButton runat="server" ID="lnkSignFU" CssClass="btn btn-link" CommandArgument='<%# Eval("PatientFUId").ToString()%>' OnClick="lnkSignFU_Click">| Sign</asp:LinkButton>
 
                                                                         <asp:HyperLink runat="server" ID="lnkhyper" CssClass="btn btn-link" NavigateUrl='<%# "~/patientdocuments.aspx?PIEID="+Eval("PatientIEId") %>'>| Documents</asp:HyperLink>
@@ -386,14 +388,14 @@
 
                                             <asp:BoundField DataField="Sex" HeaderText="Title" />
 
-                                           
+
                                             <asp:BoundField DataField="lastname" HeaderText="LastName" SortExpression="lastname" />
-                                            <asp:BoundField DataField="firstname" HeaderText="FirstName" SortExpression="firstname"/>
+                                            <asp:BoundField DataField="firstname" HeaderText="FirstName" SortExpression="firstname" />
                                             <asp:BoundField DataField="DOB" HeaderText="DOB" DataFormatString="{0:d}" />
                                             <asp:BoundField DataField="DOA" HeaderText="DOA" DataFormatString="{0:d}" />
                                             <asp:BoundField DataField="DOE" HeaderText="DOE" DataFormatString="{0:d}" />
                                             <asp:BoundField DataField="Compensation" HeaderText="Case Type" />
-                                            <asp:BoundField DataField="location" HeaderText="Location" SortExpression="location"/>
+                                            <asp:BoundField DataField="location" HeaderText="Location" SortExpression="location" />
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <asp:HyperLink runat="server" CssClass="btn btn-link" ID="hlEdit" NavigateUrl='<%# "~/Page1.aspx?id="+Eval("PatientIE_ID") %>' Text="Edit IE">
@@ -402,13 +404,13 @@
 
                                                     <asp:HyperLink runat="server" CssClass="btn btn-link" ID="hlAddFU" NavigateUrl='<%# "~/AddFU.aspx?PID="+Eval("PatientIE_ID") %>' Text="| AddFU"></asp:HyperLink>
 
-                                                    <asp:HyperLink runat="server" CssClass="btn btn-link PrintClick" data-id='<%# Eval("PatientIE_ID") %>' data-FUIE="IE" ID="HyperLink2" Text='<%# Eval("PrintStatus").ToString() %>'></asp:HyperLink>
+                                                    <asp:HyperLink runat="server" Visible="false" CssClass="btn btn-link PrintClick" data-id='<%# Eval("PatientIE_ID") %>' data-FUIE="IE" ID="HyperLink2" Text='<%# Eval("PrintStatus").ToString() %>'></asp:HyperLink>
 
-                                                    <asp:HyperLink runat="server" CssClass="btn btn-link PrintClickRod" data-id='<%# Eval("PatientIE_ID") %>' data-FUIE="IE" ID="HyperLink4" Text='<%# Eval("PrintStatusRod").ToString().Equals("Print Requested")? "" : Eval("PrintStatusRod").ToString().Equals("Printing")?"Printing Rod":Eval("PrintStatusRod").ToString().Equals("Download")? "dl RoD":Eval("PrintStatusRod").ToString()  %>'></asp:HyperLink>
+                                                    <asp:HyperLink runat="server" Visible="false" CssClass="btn btn-link PrintClickRod" data-id='<%# Eval("PatientIE_ID") %>' data-FUIE="IE" ID="HyperLink4" Text='<%# Eval("PrintStatusRod").ToString().Equals("Print Requested")? "" : Eval("PrintStatusRod").ToString().Equals("Printing")?"Printing Rod":Eval("PrintStatusRod").ToString().Equals("Download")? "dl RoD":Eval("PrintStatusRod").ToString()  %>'></asp:HyperLink>
 
                                                     <asp:LinkButton runat="server" ID="lnkprint" CssClass="btn btn-link" CommandArgument='<%# Eval("PatientIE_ID") %>' OnClick="lnkprint_Click">| Print</asp:LinkButton>
 
-                                                    <asp:LinkButton runat="server" ID="lnkDownloadIE" Visible='<%# downloadVisible(Eval("PatientIE_ID").ToString(), "0")%>' OnClick="lnkDownloadIE_Click" CommandArgument='<%# Eval("PatientIE_ID").ToString()+","+Eval("firstname").ToString()+","+Eval("lastname").ToString() %>'>| Download</asp:LinkButton>
+                                                    <asp:LinkButton runat="server" ID="lnkDownloadIE" Visible='<%# downloadVisible(Eval("PatientIE_ID").ToString(), "0")%>' OnClick="lnkDownloadIE_Click" CommandArgument='<%# Eval("PatientIE_ID").ToString()+","+Eval("firstname").ToString()+","+Eval("lastname").ToString()+","+Eval("DOE").ToString() %>'>| Download</asp:LinkButton>
 
                                                     <asp:LinkButton runat="server" ID="lnkSignIE" CssClass="btn btn-link" CommandArgument='<%# Eval("PatientIE_ID").ToString()+","+ Eval("Compensation").ToString()+","+ Eval("lastname").ToString()+","+ Eval("firstname").ToString()%>' OnClick="lnkSignIE_Click">| Sign</asp:LinkButton>
 
@@ -422,10 +424,36 @@
 
 
                                         </Columns>
-                                        <PagerSettings PageButtonCount="5" />
+    <%--                                    <PagerSettings PageButtonCount="5" />
 
-                                        <PagerStyle CssClass="pager"></PagerStyle>
+                                        <PagerStyle CssClass="pager"></PagerStyle>--%>
                                     </asp:GridView>
+
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br />
+                            <div class="col-xs-12" style="display:none">
+                                <div class="clearfix"></div>
+                                <div runat="server" id="div_page">
+                                    Page
+            <label runat="server" id="lbl_page_no" style="display: inline"></label>
+                                    of
+            <label runat="server" id="lbl_total_page" style="display: inline"></label>
+                                </div>
+                                <div>
+                                    <ul class="pagination">
+                                        <asp:Repeater ID="rptPager" runat="server">
+                                            <ItemTemplate>
+                                                <li>
+                                                    <asp:LinkButton ID="lnkPage" runat="server" Text='<%#Eval("Text") %>' CommandArgument='<%# Eval("Value") %>'
+                                                        CssClass='<%# Convert.ToBoolean(Eval("Enabled")) ? "active" : "" %>'
+                                                        OnClick="Page_Changed" OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
+                                                </li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

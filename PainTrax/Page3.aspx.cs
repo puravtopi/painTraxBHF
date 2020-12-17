@@ -92,7 +92,7 @@ public partial class Page3 : System.Web.UI.Page
             //query = query + "'" + chk_bowel_bladder.Checked + "','" + chk_recent_wt.Checked + "',";
             //query = query + "'" + chk_episodic_ligth.Checked + "','" + chk_rashes.Checked + "','" + Session["PatientIE_ID"].ToString() + "',";
             //query = query + "'" + chk_sleep_disturbance.Checked + "','" + chk_blurred.Checked + "','" + chk_hearing_loss.Checked + "','" + chk_depression.Checked + "',1,'" + chk_bloodinurine.Checked + "','" + hdHTMLContent.Value + "' )";
-            query = "insert into tblPage2HTMLContent(PatientIE_ID,topSectionHTML,degreeSectionHTML,rosSectionHTML,complainSectionHTML)values(@PatientIE_ID,@topSectionHTML,@degreeSectionHTML,@rosSectionHTML,@complainSectionHTML)";
+            query = "insert into tblPage2HTMLContent(PatientIE_ID,topSectionHTML,degreeSectionHTML,rosSectionHTML,complainSectionHTML,activityEffectedHTML)values(@PatientIE_ID,@topSectionHTML,@degreeSectionHTML,@rosSectionHTML,@complainSectionHTML,@activityEffectedHTML)";
         }
         else
         {
@@ -104,7 +104,7 @@ public partial class Page3 : System.Web.UI.Page
             //query = query + "',NightSweats='" + chk_sleep_disturbance.Checked + "',DoubleVision='" + chk_blurred.Checked;
             //query = query + "',HearingLoss='" + chk_hearing_loss.Checked + "',Depression = '" + chk_depression.Checked + "',ISFirst=1 , dloodinurine = '" + chk_bloodinurine.Checked + "',HTMLContent='" + hdHTMLContent.Value + "',";
             //query = query + " Where PatientIE_ID=" + Session["PatientIE_ID"].ToString() + "";
-            query = "update tblPage2HTMLContent set topSectionHTML=@topSectionHTML,degreeSectionHTML=@degreeSectionHTML,rosSectionHTML=@rosSectionHTML,complainSectionHTML=@complainSectionHTML where PatientIE_ID=@PatientIE_ID";
+            query = "update tblPage2HTMLContent set topSectionHTML=@topSectionHTML,degreeSectionHTML=@degreeSectionHTML,rosSectionHTML=@rosSectionHTML,complainSectionHTML=@complainSectionHTML,activityEffectedHTML=@activityEffectedHTML where PatientIE_ID=@PatientIE_ID";
         }
 
 
@@ -116,6 +116,7 @@ public partial class Page3 : System.Web.UI.Page
             command.Parameters.AddWithValue("@degreeSectionHTML", hddegreeHTMLContent.Value);
             command.Parameters.AddWithValue("@rosSectionHTML", hdrosHTMLContent.Value);
             command.Parameters.AddWithValue("@complainSectionHTML", hdcomplainHTMLContent.Value);
+            command.Parameters.AddWithValue("@activityEffectedHTML", hdactivityeffectedHTMLContent.Value);
 
             connection.Open();
             var results = command.ExecuteNonQuery();
@@ -658,6 +659,7 @@ public partial class Page3 : System.Web.UI.Page
             divtopHTML.InnerHtml = ds.Tables[0].Rows[0]["topSectionHTML"].ToString();
             divrosHTML.InnerHtml = ds.Tables[0].Rows[0]["rosSectionHTML"].ToString();
             divcomplainHTML.InnerHtml = ds.Tables[0].Rows[0]["complainSectionHTML"].ToString();
+            divactivityeffected.InnerHtml = ds.Tables[0].Rows[0]["activityEffectedHTML"].ToString();
         }
         else
             bindHtml();
@@ -1062,6 +1064,10 @@ public partial class Page3 : System.Web.UI.Page
         path = Server.MapPath("~/Template/Page2_complain.html");
         body = File.ReadAllText(path);
         divcomplainHTML.InnerHtml = body;
+
+        path = Server.MapPath("~/Template/Page2_activity_affected.html");
+        body = File.ReadAllText(path);
+        divactivityeffected.InnerHtml = body;
 
     }
 

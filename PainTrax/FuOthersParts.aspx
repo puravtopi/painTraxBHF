@@ -17,15 +17,15 @@
             if (answer) {
                 //var currentURL = window.location.href;
                 document.getElementById('<%=pageHDN.ClientID%>').value = $('#ctl00_' + page).attr('href');
-                 document.getElementById('<%= btnSave.ClientID %>').click();
-             }
-             else {
-                 window.location.href = $('#ctl00_' + page).attr('href');
-             }
-         }
-         function saveall() {
-             document.getElementById('<%= btnSave.ClientID %>').click();
-         }
+                document.getElementById('<%= btnSave.ClientID %>').click();
+            }
+            else {
+                window.location.href = $('#ctl00_' + page).attr('href');
+            }
+        }
+        function saveall() {
+            document.getElementById('<%= btnSave.ClientID %>').click();
+        }
     </script>
     <asp:HiddenField ID="pageHDN" runat="server" />
     <div id="mymodelmessage" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
@@ -178,9 +178,9 @@
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                
-                
-                  <asp:UpdatePanel runat="server" ID="upPON">
+
+
+                <asp:UpdatePanel runat="server" ID="upPON">
                     <ContentTemplate>
                         <div class="row">
                             <div class="col-md-2 inline">
@@ -223,7 +223,7 @@
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                
+
                 <div class="row">
                     <div class="col-md-3">
                         <label class="control-label"></label>
@@ -266,14 +266,37 @@
                         </asp:GridView>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="control-label labelcolor">FOLLOW UP:</label>
+                        <%-- <asp:TextBox ID="txtFollowUpIn" runat="server" Text="2-4 weeks." />--%>
+                        <editable:EditableDropDownList runat="server" ID="cboFollowUpIn" Width="250px" CssClass="inline">
+                        </editable:EditableDropDownList>
+                       
+                        &nbsp;
+                        <asp:TextBox ID="txtFollowUpInDate" runat="server" placeholder="MM/dd/yyyy" />
+                    </div>
+                    <div class="col-md-9" style="margin-top: 5px">
+                        <%--<label class="control-label">weeks. </label>
+                        <label class="control-label">It is my opinion that the injuries that </label>
+                        <asp:TextBox ID="txtFullName1" runat="server" />
+                        <label class="control-label">sustained to the </label>
+                        <asp:TextBox ID="txtInjureBodyParts" runat="server" />
+                        <label class="control-label">are causally related to </label>
+                        <asp:TextBox ID="cboAccident" runat="server" />
+                        <label class="control-label">that occurred on </label>
+                        <asp:TextBox ID="txtOccuredOn" runat="server" />
+                        <label class="control-label">as described by the patient.</label>--%>
+                    </div>
+                </div>
 
                 <div class="row"></div>
                 <div class="row" style="margin-top: 15px">
                     <div class="col-md-3"></div>
                     <div class="col-md-9" style="margin-top: 5px">
                         <div style="display: none">
-                            <asp:Button ID="btnSave" OnClick="btnSave_Click" runat="server" Text="Save" CssClass="btn blue" /></div>
+                            <asp:Button ID="btnSave" OnClick="btnSave_Click" runat="server" Text="Save" CssClass="btn blue" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -421,36 +444,36 @@
                 }
                 final_transcript = capitalize(final_transcript);
                 $('#<%=txtOthersCC.ClientID%>').text(linebreak(final_transcript));
-                     interim_span.innerHTML = linebreak(interim_transcript);
+                interim_span.innerHTML = linebreak(interim_transcript);
 
-                 };
-             }
+            };
+        }
 
 
-             var two_line = /\n\n/g;
-             var one_line = /\n/g;
-             function linebreak(s) {
-                 return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
-             }
+        var two_line = /\n\n/g;
+        var one_line = /\n/g;
+        function linebreak(s) {
+            return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+        }
 
-             var first_char = /\S/;
-             function capitalize(s) {
-                 return s.replace(first_char, function (m) { return m.toUpperCase(); });
-             }
+        var first_char = /\S/;
+        function capitalize(s) {
+            return s.replace(first_char, function (m) { return m.toUpperCase(); });
+        }
 
-             function startButton(event) {
-                 if (recognizing) {
-                     recognition.stop();
-                     return;
-                 }
-                 final_transcript = '';
-                 recognition.lang = 'en';
-                 recognition.start();
-                 ignore_onend = false;
-                 final_span.innerHTML = '';
-                 interim_span.innerHTML = '';
-                 start_timestamp = event.timeStamp;
-             }
+        function startButton(event) {
+            if (recognizing) {
+                recognition.stop();
+                return;
+            }
+            final_transcript = '';
+            recognition.lang = 'en';
+            recognition.start();
+            ignore_onend = false;
+            final_span.innerHTML = '';
+            interim_span.innerHTML = '';
+            start_timestamp = event.timeStamp;
+        }
 
     </script>
     <script>

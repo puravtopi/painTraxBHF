@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CaseTypes>
+  <CaseType>
+    <type>
+      MM
+    </type>
+    <desc>
+     
+    </desc>
+  </CaseType>
+  <CaseType>
+    <type>
+      NF
+    </type>
+    <desc>
+     It is my opinion that the injuries and symptoms #patientname sustained to #bodyparts are causally related to the incident that occurred on #doi as described by the patient.
+    </desc>
+  </CaseType>
+  <CaseType>
+    <type>
+      Lien
+    </type>
+    <desc>
+    It is my opinion that the injuries and symptoms #patientname sustained to #bodyparts are causally related to the incident that occurred on #doi as described by the patient.
+    </desc>
+  </CaseType>
+  <CaseType>
+    <type>
+      WC
+    </type>
+    <desc>
+     It is my opinion that the injuries and symptoms #patientname sustained to #bodyparts are causally related to the incident that occurred on #doi as described by the patient.
+    </desc>
+  </CaseType>
+  <CaseType>
+    <type>
+      Taxi
+    </type>
+    <desc>
+    
+    </desc>
+  </CaseType>
+  </CaseTypes>

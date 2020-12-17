@@ -141,7 +141,7 @@
                 <asp:HiddenField runat="server" ID="hdCCvalue" />
               <asp:HiddenField runat="server" ID="hdorgCC" />
 
-                <div class="row">
+                <div class="row" style="display:none">
                     <div class="col-md-3">
                         <label class="control-label">Notes</label>
                     </div>
@@ -218,6 +218,7 @@
 
                     <asp:HiddenField runat="server" ID="hdPEvalue" />
                     <asp:HiddenField runat="server" ID="hdorgPE" />
+                
 
 
                     <div class="row" style="display: none">
@@ -266,7 +267,7 @@
                                                 <asp:TemplateField HeaderText="Action" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <%--    <asp:HiddenField runat="server" ID="hidDiagCodeDetailID" Value='<%# Eval("DiagCodeDetail_ID") %>' />--%>
-                                                        <asp:CheckBox runat="server" ID="chkRemove" Checked="true" />
+                                                        <asp:CheckBox runat="server" ID="chkRemove" Checked="true" AutoPostBack="true" OnCheckedChanged="chkRemove_CheckedChanged"/>
 
                                                     </ItemTemplate>
                                                 </asp:TemplateField>

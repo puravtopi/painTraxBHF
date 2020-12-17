@@ -14,15 +14,15 @@
   </ROM>
 
   <ROM>
-    <name>Ext. rotation</name>
+    <name>External. rotation</name>
     <left></left>
     <right></right>
     <normal>90</normal>
   </ROM>
   <ROM>
-    <name>Int. rotation</name>
+    <name>Internal. rotation</name>
     <left></left>
-    <right></right>
+    <right></right> 
     <normal>90</normal>
   </ROM>
 </ROMS>

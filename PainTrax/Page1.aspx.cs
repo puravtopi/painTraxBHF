@@ -34,9 +34,9 @@ public partial class Page1 : System.Web.UI.Page
                 PageMainMaster master = (PageMainMaster)this.Master;
                 master.bindData(Request.QueryString["id"]);
 
-                txt_fname.ReadOnly = true;
-                txt_lname.ReadOnly = true;
-                txt_mname.ReadOnly = true;
+                //txt_fname.ReadOnly = true;
+                //txt_lname.ReadOnly = true;
+                //txt_mname.ReadOnly = true;
             }
             else
             {

@@ -993,11 +993,11 @@
                     </div>
                 </div>
 
-                  <div class="control-group span3">
+                <div class="control-group span3">
                     <label class="control-label">MC: </label>
                     <div class="controls">
-                        <asp:TextBox runat="server" ID="txt_MC" Width="100px" ></asp:TextBox>
-                       
+                        <asp:TextBox runat="server" ID="txt_MC" Width="100px"></asp:TextBox>
+
                     </div>
                 </div>
 
@@ -1227,14 +1227,14 @@
             <div style="clear: both"></div>
 
 
-             <div class="form-horizontal">
+            <div class="form-horizontal">
                 <div class="control-group span12">
                     <label class="control-label">Note: </label>
                     <div class="controls">
-                        <asp:TextBox ID="txtNote" runat="server" TextMode="MultiLine"></asp:TextBox>
+                        <asp:TextBox ID="txtNote" runat="server" Width="80%" TextMode="MultiLine"></asp:TextBox>
                     </div>
                 </div>
-               
+
             </div>
 
             <div class="form-horizontal" style="height: 250px;">

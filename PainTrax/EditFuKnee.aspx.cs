@@ -33,7 +33,7 @@ public partial class EditFuKnee : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         if (!IsPostBack)
         {
-
+            ViewState["saveDaigno"] = "0";
             if (Session["PatientIE_ID"] != null && Session["patientFUId"] != null)
             {
 
@@ -73,6 +73,9 @@ public partial class EditFuKnee : System.Web.UI.Page
                     PopulateIEUI(_CurIEid);
                     BindDCDataGrid();
                     BindDataGrid();
+
+                    bindCC();
+                    bindPE();
                 }
                 else
                 {
@@ -81,6 +84,8 @@ public partial class EditFuKnee : System.Web.UI.Page
                     //patientID.Value = Session["PatientIE_ID"].ToString();
                     PopulateUIDefaults();
                     BindDataGrid();
+                    bindCC();
+                    bindPE();
                     //PopulateUI(_CurIEid);
                     //BindDCDataGrid();
                     //BindDataGrid();
@@ -97,7 +102,7 @@ public partial class EditFuKnee : System.Web.UI.Page
                             //wrpPELeft.Visible = true;
                             //wrpPERight.Visible = false;
                             //Right
-                            
+
                             //Left checkbox
                             //chkMcMurrayLeft.Enabled = true;
                             //chkLachmanLeft.Enabled = true;
@@ -121,7 +126,7 @@ public partial class EditFuKnee : System.Web.UI.Page
                             //wrpPELeft.Visible = false;
                             //wrpPERight.Visible = true;
 
-                            
+
                             //Left checkbox
                             //chkMcMurrayLeft.Enabled = false;
                             //chkLachmanLeft.Enabled = false;
@@ -144,7 +149,7 @@ public partial class EditFuKnee : System.Web.UI.Page
                             //second div
                             //wrpPELeft.Visible = true;
                             //wrpPERight.Visible = true;
-                            
+
                             //Left checkbox
                             //chkMcMurrayLeft.Enabled = true;
                             //chkLachmanLeft.Enabled = true;
@@ -168,7 +173,7 @@ public partial class EditFuKnee : System.Web.UI.Page
                 Response.Redirect("EditFU.aspx");
             }
         }
-      
+
         Logger.Info(Session["uname"].ToString() + "- Visited in  EditFuKnee for -" + Convert.ToString(Session["LastNameFUEdit"]) + Convert.ToString(Session["FirstNameFUEdit"]) + "-" + DateTime.Now);
     }
     public string SaveUI(string fuID, string ieMode, bool bpIsChecked)
@@ -177,7 +182,11 @@ public partial class EditFuKnee : System.Web.UI.Page
         string _ieMode = "";
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
+        if (oSQLConn.State == ConnectionState.Open)
+            oSQLConn.Close();
+
         oSQLConn.ConnectionString = sProvider;
+
         oSQLConn.Open();
         SqlStr = "Select * from tblFUbpKnee WHERE PatientFU_ID = " + _fuID;
         SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
@@ -250,7 +259,7 @@ public partial class EditFuKnee : System.Web.UI.Page
             //TblRow["ImprovedMedicationRight"] = chkImprovedMedicationRight.Checked;
             //TblRow["ImprovedTherapyRight"] = chkImprovedTherapyRight.Checked;
             //TblRow["ImprovedSleepingRight"] = chkImprovedSleepingRight.Checked;
-            
+
             //TblRow["PalpationText1Left"] = txtPalpationText1Left.Text.ToString().ToString();
             //TblRow["PalpationText2Left"] = txtPalpationText2Left.Text.ToString().ToString();
             //TblRow["MedialLeft"] = chkMedialLeft.Checked;
@@ -290,11 +299,12 @@ public partial class EditFuKnee : System.Web.UI.Page
             TblRow["FreeFormA"] = txtFreeFormA.Text.ToString();
             TblRow["FreeFormP"] = txtFreeFormP.Text.ToString();
 
-            
-            TblRow["CCvalue"] = hdCCvalue.Value;
-         
-            TblRow["PEvalue"] = hdPEvalue.Value;
 
+            TblRow["CCvalue"] = hdCCvalue.Value;
+            TblRow["CCvalueoriginal"] = hdorgCC.Value;
+
+            TblRow["PEvalue"] = hdPEvalue.Value;
+            TblRow["PEvalueoriginal"] = hdPEvalue.Value;
 
             string strname = "", strleft = "", strright = "", strnormal = "";
 
@@ -372,55 +382,32 @@ public partial class EditFuKnee : System.Web.UI.Page
             _fldPop = true;
             TblRow = sqlTbl.Rows[0];
 
-          
-           
-            //txtLEExtensionRightWas.Text = TblRow["LEExtensionRight"].ToString().Trim();
-            //txtLEFlexionRightWas.Text = TblRow["LEFlexionRight"].ToString().Trim();
-            //txtLEExtensionLeftWas.Text = TblRow["LEExtensionLeft"].ToString().Trim();
-            //txtLEFlexionLeftWas.Text = TblRow["LEFlexionLeft"].ToString().Trim();
-            //txtPalpationText1Left.Text = TblRow["PalpationText1Left"].ToString().Trim();
-            //txtPalpationText2Left.Text = TblRow["PalpationText2Left"].ToString().Trim();
-            //chkMedialLeft.Checked = CommonConvert.ToBoolean(TblRow["MedialLeft"].ToString());
-            //chkLateralLeft.Checked = CommonConvert.ToBoolean(TblRow["LateralLeft"].ToString());
-            //chkSuperiorLeft.Checked = CommonConvert.ToBoolean(TblRow["SuperiorLeft"].ToString());
-            //chkInferiorLeft.Checked = CommonConvert.ToBoolean(TblRow["InferiorLeft"].ToString());
-            //chkSupermedialLeft.Checked = CommonConvert.ToBoolean(TblRow["SupermedialLeft"].ToString());
-            //chkSuperoLateralLeft.Checked = CommonConvert.ToBoolean(TblRow["SuperoLateralLeft"].ToString());
-            //chkInferomedialLeft.Checked = CommonConvert.ToBoolean(TblRow["InferomedialLeft"].ToString());
-            //chkInferoLateralLeft.Checked = CommonConvert.ToBoolean(TblRow["InferoLateralLeft"].ToString());
-            //chkPeripatellarLeft.Checked = CommonConvert.ToBoolean(TblRow["PeripatellarLeft"].ToString());
-            //txtPalpationText1Right.Text = TblRow["PalpationText1Right"].ToString().Trim();
-            //txtPalpationText2Right.Text = TblRow["PalpationText2Right"].ToString().Trim();
-            //chkMedialRight.Checked = CommonConvert.ToBoolean(TblRow["MedialRight"].ToString());
-            //chkLateralRight.Checked = CommonConvert.ToBoolean(TblRow["LateralRight"].ToString());
-            //chkSuperiorRight.Checked = CommonConvert.ToBoolean(TblRow["SuperiorRight"].ToString());
-            //chkInferiorRight.Checked = CommonConvert.ToBoolean(TblRow["InferiorRight"].ToString());
-            //chkSupermedialRight.Checked = CommonConvert.ToBoolean(TblRow["SupermedialRight"].ToString());
-            //chkSuperoLateralRight.Checked = CommonConvert.ToBoolean(TblRow["SuperoLateralRight"].ToString());
-            //chkInferomedialRight.Checked = CommonConvert.ToBoolean(TblRow["InferomedialRight"].ToString());
-            //chkInferoLateralRight.Checked = CommonConvert.ToBoolean(TblRow["InferoLateralRight"].ToString());
-            //chkPeripatellarRight.Checked = CommonConvert.ToBoolean(TblRow["PeripatellarRight"].ToString());
-            //chkMcMurrayLeft.Checked = CommonConvert.ToBoolean(TblRow["McMurrayLeft"].ToString());
-            //chkLachmanLeft.Checked = CommonConvert.ToBoolean(TblRow["LachmanLeft"].ToString());
-            //chkAnteriorLeft.Checked = CommonConvert.ToBoolean(TblRow["AnteriorLeft"].ToString());
-            //chkPosteriorLeft.Checked = CommonConvert.ToBoolean(TblRow["PosteriorLeft"].ToString());
-            //chkVarusLeft.Checked = CommonConvert.ToBoolean(TblRow["VarusLeft"].ToString());
-            //chkValgusLeft.Checked = CommonConvert.ToBoolean(TblRow["ValgusLeft"].ToString());
-            //chkMcMurrayRight.Checked = CommonConvert.ToBoolean(TblRow["McMurrayRight"].ToString());
-            //chkLachmanRight.Checked = CommonConvert.ToBoolean(TblRow["LachmanRight"].ToString());
-            //chkAnteriorRight.Checked = CommonConvert.ToBoolean(TblRow["AnteriorRight"].ToString());
-            //chkPosteriorRight.Checked = CommonConvert.ToBoolean(TblRow["PosteriorRight"].ToString());
-            //chkVarusRight.Checked = CommonConvert.ToBoolean(TblRow["VarusRight"].ToString());
-            //chkValgusRight.Checked = CommonConvert.ToBoolean(TblRow["ValgusRight"].ToString());
+
             txtFreeForm.Text = TblRow["FreeForm"].ToString().Trim();
             txtFreeFormCC.Text = TblRow["FreeFormCC"].ToString().Trim();
             txtFreeFormA.Text = TblRow["FreeFormA"].ToString().Trim();
             txtFreeFormP.Text = TblRow["FreeFormP"].ToString().Trim();
 
-            CF.InnerHtml = sqlTbl.Rows[0]["CCvalue"].ToString();
-            divPE.InnerHtml = sqlTbl.Rows[0]["PEvalue"].ToString();
-          
-          
+            string orgval = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+            string editval = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string cc = sqlTbl.Rows[0]["CCvalue"].ToString();
+            string ccOrg = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+
+            string p = Request.QueryString["P"];
+
+
+
+            string pe = sqlTbl.Rows[0]["PEvalue"].ToString();
+            string peOrg = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+
+            hdorgCC.Value = sqlTbl.Rows[0]["CCvalueoriginal"].ToString();
+            hdorgPE.Value = sqlTbl.Rows[0]["PEvalueoriginal"].ToString();
+
+            CF.InnerHtml = cc;
+            divPE.InnerHtml = pe;
+
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
 
             int val = checkTP();
             // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP(" + val.ToString() + ",'" + pos + "')", true);
@@ -430,6 +417,11 @@ public partial class EditFuKnee : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + pos + "');", true);
 
             _fldPop = false;
+        }
+        else
+        {
+            bindCC();
+            bindPE();
         }
 
         sqlTbl.Dispose();
@@ -445,7 +437,14 @@ public partial class EditFuKnee : System.Web.UI.Page
 
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
+
+        if (oSQLConn.State == ConnectionState.Open)
+            oSQLConn.Close();
+
         oSQLConn.ConnectionString = sProvider;
+
+
+
         oSQLConn.Open();
         SqlStr = "Select * from tblbpKnee WHERE PatientIE_ID = " + ieID;
         SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
@@ -501,7 +500,7 @@ public partial class EditFuKnee : System.Web.UI.Page
             //chkImprovedMedicationRight.Checked = CommonConvert.ToBoolean(TblRow["ImprovedMedicationRight"].ToString());
             //chkImprovedTherapyRight.Checked = CommonConvert.ToBoolean(TblRow["ImprovedTherapyRight"].ToString());
             //chkImprovedSleepingRight.Checked = CommonConvert.ToBoolean(TblRow["ImprovedSleepingRight"].ToString());
-           
+
 
             //txtLEExtensionRightWas.Text = TblRow["LEExtensionRight"].ToString().Trim();
             //txtLEFlexionRightWas.Text = TblRow["LEFlexionRight"].ToString().Trim();
@@ -605,7 +604,7 @@ public partial class EditFuKnee : System.Web.UI.Page
             //chkImprovedTherapyRight.Checked = node.SelectSingleNode("ImprovedTherapyRight") == null ? chkImprovedTherapyRight.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ImprovedTherapyRight").InnerText);
             //chkImprovedSleepingRight.Checked = node.SelectSingleNode("ImprovedSleepingRight") == null ? chkImprovedSleepingRight.Checked : CommonConvert.ToBoolean(node.SelectSingleNode("ImprovedSleepingRight").InnerText);
 
-            
+
             //txtLEExtensionRightWas.Text = node.SelectSingleNode("LEExtensionRight") == null ? txtLEExtensionRightWas.Text.ToString().Trim() : node.SelectSingleNode("LEExtensionRight").InnerText;
             //txtLEFlexionRightWas.Text = node.SelectSingleNode("LEFlexionRight") == null ? txtLEFlexionRightWas.Text.ToString().Trim() : node.SelectSingleNode("LEFlexionRight").InnerText;
             //txtLEExtensionLeftWas.Text = node.SelectSingleNode("LEExtensionLeft") == null ? txtLEExtensionLeftWas.Text.ToString().Trim() : node.SelectSingleNode("LEExtensionLeft").InnerText;
@@ -723,9 +722,14 @@ public partial class EditFuKnee : System.Web.UI.Page
         {
             SqlDataAdapter oSQLAdpr;
             DataTable Standards = new DataTable();
+
+            if (oSQLConn.State == ConnectionState.Open)
+                oSQLConn.Close();
             oSQLConn.ConnectionString = sProvider;
+
+
             oSQLConn.Open();
-           // SqlStr = "Select * from tblProceduresDetail WHERE PatientIE_ID = " + _CurIEid + " AND BodyPart = '" + _CurBP + "' AND PatientFU_ID = '" + _FuId + "' Order By BodyPart,Heading";
+            // SqlStr = "Select * from tblProceduresDetail WHERE PatientIE_ID = " + _CurIEid + " AND BodyPart = '" + _CurBP + "' AND PatientFU_ID = '" + _FuId + "' Order By BodyPart,Heading";
             SqlStr = @"Select 
                         CASE 
                               WHEN p.Requested is not null 
@@ -817,7 +821,11 @@ public partial class EditFuKnee : System.Web.UI.Page
         //long _StdID = Convert.ToInt64(iStdID);
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
+
+        if (oSQLConn.State == ConnectionState.Open)
+            oSQLConn.Close();
         oSQLConn.ConnectionString = sProvider;
+
         oSQLConn.Open();
         SqlStr = "Select * from tblProceduresDetail WHERE PatientIE_ID = " + ieID + " AND ProcedureDetail_ID = " + _StdID;
         SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
@@ -909,6 +917,7 @@ public partial class EditFuKnee : System.Web.UI.Page
         {
             ieID = Session["PatientIE_ID"].ToString();
             RemoveDiagCodesDetail(Session["patientFUId"].ToString());
+            string codeId = "", codes = "", desc = "";
             foreach (GridViewRow row in dgvDiagCodes.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -922,14 +931,22 @@ public partial class EditFuKnee : System.Web.UI.Page
                     DiagCode = row.Cells[0].Controls.OfType<TextBox>().FirstOrDefault().Text;
 
                     bool isChecked = row.Cells[2].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    //if (isChecked)
+                    //{
+                    //    ids += DiagCode_ID + ",";
+                    //    SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                    //}
                     if (isChecked)
                     {
-                        ids += DiagCode_ID + ",";
-                        SaveDiagUI(ieID, DiagCode_ID, true, _CurBP, Description, DiagCode);
+                        //ids += DiagCode_ID + ",";
+                        codeId = codeId + "@" + DiagCode_ID;
+                        codes = codes + "@" + DiagCode;
+                        desc = desc + "@" + Description;
                     }
 
                 }
             }
+            gDbhelperobj.SaveDiagUI(_CurIEid, Session["patientFUId"].ToString(), codeId, true, _CurBP, desc, codes);
 
         }
         catch (Exception ex)
@@ -949,7 +966,12 @@ public partial class EditFuKnee : System.Web.UI.Page
         long _DiagID = Convert.ToInt64(iDiagID);
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
+
+        if (oSQLConn.State == ConnectionState.Open)
+            oSQLConn.Close();
+
         oSQLConn.ConnectionString = sProvider;
+
         oSQLConn.Open();
         SqlStr = "Select * FROM tblDiagCodesDetail WHERE PatientIE_ID = " + ieID + " AND Diag_Master_ID = " + _DiagID + " AND PatientFu_ID=" + Session["patientFUId"].ToString() + " and BodyPart like '%" + _CurBP + "%' ";
         SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
@@ -1020,7 +1042,11 @@ public partial class EditFuKnee : System.Web.UI.Page
 
                 SqlDataAdapter oSQLAdpr;
                 DataTable Diagnosis = new DataTable();
+
+                if (oSQLConn.State == ConnectionState.Open)
+                    oSQLConn.Close();
                 oSQLConn.ConnectionString = sProvider;
+
                 oSQLConn.Open();
                 SqlStr = "Select * from tblDiagCodesDetail WHERE PatientFU_ID = " + _FuId + " AND BodyPart LIKE '%" + _CurBP + "%' Order By BodyPart, Description";
                 oSQLCmd.Connection = oSQLConn;
@@ -1059,7 +1085,9 @@ public partial class EditFuKnee : System.Web.UI.Page
     {
         string ieMode = "New";
         _CurIEid = Session["PatientIE_ID"].ToString();
-        SaveDiagnosis(_CurIEid);
+
+        if (ViewState["saveDaigno"].ToString() == "1")
+            SaveDiagnosis(_CurIEid);
         SaveUI(Session["PatientFUID"].ToString(), ieMode, true);
         //SaveStandards(Session["PatientIE_ID"].ToString());
         PopulateUI(Session["PatientFUID"].ToString());
@@ -1071,10 +1099,11 @@ public partial class EditFuKnee : System.Web.UI.Page
 
     protected void btnDaigSave_Click(object sender, EventArgs e)
     {
+        ViewState["saveDaigno"] = "1";
         SaveStandardsPopup(Session["PatientIE_ID"].ToString());
         BindDCDataGrid();
         txDesc.Text = string.Empty;
-        ScriptManager.RegisterStartupScript(Page, this.GetType(), "TestFU", "closeModelPopup()", true);
+        ScriptManager.RegisterStartupScript(Page, this.GetType(), "TestFU", "closeModelPopup();", true);
     }
 
     public string SaveStandardsPopup(string ieID)
@@ -1124,15 +1153,24 @@ public partial class EditFuKnee : System.Web.UI.Page
         {
             _FuId = Session["patientFUId"].ToString();
             string _CurBodyPart = _CurBP;
-            string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
-            DataSet ds = new DataSet();
-            DataTable Standards = new DataTable();
-            string SqlStr = "";
-            if (_FuId != "")
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            else
-                SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
-            ds = gDbhelperobj.selectData(SqlStr);
+            //string _SKey = "WHERE tblDiagCodes.Description LIKE '%" + txDesc.Text.Trim() + "%' AND BodyPart LIKE '%" + _CurBodyPart + "%'";
+            //DataSet ds = new DataSet();
+            //DataTable Standards = new DataTable();
+            //string SqlStr = "";
+            //if (_FuId != "")
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU(" + _FuId + ", DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //else
+            //    SqlStr = "Select tblDiagCodes.*, dbo.DIAGEXISTSFU('0', DiagCode_ID, '%" + _CurBodyPart + "%') as IsChkd FROM tblDiagCodes " + _SKey + " Order By BodyPart, Description";
+            //ds = gDbhelperobj.selectData(SqlStr);
+
+            SqlParameter[] param = new SqlParameter[4];
+
+            param[0] = new SqlParameter("@bPart", _CurBodyPart);
+            param[1] = new SqlParameter("@PatientIE_ID", 0);
+            param[2] = new SqlParameter("@PatientFU_ID", _FuId);
+            param[3] = new SqlParameter("@cnd", txDesc.Text.Trim());
+
+            DataSet ds = new DBHelperClass().executeSelectSP("GetDaignoCodesIE", param);
 
             dgvDiagCodesPopup.DataSource = ds;
             dgvDiagCodesPopup.DataBind();
@@ -1151,7 +1189,11 @@ public partial class EditFuKnee : System.Web.UI.Page
             string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
             string SqlStr = "";
 
+            if (oSQLConn.State == ConnectionState.Open)
+                oSQLConn.Close();
+
             oSQLConn.ConnectionString = sProvider;
+
             oSQLConn.Open();
             SqlStr = "delete tblDiagCodesDetail WHERE PatientFU_ID=" + PatientFU_ID + " and BodyPart like '%" + _CurBP + "%'";
             SqlCommand sqlCM = new SqlCommand(SqlStr, oSQLConn);
@@ -1198,7 +1240,13 @@ public partial class EditFuKnee : System.Web.UI.Page
         _FuId = Session["patientFUId"].ToString();
         string sProvider = ConfigurationManager.ConnectionStrings["connString_V3"].ConnectionString;
         string SqlStr = "";
+
+        if (oSQLConn.State == ConnectionState.Open)
+            oSQLConn.Close();
+
         oSQLConn.ConnectionString = sProvider;
+
+
         oSQLConn.Open();
         SqlStr = "Select * from tblFUbpknee WHERE PatientFU_ID = " + _FuId;
         SqlDataAdapter sqlAdapt = new SqlDataAdapter(SqlStr, oSQLConn);
@@ -1286,5 +1334,47 @@ public partial class EditFuKnee : System.Web.UI.Page
                 }
             }
         }
+    }
+
+    public void bindCC()
+    {
+        string path = Server.MapPath("~/Template/KneeCC.html");
+        string body = File.ReadAllText(path);
+
+
+
+        var gender = Session["Gender"].ToString().ToLower() == "mr." ? "He" : "She";
+
+        body = body.Replace("#gender", gender);
+
+        CF.InnerHtml = body;
+        hdorgCC.Value = body;
+
+    }
+
+    public void bindPE()
+    {
+        string path = Server.MapPath("~/Template/KneePE.html");
+        string body = File.ReadAllText(path);
+
+        string p = Request.QueryString["P"];
+
+
+
+        divPE.InnerHtml = body;
+        hdorgPE.Value = body;
+
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "sideFun", "displaySide('" + p.ToLower() + "');", true);
+
+
+        //int val = checkTP();
+
+        // ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "checkTP('" + p + "')", true);
+    }
+
+
+    protected void chkRemove_CheckedChanged(object sender, EventArgs e)
+    {
+        ViewState["saveDaigno"] = "1";
     }
 }

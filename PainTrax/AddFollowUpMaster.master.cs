@@ -10,10 +10,10 @@ using System.Web.UI.WebControls;
 
 public partial class AddFollowUpMaster : System.Web.UI.MasterPage
 {
+    //c
     DBHelperClass gDbhelperobj = new DBHelperClass();
     protected void Page_Load(object sender, EventArgs e)
     {
-        //cc
         lnkbtn_neck.Visible = false;
         lnkbtn_Midback.Visible = false;
         lnkbtn_lowback.Visible = false;
@@ -25,16 +25,10 @@ public partial class AddFollowUpMaster : System.Web.UI.MasterPage
         lnkbtn_Hip.Visible = false;
         Session["RightShoulder"] = null;
         Session["LeftShoulder"] = null;
-        //if (Session["patientFUId"] == null)
-        //{
-            //List<Body> b = new List<Body>();
-            //Session["FUFUbodyPartsList"] = b;
-            ssesion.Visible = false;
-        //}
-        //else
-        //{
-        //    ssesion.Visible = true;
-        //}
+        if (Session["patientFUId"] == null)
+        {
+            List<Body> b = new List<Body>(); Session["FUFUbodyPartsList"] = b;
+        }
 
         if (Session["FirstNameIE"] != null && Session["LastNameIE"] != null)
         {
@@ -42,8 +36,7 @@ public partial class AddFollowUpMaster : System.Web.UI.MasterPage
         }
         if (Session["DVLbl"] != null)
         {
-            DateTime dt = Convert.ToDateTime(Session["DVLbl"]);
-            DVLbl.Text = dt.ToShortDateString();
+            DVLbl.Text = Session["DVLbl"].ToString();
         }
         if (Session["LocLbl"] != null)
         {
@@ -53,7 +46,6 @@ public partial class AddFollowUpMaster : System.Web.UI.MasterPage
         {
             CTLbl.Text = Session["compensation"].ToString();
         }
-
         if (Session["FUFUbodyPartsList"] != null)
         {
             var f = (List<Body>)Session["FUFUbodyPartsList"];
@@ -110,7 +102,7 @@ public partial class AddFollowUpMaster : System.Web.UI.MasterPage
                     }
                 }
         }
-        //lbtnProcedureDetails.HRef = "AddFuProcedureDetails.aspx?PId=" + Convert.ToString(Session["PatientIE_Id2"]);
+        //lbtnProcedureDetails.HRef = "FuProcedureDetails.aspx?PId=" + Convert.ToString(Session["PatientIE_ID"]);
     }
 
     protected void bindBodyParts(List<string> _injuredBodyParts)
@@ -292,33 +284,36 @@ public partial class AddFollowUpMaster : System.Web.UI.MasterPage
 
             }
         }
-        //
+
+
     }
 
     //protected void lbtnProcedureDetails_Click(object sender, EventArgs e)
     //{
-    //    if (Session["PatientIE_Id2"] != null)
+    //    if (Session["PatientIE_ID"] != null)
     //    {
-    //        Response.Redirect("~/AddFuProcedureDetails.aspx?PId=" + Convert.ToString(Session["PatientIE_Id2"]));
+    //        Response.Redirect("~/FuProcedureDetails.aspx?PId=" + Convert.ToString(Session["PatientIE_ID"]));
     //    }
 
     //}
-    public void bindData(string PatientFU_ID)
+    public void bindData(string PatientFU_ID = "", string PatientIE_ID = "")
     {
         //IntakeSheet.BLL.BusinessLogic _bl = new IntakeSheet.BLL.BusinessLogic();
-        if (PatientFU_ID != "")
-        {
-            List<string> _injured = getFUInjuredParts(Convert.ToInt64(PatientFU_ID));
-            bindBodyParts(_injured);
-        }
-    }
 
-    public List<string> getFUInjuredParts(Int64 PatientIE_ID)
+        List<string> _injured = null;
+        if (PatientIE_ID == "")
+            _injured = getFUInjuredParts(Convert.ToInt64(PatientFU_ID));
+        else
+            _injured = getFUeInjuredParts(Convert.ToInt64(PatientIE_ID));
+        bindBodyParts(_injured);
+
+    }
+    public List<string> getFUInjuredParts(Int64 PatientFU_ID)
     {
         DataAccess _dal = new DataAccess();
         List<SqlParameter> param = new List<SqlParameter>();
-        param.Add(new SqlParameter("@PatientIE_ID", PatientIE_ID));
-        DataTable _dt = _dal.getDataTable("nusp_GetInjuredBodyParts", param);
+        param.Add(new SqlParameter("@PatientFU_ID", PatientFU_ID));
+        DataTable _dt = _dal.getDataTable("nusp_GetFUInjuredBodyParts", param);
         IntakeSheet.Entity.BodyParts _bodyparts = new IntakeSheet.Entity.BodyParts();
         DataRow _newdr = _dt.NewRow();
         foreach (DataRow dr in _dt.Rows)
@@ -399,15 +394,17 @@ public partial class AddFollowUpMaster : System.Web.UI.MasterPage
                 }
             }
         }
-        return _injuredParts;
-    }
 
+
+        return _injuredParts;
+
+    }
     public List<string> getFUeInjuredParts(Int64 PatientIE_ID)
     {
         DataAccess _dal = new DataAccess();
         List<SqlParameter> param = new List<SqlParameter>();
         param.Add(new SqlParameter("@PatientIE_ID", PatientIE_ID));
-        DataTable _dt = _dal.getDataTable("nusp_GetFUeInjuredBodyParts", param);
+        DataTable _dt = _dal.getDataTable("nusp_GetInjuredBodyParts", param);
         IntakeSheet.Entity.BodyParts _bodyparts = new IntakeSheet.Entity.BodyParts();
         DataRow _newdr = _dt.NewRow();
         foreach (DataRow dr in _dt.Rows)

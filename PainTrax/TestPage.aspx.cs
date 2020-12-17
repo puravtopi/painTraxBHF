@@ -14,8 +14,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+
 //using Microsoft.VisualBasic.Devices;
 //using Microsoft.VisualBasic;
+
 
 public partial class TestPage : System.Web.UI.Page
 {
@@ -32,26 +34,22 @@ public partial class TestPage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         demoText();
-        //mciSendString("open new Type waveaudio alias recsound", null, 0, 0);
-        //this.createDB();
-        // demoPDF();
-        //string path = Server.MapPath("~/Template/Demo.txt");
-        //string body = File.ReadAllText(path);
 
-        //string temp = new PrintDocumentHelper().getDocumentStringDenies(body);
+       // DIaLOGIKa.b2xtranslator.WordprocessingMLMapping.Converter.Convert(new WordDocument(StructuredStorageReader(fileName)), WordprocessingDocument.Create(fileName + "x", DocumentType.Document))
+    }
 
-        //  PdfStampInExistingFile("Hello world");
 
-        // setPDF();
-        //var word = new Microsoft.Office.Interop.Word.Application();
-        //word.Visible = false;
+    private void editBookmark(Microsoft.Office.Interop.Word.Document objWordDocument, string strBookmark, string strText)
+    {
+        if (objWordDocument.Bookmarks.Exists(strBookmark))
+        {
+            object objBookmark = strBookmark;
+            Microsoft.Office.Interop.Word.Range objRange = objWordDocument.Bookmarks.get_Item(ref objBookmark).Range;
 
-        //var filePath = Server.MapPath("~/MyFiles/123.doc");
-        //var savePathDocx = Server.MapPath("~/MyFiles/Demo.docx");
-        //var wordDoc = word.Documents.Open(FileName: filePath, ReadOnly: false);
-        //wordDoc.SaveAs2(FileName: savePathDocx, FileFormat: WdSaveFormat.wdFormatXMLDocument);
-        //wordDoc.Close();
-
+            objRange.Text = strText;
+            object objNewRange = objRange;
+            objWordDocument.Bookmarks.Add(strBookmark, ref objNewRange);
+        }
     }
 
 
@@ -255,7 +253,7 @@ public partial class TestPage : System.Web.UI.Page
 
     protected void btnRecord_Click(object sender, EventArgs e)
     {
-       // mciSendString("open new Type waveaudio Alias recsound", null, 0, 0);
+        // mciSendString("open new Type waveaudio Alias recsound", null, 0, 0);
         mciSendString("record recsound", null, 0, 0);
     }
 
@@ -431,5 +429,10 @@ public partial class TestPage : System.Web.UI.Page
                 sb.Append("<br/><br/>");
         }
         Response.Write(sb.Replace(" .", ". ").ToString());
+    }
+
+    protected void btnDeo_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("https://www.google.com/");
     }
 }
